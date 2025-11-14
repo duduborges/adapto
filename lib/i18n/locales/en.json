@@ -1,0 +1,187 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Software that adapts to",
+    "titleHighlight": "your business",
+    "subtitle": "We develop custom solutions and automations that understand your company and enhance productivity",
+    "cta": "Schedule a Meeting",
+    "ctaSecondary": "Learn More"
+  },
+  "about": {
+    "badge": "About Adapto",
+    "title": "We understand your business to create the perfect solution",
+    "description": "At Adapto, we don't believe in generic solutions. Each company has its own processes, policies, and culture. Our approach is to deeply understand your business to develop software that truly adapts to your needs.",
+    "stats": {
+      "clients": "Satisfied Clients",
+      "projects": "Projects Delivered",
+      "countries": "Countries",
+      "team": "Specialized Team"
+    }
+  },
+  "services": {
+    "badge": "Our Services",
+    "title": "Complete solutions for your company",
+    "subtitle": "From idea to implementation, we offer everything you need to digitally transform your business",
+    "items": {
+      "development": {
+        "title": "Custom Development",
+        "description": "Scalable and efficient systems tailored to your company's specific processes and policies"
+      },
+      "automation": {
+        "title": "Automation",
+        "description": "Eliminate repetitive tasks and optimize workflows with intelligent automations"
+      },
+      "consulting": {
+        "title": "Technology Consulting",
+        "description": "Strategic guidance to identify opportunities and implement the best technological solutions"
+      },
+      "integration": {
+        "title": "Systems Integration",
+        "description": "Connect your existing tools and systems for a seamless workflow"
+      },
+      "support": {
+        "title": "Maintenance & Support",
+        "description": "Continuous assistance to ensure your systems operate efficiently and stay up-to-date"
+      },
+      "optimization": {
+        "title": "Process Optimization",
+        "description": "Analysis and improvement of your workflows to maximize productivity"
+      }
+    }
+  },
+  "differentials": {
+    "badge": "Why Choose Adapto",
+    "title": "Software that truly fits your business",
+    "items": {
+      "personalized": {
+        "title": "100% Personalized",
+        "description": "We don't use ready-made templates. Every solution is developed from scratch for your business"
+      },
+      "adaptable": {
+        "title": "Adaptable",
+        "description": "Software that adapts to your processes, not the other way around"
+      },
+      "scalable": {
+        "title": "Scalable",
+        "description": "Solutions that grow with your business, prepared for the future"
+      },
+      "support": {
+        "title": "Continuous Support",
+        "description": "We're with you every step of the way, from planning to post-launch support"
+      }
+    }
+  },
+  "portfolio": {
+    "badge": "Portfolio",
+    "title": "Recent projects",
+    "subtitle": "See how we're helping companies transform their operations",
+    "projects": {
+      "erp": {
+        "title": "Custom ERP System",
+        "description": "Complete management system for mid-sized retail company"
+      },
+      "automation": {
+        "title": "Workflow Automation",
+        "description": "Process automation reducing operational time by 60%"
+      },
+      "integration": {
+        "title": "Multi-Platform Integration",
+        "description": "Integration of 5 different systems into a single dashboard"
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "title": "What our clients say",
+    "items": [
+      {
+        "name": "Maria Silva",
+        "role": "CEO",
+        "company": "TechRetail Inc.",
+        "content": "Adapto understood our needs perfectly. The system they developed increased our productivity by 40% in the first month."
+      },
+      {
+        "name": "John Anderson",
+        "role": "Operations Director",
+        "company": "LogiFlow Solutions",
+        "content": "The process automation was a game-changer for our company. What took hours now takes minutes."
+      },
+      {
+        "name": "Carlos Mendes",
+        "role": "Founder",
+        "company": "Innovate Labs",
+        "content": "Exceptional service! The Adapto team is highly professional and delivered exactly what we needed."
+      }
+    ]
+  },
+  "process": {
+    "badge": "Our Process",
+    "title": "How we work",
+    "subtitle": "A proven approach to deliver exceptional results",
+    "steps": {
+      "discovery": {
+        "title": "Discovery",
+        "description": "We deeply understand your business, processes, and challenges"
+      },
+      "planning": {
+        "title": "Planning",
+        "description": "We create a detailed strategy and project roadmap"
+      },
+      "development": {
+        "title": "Development",
+        "description": "We build the solution with agile methodology and constant feedback"
+      },
+      "testing": {
+        "title": "Testing",
+        "description": "Rigorous quality assurance to ensure perfect operation"
+      },
+      "launch": {
+        "title": "Launch",
+        "description": "Implementation and training for your team"
+      },
+      "support": {
+        "title": "Support",
+        "description": "Continuous monitoring and ongoing improvements"
+      }
+    }
+  },
+  "contact": {
+    "badge": "Contact",
+    "title": "Ready to transform your business?",
+    "subtitle": "Schedule a free meeting and discover how we can help your company",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "message": "Tell us about your project",
+      "submit": "Schedule Meeting",
+      "sending": "Sending...",
+      "success": "Message sent successfully! We'll contact you soon.",
+      "error": "Error sending message. Please try again."
+    },
+    "info": {
+      "title": "Get in touch",
+      "location": "Vancouver, BC - Canada",
+      "availability": "Available for projects worldwide"
+    }
+  },
+  "footer": {
+    "tagline": "Custom software solutions that adapt to your business",
+    "rights": "All rights reserved",
+    "links": {
+      "about": "About",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
+  }
+}

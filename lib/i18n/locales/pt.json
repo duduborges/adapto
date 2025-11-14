@@ -1,0 +1,187 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "services": "Serviços",
+    "portfolio": "Portfólio",
+    "contact": "Contato"
+  },
+  "hero": {
+    "title": "Software que se adapta ao",
+    "titleHighlight": "seu negócio",
+    "subtitle": "Desenvolvemos soluções personalizadas e automações que entendem sua empresa e aumentam a produtividade",
+    "cta": "Agendar Reunião",
+    "ctaSecondary": "Saiba Mais"
+  },
+  "about": {
+    "badge": "Sobre a Adapto",
+    "title": "Entendemos seu negócio para criar a solução perfeita",
+    "description": "Na Adapto, não acreditamos em soluções genéricas. Cada empresa tem seus próprios processos, políticas e cultura. Nossa abordagem é entender profundamente seu negócio para desenvolver um software que realmente se adapte às suas necessidades.",
+    "stats": {
+      "clients": "Clientes Satisfeitos",
+      "projects": "Projetos Entregues",
+      "countries": "Países",
+      "team": "Equipe Especializada"
+    }
+  },
+  "services": {
+    "badge": "Nossos Serviços",
+    "title": "Soluções completas para sua empresa",
+    "subtitle": "Da ideia à implementação, oferecemos tudo que você precisa para transformar digitalmente seu negócio",
+    "items": {
+      "development": {
+        "title": "Desenvolvimento Personalizado",
+        "description": "Sistemas escaláveis e eficientes, adaptados aos processos e políticas específicas da sua empresa"
+      },
+      "automation": {
+        "title": "Automações",
+        "description": "Elimine tarefas repetitivas e otimize fluxos de trabalho com automações inteligentes"
+      },
+      "consulting": {
+        "title": "Consultoria Tecnológica",
+        "description": "Orientação estratégica para identificar oportunidades e implementar as melhores soluções tecnológicas"
+      },
+      "integration": {
+        "title": "Integração de Sistemas",
+        "description": "Conecte suas ferramentas e sistemas existentes para um fluxo de trabalho sem interrupções"
+      },
+      "support": {
+        "title": "Manutenção e Suporte",
+        "description": "Assistência contínua para garantir que seus sistemas funcionem de forma eficiente e atualizada"
+      },
+      "optimization": {
+        "title": "Otimização de Processos",
+        "description": "Análise e melhoria dos seus fluxos de trabalho para maximizar a produtividade"
+      }
+    }
+  },
+  "differentials": {
+    "badge": "Por Que Escolher a Adapto",
+    "title": "Software que realmente se encaixa no seu negócio",
+    "items": {
+      "personalized": {
+        "title": "100% Personalizado",
+        "description": "Não usamos templates prontos. Cada solução é desenvolvida do zero para o seu negócio"
+      },
+      "adaptable": {
+        "title": "Adaptável",
+        "description": "Software que se adapta aos seus processos, não o contrário"
+      },
+      "scalable": {
+        "title": "Escalável",
+        "description": "Soluções que crescem com seu negócio, preparadas para o futuro"
+      },
+      "support": {
+        "title": "Suporte Contínuo",
+        "description": "Estamos com você em cada etapa, desde o planejamento até o suporte pós-lançamento"
+      }
+    }
+  },
+  "portfolio": {
+    "badge": "Portfólio",
+    "title": "Projetos recentes",
+    "subtitle": "Veja como estamos ajudando empresas a transformar suas operações",
+    "projects": {
+      "erp": {
+        "title": "Sistema ERP Personalizado",
+        "description": "Sistema de gestão completo para empresa de varejo de médio porte"
+      },
+      "automation": {
+        "title": "Automação de Fluxos",
+        "description": "Automação de processos reduzindo 60% do tempo operacional"
+      },
+      "integration": {
+        "title": "Integração Multi-Plataforma",
+        "description": "Integração de 5 sistemas diferentes em um único dashboard"
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Depoimentos",
+    "title": "O que nossos clientes dizem",
+    "items": [
+      {
+        "name": "Maria Silva",
+        "role": "CEO",
+        "company": "TechRetail Inc.",
+        "content": "A Adapto entendeu perfeitamente nossas necessidades. O sistema que desenvolveram aumentou nossa produtividade em 40% no primeiro mês."
+      },
+      {
+        "name": "João Anderson",
+        "role": "Diretor de Operações",
+        "company": "LogiFlow Solutions",
+        "content": "A automação de processos foi um divisor de águas para nossa empresa. O que levava horas agora leva minutos."
+      },
+      {
+        "name": "Carlos Mendes",
+        "role": "Fundador",
+        "company": "Innovate Labs",
+        "content": "Atendimento excepcional! A equipe da Adapto é altamente profissional e entregou exatamente o que precisávamos."
+      }
+    ]
+  },
+  "process": {
+    "badge": "Nosso Processo",
+    "title": "Como trabalhamos",
+    "subtitle": "Uma abordagem comprovada para entregar resultados excepcionais",
+    "steps": {
+      "discovery": {
+        "title": "Descoberta",
+        "description": "Entendemos profundamente seu negócio, processos e desafios"
+      },
+      "planning": {
+        "title": "Planejamento",
+        "description": "Criamos uma estratégia detalhada e roadmap do projeto"
+      },
+      "development": {
+        "title": "Desenvolvimento",
+        "description": "Construímos a solução com metodologia ágil e feedback constante"
+      },
+      "testing": {
+        "title": "Testes",
+        "description": "Garantia de qualidade rigorosa para assegurar funcionamento perfeito"
+      },
+      "launch": {
+        "title": "Lançamento",
+        "description": "Implementação e treinamento para sua equipe"
+      },
+      "support": {
+        "title": "Suporte",
+        "description": "Monitoramento contínuo e melhorias constantes"
+      }
+    }
+  },
+  "contact": {
+    "badge": "Contato",
+    "title": "Pronto para transformar seu negócio?",
+    "subtitle": "Agende uma reunião gratuita e descubra como podemos ajudar sua empresa",
+    "form": {
+      "name": "Nome Completo",
+      "email": "E-mail",
+      "company": "Empresa",
+      "phone": "Telefone",
+      "message": "Conte-nos sobre seu projeto",
+      "submit": "Agendar Reunião",
+      "sending": "Enviando...",
+      "success": "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+      "error": "Erro ao enviar mensagem. Por favor, tente novamente."
+    },
+    "info": {
+      "title": "Entre em contato",
+      "location": "Vancouver, BC - Canadá",
+      "availability": "Disponível para projetos em todo o mundo"
+    }
+  },
+  "footer": {
+    "tagline": "Soluções de software personalizadas que se adaptam ao seu negócio",
+    "rights": "Todos os direitos reservados",
+    "links": {
+      "about": "Sobre",
+      "services": "Serviços",
+      "portfolio": "Portfólio",
+      "contact": "Contato",
+      "privacy": "Política de Privacidade",
+      "terms": "Termos de Serviço"
+    }
+  }
+}
