@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
+import { MapPin, Mail, Phone, Send, Globe } from 'lucide-react';
 import type { ContactFormData } from '@/types';
 
 interface ContactProps {
@@ -178,40 +179,40 @@ export const Contact: React.FC<ContactProps> = ({ dict }) => {
             <div>
               <h3 className="text-2xl font-semibold mb-6">{dict.contact.info.title}</h3>
               <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="w-12 h-12 rounded-lg bg-black text-white flex items-center justify-center flex-shrink-0">
-                    📍
+                <div className="flex items-start space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 text-white flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="font-medium">Location</div>
+                    <div className="font-semibold text-gray-900">Location</div>
                     <div className="text-gray-600">{dict.contact.info.location}</div>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
-                  <div className="w-12 h-12 rounded-lg bg-black text-white flex items-center justify-center flex-shrink-0">
-                    ✉️
+                <div className="flex items-start space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="font-medium">Email</div>
+                    <div className="font-semibold text-gray-900">Email</div>
                     <a
                       href="mailto:eduardoborges.dev31@gmail.com"
-                      className="text-gray-600 hover:text-black transition-colors"
+                      className="text-gray-600 hover:text-indigo-600 transition-colors"
                     >
                       eduardoborges.dev31@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3">
-                  <div className="w-12 h-12 rounded-lg bg-black text-white flex items-center justify-center flex-shrink-0">
-                    📞
+                <div className="flex items-start space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-white flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="font-medium">Phone</div>
+                    <div className="font-semibold text-gray-900">Phone</div>
                     <a
                       href="tel:+16727553873"
-                      className="text-gray-600 hover:text-black transition-colors"
+                      className="text-gray-600 hover:text-indigo-600 transition-colors"
                     >
                       +1 (672) 755-3873
                     </a>
@@ -220,8 +221,12 @@ export const Contact: React.FC<ContactProps> = ({ dict }) => {
               </div>
             </div>
 
-            <div className="p-6 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl">
-              <p className="text-gray-700">{dict.contact.info.availability}</p>
+            <div className="relative p-6 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100 overflow-hidden">
+              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-indigo-200 rounded-full opacity-20 blur-2xl" />
+              <div className="relative flex items-start space-x-3">
+                <Globe className="w-6 h-6 text-indigo-600 mt-1 flex-shrink-0" />
+                <p className="text-gray-700 leading-relaxed">{dict.contact.info.availability}</p>
+              </div>
             </div>
           </motion.div>
         </div>

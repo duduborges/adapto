@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
+import { Calendar, ArrowDown, CheckCircle2, Zap, Shield } from 'lucide-react';
 
 interface HeroProps {
   dict: any;
@@ -52,14 +53,60 @@ export const Hero: React.FC<HeroProps> = ({ dict }) => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button size="lg" onClick={scrollToContact}>
+            <Button size="lg" onClick={scrollToContact} className="group">
+              <Calendar className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               {dict.hero.cta}
             </Button>
-            <Button size="lg" variant="secondary" onClick={scrollToAbout}>
+            <Button size="lg" variant="secondary" onClick={scrollToAbout} className="group">
               {dict.hero.ctaSecondary}
+              <ArrowDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
             </Button>
           </motion.div>
 
+          {/* Feature badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-wrap items-center justify-center gap-6 pt-8"
+          >
+            <div className="flex items-center space-x-2 text-gray-600">
+              <div className="p-1.5 rounded-full bg-green-100">
+                <CheckCircle2 className="w-4 h-4 text-green-600" />
+              </div>
+              <span className="text-sm font-medium">100% Custom</span>
+            </div>
+            <div className="flex items-center space-x-2 text-gray-600">
+              <div className="p-1.5 rounded-full bg-blue-100">
+                <Zap className="w-4 h-4 text-blue-600" />
+              </div>
+              <span className="text-sm font-medium">Fast Delivery</span>
+            </div>
+            <div className="flex items-center space-x-2 text-gray-600">
+              <div className="p-1.5 rounded-full bg-purple-100">
+                <Shield className="w-4 h-4 text-purple-600" />
+              </div>
+              <span className="text-sm font-medium">Secure & Reliable</span>
+            </div>
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <div className="flex flex-col items-center space-y-2">
+              <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-2">
+                <motion.div
+                  className="w-1.5 h-1.5 bg-gray-600 rounded-full"
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
