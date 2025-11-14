@@ -90,23 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ dict }) => {
             </div>
           </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          >
-            <div className="flex flex-col items-center space-y-2">
-              <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-2">
-                <motion.div
-                  className="w-1.5 h-1.5 bg-gray-600 rounded-full"
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
-              </div>
-            </div>
-          </motion.div>
+
         </div>
       </div>
 
