@@ -1,91 +1,106 @@
 'use client';
 
 import React from 'react';
-import { Section } from '@/components/ui/Section';
-import { Badge } from '@/components/ui/Badge';
 import { motion } from 'framer-motion';
-import { Sparkles, RefreshCw, BarChart3, Handshake } from 'lucide-react';
+import { X, Check } from 'lucide-react';
+import { Section } from '@/components/ui/Section';
+import { SectionLabel } from '@/components/ui/SectionLabel';
 
 interface DifferentialsProps {
   dict: any;
 }
 
-export const Differentials: React.FC<DifferentialsProps> = ({ dict }) => {
-  const differentials = [
+export function Differentials({ dict }: DifferentialsProps) {
+  const rows = [
     {
-      icon: Sparkles,
-      title: dict.differentials.items.personalized.title,
-      description: dict.differentials.items.personalized.description,
+      them: dict.differentials.contrast.themEmbedded,
+      us: dict.differentials.items.embedded.title,
+      detail: dict.differentials.items.embedded.description,
     },
     {
-      icon: RefreshCw,
-      title: dict.differentials.items.adaptable.title,
-      description: dict.differentials.items.adaptable.description,
+      them: dict.differentials.contrast.themDiagnostic,
+      us: dict.differentials.items.diagnostic.title,
+      detail: dict.differentials.items.diagnostic.description,
     },
     {
-      icon: BarChart3,
-      title: dict.differentials.items.scalable.title,
-      description: dict.differentials.items.scalable.description,
+      them: dict.differentials.contrast.themHonest,
+      us: dict.differentials.items.honest.title,
+      detail: dict.differentials.items.honest.description,
     },
     {
-      icon: Handshake,
-      title: dict.differentials.items.support.title,
-      description: dict.differentials.items.support.description,
+      them: dict.differentials.contrast.themLasting,
+      us: dict.differentials.items.lasting.title,
+      detail: dict.differentials.items.lasting.description,
     },
   ];
 
   return (
-    <Section id="differentials" className="relative bg-black text-white overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-black to-purple-950 animate-gradient opacity-50" />
-      <div className="absolute inset-0 grid-pattern opacity-10" />
+    <Section id="why" size="wide" className="relative border-t border-cream/10">
+      <SectionLabel index="03" label={dict.differentials.eyebrow} />
 
-      {/* Glowing orbs */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-600 rounded-full blur-3xl opacity-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-600 rounded-full blur-3xl opacity-10" />
-
-      <div className="relative max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-6 mb-16"
+          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:text-6xl"
         >
-          <Badge className="bg-white/10 text-white border-white/20">
-            {dict.differentials.badge}
-          </Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-            {dict.differentials.title}
-          </h2>
-        </motion.div>
+          {dict.differentials.title.replace(/\.$/, '')}
+          <span className="text-ember">.</span>
+        </motion.h2>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {differentials.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 p-3 rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors">
-                    <Icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="flex-1 space-y-2">
-                    <h3 className="text-2xl font-semibold">{item.title}</h3>
-                    <p className="text-gray-300 text-lg leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+      <div className="mt-20 md:mt-24">
+        {/* Column headers */}
+        <div className="grid grid-cols-12 gap-4 border-b border-cream/15 pb-4 md:gap-8">
+          <span className="col-span-1 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+            #
+          </span>
+          <span className="col-span-5 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40 md:col-span-5">
+            {dict.differentials.contrast.themHeading}
+          </span>
+          <span className="col-span-6 font-mono text-[11px] uppercase tracking-[0.2em] text-ember md:col-span-6">
+            {dict.differentials.contrast.usHeading}
+          </span>
         </div>
+
+        {rows.map((row, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.4, delay: i * 0.06 }}
+            className="grid grid-cols-12 gap-4 border-b border-cream/10 py-8 md:gap-8 md:py-10"
+          >
+            <span className="col-span-1 font-mono text-sm text-cream/40">
+              0{i + 1}
+            </span>
+            <div className="col-span-11 md:col-span-5">
+              <div className="flex items-start gap-3">
+                <X className="mt-1 h-4 w-4 shrink-0 text-cream/30" />
+                <p className="text-base leading-relaxed text-cream/45 line-through decoration-cream/20">
+                  {row.them}
+                </p>
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-6">
+              <div className="flex items-start gap-3">
+                <Check className="mt-1 h-4 w-4 shrink-0 text-ember" />
+                <div>
+                  <h3 className="font-serif text-xl text-cream md:text-2xl">
+                    {row.us}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-cream/60">
+                    {row.detail}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </Section>
   );
-};
+}

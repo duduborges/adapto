@@ -1,116 +1,161 @@
 'use client';
 
 import React from 'react';
-import { Section } from '@/components/ui/Section';
-import { Badge } from '@/components/ui/Badge';
 import { motion } from 'framer-motion';
-import { Search, FileText, Code, TestTube, Rocket, Headphones } from 'lucide-react';
+import { Section } from '@/components/ui/Section';
+import { SectionLabel } from '@/components/ui/SectionLabel';
 
 interface ProcessProps {
   dict: any;
 }
 
-export const Process: React.FC<ProcessProps> = ({ dict }) => {
-  const steps = [
-    {
-      number: '01',
-      icon: Search,
-      title: dict.process.steps.discovery.title,
-      description: dict.process.steps.discovery.description,
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
-      number: '02',
-      icon: FileText,
-      title: dict.process.steps.planning.title,
-      description: dict.process.steps.planning.description,
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      number: '03',
-      icon: Code,
-      title: dict.process.steps.development.title,
-      description: dict.process.steps.development.description,
-      color: 'from-green-500 to-emerald-500',
-    },
-    {
-      number: '04',
-      icon: TestTube,
-      title: dict.process.steps.testing.title,
-      description: dict.process.steps.testing.description,
-      color: 'from-orange-500 to-red-500',
-    },
-    {
-      number: '05',
-      icon: Rocket,
-      title: dict.process.steps.launch.title,
-      description: dict.process.steps.launch.description,
-      color: 'from-indigo-500 to-purple-500',
-    },
-    {
-      number: '06',
-      icon: Headphones,
-      title: dict.process.steps.support.title,
-      description: dict.process.steps.support.description,
-      color: 'from-pink-500 to-rose-500',
-    },
-  ];
+const phaseKeys = ['discovery', 'modeling', 'execution', 'control', 'delivery'] as const;
+type PhaseKey = (typeof phaseKeys)[number];
 
+/**
+ * Slight rotation values to give a Miro-board "sticky note" feel.
+ * Subtle — just enough to break the perfectly-aligned grid look.
+ */
+const rotations = ['-0.6deg', '0.5deg', '-0.4deg', '0.7deg', '-0.3deg'];
+
+export function Process({ dict }: ProcessProps) {
   return (
-    <Section id="process" className="relative bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-      {/* Background grid */}
-      <div className="absolute inset-0 grid-pattern opacity-30" />
+    <Section
+      id="process"
+      size="wide"
+      className="relative overflow-hidden border-t border-cream/10"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40"
+      />
 
-      <div className="relative max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+      <SectionLabel index="04" label={dict.process.eyebrow} />
+
+      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-6 mb-16"
+          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
-          <Badge>{dict.process.badge}</Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-            {dict.process.title}
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            {dict.process.subtitle}
-          </p>
-        </motion.div>
+          {dict.process.title.replace(/\.$/, '')}
+          <span className="text-ember">.</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="col-span-12 self-end text-base leading-relaxed text-cream/60 md:col-span-4 md:text-lg"
+        >
+          {dict.process.subtitle}
+        </motion.p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
+      {/* Desktop diagram — sticky-note cards connected by ember arrows */}
+      <div className="mt-24 hidden md:block">
+        <div className="flex items-stretch gap-2">
+          {phaseKeys.map((key, i) => {
+            const step = dict.process.steps[key] as {
+              number: string;
+              title: string;
+              description: string;
+            };
             return (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative p-6 rounded-2xl border border-gray-200 hover:border-transparent hover:shadow-lg transition-all duration-300"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity`} />
-
-                <div className="relative space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className={`inline-flex p-2.5 rounded-lg bg-gradient-to-br ${step.color}`}>
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className={`text-3xl font-bold bg-gradient-to-br ${step.color} bg-clip-text text-transparent`}>
-                      {step.number}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-semibold group-hover:text-gray-900 transition-colors">
+              <React.Fragment key={key}>
+                <motion.article
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.45, delay: i * 0.08 }}
+                  style={{ rotate: rotations[i] }}
+                  className="group relative flex flex-1 flex-col border border-cream/15 bg-ink p-5 transition-all hover:border-ember/50 hover:[rotate:0deg] lg:p-6"
+                >
+                  {/* Sticky-note tab */}
+                  <span className="absolute -top-3 left-5 bg-ember px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-cream shadow-[0_2px_8px_rgba(195,86,34,0.4)]">
+                    Phase {step.number}
+                  </span>
+                  <h3 className="mt-4 font-serif text-2xl leading-[1.1] text-cream lg:text-3xl">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                </div>
-              </motion.div>
+                  <p className="mt-4 text-sm leading-relaxed text-cream/60">
+                    {step.description}
+                  </p>
+                  {/* Pin dot (visual signature) */}
+                  <span
+                    aria-hidden
+                    className="absolute right-3 top-3 h-2 w-2 rounded-full bg-ember/40 transition-all group-hover:bg-ember group-hover:shadow-[0_0_12px_rgba(195,86,34,0.8)]"
+                  />
+                </motion.article>
+
+                {i < phaseKeys.length - 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.35, delay: i * 0.08 + 0.2 }}
+                    className="flex items-center"
+                    aria-hidden
+                  >
+                    <svg
+                      width="32"
+                      height="14"
+                      viewBox="0 0 32 14"
+                      fill="none"
+                      className="text-ember"
+                    >
+                      <line
+                        x1="0"
+                        y1="7"
+                        x2="26"
+                        y2="7"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeDasharray="3 3"
+                      />
+                      <path
+                        d="M22 1 L30 7 L22 13"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </motion.div>
+                )}
+              </React.Fragment>
             );
           })}
         </div>
+
+        {/* Hand-written annotation below the diagram */}
+        <p className="mt-12 font-serif text-base italic text-cream/40">
+          ↳ Every phase is reviewed with you before the next one starts. No surprises.
+        </p>
       </div>
+
+      {/* Mobile — stacked editorial list */}
+      <ol className="mt-20 space-y-10 md:hidden">
+        {phaseKeys.map((key) => {
+          const step = dict.process.steps[key] as {
+            number: string;
+            title: string;
+            description: string;
+          };
+          return (
+            <li key={key} className="border-l-2 border-ember/40 pl-5">
+              <span className="font-mono text-xs text-ember">Phase {step.number}</span>
+              <h3 className="mt-2 font-serif text-2xl text-cream">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-cream/60">
+                {step.description}
+              </p>
+            </li>
+          );
+        })}
+      </ol>
     </Section>
   );
-};
+}

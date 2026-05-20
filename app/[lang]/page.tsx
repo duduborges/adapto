@@ -6,9 +6,8 @@ import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
 import { Differentials } from '@/components/sections/Differentials';
-import { Portfolio } from '@/components/sections/Portfolio';
-import { Testimonials } from '@/components/sections/Testimonials';
 import { Process } from '@/components/sections/Process';
+import { Portfolio } from '@/components/sections/Portfolio';
 import { Contact } from '@/components/sections/Contact';
 
 export default async function Home({
@@ -20,17 +19,18 @@ export default async function Home({
   const dict = await getDictionary(lang as Locale);
 
   return (
-    <main className="min-h-screen">
+    <>
       <Header lang={lang as Locale} dict={dict} />
-      <Hero dict={dict} />
-      <About dict={dict} />
-      <Services dict={dict} />
-      <Differentials dict={dict} />
-      <Portfolio dict={dict} />
-      <Testimonials dict={dict} />
-      <Process dict={dict} />
-      <Contact dict={dict} />
+      <main className="relative">
+        <Hero dict={dict} />
+        <About dict={dict} />
+        <Services dict={dict} />
+        <Differentials dict={dict} />
+        <Process dict={dict} />
+        <Portfolio dict={dict} />
+        <Contact dict={dict} />
+      </main>
       <Footer lang={lang as Locale} dict={dict} />
-    </main>
+    </>
   );
 }

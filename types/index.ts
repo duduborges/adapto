@@ -1,4 +1,4 @@
-export type Locale = 'en' | 'pt' | 'es';
+export type Locale = 'en' | 'pt' | 'fr';
 
 export interface Translation {
   [key: string]: string | Translation;
@@ -8,37 +8,19 @@ export interface Translations {
   [locale: string]: Translation;
 }
 
-export interface Service {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-export interface Testimonial {
-  name: string;
-  role: string;
-  company: string;
-  content: string;
-  avatar?: string;
-}
-
-export interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
-}
-
-export interface PortfolioItem {
-  title: string;
-  description: string;
-  tags: string[];
-  image?: string;
-}
-
 export interface ContactFormData {
   name: string;
   email: string;
   company: string;
-  phone?: string;
   message: string;
+}
+
+export interface CaseStudy {
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  link?: string;
+  tags?: string[];
+  year?: string;
 }

@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "placeholder-erp",
+    "title": "Custom ERP for a mid-size retail operation",
+    "description": "Replaced spreadsheets and three disconnected tools with a single platform covering inventory, sales, purchasing and team management.",
+    "image": "/cases/placeholder-erp.svg",
+    "link": "",
+    "tags": ["ERP", "Retail", "Inventory"],
+    "year": "2025"
+  },
+  {
+    "slug": "placeholder-automation",
+    "title": "Approval automation for a services agency",
+    "description": "Cut 60% of operational time by replacing manual reporting and approvals with quiet automations and real-time dashboards.",
+    "image": "/cases/placeholder-automation.svg",
+    "link": "",
+    "tags": ["Automation", "Workflows"],
+    "year": "2025"
+  },
+  {
+    "slug": "placeholder-dashboard",
+    "title": "Operations dashboard for a logistics team",
+    "description": "Unified data from five different systems into one real-time view used daily by the operations and leadership teams.",
+    "image": "/cases/placeholder-dashboard.svg",
+    "link": "",
+    "tags": ["Dashboards", "Integrations"],
+    "year": "2024"
+  }
+]

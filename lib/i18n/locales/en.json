@@ -1,187 +1,180 @@
 {
   "nav": {
-    "home": "Home",
-    "about": "About",
+    "manifesto": "Manifesto",
     "services": "Services",
-    "portfolio": "Portfolio",
-    "contact": "Contact"
+    "process": "Process",
+    "work": "Work",
+    "contact": "Contact",
+    "book": "Book a call"
   },
   "hero": {
-    "title": "Software that adapts to",
-    "titleHighlight": "your business",
-    "subtitle": "We develop custom solutions and automations that understand your company and enhance productivity",
-    "cta": "Schedule a Meeting",
-    "ctaSecondary": "Learn More"
+    "eyebrow": "Canadian software studio · Built by Brazilian engineers",
+    "title": "Software that adapts",
+    "titleAccent": "to how your business actually works.",
+    "subtitle": "We embed into your operation, learn the real workflow, and build the systems that let your company keep producing — with or without you in the room.",
+    "cta": "Book a conversation",
+    "ctaSecondary": "See how we work",
+    "scrollHint": "Scroll to explore"
   },
-  "about": {
-    "badge": "About Adapto",
-    "title": "We understand your business to create the perfect solution",
-    "description": "At Adapto, we don't believe in generic solutions. Each company has its own processes, policies, and culture. Our approach is to deeply understand your business to develop software that truly adapts to your needs.",
-    "stats": {
-      "clients": "Satisfied Clients",
-      "projects": "Projects Delivered",
-      "countries": "Countries",
-      "team": "Specialized Team"
+  "manifesto": {
+    "eyebrow": "Manifesto",
+    "title": "We don't sell software off the shelf.",
+    "lead": "Most software houses arrive with a product looking for a problem. We do the opposite: we walk into your company, sit next to your team, and learn the operation before writing a single line of code.",
+    "paragraphs": [
+      "Adapto is a software studio focused on evolving how businesses operate through technology. We eliminate manual tasks and give you real control — from inventory to team management — so your company keeps growing even when you step away.",
+      "The change starts from the inside. We adapt to your culture, your process, your people. The result is software that fits like it was always there."
+    ],
+    "pillars": {
+      "inside": {
+        "title": "From the inside out",
+        "description": "We learn your operation before we propose a solution. The brief is what you tell us; the answer comes from what we see."
+      },
+      "process": {
+        "title": "Process over product",
+        "description": "Your workflow is the spec. We don't reshape your team to fit a tool — we shape the tool to fit your team."
+      },
+      "partnership": {
+        "title": "Long-term partnership",
+        "description": "We ship, we stay. Adapto sticks around to evolve the system as your business grows."
+      }
     }
   },
   "services": {
-    "badge": "Our Services",
-    "title": "Complete solutions for your company",
-    "subtitle": "From idea to implementation, we offer everything you need to digitally transform your business",
+    "eyebrow": "What we build",
+    "title": "Anything that removes friction from your day.",
+    "subtitle": "If it's a system, an automation, or a dashboard — and it makes the operation lighter — we can build it.",
     "items": {
-      "development": {
-        "title": "Custom Development",
-        "description": "Scalable and efficient systems tailored to your company's specific processes and policies"
+      "custom": {
+        "title": "Custom systems",
+        "description": "ERPs, CRMs, internal tools and full applications designed around the exact way your team works.",
+        "tags": ["Web apps", "Internal tools", "ERP / CRM"]
       },
       "automation": {
         "title": "Automation",
-        "description": "Eliminate repetitive tasks and optimize workflows with intelligent automations"
+        "description": "We map the repetitive work — reports, approvals, data entry — and replace it with quiet automations that run while you sleep.",
+        "tags": ["Workflows", "Integrations", "Triggers"]
       },
-      "consulting": {
-        "title": "Technology Consulting",
-        "description": "Strategic guidance to identify opportunities and implement the best technological solutions"
+      "dashboards": {
+        "title": "Dashboards & visibility",
+        "description": "Real-time views of what matters: sales, stock, operations, people. Decisions stop relying on gut feeling.",
+        "tags": ["BI", "Reporting", "Real-time"]
       },
-      "integration": {
-        "title": "Systems Integration",
-        "description": "Connect your existing tools and systems for a seamless workflow"
-      },
-      "support": {
-        "title": "Maintenance & Support",
-        "description": "Continuous assistance to ensure your systems operate efficiently and stay up-to-date"
-      },
-      "optimization": {
-        "title": "Process Optimization",
-        "description": "Analysis and improvement of your workflows to maximize productivity"
+      "integrations": {
+        "title": "Integrations",
+        "description": "Connect the tools you already use — accounting, e-commerce, logistics, payments — into one consistent operation.",
+        "tags": ["APIs", "Webhooks", "Sync"]
       }
     }
   },
   "differentials": {
-    "badge": "Why Choose Adapto",
-    "title": "Software that truly fits your business",
+    "eyebrow": "Why Adapto",
+    "title": "We're not a freelancer. We're not a generic agency.",
+    "subtitle": "We're the engineering team that becomes part of your company for as long as you need us.",
+    "contrast": {
+      "themHeading": "Most studios",
+      "usHeading": "Adapto",
+      "themEmbedded": "Drop a quote, disappear until the demo, send a Slack invite at launch.",
+      "themDiagnostic": "Start coding from the first call. Reshape scope mid-sprint.",
+      "themHonest": "Hide slippage behind status emojis. Surprise you with a launch delay.",
+      "themLasting": "Hand over a black-box codebase nobody on your side can read."
+    },
     "items": {
-      "personalized": {
-        "title": "100% Personalized",
-        "description": "We don't use ready-made templates. Every solution is developed from scratch for your business"
+      "embedded": {
+        "title": "Embedded with your team",
+        "description": "We treat your operation like our own. Daily contact, shared rituals, full transparency on what's being built and why."
       },
-      "adaptable": {
-        "title": "Adaptable",
-        "description": "Software that adapts to your processes, not the other way around"
+      "diagnostic": {
+        "title": "Diagnosis first, code second",
+        "description": "Every project starts with a discovery — written down, agreed on, signed off. No code until the problem is real and the scope is clear."
       },
-      "scalable": {
-        "title": "Scalable",
-        "description": "Solutions that grow with your business, prepared for the future"
+      "honest": {
+        "title": "Honest delivery",
+        "description": "Weekly updates, working software every sprint, and a fixed scope that respects your budget. If something slips, you hear it from us first."
       },
-      "support": {
-        "title": "Continuous Support",
-        "description": "We're with you every step of the way, from planning to post-launch support"
+      "lasting": {
+        "title": "Built to last",
+        "description": "Clean architecture, documented code and a handover that lets you keep the system running long after we ship."
       }
     }
-  },
-  "portfolio": {
-    "badge": "Portfolio",
-    "title": "Recent projects",
-    "subtitle": "See how we're helping companies transform their operations",
-    "projects": {
-      "erp": {
-        "title": "Custom ERP System",
-        "description": "Complete management system for mid-sized retail company"
-      },
-      "automation": {
-        "title": "Workflow Automation",
-        "description": "Process automation reducing operational time by 60%"
-      },
-      "integration": {
-        "title": "Multi-Platform Integration",
-        "description": "Integration of 5 different systems into a single dashboard"
-      }
-    }
-  },
-  "testimonials": {
-    "badge": "Testimonials",
-    "title": "What our clients say",
-    "items": [
-      {
-        "name": "Maria Silva",
-        "role": "CEO",
-        "company": "TechRetail Inc.",
-        "content": "Adapto understood our needs perfectly. The system they developed increased our productivity by 40% in the first month."
-      },
-      {
-        "name": "John Anderson",
-        "role": "Operations Director",
-        "company": "LogiFlow Solutions",
-        "content": "The process automation was a game-changer for our company. What took hours now takes minutes."
-      },
-      {
-        "name": "Carlos Mendes",
-        "role": "Founder",
-        "company": "Innovate Labs",
-        "content": "Exceptional service! The Adapto team is highly professional and delivered exactly what we needed."
-      }
-    ]
   },
   "process": {
-    "badge": "Our Process",
-    "title": "How we work",
-    "subtitle": "A proven approach to deliver exceptional results",
+    "eyebrow": "How we work",
+    "title": "Five phases. No magic.",
+    "subtitle": "A repeatable, transparent process from first call to long-term partnership.",
     "steps": {
       "discovery": {
+        "number": "01",
         "title": "Discovery",
-        "description": "We deeply understand your business, processes, and challenges"
+        "description": "We meet your team, map the pain, document the problem and define the goal — before anyone talks about technology."
       },
-      "planning": {
-        "title": "Planning",
-        "description": "We create a detailed strategy and project roadmap"
+      "modeling": {
+        "number": "02",
+        "title": "Modeling",
+        "description": "Requirements, architecture, wireframes and a realistic roadmap. You approve every assumption before we start."
       },
-      "development": {
-        "title": "Development",
-        "description": "We build the solution with agile methodology and constant feedback"
+      "execution": {
+        "number": "03",
+        "title": "Execution",
+        "description": "Agile builds in short cycles. You see working software every few days, with code review, tests and clean releases."
       },
-      "testing": {
-        "title": "Testing",
-        "description": "Rigorous quality assurance to ensure perfect operation"
+      "control": {
+        "number": "04",
+        "title": "Quality & control",
+        "description": "Continuous testing, scope tracking and weekly status. Risks are flagged early; nothing surprises us at launch."
       },
-      "launch": {
-        "title": "Launch",
-        "description": "Implementation and training for your team"
-      },
-      "support": {
-        "title": "Support",
-        "description": "Continuous monitoring and ongoing improvements"
+      "delivery": {
+        "number": "05",
+        "title": "Delivery & beyond",
+        "description": "Final deploy, technical and user documentation, training, and a warranty period. Then ongoing support if you want it."
       }
     }
   },
+  "work": {
+    "eyebrow": "Recent work",
+    "title": "A few of the operations we've reshaped.",
+    "subtitle": "Custom builds for retail, services, logistics and operations teams.",
+    "empty": "Cases coming soon — currently building with our first cohort of clients.",
+    "viewCase": "View case"
+  },
   "contact": {
-    "badge": "Contact",
-    "title": "Ready to transform your business?",
-    "subtitle": "Schedule a free meeting and discover how we can help your company",
+    "eyebrow": "Let's talk",
+    "title": "Bring us the problem. We'll bring the questions.",
+    "subtitle": "Book a 30-minute call. We'll listen, ask, and tell you honestly whether we're the right team for the job.",
+    "ctaPrimary": "Book a call on our calendar",
+    "ctaSecondary": "Or send us an email",
     "form": {
-      "name": "Full Name",
-      "email": "Email",
+      "name": "Full name",
+      "email": "Work email",
       "company": "Company",
-      "phone": "Phone",
-      "message": "Tell us about your project",
-      "submit": "Schedule Meeting",
-      "sending": "Sending...",
-      "success": "Message sent successfully! We'll contact you soon.",
-      "error": "Error sending message. Please try again."
+      "message": "What are you trying to solve?",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "success": "Thanks — we'll get back to you within one business day.",
+      "error": "Something went wrong. Please try again or email us directly.",
+      "required": "Required"
     },
     "info": {
-      "title": "Get in touch",
-      "location": "Vancouver, BC - Canada",
-      "availability": "Available for projects worldwide"
+      "locationLabel": "Based in",
+      "location": "Vancouver, BC · Canada",
+      "remoteLabel": "Working with teams in",
+      "remote": "North America, LATAM and Europe"
     }
   },
   "footer": {
-    "tagline": "Custom software solutions that adapt to your business",
-    "rights": "All rights reserved",
+    "tagline": "Software that adapts to how your business actually works.",
+    "sections": {
+      "company": "Company",
+      "explore": "Explore",
+      "contact": "Contact"
+    },
     "links": {
-      "about": "About",
+      "manifesto": "Manifesto",
       "services": "Services",
-      "portfolio": "Portfolio",
-      "contact": "Contact",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
-    }
+      "process": "Process",
+      "work": "Work",
+      "book": "Book a call",
+      "email": "Email us"
+    },
+    "rights": "All rights reserved."
   }
 }

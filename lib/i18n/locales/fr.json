@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "manifesto": "Manifeste",
+    "services": "Services",
+    "process": "Processus",
+    "work": "Réalisations",
+    "contact": "Contact",
+    "book": "Prendre rendez-vous"
+  },
+  "hero": {
+    "eyebrow": "Studio logiciel canadien · Ingénierie brésilienne",
+    "title": "Un logiciel qui s'adapte",
+    "titleAccent": "à la façon dont votre entreprise fonctionne vraiment.",
+    "subtitle": "Nous nous intégrons à votre opération, comprenons le flux de travail réel et construisons les systèmes qui font tourner votre entreprise — avec ou sans vous dans la pièce.",
+    "cta": "Prendre rendez-vous",
+    "ctaSecondary": "Voir notre méthode",
+    "scrollHint": "Faites défiler pour explorer"
+  },
+  "manifesto": {
+    "eyebrow": "Manifeste",
+    "title": "Nous ne vendons pas de logiciel sur étagère.",
+    "lead": "La plupart des studios logiciels arrivent avec un produit cherchant un problème. Nous faisons l'inverse : nous entrons dans votre entreprise, nous asseyons aux côtés de votre équipe et apprenons l'opération avant d'écrire la moindre ligne de code.",
+    "paragraphs": [
+      "Adapto est un studio logiciel concentré sur l'évolution du fonctionnement des entreprises par la technologie. Nous éliminons les tâches manuelles et vous donnons un véritable contrôle — de l'inventaire à la gestion des équipes — pour que votre entreprise continue à croître même quand vous prenez du recul.",
+      "Le changement vient de l'intérieur. Nous nous adaptons à votre culture, à votre processus, à vos gens. Le résultat est un logiciel qui s'intègre comme s'il avait toujours été là."
+    ],
+    "pillars": {
+      "inside": {
+        "title": "De l'intérieur vers l'extérieur",
+        "description": "Nous comprenons votre opération avant de proposer une solution. Le brief, c'est ce que vous nous dites ; la réponse vient de ce que nous voyons."
+      },
+      "process": {
+        "title": "Le processus avant le produit",
+        "description": "Votre flux de travail est la spécification. Nous ne remodelons pas votre équipe pour qu'elle entre dans un outil — nous façonnons l'outil pour qu'il entre dans votre équipe."
+      },
+      "partnership": {
+        "title": "Partenariat de long terme",
+        "description": "Nous livrons, et nous restons. Adapto continue d'évoluer le système au rythme de votre entreprise."
+      }
+    }
+  },
+  "services": {
+    "eyebrow": "Ce que nous construisons",
+    "title": "Tout ce qui enlève de la friction à votre journée.",
+    "subtitle": "Si c'est un système, une automatisation ou un tableau de bord — et que ça allège l'opération — nous savons le faire.",
+    "items": {
+      "custom": {
+        "title": "Systèmes sur mesure",
+        "description": "ERP, CRM, outils internes et applications complètes conçus exactement autour du fonctionnement de votre équipe.",
+        "tags": ["Web apps", "Outils internes", "ERP / CRM"]
+      },
+      "automation": {
+        "title": "Automatisation",
+        "description": "Nous cartographions le travail répétitif — rapports, approbations, saisie de données — et le remplaçons par des automatisations silencieuses.",
+        "tags": ["Flux", "Intégrations", "Déclencheurs"]
+      },
+      "dashboards": {
+        "title": "Tableaux de bord",
+        "description": "Vues en temps réel de ce qui compte : ventes, stocks, opérations, équipes. Les décisions ne reposent plus sur l'intuition.",
+        "tags": ["BI", "Reporting", "Temps réel"]
+      },
+      "integrations": {
+        "title": "Intégrations",
+        "description": "Reliez les outils que vous utilisez déjà — comptabilité, e-commerce, logistique, paiements — dans une opération unique et cohérente.",
+        "tags": ["APIs", "Webhooks", "Synchronisation"]
+      }
+    }
+  },
+  "differentials": {
+    "eyebrow": "Pourquoi Adapto",
+    "title": "Ni freelance. Ni agence générique.",
+    "subtitle": "Nous sommes l'équipe d'ingénierie qui devient partie de votre entreprise aussi longtemps que vous en avez besoin.",
+    "contrast": {
+      "themHeading": "La plupart des studios",
+      "usHeading": "Adapto",
+      "themEmbedded": "Envoient un devis, disparaissent jusqu'à la démo, vous invitent sur Slack au lancement.",
+      "themDiagnostic": "Codent dès le premier appel. Modifient le périmètre en pleine sprint.",
+      "themHonest": "Cachent les retards derrière des emojis. Vous surprennent avec un délai au lancement.",
+      "themLasting": "Livrent une boîte noire que personne dans votre équipe ne sait lire."
+    },
+    "items": {
+      "embedded": {
+        "title": "Intégrés à votre équipe",
+        "description": "Nous traitons votre opération comme la nôtre. Contact quotidien, rituels partagés, transparence totale sur ce qui se construit et pourquoi."
+      },
+      "diagnostic": {
+        "title": "Diagnostic d'abord, code ensuite",
+        "description": "Chaque projet commence par une découverte — documentée, validée, signée. Pas de code avant que le problème soit clair et le périmètre défini."
+      },
+      "honest": {
+        "title": "Livraison honnête",
+        "description": "Mises à jour hebdomadaires, logiciel fonctionnel chaque sprint, et un périmètre fixe qui respecte votre budget. Si quelque chose dérape, vous l'apprenez de nous d'abord."
+      },
+      "lasting": {
+        "title": "Conçu pour durer",
+        "description": "Architecture propre, code documenté et une remise qui vous permet de continuer à faire tourner le système bien après notre passage."
+      }
+    }
+  },
+  "process": {
+    "eyebrow": "Notre méthode",
+    "title": "Cinq phases. Pas de magie.",
+    "subtitle": "Un processus reproductible et transparent — du premier appel au partenariat de long terme.",
+    "steps": {
+      "discovery": {
+        "number": "01",
+        "title": "Découverte",
+        "description": "Nous rencontrons votre équipe, cartographions la douleur, documentons le problème et définissons l'objectif — avant toute discussion technique."
+      },
+      "modeling": {
+        "number": "02",
+        "title": "Modélisation",
+        "description": "Exigences, architecture, wireframes et feuille de route réaliste. Vous validez chaque hypothèse avant que nous démarrions."
+      },
+      "execution": {
+        "number": "03",
+        "title": "Exécution",
+        "description": "Sprints courts en agile. Vous voyez du logiciel fonctionnel tous les quelques jours, avec revue de code, tests et livraisons propres."
+      },
+      "control": {
+        "number": "04",
+        "title": "Qualité et contrôle",
+        "description": "Tests continus, suivi du périmètre, et statut hebdomadaire. Les risques émergent tôt ; rien ne nous surprend au lancement."
+      },
+      "delivery": {
+        "number": "05",
+        "title": "Livraison et au-delà",
+        "description": "Déploiement final, documentation technique et utilisateur, formation et période de garantie. Ensuite, support continu si vous le souhaitez."
+      }
+    }
+  },
+  "work": {
+    "eyebrow": "Réalisations récentes",
+    "title": "Quelques opérations que nous avons remodelées.",
+    "subtitle": "Projets sur mesure pour le commerce, les services, la logistique et les équipes d'opération.",
+    "empty": "Cas à venir — actuellement en construction avec notre première vague de clients.",
+    "viewCase": "Voir le cas"
+  },
+  "contact": {
+    "eyebrow": "Parlons-en",
+    "title": "Apportez le problème. Nous apporterons les questions.",
+    "subtitle": "Réservez un appel de 30 minutes. Nous écoutons, posons des questions, et vous dirons honnêtement si nous sommes la bonne équipe.",
+    "ctaPrimary": "Réserver dans notre agenda",
+    "ctaSecondary": "Ou envoyez-nous un e-mail",
+    "form": {
+      "name": "Nom complet",
+      "email": "E-mail professionnel",
+      "company": "Entreprise",
+      "message": "Que cherchez-vous à résoudre ?",
+      "submit": "Envoyer le message",
+      "sending": "Envoi…",
+      "success": "Merci — nous revenons vers vous sous un jour ouvré.",
+      "error": "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
+      "required": "Requis"
+    },
+    "info": {
+      "locationLabel": "Basés à",
+      "location": "Vancouver, BC · Canada",
+      "remoteLabel": "Avec des équipes en",
+      "remote": "Amérique du Nord, Amérique latine et Europe"
+    }
+  },
+  "footer": {
+    "tagline": "Un logiciel qui s'adapte à la façon dont votre entreprise fonctionne vraiment.",
+    "sections": {
+      "company": "Entreprise",
+      "explore": "Explorer",
+      "contact": "Contact"
+    },
+    "links": {
+      "manifesto": "Manifeste",
+      "services": "Services",
+      "process": "Processus",
+      "work": "Réalisations",
+      "book": "Prendre rendez-vous",
+      "email": "Écrivez-nous"
+    },
+    "rights": "Tous droits réservés."
+  }
+}

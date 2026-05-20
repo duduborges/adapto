@@ -1,124 +1,117 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowDown, CheckCircle2, Zap, Shield } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
+import { Container } from '@/components/ui/Container';
+import { site } from '@/lib/site';
 
 interface HeroProps {
   dict: any;
 }
 
-export const Hero: React.FC<HeroProps> = ({ dict }) => {
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
+export function Hero({ dict }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-      {/* Background decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+    <section className="relative isolate min-h-[100svh] overflow-hidden bg-ink pt-32 md:pt-40">
+      {/* Massive A watermark — the brand mark as a structural background */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 top-12 -z-10 hidden select-none font-serif text-[44rem] leading-none text-ember/[0.06] md:block"
+        style={{ fontFeatureSettings: '"ss01"' }}
+      >
+        A
+      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 top-20 -z-10 select-none font-serif text-[22rem] leading-none text-ember/[0.06] md:hidden"
+      >
+        A
       </div>
 
-      <div className="container relative mx-auto px-4 md:px-6 lg:px-8 max-w-7xl pt-20 md:pt-24">
-        <div className="flex flex-col items-center text-center space-y-8">
+      {/* coordinate / station metadata top-left */}
+      <div className="absolute left-6 top-28 z-10 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-cream/30 md:left-10 md:block">
+        <div>49.2827° N · 123.1207° W</div>
+        <div className="mt-1">Vancouver — Canada</div>
+      </div>
+
+      <Container size="wide" className="relative">
+        <div className="grid grid-cols-12 items-end gap-8">
+          {/* Section number marker */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="space-y-4"
+            className="col-span-12 font-mono text-xs uppercase tracking-[0.2em] text-cream/40 md:col-span-2"
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              {dict.hero.title}
-              <br />
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                {dict.hero.titleHighlight}
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto">
-              {dict.hero.subtitle}
-            </p>
+            <span className="text-ember">§00</span> · Intro
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+          <div className="col-span-12 md:col-span-10">
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-[clamp(2.6rem,7vw,7rem)] font-medium leading-[0.95] tracking-[-0.02em] text-cream"
+            >
+              <span className="block">{dict.hero.title}</span>
+              <span className="block font-serif italic text-ember">
+                {dict.hero.titleAccent}
+              </span>
+            </motion.h1>
+          </div>
+        </div>
+
+        {/* Subtitle + CTA in a 2-column editorial layout */}
+        <div className="mt-20 grid grid-cols-12 gap-8 md:mt-28">
+          <div className="col-span-12 md:col-span-2">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-cream/40">
+              <span className="text-ember">↳</span> 2026
+            </div>
+          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="col-span-12 max-w-2xl text-balance text-lg leading-[1.55] text-cream/75 md:col-span-7 md:text-xl"
           >
-            <Button size="lg" onClick={scrollToContact} className="group">
-              <Calendar className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              {dict.hero.cta}
-            </Button>
-            <Button size="lg" variant="secondary" onClick={scrollToAbout} className="group">
-              {dict.hero.ctaSecondary}
-              <ArrowDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
-            </Button>
-          </motion.div>
+            {dict.hero.subtitle}
+          </motion.p>
 
-          {/* Feature badges */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-6 pt-8"
+            className="col-span-12 flex flex-col items-start gap-4 md:col-span-3 md:items-end"
           >
-            <div className="flex items-center space-x-2 text-gray-600">
-              <div className="p-1.5 rounded-full bg-green-100">
-                <CheckCircle2 className="w-4 h-4 text-green-600" />
-              </div>
-              <span className="text-sm font-medium">100% Custom</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-600">
-              <div className="p-1.5 rounded-full bg-blue-100">
-                <Zap className="w-4 h-4 text-blue-600" />
-              </div>
-              <span className="text-sm font-medium">Fast Delivery</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-600">
-              <div className="p-1.5 rounded-full bg-purple-100">
-                <Shield className="w-4 h-4 text-purple-600" />
-              </div>
-              <span className="text-sm font-medium">Secure & Reliable</span>
-            </div>
+            <a
+              href={site.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
+            >
+              <span>{dict.hero.cta}</span>
+              <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
+            </a>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream/40">
+              30 min · No commitment
+            </span>
           </motion.div>
-
-
         </div>
-      </div>
 
-      <style jsx>{`
-        @keyframes blob {
-          0% {
-            transform: translate(0px, 0px) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-          100% {
-            transform: translate(0px, 0px) scale(1);
-          }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
+        {/* Bottom strip: marquee-ish credibility line */}
+        <div className="mt-24 flex flex-col gap-6 border-t border-cream/10 pt-6 md:mt-32 md:flex-row md:items-center md:justify-between">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+            {dict.hero.eyebrow}
+          </p>
+          <a
+            href="#manifesto"
+            className="group inline-flex items-center gap-2 self-start font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40 transition-colors hover:text-cream md:self-auto"
+          >
+            {dict.hero.scrollHint}
+            <ArrowDown className="h-3 w-3 text-ember transition-transform group-hover:translate-y-0.5" />
+          </a>
+        </div>
+      </Container>
     </section>
   );
-};
+}

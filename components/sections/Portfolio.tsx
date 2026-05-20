@@ -1,111 +1,134 @@
 'use client';
 
 import React from 'react';
-import { Section } from '@/components/ui/Section';
-import { Badge } from '@/components/ui/Badge';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Database, Zap, Network, ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { Section } from '@/components/ui/Section';
+import { SectionLabel } from '@/components/ui/SectionLabel';
+import { cases } from '@/lib/data/cases';
 
 interface PortfolioProps {
   dict: any;
 }
 
-export const Portfolio: React.FC<PortfolioProps> = ({ dict }) => {
-  const projects = [
-    {
-      title: dict.portfolio.projects.erp.title,
-      description: dict.portfolio.projects.erp.description,
-      tags: ['ERP', 'Custom Development', 'Database'],
-      gradient: 'from-blue-500 to-cyan-500',
-      icon: Database,
-    },
-    {
-      title: dict.portfolio.projects.automation.title,
-      description: dict.portfolio.projects.automation.description,
-      tags: ['Automation', 'Workflow', 'Integration'],
-      gradient: 'from-purple-500 to-pink-500',
-      icon: Zap,
-    },
-    {
-      title: dict.portfolio.projects.integration.title,
-      description: dict.portfolio.projects.integration.description,
-      tags: ['Integration', 'API', 'Dashboard'],
-      gradient: 'from-orange-500 to-red-500',
-      icon: Network,
-    },
-  ];
+export function Portfolio({ dict }: PortfolioProps) {
+  const hasCases = cases.length > 0;
 
   return (
-    <Section id="portfolio" className="relative bg-white overflow-hidden">
-      {/* Dot pattern background */}
-      <div className="absolute inset-0 dot-pattern opacity-40" />
+    <Section id="work" size="wide" className="relative border-t border-cream/10">
+      <SectionLabel index="05" label={dict.work.eyebrow} />
 
-      <div className="relative max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-6 mb-16"
+          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
-          <Badge>{dict.portfolio.badge}</Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-            {dict.portfolio.title}
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            {dict.portfolio.subtitle}
+          {dict.work.title.replace(/\.$/, '')}
+          <span className="text-ember">.</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="col-span-12 self-end text-base leading-relaxed text-cream/60 md:col-span-4 md:text-lg"
+        >
+          {dict.work.subtitle}
+        </motion.p>
+      </div>
+
+      {!hasCases && (
+        <div className="mt-16 border-y border-dashed border-cream/15 px-6 py-16 text-center">
+          <p className="font-serif text-2xl italic text-cream/50">
+            {dict.work.empty}
           </p>
-        </motion.div>
+        </div>
+      )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((project, index) => {
-            const Icon = project.icon;
-            return (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
+      {hasCases && (
+        <div className="mt-20 border-t border-cream/15 md:mt-24">
+          {cases.map((c, i) => {
+            const inner = (
+              <motion.article
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+                className="group grid grid-cols-12 gap-6 border-b border-cream/15 py-10 md:gap-8 md:py-16"
               >
-                {/* Gradient header with icon */}
-                <div className={`relative h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
-                  <Icon className="w-16 h-16 text-white/90 group-hover:scale-110 transition-transform duration-300 relative z-10" />
-
-                  {/* Decorative circles */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12" />
+                {/* Index + meta */}
+                <div className="col-span-12 md:col-span-2">
+                  <p className="font-mono text-sm text-ember">0{i + 1}</p>
+                  {c.year && (
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+                      {c.year}
+                    </p>
+                  )}
+                  {c.tags && c.tags.length > 0 && (
+                    <ul className="mt-4 space-y-1">
+                      {c.tags.map((t) => (
+                        <li
+                          key={t}
+                          className="font-mono text-[11px] uppercase tracking-[0.18em] text-cream/40"
+                        >
+                          · {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
-                <div className="p-6 space-y-4">
-                  <h3 className="text-xl font-semibold group-hover:text-gray-900 transition-colors">
-                    {project.title}
+                {/* Title + description */}
+                <div className="col-span-12 md:col-span-4">
+                  <h3 className="font-serif text-3xl leading-tight tracking-tight text-cream md:text-4xl">
+                    {c.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700 group-hover:bg-gray-200 transition-colors"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-cream/60 md:text-base">
+                    {c.description}
+                  </p>
+                  {c.link && (
+                    <span className="mt-6 inline-flex items-center gap-2 border-b border-ember pb-0.5 font-mono text-xs uppercase tracking-[0.18em] text-cream transition-all group-hover:gap-3 group-hover:text-ember">
+                      {dict.work.viewCase}
+                      <ArrowUpRight className="h-3 w-3" />
+                    </span>
+                  )}
+                </div>
 
-                  {/* View more link */}
-                  <div className="flex items-center text-sm font-medium text-gray-400 group-hover:text-gray-900 transition-colors pt-2">
-                    <span>View details</span>
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                {/* Image */}
+                <div className="col-span-12 md:col-span-6">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-ink-800">
+                    <Image
+                      src={c.image}
+                      alt={c.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
+                    />
                   </div>
                 </div>
-              </motion.div>
+              </motion.article>
+            );
+
+            return c.link ? (
+              <a
+                key={c.slug}
+                href={c.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                {inner}
+              </a>
+            ) : (
+              <div key={c.slug}>{inner}</div>
             );
           })}
         </div>
-      </div>
+      )}
     </Section>
   );
-};
+}

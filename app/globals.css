@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --brand-ink: #2a2021;
+  --brand-cream: #fefefe;
+  --brand-ember: #c35622;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--brand-ink);
+  color: var(--brand-cream);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--brand-ember);
+  color: var(--brand-cream);
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1314;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a2e2e;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-ember);
+}
+
+@layer utilities {
+  .text-gradient-ember {
+    background-image: linear-gradient(135deg, #f4c6ad 0%, #c35622 50%, #e57b4d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ring-ember {
+    box-shadow: 0 0 0 1px rgba(195, 86, 34, 0.4);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(254, 254, 254, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(254, 254, 254, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .mask-radial {
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+}

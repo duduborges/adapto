@@ -1,97 +1,107 @@
 'use client';
 
 import React from 'react';
-import { Section } from '@/components/ui/Section';
-import { Badge } from '@/components/ui/Badge';
 import { motion } from 'framer-motion';
-import { Users, FolderKanban, Globe2, Sparkles } from 'lucide-react';
+import { Section } from '@/components/ui/Section';
+import { SectionLabel } from '@/components/ui/SectionLabel';
 
 interface AboutProps {
   dict: any;
 }
 
-export const About: React.FC<AboutProps> = ({ dict }) => {
-  const stats = [
-    {
-      value: '15+',
-      label: dict.about.stats.clients,
-      icon: Users,
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      value: '25+',
-      label: dict.about.stats.projects,
-      icon: FolderKanban,
-      color: 'from-purple-500 to-pink-500'
-    },
-    {
-      value: '3',
-      label: dict.about.stats.countries,
-      icon: Globe2,
-      color: 'from-green-500 to-emerald-500'
-    },
-    {
-      value: '2',
-      label: dict.about.stats.team,
-      icon: Sparkles,
-      color: 'from-orange-500 to-red-500'
-    },
-  ];
-
+export function About({ dict }: AboutProps) {
   return (
-    <Section id="about" className="relative bg-white overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full blur-3xl opacity-30 -mr-48 -mt-48" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-30 -ml-48 -mb-48" />
+    <Section id="manifesto" size="wide" className="relative">
+      <SectionLabel index="01" label={dict.manifesto.eyebrow} />
 
-      <div className="relative max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+      {/* Heading + lead — asymmetric editorial grid */}
+      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-6 mb-16"
+          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
         >
-          <Badge>{dict.about.badge}</Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-            {dict.about.title}
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            {dict.about.description}
+          {dict.manifesto.title.split('.')[0]}
+          <span className="text-ember">.</span>
+        </motion.h2>
+      </div>
+
+      {/* Long-form body with drop cap */}
+      <div className="mt-20 grid grid-cols-12 gap-8 md:mt-24">
+        <motion.aside
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
+          className="col-span-12 space-y-3 md:col-span-3"
+        >
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+            ↳ Marginalia
           </p>
+          <p className="font-serif text-base italic leading-snug text-cream/50">
+            “The brief is what you tell us; the answer comes from what we see.”
+          </p>
+        </motion.aside>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="col-span-12 max-w-2xl md:col-span-8 md:col-start-5"
+        >
+          <p className="text-xl leading-[1.55] text-cream md:text-2xl">
+            <span className="float-left mr-3 mt-1 font-serif text-7xl leading-none text-ember md:text-8xl">
+              {dict.manifesto.lead.charAt(0)}
+            </span>
+            {dict.manifesto.lead.slice(1)}
+          </p>
+
+          <div className="mt-10 space-y-6 text-base leading-[1.7] text-cream/70 md:text-lg">
+            {dict.manifesto.paragraphs.map((p: string, i: number) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
         </motion.div>
+      </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-16">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative text-center p-6 rounded-2xl border border-gray-200 hover:border-transparent hover:shadow-lg transition-all duration-300"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity`} />
-
-                <div className="relative space-y-3">
-                  <div className={`inline-flex p-2.5 rounded-lg bg-gradient-to-br ${stat.color} mx-auto`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div className={`text-4xl md:text-5xl font-bold bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-sm md:text-base text-gray-600 font-medium">
-                    {stat.label}
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+      {/* Pillars as a numbered list, not cards */}
+      <div className="mt-28 grid grid-cols-12 gap-8 md:mt-36">
+        <div className="col-span-12 md:col-span-3">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+            ↳ Three principles
+          </p>
+        </div>
+        <div className="col-span-12 md:col-span-9">
+          <ul className="divide-y divide-cream/10 border-y border-cream/10">
+            {(['inside', 'process', 'partnership'] as const).map((key, i) => {
+              const p = dict.manifesto.pillars[key];
+              return (
+                <motion.li
+                  key={key}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  className="group grid grid-cols-12 items-baseline gap-4 py-8 md:gap-8 md:py-10"
+                >
+                  <span className="col-span-2 font-mono text-sm text-ember md:col-span-1">
+                    0{i + 1}
+                  </span>
+                  <h3 className="col-span-10 font-serif text-2xl text-cream md:col-span-4 md:text-3xl">
+                    {p.title}
+                  </h3>
+                  <p className="col-span-12 text-base leading-relaxed text-cream/60 md:col-span-7">
+                    {p.description}
+                  </p>
+                </motion.li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </Section>
   );
-};
+}
