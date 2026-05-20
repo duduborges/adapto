@@ -1,15 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/types';
 import { i18n, languageShort } from '@/lib/i18n/config';
 import { Logo } from './Logo';
 import { Button } from './Button';
 import { site } from '@/lib/site';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight, MapPin, Mail } from 'lucide-react';
 
 interface HeaderProps {
   lang: Locale;
@@ -19,7 +21,11 @@ interface HeaderProps {
 export function Header({ lang, dict }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -27,6 +33,22 @@ export function Header({ lang, dict }: HeaderProps) {
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Body scroll lock + ESC handler when drawer is open
+  useEffect(() => {
+    if (!open) return;
+    document.documentElement.classList.add('no-scroll');
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    // focus the close button so screen readers land here
+    requestAnimationFrame(() => closeButtonRef.current?.focus());
+    return () => {
+      document.documentElement.classList.remove('no-scroll');
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
 
   const switchLanguage = (newLang: Locale) => {
     const segments = pathname.split('/');
@@ -46,8 +68,8 @@ export function Header({ lang, dict }: HeaderProps) {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled
-          ? 'border-b border-cream/10 bg-ink/80 backdrop-blur-xl'
+        scrolled || open
+          ? 'border-b border-cream/10 bg-ink/85 backdrop-blur-xl'
           : 'border-b border-transparent bg-transparent',
       )}
     >
@@ -101,46 +123,183 @@ export function Header({ lang, dict }: HeaderProps) {
           </Button>
         </div>
 
-        {/* Mobile toggle */}
+        {/* Mobile toggle — generous hit area, no default highlight */}
         <button
-          className="rounded-md p-2 text-cream md:hidden"
+          type="button"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream md:hidden"
           onClick={() => setOpen((s) => !s)}
-          aria-label="Toggle menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="border-t border-cream/10 bg-ink/95 backdrop-blur-xl md:hidden">
-          <div className="space-y-1 px-6 py-6">
-            {navItems.map((item) => (
-              <a
+      {/* Editorial mobile drawer — portaled to body to escape the header's
+          backdrop-filter containing block, which traps fixed-position children. */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <MobileDrawer
+                key="mobile-drawer"
+                dict={dict}
+                lang={lang}
+                navItems={navItems}
+                switchLanguage={switchLanguage}
+                onClose={() => setOpen(false)}
+                closeButtonRef={closeButtonRef}
+              />
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
+    </header>
+  );
+}
+
+interface MobileDrawerProps {
+  dict: any;
+  lang: Locale;
+  navItems: { label: string; href: string }[];
+  switchLanguage: (l: Locale) => string;
+  onClose: () => void;
+  closeButtonRef: React.RefObject<HTMLButtonElement>;
+}
+
+function MobileDrawer({
+  dict,
+  lang,
+  navItems,
+  switchLanguage,
+  onClose,
+  closeButtonRef,
+}: MobileDrawerProps) {
+  return (
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site navigation"
+      className="fixed inset-0 z-[60] md:hidden"
+    >
+      {/* Scrim — 50% black, dismissible */}
+      <motion.button
+        type="button"
+        aria-label="Close menu"
+        onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="absolute inset-0 bg-ink-950/55 backdrop-blur-sm motion-reduce:backdrop-blur-none"
+      />
+
+      {/* Drawer panel — slides from the right */}
+      <motion.aside
+        initial={{ x: '100%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '100%' }}
+        transition={{
+          type: 'tween',
+          ease: [0.22, 1, 0.36, 1],
+          duration: 0.32,
+        }}
+        className="absolute inset-y-0 right-0 flex w-full max-w-[420px] flex-col overflow-y-auto bg-ink shadow-[-30px_0_60px_-20px_rgba(0,0,0,0.6)] motion-reduce:transition-none"
+      >
+        {/* Top bar inside drawer */}
+        <div className="flex h-20 items-center justify-between border-b border-cream/10 px-6">
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+            <span className="text-ember">§</span> Menu
+          </span>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
+            className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream/70 transition-colors hover:text-cream"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Editorial nav list */}
+        <nav className="flex-1 px-6 py-10">
+          <ul className="space-y-1">
+            {navItems.map((item, i) => (
+              <motion.li
                 key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-3 text-base font-medium text-cream/80 hover:bg-cream/5 hover:text-cream"
+                initial={{ opacity: 0, x: 12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.08 + i * 0.05,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               >
-                {item.label}
-              </a>
+                <a
+                  href={item.href}
+                  onClick={onClose}
+                  className="group flex items-baseline gap-4 py-3 transition-colors"
+                >
+                  <span className="font-mono text-xs text-cream/30 transition-colors group-hover:text-ember">
+                    0{i + 1}
+                  </span>
+                  <span className="font-serif text-3xl leading-tight tracking-tight text-cream transition-colors group-hover:text-ember">
+                    {item.label}
+                  </span>
+                </a>
+              </motion.li>
             ))}
-            <div className="pt-4">
-              <Button href={site.bookingUrl} external className="w-full justify-center">
-                {dict.nav.book}
-              </Button>
-            </div>
-            <div className="flex items-center gap-1 pt-4">
+          </ul>
+        </nav>
+
+        {/* CTA — editorial underline style, matches Hero/Contact */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="border-t border-cream/10 px-6 pb-6 pt-8"
+        >
+          <a
+            href={site.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember"
+          >
+            <span>{dict.nav.book}</span>
+            <ArrowRight className="h-4 w-4 self-center transition-transform group-hover:translate-x-1" />
+          </a>
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream/40">
+            30 min · No commitment
+          </p>
+        </motion.div>
+
+        {/* Footer — language switcher + meta */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.45 }}
+          className="border-t border-cream/10 px-6 py-6"
+        >
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-cream/40">
+              Language
+            </span>
+            <div className="flex items-center gap-3" role="group" aria-label="Language switcher">
               {i18n.locales.map((locale) => (
                 <Link
                   key={locale}
                   href={switchLanguage(locale)}
-                  onClick={() => setOpen(false)}
+                  onClick={onClose}
+                  aria-current={locale === lang ? 'page' : undefined}
                   className={cn(
-                    'rounded-full px-3 py-1.5 text-xs font-semibold tracking-wider transition-all',
+                    'font-mono text-xs font-semibold tracking-[0.2em] transition-colors',
                     locale === lang
-                      ? 'bg-cream text-ink'
-                      : 'text-cream/60 hover:text-cream',
+                      ? 'text-ember'
+                      : 'text-cream/40 hover:text-cream',
                   )}
                 >
                   {languageShort[locale]}
@@ -148,8 +307,25 @@ export function Header({ lang, dict }: HeaderProps) {
               ))}
             </div>
           </div>
-        </div>
-      )}
-    </header>
+
+          <ul className="mt-6 space-y-2 text-sm text-cream/60">
+            <li className="flex items-center gap-2">
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-ember/80" />
+              {dict.contact.info.location}
+            </li>
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                onClick={onClose}
+                className="inline-flex items-center gap-2 transition-colors hover:text-cream"
+              >
+                <Mail className="h-3.5 w-3.5 shrink-0 text-ember/80" />
+                {site.email}
+              </a>
+            </li>
+          </ul>
+        </motion.div>
+      </motion.aside>
+    </div>
   );
 }

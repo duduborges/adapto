@@ -14,6 +14,18 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Kill the default mobile tap highlight everywhere — interaction feedback is handled per-component */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Lock body scroll when a menu/drawer is open */
+html.no-scroll,
+body.no-scroll {
+  overflow: hidden;
+  touch-action: none;
+}
+
 body {
   background: var(--brand-ink);
   color: var(--brand-cream);
