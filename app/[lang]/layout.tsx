@@ -65,7 +65,8 @@ export async function generateMetadata({
       description: descriptions[locale] ?? descriptions.en,
     },
     icons: {
-      icon: '/favicon.svg',
+      icon: '/adapto-logo.svg',
+      apple: '/adapto-logo.svg',
     },
   };
 }
