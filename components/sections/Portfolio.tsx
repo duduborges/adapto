@@ -98,15 +98,15 @@ export function Portfolio({ dict }: PortfolioProps) {
                   )}
                 </div>
 
-                {/* Image */}
+                {/* Image — use contain so wider/taller artwork doesn't get cropped weirdly */}
                 <div className="col-span-12 md:col-span-6">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-ink-800">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-cream/10 bg-ink-800">
                     <Image
                       src={c.image}
                       alt={c.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
+                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-[1.02] md:p-6"
                     />
                   </div>
                 </div>

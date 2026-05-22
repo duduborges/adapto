@@ -5,8 +5,8 @@ import { Footer } from '@/components/ui/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
-import { Differentials } from '@/components/sections/Differentials';
 import { Process } from '@/components/sections/Process';
+import { Differentials } from '@/components/sections/Differentials';
 import { Portfolio } from '@/components/sections/Portfolio';
 import { Contact } from '@/components/sections/Contact';
 
@@ -22,11 +22,13 @@ export default async function Home({
     <>
       <Header lang={lang as Locale} dict={dict} />
       <main className="relative">
-        <Hero dict={dict} />
+        {/* Order: Hero → About (who we are) → Services (what we do)
+            → Process (how we do it) → Differentials (why us) → Portfolio → Contact */}
+        <Hero dict={dict} lang={lang} />
         <About dict={dict} />
         <Services dict={dict} />
-        <Differentials dict={dict} />
         <Process dict={dict} />
+        <Differentials dict={dict} />
         <Portfolio dict={dict} />
         <Contact dict={dict} />
       </main>

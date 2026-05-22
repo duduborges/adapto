@@ -30,7 +30,7 @@ export function Process({ dict }: ProcessProps) {
         className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40"
       />
 
-      <SectionLabel index="04" label={dict.process.eyebrow} />
+      <SectionLabel index="03" label={dict.process.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
         <motion.h2

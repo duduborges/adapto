@@ -10,7 +10,7 @@ import type { Locale } from '@/types';
 import { i18n, languageShort } from '@/lib/i18n/config';
 import { Logo } from './Logo';
 import { Button } from './Button';
-import { site } from '@/lib/site';
+import { site, bookingHref, bookingIsExternal } from '@/lib/site';
 import { Menu, X, ArrowRight, MapPin, Mail } from 'lucide-react';
 
 interface HeaderProps {
@@ -77,10 +77,10 @@ export function Header({ lang, dict }: HeaderProps) {
         <Link
           href={`/${lang}`}
           aria-label="Adapto Software House — home"
-          className="group inline-flex items-center gap-3 transition-opacity hover:opacity-80"
+          className="group inline-flex items-center gap-4 transition-opacity hover:opacity-80"
         >
-          <Logo size="h-12 md:h-14" />
-          <span className="hidden font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-cream/50 md:inline-flex md:flex-col">
+          <Logo variant="mark" />
+          <span className="font-mono text-[13px] font-semibold uppercase leading-[1.05] tracking-[0.14em] text-cream/85 inline-flex flex-col md:text-[14px] md:tracking-[0.15em]">
             <span>Software</span>
             <span className="text-ember">/ House</span>
           </span>
@@ -118,7 +118,7 @@ export function Header({ lang, dict }: HeaderProps) {
             ))}
           </div>
 
-          <Button href={site.bookingUrl} external size="sm">
+          <Button href={bookingHref()} external={bookingIsExternal()} size="sm">
             {dict.nav.book}
           </Button>
         </div>
@@ -263,9 +263,10 @@ function MobileDrawer({
           className="border-t border-cream/10 px-6 pb-6 pt-8"
         >
           <a
-            href={site.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={bookingHref()}
+            {...(bookingIsExternal()
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {})}
             onClick={onClose}
             className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember"
           >

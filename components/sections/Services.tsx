@@ -51,24 +51,29 @@ export function Services({ dict }: ServicesProps) {
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : key)}
-                className="group grid w-full grid-cols-12 items-center gap-4 py-7 text-left transition-colors hover:bg-cream/[0.02] md:gap-8 md:py-10"
+                className="group grid w-full grid-cols-12 items-center gap-6 px-2 py-8 text-left transition-colors hover:bg-cream/[0.02] md:gap-10 md:px-4 md:py-12"
                 aria-expanded={isOpen}
               >
-                <span className="col-span-2 font-mono text-sm text-ember md:col-span-1">
+                <span className="col-span-2 font-mono text-sm font-semibold text-ember md:col-span-1">
                   0{i + 1}
                 </span>
                 <h3
-                  className={`col-span-9 font-serif text-3xl leading-tight tracking-tight transition-colors md:col-span-9 md:text-5xl ${
+                  className={`col-span-8 font-serif text-3xl leading-tight tracking-tight transition-colors md:col-span-9 md:text-5xl ${
                     isOpen ? 'text-cream' : 'text-cream/70 group-hover:text-cream'
                   }`}
                 >
                   {item.title}
                 </h3>
-                <span className="col-span-1 flex items-center justify-end text-cream/40 group-hover:text-ember md:col-span-2">
+                <span
+                  aria-hidden
+                  className={`col-span-2 flex h-10 w-10 items-center justify-end justify-self-end text-cream/40 transition-colors group-hover:text-ember md:col-span-2 md:h-12 md:w-12 ${
+                    isOpen ? 'text-ember' : ''
+                  }`}
+                >
                   {isOpen ? (
-                    <Minus className="h-5 w-5" />
+                    <Minus className="h-6 w-6 md:h-7 md:w-7" />
                   ) : (
-                    <Plus className="h-5 w-5" />
+                    <Plus className="h-6 w-6 md:h-7 md:w-7" />
                   )}
                 </span>
               </button>
@@ -80,23 +85,26 @@ export function Services({ dict }: ServicesProps) {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
-                    <div className="grid grid-cols-12 gap-4 pb-10 md:gap-8">
+                    <div className="grid grid-cols-12 gap-6 px-2 pb-14 pt-2 md:gap-10 md:px-4 md:pb-20 md:pt-4">
                       <div className="col-span-12 col-start-1 md:col-span-7 md:col-start-2">
-                        <p className="text-lg leading-[1.6] text-cream/80 md:text-xl">
+                        <p className="text-lg leading-[1.65] text-cream/85 md:text-xl">
                           {item.description}
                         </p>
                       </div>
                       <div className="col-span-12 md:col-span-4 md:col-start-9">
-                        <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-cream/40">
+                        <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45">
                           Stack & primitives
                         </p>
-                        <ul className="space-y-2 text-sm text-cream/60">
+                        <ul className="flex flex-wrap gap-2">
                           {item.tags.map((tag: string) => (
-                            <li key={tag} className="flex items-baseline gap-2">
-                              <span className="text-ember">·</span>
+                            <li
+                              key={tag}
+                              className="inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
+                            >
+                              <span className="h-1.5 w-1.5 rounded-full bg-ember" />
                               {tag}
                             </li>
                           ))}

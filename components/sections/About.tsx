@@ -53,10 +53,7 @@ export function About({ dict }: AboutProps) {
           className="col-span-12 max-w-2xl md:col-span-8 md:col-start-5"
         >
           <p className="text-xl leading-[1.55] text-cream md:text-2xl">
-            <span className="float-left mr-3 mt-1 font-serif text-7xl leading-none text-ember md:text-8xl">
-              {dict.manifesto.lead.charAt(0)}
-            </span>
-            {dict.manifesto.lead.slice(1)}
+            {dict.manifesto.lead}
           </p>
 
           <div className="mt-10 space-y-6 text-base leading-[1.7] text-cream/70 md:text-lg">

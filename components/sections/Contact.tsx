@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Mail, MapPin, Globe2 } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
-import { site } from '@/lib/site';
+import { site, bookingHref, bookingIsExternal } from '@/lib/site';
 
 interface ContactProps {
   dict: any;
@@ -59,7 +59,7 @@ export function Contact({ dict }: ContactProps) {
           {dict.contact.title.includes('.') && dict.contact.title.split('.').slice(1).join('.').trim() && (
             <>
               <br />
-              <span className="font-serif italic text-cream/40">
+              <span className="text-cream/45">
                 {dict.contact.title.split('.').slice(1).join('.').trim()}
               </span>
             </>
@@ -81,9 +81,10 @@ export function Contact({ dict }: ContactProps) {
           </p>
 
           <a
-            href={site.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={bookingHref()}
+            {...(bookingIsExternal()
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {})}
             className="group mt-10 inline-flex max-w-full items-baseline gap-3 border-b border-ember pb-1 font-serif text-3xl leading-tight text-cream transition-colors hover:text-ember md:text-4xl"
           >
             <Calendar className="h-6 w-6 self-center" />

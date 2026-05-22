@@ -2,7 +2,7 @@ import React from 'react';
 import type { Locale } from '@/types';
 import { Container } from './Container';
 import { Logo } from './Logo';
-import { site } from '@/lib/site';
+import { site, bookingHref, bookingIsExternal } from '@/lib/site';
 import { MapPin, Mail, Calendar } from 'lucide-react';
 
 interface FooterProps {
@@ -25,9 +25,9 @@ export function Footer({ lang, dict }: FooterProps) {
       <Container size="wide" className="py-16 md:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
           <div className="md:col-span-1 lg:col-span-2 space-y-6">
-            <div className="flex items-center gap-4">
-              <Logo size="h-16" />
-              <span className="font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-cream/50 flex flex-col">
+            <div className="flex items-center gap-5">
+              <Logo variant="full" sizeClass="h-28 md:h-32" />
+              <span className="font-mono text-base font-semibold uppercase leading-[1.05] tracking-[0.14em] text-cream/80 flex flex-col">
                 <span>Software</span>
                 <span className="text-ember">/ House</span>
               </span>
@@ -66,9 +66,10 @@ export function Footer({ lang, dict }: FooterProps) {
             <ul className="space-y-3">
               <li>
                 <a
-                  href={site.bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={bookingHref()}
+                  {...(bookingIsExternal()
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
                   className="inline-flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-cream"
                 >
                   <Calendar className="h-4 w-4 text-ember" />
