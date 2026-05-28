@@ -26,7 +26,7 @@ export function Footer({ lang, dict }: FooterProps) {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
           <div className="md:col-span-1 lg:col-span-2 space-y-6">
             <div className="flex items-center gap-5">
-              <Logo variant="full" sizeClass="h-28 md:h-32" />
+              <Logo variant="lockup" sizeClass="h-28 md:h-36" />
               <span className="font-mono text-base font-semibold uppercase leading-[1.05] tracking-[0.14em] text-cream/80 flex flex-col">
                 <span>Software</span>
                 <span className="text-ember">/ House</span>

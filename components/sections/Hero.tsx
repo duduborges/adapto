@@ -149,12 +149,12 @@ function HeroVisual() {
         className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
       >
         <Image
-          src="/adapto-logo.svg"
+          src="/logos/adapto-mark.png"
           alt=""
-          width={632}
-          height={592}
+          width={1600}
+          height={1600}
           priority
-          className="h-44 w-auto select-none drop-shadow-[0_8px_40px_rgba(195,86,34,0.35)] sm:h-56 lg:h-64"
+          className="h-48 w-auto select-none drop-shadow-[0_8px_40px_rgba(195,86,34,0.35)] sm:h-56 lg:h-72"
         />
       </motion.div>
 

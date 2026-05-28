@@ -2,73 +2,77 @@ import React from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
+type Variant = 'mark' | 'lockup' | 'wordmark' | 'mark-inverse';
+
 interface LogoProps {
   className?: string;
   /**
-   * 'mark' — just the A + orange dot (the 'Adapto' wordmark portion of the
-   *          source SVG is cropped via background-position).
-   * 'full' — full brand block as exported (mark + wordmark).
+   * 'mark'         — A + orange half-dot. Use on dark backgrounds (header, hero).
+   * 'lockup'       — Full brand: A + dot + 'Adapto' wordmark + orange 'o' (footer).
+   * 'wordmark'     — 'Adapto' word only.
+   * 'mark-inverse' — A + dark half-dot. Use on cream/ember backgrounds.
    */
-  variant?: 'mark' | 'full';
-  /** Tailwind size classes applied to the wrapper. */
+  variant?: Variant;
+  /** Tailwind size classes applied to the wrapper element. */
   sizeClass?: string;
+  priority?: boolean;
 }
 
-/**
- * /public/adapto-logo.svg is a 632×592 raster PNG embedded in an SVG wrapper,
- * exported as the full brand block (mark + 'Adapto' wordmark + dot).
- *
- * For the 'mark' variant we render the image as a background and crop the
- * bottom ~32% (where the wordmark lives) by scaling the background larger
- * than the visible container and pinning it to top-center. Using
- * background-image avoids the next/image style overrides that prevented
- * the overflow-clip approach from working.
- */
+const ASSETS: Record<
+  Variant,
+  { src: string; width: number; height: number; alt: string }
+> = {
+  mark: {
+    src: '/logos/adapto-mark.png',
+    width: 1600,
+    height: 1600,
+    alt: 'Adapto',
+  },
+  lockup: {
+    src: '/logos/adapto-lockup-white.png',
+    width: 1600,
+    height: 1600,
+    alt: 'Adapto',
+  },
+  wordmark: {
+    src: '/logos/adapto-wordmark.png',
+    width: 1600,
+    height: 1066,
+    alt: 'Adapto',
+  },
+  'mark-inverse': {
+    src: '/logos/adapto-mark-inverse.png',
+    width: 1600,
+    height: 1600,
+    alt: 'Adapto',
+  },
+};
+
 export function Logo({
   className,
   variant = 'mark',
   sizeClass,
+  priority = true,
 }: LogoProps) {
-  if (variant === 'full') {
-    return (
-      <span
-        aria-label="Adapto"
-        className={cn(
-          'inline-block select-none',
-          sizeClass ?? 'h-12',
-          className,
-        )}
-      >
-        <Image
-          src="/adapto-logo.svg"
-          alt="Adapto"
-          width={632}
-          height={592}
-          priority
-          className="h-full w-auto"
-        />
-      </span>
-    );
-  }
-
-  // Mark-only crop.
-  // Container aspect ≈ 4:3 (wider than tall) so the source image overflows
-  // vertically; combined with background-position: top, this hides the
-  // wordmark that sits in the bottom of the source.
+  const asset = ASSETS[variant];
   return (
     <span
       role="img"
       aria-label="Adapto"
       className={cn(
-        'inline-block shrink-0 select-none bg-no-repeat',
-        sizeClass ?? 'h-10 w-14 md:h-12 md:w-16',
+        'inline-flex shrink-0 select-none',
+        sizeClass ?? 'h-12 md:h-14',
         className,
       )}
-      style={{
-        backgroundImage: 'url(/adapto-logo.svg)',
-        backgroundSize: '160% auto',
-        backgroundPosition: '50% 18%',
-      }}
-    />
+    >
+      <Image
+        src={asset.src}
+        alt={asset.alt}
+        width={asset.width}
+        height={asset.height}
+        priority={priority}
+        className="h-full w-auto"
+      />
+    </span>
   );
 }
