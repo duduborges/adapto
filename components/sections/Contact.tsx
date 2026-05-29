@@ -20,7 +20,10 @@ export function Contact({ dict }: ContactProps) {
     e.preventDefault();
     setStatus('sending');
 
-    const formData = new FormData(e.currentTarget);
+    // Capture the form node BEFORE we await — React clears
+    // SyntheticEvent.currentTarget after the handler returns/awaits.
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const payload = {
       name: String(formData.get('name') || ''),
       email: String(formData.get('email') || ''),
@@ -36,8 +39,9 @@ export function Contact({ dict }: ContactProps) {
       });
       if (!res.ok) throw new Error('Request failed');
       setStatus('success');
-      e.currentTarget.reset();
-    } catch {
+      form.reset();
+    } catch (err) {
+      console.error('[adapto] contact submit failed', err);
       setStatus('error');
     }
   }
