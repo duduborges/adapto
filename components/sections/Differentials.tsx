@@ -80,7 +80,7 @@ export function Differentials({ dict }: DifferentialsProps) {
             {dict.differentials.contrast.themHeading}
           </span>
           <span className="col-span-6 inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ember">
-            <span className="h-1.5 w-1.5 rounded-full bg-ember" />
+            <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.9)]" />
             {dict.differentials.contrast.usHeading}
           </span>
         </div>

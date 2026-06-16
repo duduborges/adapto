@@ -15,7 +15,7 @@ export function SectionLabel({ index, label, className }: SectionLabelProps) {
         className,
       )}
     >
-      <span className="text-ember">§{index}</span>
+      <span className="text-ember drop-shadow-[0_0_8px_rgba(195,86,34,0.7)]">§{index}</span>
       <span className="h-px w-12 bg-cream/15" />
       <span>{label}</span>
     </div>

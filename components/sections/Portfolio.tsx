@@ -16,7 +16,12 @@ export function Portfolio({ dict }: PortfolioProps) {
   const hasCases = cases.length > 0;
 
   return (
-    <Section id="work" size="wide" className="relative border-t border-cream/10">
+    <Section id="work" size="wide" className="relative overflow-hidden border-t border-cream/10">
+      {/* Ember bloom — top-right accent */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-[-5%] top-0 -z-10 h-[500px] w-[500px] rounded-full bg-ember/[0.06] blur-[130px]"
+      />
       <SectionLabel index="05" label={dict.work.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">

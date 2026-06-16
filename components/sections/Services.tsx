@@ -17,7 +17,12 @@ export function Services({ dict }: ServicesProps) {
   const [open, setOpen] = useState<ServiceKey | null>('custom');
 
   return (
-    <Section id="services" size="wide" className="relative border-t border-cream/10">
+    <Section id="services" size="wide" className="relative overflow-hidden border-t border-cream/10">
+      {/* Ember bloom — left-center behind the accordion */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[-10%] top-1/2 -z-10 h-[600px] w-[500px] -translate-y-1/2 rounded-full bg-ember/[0.07] blur-[150px]"
+      />
       <SectionLabel index="02" label={dict.services.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
@@ -104,7 +109,7 @@ export function Services({ dict }: ServicesProps) {
                               key={tag}
                               className="inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
                             >
-                              <span className="h-1.5 w-1.5 rounded-full bg-ember" />
+                              <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.8)]" />
                               {tag}
                             </li>
                           ))}
