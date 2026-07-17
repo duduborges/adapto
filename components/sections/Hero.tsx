@@ -4,8 +4,22 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { Container } from '@/components/ui/Container';
 import { bookingHref, bookingIsExternal } from '@/lib/site';
+
+// WebGL scene — client-only, no server render
+const HeroScene = dynamic(() => import('@/components/three/HeroScene'), {
+  ssr: false,
+  loading: () => (
+    <div className="relative mx-auto aspect-[5/4] w-full max-w-[460px] animate-pulse lg:max-w-none">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-[6%] inset-y-[8%] rounded-3xl bg-gradient-to-br from-ember/14 via-ember/4 to-transparent blur-3xl"
+      />
+    </div>
+  ),
+});
 
 interface HeroProps {
   dict: any;
@@ -66,7 +80,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
           {/* Title + Visual two-column grid */}
           <div className="grid w-full grid-cols-12 items-center gap-8 lg:gap-12">
             {/* Headline column */}
-            <div className="col-span-12 lg:col-span-6">
+            <div className="col-span-12 lg:col-span-5">
               <motion.h1
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -115,9 +129,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="col-span-12 hidden lg:col-span-6 lg:block"
+              className="col-span-12 hidden lg:col-span-7 lg:block"
             >
-              <HeroVisual />
+              <HeroScene />
             </motion.div>
           </div>
         </div>
@@ -137,83 +151,5 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
         </div>
       </Container>
     </section>
-  );
-}
-
-/**
- * Hero visual — the brand mark big and prominent, with floating orbital
- * "module" cards that subtly suggest the systems Adapto builds around a
- * business. Keeps the editorial / friendly tone the partner asked for.
- */
-function HeroVisual() {
-  return (
-    <div className="relative mx-auto aspect-[5/4] w-full max-w-[460px] lg:max-w-none">
-      {/* Soft circular halo */}
-      <div
-        aria-hidden
-        className="absolute inset-[6%] rounded-full bg-gradient-to-br from-ember/20 via-ember/5 to-transparent blur-2xl"
-      />
-
-      <FloatingChip label="ERP"          sublabel="inventory · sales" className="left-[4%]  top-[14%]"    delay={0}   />
-      <FloatingChip label="Automation"   sublabel="workflows · jobs"   className="right-[2%] top-[8%]"     delay={0.4} />
-      <FloatingChip label="Dashboards"   sublabel="real-time KPIs"     className="right-[6%] bottom-[14%]" delay={0.8} />
-      <FloatingChip label="Integrations" sublabel="APIs · webhooks"    className="left-[2%]  bottom-[10%]" delay={1.2} />
-
-      {/* Subtle connecting lines */}
-      <svg
-        aria-hidden
-        viewBox="0 0 400 320"
-        preserveAspectRatio="none"
-        className="absolute inset-0 h-full w-full"
-      >
-        <defs>
-          <linearGradient id="hero-line" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%"   stopColor="#c35622" stopOpacity="0" />
-            <stop offset="50%"  stopColor="#c35622" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#c35622" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <g stroke="url(#hero-line)" strokeWidth="1" fill="none" strokeDasharray="3 5">
-          <line x1="80"  y1="70"  x2="200" y2="160" />
-          <line x1="320" y1="55"  x2="200" y2="160" />
-          <line x1="320" y1="250" x2="200" y2="160" />
-          <line x1="70"  y1="260" x2="200" y2="160" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function FloatingChip({
-  label,
-  sublabel,
-  className,
-  delay = 0,
-}: {
-  label: string;
-  sublabel: string;
-  className: string;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ y: 0 }}
-      animate={{ y: [-3, 3, -3] }}
-      transition={{
-        duration: 5,
-        delay,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
-      className={`absolute z-20 rounded-md border border-cream/10 bg-ink/85 px-3 py-2 backdrop-blur-md shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)] ${className}`}
-    >
-      <div className="flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-ember" />
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-cream/90">
-          {label}
-        </span>
-      </div>
-      <p className="mt-0.5 font-mono text-[9px] text-cream/45">{sublabel}</p>
-    </motion.div>
   );
 }
