@@ -25,8 +25,8 @@ function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
-// Cycle of target exponents the object settles into: sphere → cube → octahedron → star → sphere…
-const SHAPE_TARGETS = [2, 9, 1, 0.65, 2.6];
+// Cycle of target exponents the object settles into: ball → square (cube) → triangle (octahedron) → star → ball…
+const SHAPE_TARGETS = [2, 9, 1, 0.65];
 const SEGMENT_DURATION = 3.2; // seconds per hop (transition + hold)
 const TRANSITION_FRACTION = 0.55; // portion of the segment spent easing, rest is a hold
 

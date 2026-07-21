@@ -22,7 +22,7 @@ export function Portfolio({ dict }: PortfolioProps) {
         aria-hidden
         className="pointer-events-none absolute right-[-5%] top-0 -z-10 h-[500px] w-[500px] rounded-full bg-ember/[0.06] blur-[130px]"
       />
-      <SectionLabel index="05" label={dict.work.eyebrow} />
+      <SectionLabel index="01" label={dict.work.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
         <motion.h2
@@ -55,26 +55,47 @@ export function Portfolio({ dict }: PortfolioProps) {
       )}
 
       {hasCases && (
-        <div className="mt-20 border-t border-cream/15 md:mt-24">
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-20 lg:grid-cols-3 lg:gap-8">
           {cases.map((c, i) => {
             const inner = (
               <motion.article
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.5, delay: 0.05 }}
-                className="group grid grid-cols-12 gap-6 border-b border-cream/15 py-10 md:gap-8 md:py-16"
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group flex h-full flex-col overflow-hidden rounded-xl border border-cream/15 bg-ink-800/40 transition-colors duration-300 hover:border-ember/40"
               >
-                {/* Index + meta */}
-                <div className="col-span-12 md:col-span-2">
-                  <p className="font-mono text-sm text-ember">0{i + 1}</p>
-                  {c.year && (
-                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
-                      {c.year}
-                    </p>
-                  )}
+                {/* Image */}
+                <div className="relative aspect-[16/10] overflow-hidden border-b border-cream/10 bg-ink-800">
+                  <Image
+                    src={c.image}
+                    alt={c.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain p-4 transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </div>
+
+                {/* Meta + content */}
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-center justify-between">
+                    <p className="font-mono text-sm text-ember">0{i + 1}</p>
+                    {c.year && (
+                      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+                        {c.year}
+                      </p>
+                    )}
+                  </div>
+
+                  <h3 className="mt-4 font-serif text-2xl leading-tight tracking-tight text-cream">
+                    {c.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-cream/60">
+                    {c.description}
+                  </p>
+
                   {c.tags && c.tags.length > 0 && (
-                    <ul className="mt-4 space-y-1">
+                    <ul className="mt-4 flex flex-wrap gap-x-3 gap-y-1">
                       {c.tags.map((t) => (
                         <li
                           key={t}
@@ -85,35 +106,13 @@ export function Portfolio({ dict }: PortfolioProps) {
                       ))}
                     </ul>
                   )}
-                </div>
 
-                {/* Title + description */}
-                <div className="col-span-12 md:col-span-4">
-                  <h3 className="font-serif text-3xl leading-tight tracking-tight text-cream md:text-4xl">
-                    {c.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-cream/60 md:text-base">
-                    {c.description}
-                  </p>
                   {c.link && (
-                    <span className="mt-6 inline-flex items-center gap-2 border-b border-ember pb-0.5 font-mono text-xs uppercase tracking-[0.18em] text-cream transition-all group-hover:gap-3 group-hover:text-ember">
+                    <span className="mt-6 inline-flex items-center gap-2 self-start border-b border-ember pb-0.5 font-mono text-xs uppercase tracking-[0.18em] text-cream transition-all group-hover:gap-3 group-hover:text-ember">
                       {dict.work.viewCase}
                       <ArrowUpRight className="h-3 w-3" />
                     </span>
                   )}
-                </div>
-
-                {/* Image — use contain so wider/taller artwork doesn't get cropped weirdly */}
-                <div className="col-span-12 md:col-span-6">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-cream/10 bg-ink-800">
-                    <Image
-                      src={c.image}
-                      alt={c.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-[1.02] md:p-6"
-                    />
-                  </div>
                 </div>
               </motion.article>
             );
@@ -124,12 +123,14 @@ export function Portfolio({ dict }: PortfolioProps) {
                 href={c.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block"
+                className="block h-full"
               >
                 {inner}
               </a>
             ) : (
-              <div key={c.slug}>{inner}</div>
+              <div key={c.slug} className="h-full">
+                {inner}
+              </div>
             );
           })}
         </div>

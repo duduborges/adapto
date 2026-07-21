@@ -23,7 +23,7 @@ export function Services({ dict }: ServicesProps) {
         aria-hidden
         className="pointer-events-none absolute left-[-10%] top-1/2 -z-10 h-[600px] w-[500px] -translate-y-1/2 rounded-full bg-ember/[0.07] blur-[150px]"
       />
-      <SectionLabel index="02" label={dict.services.eyebrow} />
+      <SectionLabel index="03" label={dict.services.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
         <motion.h2
