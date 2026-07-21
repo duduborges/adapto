@@ -22,14 +22,14 @@ export default async function Home({
     <>
       <Header lang={lang as Locale} dict={dict} />
       <main className="relative">
-        {/* Order: Hero → About (who we are) → Services (what we do)
-            → Process (how we do it) → Differentials (why us) → Portfolio → Contact */}
+        {/* Order: Hero → Portfolio (recent work) → Process (how we do it) → Services (what we do)
+            → About (who we are) → Differentials (why us) → Contact */}
         <Hero dict={dict} lang={lang} />
-        <About dict={dict} />
-        <Services dict={dict} />
-        <Process dict={dict} />
-        <Differentials dict={dict} />
         <Portfolio dict={dict} />
+        <Process dict={dict} />
+        <Services dict={dict} />
+        <About dict={dict} />
+        <Differentials dict={dict} />
         <Contact dict={dict} />
       </main>
       <Footer lang={lang as Locale} dict={dict} />

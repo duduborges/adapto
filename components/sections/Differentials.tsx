@@ -46,7 +46,7 @@ export function Differentials({ dict }: DifferentialsProps) {
         className="pointer-events-none absolute right-1/2 top-1/2 -z-10 h-[640px] w-[640px] -translate-y-1/2 translate-x-1/2 rounded-full bg-ember/8 blur-[160px]"
       />
 
-      <SectionLabel index="04" label={dict.differentials.eyebrow} />
+      <SectionLabel index="05" label={dict.differentials.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
         <motion.h2
@@ -80,7 +80,7 @@ export function Differentials({ dict }: DifferentialsProps) {
             {dict.differentials.contrast.themHeading}
           </span>
           <span className="col-span-6 inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ember">
-            <span className="h-1.5 w-1.5 rounded-full bg-ember" />
+            <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.9)]" />
             {dict.differentials.contrast.usHeading}
           </span>
         </div>

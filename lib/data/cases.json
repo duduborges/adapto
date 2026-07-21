@@ -2,7 +2,7 @@
   {
     "slug": "placeholder-erp",
     "title": "Custom ERP for a mid-size retail operation",
-    "description": "Replaced spreadsheets and three disconnected tools with a single platform covering inventory, sales, purchasing and team management.",
+    "description": "One platform for inventory, sales, purchasing and team management.",
     "image": "/cases/placeholder-erp.svg",
     "link": "",
     "tags": ["ERP", "Retail", "Inventory"],
@@ -11,7 +11,7 @@
   {
     "slug": "placeholder-automation",
     "title": "Approval automation for a services agency",
-    "description": "Cut 60% of operational time by replacing manual reporting and approvals with quiet automations and real-time dashboards.",
+    "description": "Manual reporting and approvals replaced by quiet automation.",
     "image": "/cases/placeholder-automation.svg",
     "link": "",
     "tags": ["Automation", "Workflows"],
@@ -20,7 +20,7 @@
   {
     "slug": "placeholder-dashboard",
     "title": "Operations dashboard for a logistics team",
-    "description": "Unified data from five different systems into one real-time view used daily by the operations and leadership teams.",
+    "description": "Five systems unified into one real-time operations view.",
     "image": "/cases/placeholder-dashboard.svg",
     "link": "",
     "tags": ["Dashboards", "Integrations"],

@@ -47,7 +47,17 @@ export function Contact({ dict }: ContactProps) {
   }
 
   return (
-    <Section id="contact" size="wide" className="relative border-t border-cream/10">
+    <Section id="contact" size="wide" className="relative overflow-hidden border-t border-cream/10">
+      {/* Ember bloom — behind the booking CTA */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[-5%] top-1/4 -z-10 h-[600px] w-[500px] rounded-full bg-ember/[0.08] blur-[140px]"
+      />
+      {/* Second bloom — right side behind the form */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-ember/[0.05] blur-[110px]"
+      />
       <SectionLabel index="06" label={dict.contact.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">

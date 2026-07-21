@@ -29,8 +29,13 @@ export function Process({ dict }: ProcessProps) {
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40"
       />
+      {/* Ember bloom — warm glow behind the sticky-note diagram */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-1/4 left-1/4 -z-10 h-[500px] w-[700px] rounded-full bg-ember/[0.07] blur-[130px]"
+      />
 
-      <SectionLabel index="03" label={dict.process.eyebrow} />
+      <SectionLabel index="02" label={dict.process.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
         <motion.h2

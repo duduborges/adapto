@@ -12,7 +12,7 @@ interface AboutProps {
 export function About({ dict }: AboutProps) {
   return (
     <Section id="manifesto" size="wide" className="relative">
-      <SectionLabel index="01" label={dict.manifesto.eyebrow} />
+      <SectionLabel index="04" label={dict.manifesto.eyebrow} />
 
       {/* Heading + lead — asymmetric editorial grid */}
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
