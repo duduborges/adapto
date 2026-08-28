@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown, MapPin } from 'lucide-react';
 import Image from 'next/image';
@@ -26,7 +26,29 @@ interface HeroProps {
   lang?: string;
 }
 
+/**
+ * The visual column is `hidden lg:block`. Mounting HeroScene below that
+ * breakpoint would still fetch Three.js (~134 KB gzip) and spin up a WebGL
+ * context for a zero-sized, invisible canvas, so gate the mount on the same
+ * breakpoint the CSS uses.
+ */
+function useLargeViewport() {
+  const [isLarge, setIsLarge] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const sync = () => setIsLarge(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+
+  return isLarge;
+}
+
 export function Hero({ dict, lang = 'en' }: HeroProps) {
+  const showScene = useLargeViewport();
+
   // French copy is longer — pull the headline ceiling down so it doesn't overflow.
   const titleClamp =
     lang === 'fr'
@@ -50,8 +72,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
         <Image
           src="/logos/adapto-mark.png"
           alt=""
-          width={1600}
-          height={1600}
+          width={1000}
+          height={1000}
+          sizes="80vh"
           className="h-[80svh] w-auto opacity-[0.12]"
         />
       </div>
@@ -131,7 +154,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="col-span-12 hidden lg:col-span-7 lg:block"
             >
-              <HeroScene />
+              {showScene && <HeroScene />}
             </motion.div>
           </div>
         </div>
