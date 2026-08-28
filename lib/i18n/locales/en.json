@@ -47,22 +47,38 @@
       "custom": {
         "title": "Custom systems",
         "description": "ERPs, CRMs, internal tools and full applications designed around the exact way your team works.",
-        "tags": ["Web apps", "Internal tools", "ERP / CRM"]
+        "tags": [
+          "Web apps",
+          "Internal tools",
+          "ERP / CRM"
+        ]
       },
       "automation": {
         "title": "Automation",
         "description": "We map the repetitive work — reports, approvals, data entry — and replace it with quiet automations that run while you sleep.",
-        "tags": ["Workflows", "Integrations", "Triggers"]
+        "tags": [
+          "Workflows",
+          "Integrations",
+          "Triggers"
+        ]
       },
       "dashboards": {
         "title": "Dashboards & visibility",
         "description": "Real-time views of what matters: sales, stock, operations, people. Decisions stop relying on gut feeling.",
-        "tags": ["BI", "Reporting", "Real-time"]
+        "tags": [
+          "BI",
+          "Reporting",
+          "Real-time"
+        ]
       },
       "integrations": {
         "title": "Integrations",
         "description": "Connect the tools you already use — accounting, e-commerce, logistics, payments — into one consistent operation.",
-        "tags": ["APIs", "Webhooks", "Sync"]
+        "tags": [
+          "APIs",
+          "Webhooks",
+          "Sync"
+        ]
       }
     }
   },
@@ -173,8 +189,55 @@
       "process": "Process",
       "work": "Work",
       "book": "Book a call",
-      "email": "Email us"
+      "email": "Email us",
+      "privacy": "Privacy policy",
+      "cookiePrefs": "Cookie preferences"
     },
     "rights": "All rights reserved."
+  },
+  "notFound": {
+    "code": "404",
+    "title": "This page doesn't exist.",
+    "body": "The link may be broken, or the page may have been moved. Everything we do still lives on the home page.",
+    "cta": "Back to home",
+    "secondary": "Book a call"
+  },
+  "cookies": {
+    "title": "We use cookies",
+    "body": "We use analytics cookies to understand how the site is used. Nothing is loaded until you choose.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "policy": "Privacy policy"
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "updated": "Last updated",
+    "back": "Back to home",
+    "sections": [
+      {
+        "heading": "Who we are",
+        "body": "Adapto Software House is a software studio based in Vancouver, British Columbia, Canada. You can reach us at hello@adapto-sh.com for any question about this policy or the data we hold."
+      },
+      {
+        "heading": "What we collect",
+        "body": "When you submit the contact form we receive your name, email address, company name and the message you write. That is the only personal data we ask for. We use it solely to reply to you and, if it goes further, to run the project we discuss."
+      },
+      {
+        "heading": "Analytics and cookies",
+        "body": "We use Google Analytics 4 to understand how people find and use this site, and Vercel Speed Insights to measure page performance. Google Analytics sets cookies and only runs after you accept them in the banner. Speed Insights collects anonymous performance timings and sets no cookies. You can change your choice at any time from the link in the footer."
+      },
+      {
+        "heading": "Who we share it with",
+        "body": "Contact-form messages are delivered through Resend, our email provider. Analytics data is processed by Google. This site is hosted by Vercel. We do not sell your data and we do not share it with anyone else."
+      },
+      {
+        "heading": "How long we keep it",
+        "body": "Contact-form messages are kept for as long as the conversation stays relevant to a possible or ongoing project, and no more than 24 months after our last exchange. Analytics data follows Google's standard 14-month retention."
+      },
+      {
+        "heading": "Your rights",
+        "body": "You can ask us to show you, correct or delete any personal data we hold about you, or withdraw your consent to analytics. Write to hello@adapto-sh.com and we will respond within 30 days. If you are in Quebec, Law 25 gives you these rights; if you are in the European Economic Area, the GDPR does."
+      }
+    ]
   }
 }

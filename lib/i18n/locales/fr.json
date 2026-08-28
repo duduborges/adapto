@@ -47,22 +47,38 @@
       "custom": {
         "title": "Systèmes sur mesure",
         "description": "ERP, CRM, outils internes et applications complètes conçus exactement autour du fonctionnement de votre équipe.",
-        "tags": ["Web apps", "Outils internes", "ERP / CRM"]
+        "tags": [
+          "Web apps",
+          "Outils internes",
+          "ERP / CRM"
+        ]
       },
       "automation": {
         "title": "Automatisation",
         "description": "Nous cartographions le travail répétitif — rapports, approbations, saisie de données — et le remplaçons par des automatisations silencieuses.",
-        "tags": ["Flux", "Intégrations", "Déclencheurs"]
+        "tags": [
+          "Flux",
+          "Intégrations",
+          "Déclencheurs"
+        ]
       },
       "dashboards": {
         "title": "Tableaux de bord",
         "description": "Vues en temps réel de ce qui compte : ventes, stocks, opérations, équipes. Les décisions ne reposent plus sur l'intuition.",
-        "tags": ["BI", "Reporting", "Temps réel"]
+        "tags": [
+          "BI",
+          "Reporting",
+          "Temps réel"
+        ]
       },
       "integrations": {
         "title": "Intégrations",
         "description": "Reliez les outils que vous utilisez déjà — comptabilité, e-commerce, logistique, paiements — dans une opération unique et cohérente.",
-        "tags": ["APIs", "Webhooks", "Synchronisation"]
+        "tags": [
+          "APIs",
+          "Webhooks",
+          "Synchronisation"
+        ]
       }
     }
   },
@@ -173,8 +189,55 @@
       "process": "Processus",
       "work": "Réalisations",
       "book": "Prendre rendez-vous",
-      "email": "Écrivez-nous"
+      "email": "Écrivez-nous",
+      "privacy": "Politique de confidentialité",
+      "cookiePrefs": "Préférences de témoins"
     },
     "rights": "Tous droits réservés."
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Cette page n'existe pas.",
+    "body": "Le lien est peut-être rompu, ou la page a été déplacée. Tout ce que nous faisons se trouve sur la page d'accueil.",
+    "cta": "Retour à l'accueil",
+    "secondary": "Réserver un appel"
+  },
+  "cookies": {
+    "title": "Nous utilisons des témoins",
+    "body": "Nous utilisons des témoins d'analyse pour comprendre comment le site est utilisé. Rien n'est chargé avant votre choix.",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "policy": "Politique de confidentialité"
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "updated": "Dernière mise à jour",
+    "back": "Retour à l'accueil",
+    "sections": [
+      {
+        "heading": "Qui nous sommes",
+        "body": "Adapto Software House est un studio logiciel établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à hello@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
+      },
+      {
+        "heading": "Ce que nous recueillons",
+        "body": "Lorsque vous remplissez le formulaire de contact, nous recevons votre nom, votre adresse courriel, le nom de votre entreprise et votre message. Ce sont les seules données personnelles que nous demandons. Elles servent uniquement à vous répondre et, le cas échéant, à mener le projet dont nous discutons."
+      },
+      {
+        "heading": "Analyse et témoins",
+        "body": "Nous utilisons Google Analytics 4 pour comprendre comment les visiteurs trouvent et utilisent ce site, ainsi que Vercel Speed Insights pour mesurer la performance des pages. Google Analytics dépose des témoins et ne se charge qu'après votre acceptation dans la bannière. Speed Insights recueille des mesures de performance anonymes et ne dépose aucun témoin. Vous pouvez modifier votre choix à tout moment depuis le lien dans le pied de page."
+      },
+      {
+        "heading": "Avec qui nous les partageons",
+        "body": "Les messages du formulaire de contact sont acheminés par Resend, notre fournisseur de courriel. Les données d'analyse sont traitées par Google. Ce site est hébergé par Vercel. Nous ne vendons pas vos données et ne les partageons avec personne d'autre."
+      },
+      {
+        "heading": "Combien de temps nous les conservons",
+        "body": "Les messages du formulaire de contact sont conservés tant que l'échange demeure pertinent pour un projet possible ou en cours, et au plus 24 mois après notre dernier échange. Les données d'analyse suivent la conservation standard de 14 mois de Google."
+      },
+      {
+        "heading": "Vos droits",
+        "body": "Vous pouvez nous demander de consulter, corriger ou supprimer les données personnelles que nous détenons à votre sujet, ou retirer votre consentement à l'analyse. Écrivez à hello@adapto-sh.com et nous répondrons dans les 30 jours. Si vous résidez au Québec, la Loi 25 vous accorde ces droits; dans l'Espace économique européen, c'est le RGPD."
+      }
+    ]
   }
 }

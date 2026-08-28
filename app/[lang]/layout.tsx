@@ -3,9 +3,12 @@ import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { Instrument_Serif } from 'next/font/google';
 import { i18n } from '@/lib/i18n/config';
+import { getDictionary } from '@/lib/i18n/get-dictionary';
 import { siteUrl } from '@/lib/site';
 import type { Locale } from '@/types';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { Analytics } from '@/components/analytics/Analytics';
+import { CookieBanner } from '@/components/analytics/CookieBanner';
 import '../globals.css';
 
 const instrumentSerif = Instrument_Serif({
@@ -96,6 +99,7 @@ export default async function LangLayout({
 }) {
   const { lang } = await params;
   const locale = lang as Locale;
+  const dict = await getDictionary(locale);
 
   return (
     <html
@@ -108,6 +112,8 @@ export default async function LangLayout({
       </head>
       <body className="bg-ink font-sans text-cream antialiased">
         {children}
+        <CookieBanner lang={locale} dict={dict} />
+        <Analytics />
       </body>
     </html>
   );
