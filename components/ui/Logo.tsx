@@ -15,6 +15,7 @@ interface LogoProps {
   variant?: Variant;
   /** Tailwind size classes applied to the wrapper element. */
   sizeClass?: string;
+  /** Only the above-the-fold header logo should opt in. */
   priority?: boolean;
 }
 
@@ -24,26 +25,26 @@ const ASSETS: Record<
 > = {
   mark: {
     src: '/logos/adapto-mark.png',
-    width: 1600,
-    height: 1600,
+    width: 1000,
+    height: 1000,
     alt: 'Adapto',
   },
   lockup: {
     src: '/logos/adapto-lockup-white.png',
-    width: 1600,
-    height: 1600,
+    width: 640,
+    height: 640,
     alt: 'Adapto',
   },
   wordmark: {
     src: '/logos/adapto-wordmark.png',
-    width: 1600,
-    height: 1066,
+    width: 640,
+    height: 426,
     alt: 'Adapto',
   },
   'mark-inverse': {
     src: '/logos/adapto-mark-inverse.png',
-    width: 1600,
-    height: 1600,
+    width: 640,
+    height: 640,
     alt: 'Adapto',
   },
 };
@@ -52,7 +53,7 @@ export function Logo({
   className,
   variant = 'mark',
   sizeClass,
-  priority = true,
+  priority = false,
 }: LogoProps) {
   const asset = ASSETS[variant];
   return (
@@ -71,6 +72,8 @@ export function Logo({
         width={asset.width}
         height={asset.height}
         priority={priority}
+        loading={priority ? undefined : 'lazy'}
+        sizes="(max-width: 768px) 120px, 220px"
         className="h-full w-auto"
       />
     </span>

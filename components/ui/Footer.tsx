@@ -1,8 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 import type { Locale } from '@/types';
 import { Container } from './Container';
 import { Logo } from './Logo';
 import { site, bookingHref, bookingIsExternal } from '@/lib/site';
+import { CookiePrefsLink } from '@/components/analytics/CookiePrefsLink';
 import { MapPin, Mail, Calendar } from 'lucide-react';
 
 interface FooterProps {
@@ -35,10 +37,20 @@ export function Footer({ lang, dict }: FooterProps) {
             <p className="max-w-sm text-sm leading-relaxed text-cream/60">
               {dict.footer.tagline}
             </p>
-            <div className="flex items-center gap-2 text-sm text-cream/50">
-              <MapPin className="h-4 w-4 text-ember" />
-              {dict.contact.info.location}
-            </div>
+            <address className="space-y-2 not-italic">
+              <div className="flex items-center gap-2 text-sm text-cream/50">
+                <MapPin className="h-4 w-4 text-ember" />
+                {dict.contact.info.location}
+              </div>
+              <p className="text-sm text-cream/40">
+                <a
+                  href={`mailto:${site.email}`}
+                  className="transition-colors hover:text-cream/70"
+                >
+                  {site.email}
+                </a>
+              </p>
+            </address>
           </div>
 
           <nav className="space-y-4">
@@ -93,9 +105,18 @@ export function Footer({ lang, dict }: FooterProps) {
           <p>
             © {year} {site.fullName}. {dict.footer.rights}
           </p>
-          <p className="font-mono">
-            <span className="text-cream/60">/{lang}</span> · {site.domain}
-          </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link
+              href={`/${lang}/privacy`}
+              className="transition-colors hover:text-cream/70"
+            >
+              {dict.footer.links.privacy}
+            </Link>
+            <CookiePrefsLink label={dict.footer.links.cookiePrefs} />
+            <p className="font-mono">
+              <span className="text-cream/60">/{lang}</span> · {site.domain}
+            </p>
+          </div>
         </div>
       </Container>
     </footer>
