@@ -65,10 +65,6 @@ export async function generateMetadata({
       title: ogTitles[locale] ?? ogTitles.en,
       description: descriptions[locale] ?? descriptions.en,
     },
-    icons: {
-      icon: '/favicon.svg',
-      apple: '/favicon.svg',
-    },
   };
 }
 

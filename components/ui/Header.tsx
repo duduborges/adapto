@@ -79,7 +79,7 @@ export function Header({ lang, dict }: HeaderProps) {
           aria-label="Adapto Software House — home"
           className="group inline-flex items-center gap-4 transition-opacity hover:opacity-80"
         >
-          <Logo variant="mark" sizeClass="h-11 md:h-12" />
+          <Logo variant="mark" sizeClass="h-11 md:h-12" priority />
           <span className="font-mono text-[13px] font-semibold uppercase leading-[1.05] tracking-[0.14em] text-cream/85 inline-flex flex-col md:text-[14px] md:tracking-[0.15em]">
             <span>Software</span>
             <span className="text-ember">/ House</span>
