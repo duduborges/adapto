@@ -1,10 +1,11 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { Instrument_Serif } from 'next/font/google';
 import { i18n } from '@/lib/i18n/config';
-import { site } from '@/lib/site';
+import { siteUrl } from '@/lib/site';
 import type { Locale } from '@/types';
+import { JsonLd } from '@/components/seo/JsonLd';
 import '../globals.css';
 
 const instrumentSerif = Instrument_Serif({
@@ -44,7 +45,7 @@ export async function generateMetadata({
     // Tab title — short. Long form is below in openGraph.title for SEO/AEO.
     title: tabTitle,
     description: descriptions[locale] ?? descriptions.en,
-    metadataBase: new URL(`https://${site.domain}`),
+    metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `/${locale}`,
       languages: {
@@ -55,7 +56,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       locale: locale === 'fr' ? 'fr_CA' : 'en_CA',
-      url: `https://${site.domain}/${locale}`,
+      url: `${siteUrl}/${locale}`,
       siteName: 'Adapto',
       title: ogTitles[locale] ?? ogTitles.en,
       description: descriptions[locale] ?? descriptions.en,
@@ -65,8 +66,26 @@ export async function generateMetadata({
       title: ogTitles[locale] ?? ogTitles.en,
       description: descriptions[locale] ?? descriptions.en,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+      },
+    },
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: '#2a2021',
+  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export default async function LangLayout({
   children,
@@ -76,13 +95,20 @@ export default async function LangLayout({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+  const locale = lang as Locale;
+
   return (
     <html
-      lang={lang}
+      lang={locale === 'fr' ? 'fr-CA' : 'en-CA'}
       className={`${GeistSans.variable} ${GeistMono.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-ink font-sans text-cream antialiased">{children}</body>
+      <head>
+        <JsonLd lang={locale} />
+      </head>
+      <body className="bg-ink font-sans text-cream antialiased">
+        {children}
+      </body>
     </html>
   );
 }
