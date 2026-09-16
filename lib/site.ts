@@ -48,6 +48,8 @@ export const site = {
   domain: 'adapto-sh.com',
   email: 'hello@adapto-sh.com',
   bookingUrl: 'https://calendar.app.google/kzHtcffwJgX8JQVG7',
+  /** Adapto Tracker — clients enter their access code here. */
+  trackerUrl: 'https://tracker.adapto-sh.com',
   location: {
     city: 'Vancouver',
     region: 'British Columbia',

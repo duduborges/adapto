@@ -143,6 +143,15 @@
         "title": "Livraison et au-delà",
         "description": "Déploiement final, documentation technique et utilisateur, formation et période de garantie. Ensuite, support continu si vous le souhaitez."
       }
+    },
+    "tracker": {
+      "focus": "En cours",
+      "start": "Premier appel",
+      "end": "Partenariat",
+      "cta": {
+        "description": "Déjà client ? Suivez chaque phase en direct dans l'Adapto Tracker.",
+        "button": "Ouvrir le Tracker"
+      }
     }
   },
   "work": {

@@ -143,6 +143,15 @@
         "title": "Delivery & beyond",
         "description": "Final deploy, technical and user documentation, training, and a warranty period. Then ongoing support if you want it."
       }
+    },
+    "tracker": {
+      "focus": "In focus",
+      "start": "First call",
+      "end": "Partnership",
+      "cta": {
+        "description": "Already a client? Follow every phase live in the Adapto Tracker.",
+        "button": "Open the Tracker"
+      }
     }
   },
   "work": {
