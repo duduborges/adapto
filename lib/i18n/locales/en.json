@@ -145,28 +145,11 @@
       }
     },
     "tracker": {
-      "progress": "{done} of {total} phases completed",
-      "current": "currently on",
-      "focus": "Focus",
-      "phase": "Phase",
-      "start": {
-        "label": "Start",
-        "title": "First call"
-      },
-      "end": {
-        "label": "End",
-        "title": "Partnership"
-      },
-      "status": {
-        "completed": "Completed",
-        "in_progress": "In progress",
-        "pending": "Pending"
-      },
-      "hint": "Click a phase to see what happens in it.",
-      "annotation": "Every phase is reviewed with you before the next one starts. No surprises.",
+      "focus": "In focus",
+      "start": "First call",
+      "end": "Partnership",
       "cta": {
-        "title": "Already a client? Watch it happen live.",
-        "description": "The Adapto Tracker shows where your project stands right now — every phase, checkpoint and delivery, with the access code we send you.",
+        "description": "Already a client? Follow every phase live in the Adapto Tracker.",
         "button": "Open the Tracker"
       }
     }

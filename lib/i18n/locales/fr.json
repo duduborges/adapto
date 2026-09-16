@@ -145,28 +145,11 @@
       }
     },
     "tracker": {
-      "progress": "{done} phases sur {total} terminées",
-      "current": "en cours :",
-      "focus": "Focus",
-      "phase": "Phase",
-      "start": {
-        "label": "Début",
-        "title": "Premier appel"
-      },
-      "end": {
-        "label": "Fin",
-        "title": "Partenariat"
-      },
-      "status": {
-        "completed": "Terminée",
-        "in_progress": "En cours",
-        "pending": "À venir"
-      },
-      "hint": "Cliquez sur une phase pour voir ce qui s'y passe.",
-      "annotation": "Chaque phase est validée avec vous avant de passer à la suivante. Aucune surprise.",
+      "focus": "En cours",
+      "start": "Premier appel",
+      "end": "Partenariat",
       "cta": {
-        "title": "Déjà client ? Suivez tout en direct.",
-        "description": "L'Adapto Tracker montre où en est votre projet en ce moment — chaque phase, chaque point de contrôle et chaque livraison, avec le code d'accès que nous vous envoyons.",
+        "description": "Déjà client ? Suivez chaque phase en direct dans l'Adapto Tracker.",
         "button": "Ouvrir le Tracker"
       }
     }
