@@ -22,7 +22,7 @@ export function Portfolio({ dict }: PortfolioProps) {
         aria-hidden
         className="pointer-events-none absolute right-[-5%] top-0 -z-10 h-[500px] w-[500px] rounded-full bg-ember/[0.06] blur-[130px]"
       />
-      <SectionLabel index="01" label={dict.work.eyebrow} />
+      <SectionLabel label={dict.work.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
         <motion.h2

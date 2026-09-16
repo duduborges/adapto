@@ -1,4 +1,5 @@
-const PRODUCTION_URL = 'https://adapto-sh.com';
+// The apex redirects to www, so www is the canonical host.
+const PRODUCTION_URL = 'https://www.adapto-sh.com';
 
 /**
  * Canonical origin for this deployment, no trailing slash.
@@ -29,8 +30,16 @@ function resolveSiteUrl(): string {
 
 export const siteUrl = resolveSiteUrl();
 
-/** Preview/branch deploys must not be indexed and must not emit prod canonicals. */
-export const isProductionSite = siteUrl === PRODUCTION_URL;
+/**
+ * Preview/branch deploys must not be indexed. Derived from VERCEL_ENV rather
+ * than by comparing siteUrl to a hardcoded host: the first version compared
+ * against the apex domain, but VERCEL_PROJECT_PRODUCTION_URL is the www host,
+ * so production failed the check and robots.txt served `Disallow: /`.
+ */
+export const isProductionSite =
+  process.env.VERCEL_ENV !== undefined
+    ? process.env.VERCEL_ENV === 'production'
+    : siteUrl === PRODUCTION_URL;
 
 export const site = {
   name: 'Adapto',

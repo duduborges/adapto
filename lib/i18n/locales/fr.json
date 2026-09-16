@@ -196,9 +196,12 @@
     "rights": "Tous droits réservés."
   },
   "notFound": {
-    "code": "404",
-    "title": "Cette page n'existe pas.",
-    "body": "Le lien est peut-être rompu, ou la page a été déplacée. Tout ce que nous faisons se trouve sur la page d'accueil.",
+    "code": "Erreur 404",
+    "requested": "Vous avez demandé",
+    "title": "Cette page",
+    "titleAccent": "n'existe pas.",
+    "body": "Le lien est peut-être rompu, ou la page a été déplacée. Choisissez une section ci-dessous ou revenez à l'accueil.",
+    "routesLabel": "Aller à",
     "cta": "Retour à l'accueil",
     "secondary": "Réserver un appel"
   },

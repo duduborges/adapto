@@ -211,7 +211,7 @@ function MobileDrawer({
         {/* Top bar inside drawer */}
         <div className="flex h-20 items-center justify-between border-b border-cream/10 px-6">
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
-            <span className="text-ember">§</span> Menu
+            Menu
           </span>
           <button
             ref={closeButtonRef}

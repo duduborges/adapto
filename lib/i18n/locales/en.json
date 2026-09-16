@@ -196,9 +196,12 @@
     "rights": "All rights reserved."
   },
   "notFound": {
-    "code": "404",
-    "title": "This page doesn't exist.",
-    "body": "The link may be broken, or the page may have been moved. Everything we do still lives on the home page.",
+    "code": "Error 404",
+    "requested": "You asked for",
+    "title": "This page",
+    "titleAccent": "doesn't exist.",
+    "body": "The link may be broken, or the page may have moved. Pick a section below or go back to the home page.",
+    "routesLabel": "Go to",
     "cta": "Back to home",
     "secondary": "Book a call"
   },
