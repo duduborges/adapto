@@ -143,6 +143,32 @@
         "title": "Livraison et au-delà",
         "description": "Déploiement final, documentation technique et utilisateur, formation et période de garantie. Ensuite, support continu si vous le souhaitez."
       }
+    },
+    "tracker": {
+      "progress": "{done} phases sur {total} terminées",
+      "current": "en cours :",
+      "focus": "Focus",
+      "phase": "Phase",
+      "start": {
+        "label": "Début",
+        "title": "Premier appel"
+      },
+      "end": {
+        "label": "Fin",
+        "title": "Partenariat"
+      },
+      "status": {
+        "completed": "Terminée",
+        "in_progress": "En cours",
+        "pending": "À venir"
+      },
+      "hint": "Cliquez sur une phase pour voir ce qui s'y passe.",
+      "annotation": "Chaque phase est validée avec vous avant de passer à la suivante. Aucune surprise.",
+      "cta": {
+        "title": "Déjà client ? Suivez tout en direct.",
+        "description": "L'Adapto Tracker montre où en est votre projet en ce moment — chaque phase, chaque point de contrôle et chaque livraison, avec le code d'accès que nous vous envoyons.",
+        "button": "Ouvrir le Tracker"
+      }
     }
   },
   "work": {

@@ -143,6 +143,32 @@
         "title": "Delivery & beyond",
         "description": "Final deploy, technical and user documentation, training, and a warranty period. Then ongoing support if you want it."
       }
+    },
+    "tracker": {
+      "progress": "{done} of {total} phases completed",
+      "current": "currently on",
+      "focus": "Focus",
+      "phase": "Phase",
+      "start": {
+        "label": "Start",
+        "title": "First call"
+      },
+      "end": {
+        "label": "End",
+        "title": "Partnership"
+      },
+      "status": {
+        "completed": "Completed",
+        "in_progress": "In progress",
+        "pending": "Pending"
+      },
+      "hint": "Click a phase to see what happens in it.",
+      "annotation": "Every phase is reviewed with you before the next one starts. No surprises.",
+      "cta": {
+        "title": "Already a client? Watch it happen live.",
+        "description": "The Adapto Tracker shows where your project stands right now — every phase, checkpoint and delivery, with the access code we send you.",
+        "button": "Open the Tracker"
+      }
     }
   },
   "work": {

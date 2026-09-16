@@ -46,6 +46,9 @@ const config: Config = {
           900: '#6b321e',
           950: '#39170d',
         },
+        // Status colours shared with the Adapto Tracker (its dark theme).
+        success: '#6fbf87',
+        warning: '#e0a95a',
       },
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
