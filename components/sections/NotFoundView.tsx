@@ -57,12 +57,12 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
         className="pointer-events-none absolute inset-0 -z-10 grid-bg mask-radial opacity-30"
       />
 
-      <Container size="wide" className="flex h-20 w-full items-center justify-between">
+      <Container size="wide" className="flex h-28 w-full items-center justify-between md:h-32">
         <Link
           href={home}
           className="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
         >
-          <Logo variant="mark" sizeClass="h-9" priority />
+          <Logo variant="lockup" sizeClass="h-20 md:h-24" priority />
         </Link>
         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
           {t.code}
