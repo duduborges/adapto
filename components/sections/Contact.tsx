@@ -58,7 +58,7 @@ export function Contact({ dict }: ContactProps) {
         aria-hidden
         className="pointer-events-none absolute bottom-0 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-ember/[0.05] blur-[110px]"
       />
-      <SectionLabel index="06" label={dict.contact.eyebrow} />
+      <SectionLabel label={dict.contact.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
         <motion.h2

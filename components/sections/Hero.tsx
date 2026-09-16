@@ -94,7 +94,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
             <span className="hidden text-cream/55 md:inline">Remote-friendly worldwide</span>
           </span>
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/35">
-            <span className="text-ember">§00</span> · Intro
+            Intro
           </span>
         </motion.div>
 
