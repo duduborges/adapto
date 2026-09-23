@@ -35,6 +35,9 @@ const demoStatus: Record<PhaseKey, Status> = {
 
 const focusKey: PhaseKey = 'execution';
 
+/** Discovery + modeling cost nothing — pricing only exists once scope is real. */
+const freePhases: PhaseKey[] = ['discovery', 'modeling'];
+
 const ruleClass: Record<Status, string> = {
   completed: 'border-l-success',
   in_progress: 'border-l-warning',
@@ -91,6 +94,22 @@ export function Process({ dict }: ProcessProps) {
         </motion.p>
       </div>
 
+      {/* Big free-start trigger — answers the pricing question before the tracker does */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="mt-12 flex flex-col gap-4 rounded-2xl border border-ember/25 bg-ember/[0.06] p-8 md:mt-16 md:flex-row md:items-center md:justify-between md:gap-10 md:p-10"
+      >
+        <p className="text-balance font-serif text-3xl italic leading-[1.08] text-ember md:text-5xl">
+          {dict.process.freeHeadline}
+        </p>
+        <p className="max-w-sm text-sm leading-relaxed text-cream/75 md:text-base">
+          {dict.process.freeNote}
+        </p>
+      </motion.div>
+
       {/* Desktop — the tracker pill */}
       <motion.div
         initial={{ opacity: 0, y: 14 }}
@@ -138,6 +157,11 @@ export function Process({ dict }: ProcessProps) {
                   >
                     {steps[key].title}
                   </span>
+                  {freePhases.includes(key) && (
+                    <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember">
+                      {t.free}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -187,7 +211,14 @@ export function Process({ dict }: ProcessProps) {
                 <span className="font-mono text-[10px] tracking-widest text-cream/35">
                   {step.number}
                 </span>
-                <h3 className="mt-1 font-serif text-2xl text-cream">{step.title}</h3>
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+                  <h3 className="font-serif text-2xl text-cream">{step.title}</h3>
+                  {freePhases.includes(key) && (
+                    <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember">
+                      {t.free}
+                    </span>
+                  )}
+                </div>
                 <p className="mt-2 text-sm leading-relaxed text-cream/60">{step.description}</p>
               </div>
             </li>
