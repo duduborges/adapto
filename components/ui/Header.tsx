@@ -57,10 +57,10 @@ export function Header({ lang, dict }: HeaderProps) {
   };
 
   const navItems = [
-    { label: dict.nav.manifesto, href: '#manifesto' },
     { label: dict.nav.services, href: '#services' },
     { label: dict.nav.process, href: '#process' },
-    { label: dict.nav.work, href: '#work' },
+    { label: dict.nav.why, href: '#why' },
+    { label: dict.nav.manifesto, href: '#manifesto' },
     { label: dict.nav.contact, href: '#contact' },
   ];
 

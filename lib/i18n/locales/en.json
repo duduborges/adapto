@@ -4,6 +4,7 @@
     "services": "Services",
     "process": "Process",
     "work": "Work",
+    "why": "Why us",
     "contact": "Contact",
     "book": "Book a call"
   },
@@ -148,11 +149,14 @@
       "focus": "In focus",
       "start": "First call",
       "end": "Partnership",
+      "free": "Free",
       "cta": {
         "description": "Already a client? Follow every phase live in the Adapto Tracker.",
         "button": "Open the Tracker"
       }
-    }
+    },
+    "freeHeadline": "The first two phases don't cost you a thing.",
+    "freeNote": "Discovery and modeling are on us. You only pay once we build — priced after we know exactly what we're solving, never before."
   },
   "work": {
     "eyebrow": "Recent work",
@@ -197,6 +201,7 @@
       "services": "Services",
       "process": "Process",
       "work": "Work",
+      "why": "Why us",
       "book": "Book a call",
       "email": "Email us",
       "privacy": "Privacy policy",

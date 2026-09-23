@@ -56,7 +56,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
       : 'text-[clamp(2.6rem,5vw,4.4rem)]';
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-24 md:pt-28">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-24 md:pt-28 snap-start [scroll-snap-stop:always]">
       {/* subtle grid background */}
       <div
         aria-hidden
@@ -165,7 +165,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
             <span className="text-ember">↳</span> 2026 — Currently accepting projects
           </p>
           <a
-            href="#about"
+            href="#services"
             className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40 transition-colors hover:text-cream"
           >
             {dict.hero.scrollHint}

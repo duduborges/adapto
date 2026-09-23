@@ -4,6 +4,7 @@
     "services": "Services",
     "process": "Processus",
     "work": "Réalisations",
+    "why": "Pourquoi nous",
     "contact": "Contact",
     "book": "Prendre rendez-vous"
   },
@@ -148,11 +149,14 @@
       "focus": "En cours",
       "start": "Premier appel",
       "end": "Partenariat",
+      "free": "Gratuit",
       "cta": {
         "description": "Déjà client ? Suivez chaque phase en direct dans l'Adapto Tracker.",
         "button": "Ouvrir le Tracker"
       }
-    }
+    },
+    "freeHeadline": "Les deux premières phases ne vous coûtent rien.",
+    "freeNote": "La découverte et la modélisation sont offertes. Vous ne payez qu'une fois la construction lancée — un prix fixé une fois le problème bien cerné, jamais avant."
   },
   "work": {
     "eyebrow": "Réalisations récentes",
@@ -197,6 +201,7 @@
       "services": "Services",
       "process": "Processus",
       "work": "Réalisations",
+      "why": "Pourquoi nous",
       "book": "Prendre rendez-vous",
       "email": "Écrivez-nous",
       "privacy": "Politique de confidentialité",

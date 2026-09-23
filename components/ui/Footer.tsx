@@ -16,14 +16,14 @@ export function Footer({ lang, dict }: FooterProps) {
   const year = new Date().getFullYear();
 
   const exploreLinks = [
-    { label: dict.footer.links.manifesto, href: '#manifesto' },
     { label: dict.footer.links.services, href: '#services' },
     { label: dict.footer.links.process, href: '#process' },
-    { label: dict.footer.links.work, href: '#work' },
+    { label: dict.footer.links.why, href: '#why' },
+    { label: dict.footer.links.manifesto, href: '#manifesto' },
   ];
 
   return (
-    <footer className="relative border-t border-cream/10 bg-ink-950">
+    <footer className="relative border-t border-cream/10 bg-ink-950 snap-start scroll-mt-20 md:scroll-mt-24">
       <Container size="wide" className="py-16 md:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
           <div className="md:col-span-1 lg:col-span-2 space-y-6">
