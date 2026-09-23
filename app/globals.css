@@ -14,6 +14,20 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Landing page: one wheel/swipe gesture advances a section. Short sections jump
+   straight to the next; sections taller than the viewport scroll freely until
+   their end, then snap into the next one. Scoped via a class (not globally on
+   html) so pages without section snap-points, like /privacy, scroll normally. */
+html.snap-scroll {
+  scroll-snap-type: y mandatory;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.snap-scroll {
+    scroll-snap-type: none;
+  }
+}
+
 /* Kill the default mobile tap highlight everywhere — interaction feedback is handled per-component */
 * {
   -webkit-tap-highlight-color: transparent;

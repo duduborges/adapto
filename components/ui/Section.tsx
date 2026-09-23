@@ -26,7 +26,14 @@ export function Section({
   bare = false,
 }: SectionProps) {
   return (
-    <section id={id} className={cn(padding[pad], className)}>
+    <section
+      id={id}
+      className={cn(
+        padding[pad],
+        'snap-start scroll-mt-20 [scroll-snap-stop:always] md:scroll-mt-24',
+        className,
+      )}
+    >
       {bare ? children : <Container size={size}>{children}</Container>}
     </section>
   );
