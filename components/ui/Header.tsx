@@ -57,11 +57,11 @@ export function Header({ lang, dict }: HeaderProps) {
   };
 
   const navItems = [
-    { label: dict.nav.services, href: '#services' },
-    { label: dict.nav.process, href: '#process' },
-    { label: dict.nav.why, href: '#why' },
-    { label: dict.nav.manifesto, href: '#manifesto' },
-    { label: dict.nav.contact, href: '#contact' },
+    { label: dict.nav.services, href: `/${lang}#services` },
+    { label: dict.nav.process, href: `/${lang}#process` },
+    { label: dict.nav.why, href: `/${lang}#why` },
+    { label: dict.nav.manifesto, href: `/${lang}#manifesto` },
+    { label: dict.nav.contact, href: `/${lang}#contact` },
   ];
 
   return (
@@ -76,18 +76,14 @@ export function Header({ lang, dict }: HeaderProps) {
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-24 md:px-8 lg:px-10">
         <Link
           href={`/${lang}`}
-          aria-label="Adapto Software House — home"
-          className="group inline-flex items-center gap-4 transition-opacity hover:opacity-80"
+          aria-label="Adapto — home"
+          className="group inline-flex items-center transition-opacity hover:opacity-80"
         >
-          <Logo variant="mark" sizeClass="h-11 md:h-12" priority />
-          <span className="font-mono text-[13px] font-semibold uppercase leading-[1.05] tracking-[0.14em] text-cream/85 inline-flex flex-col md:text-[14px] md:tracking-[0.15em]">
-            <span>Software</span>
-            <span className="text-ember">/ House</span>
-          </span>
+          <Logo variant="mark" sizeClass="h-14 md:h-16" priority />
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           <ul className="flex items-center gap-7">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -136,7 +132,7 @@ export function Header({ lang, dict }: HeaderProps) {
         {/* Mobile toggle — generous hit area, no default highlight */}
         <button
           type="button"
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream md:hidden"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream lg:hidden"
           onClick={() => setOpen((s) => !s)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -192,7 +188,7 @@ function MobileDrawer({
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className="fixed inset-0 z-[60] md:hidden"
+      className="fixed inset-0 z-[60] lg:hidden"
     >
       {/* Scrim — 50% black, dismissible */}
       <motion.button
@@ -270,7 +266,7 @@ function MobileDrawer({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="border-t border-cream/10 px-6 pb-6 pt-8"
+          className="flex flex-col items-start border-t border-cream/10 px-6 pb-6 pt-8"
         >
           <a
             href={bookingHref()}

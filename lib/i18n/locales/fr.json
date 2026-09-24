@@ -12,10 +12,11 @@
     "eyebrow": "Studio logiciel canadien · Ingénierie brésilienne",
     "title": "Un logiciel qui s'adapte",
     "titleAccent": "à la façon dont votre entreprise fonctionne vraiment.",
-    "subtitle": "Nous nous intégrons à votre opération, comprenons le flux de travail réel et construisons les systèmes qui font tourner votre entreprise — avec ou sans vous dans la pièce.",
+    "subtitle": "",
     "cta": "Prendre rendez-vous",
     "ctaSecondary": "Voir notre méthode",
-    "scrollHint": "Faites défiler pour explorer"
+    "scrollHint": "Faites défiler pour explorer",
+    "available": "Nouveaux projets acceptés"
   },
   "manifesto": {
     "eyebrow": "Manifeste",
@@ -43,7 +44,7 @@
   "services": {
     "eyebrow": "Ce que nous construisons",
     "title": "Tout ce qui enlève de la friction à votre journée.",
-    "subtitle": "Si c'est un système, une automatisation ou un tableau de bord — et que ça allège l'opération — nous savons le faire.",
+    "subtitle": "",
     "items": {
       "custom": {
         "title": "Systèmes sur mesure",
@@ -52,6 +53,16 @@
           "Web apps",
           "Outils internes",
           "ERP / CRM"
+        ]
+      },
+      "websites": {
+        "title": "Sites web et landing pages",
+        "description": "Sites institutionnels, landing pages, boutiques en ligne et portails clients — rapides, prêts pour le bilinguisme, faciles à mettre à jour par votre équipe et pensés pour transformer les visiteurs en conversations.",
+        "tags": [
+          "Sites web",
+          "Landing pages",
+          "E-commerce",
+          "Portails"
         ]
       },
       "automation": {
@@ -87,6 +98,10 @@
     "eyebrow": "Pourquoi Adapto",
     "title": "Ni freelance. Ni agence générique.",
     "subtitle": "Nous sommes l'équipe d'ingénierie qui devient partie de votre entreprise aussi longtemps que vous en avez besoin.",
+    "visual": {
+      "you": "Votre entreprise",
+      "us": "Adapto"
+    },
     "contrast": {
       "themHeading": "La plupart des studios",
       "usHeading": "Adapto",
@@ -153,10 +168,61 @@
       "cta": {
         "description": "Déjà client ? Suivez chaque phase en direct dans l'Adapto Tracker.",
         "button": "Ouvrir le Tracker"
+      },
+      "explainer": {
+        "prompt": "Vous voulez comprendre comment fonctionne notre Tracker ?",
+        "button": "Voir comment ça marche",
+        "eyebrow": "Adapto Tracker",
+        "title": "Comment fonctionne le Tracker",
+        "lead": "Un accès privé, en lecture seule, à votre projet, mis à jour par notre équipe au fil du travail.",
+        "pillCaption": "Chaque phase est découpée en jalons. Vous voyez chacun passer de « à venir » à « terminé », en temps réel.",
+        "demo": {
+          "project": "Projet exemple",
+          "progress": "Avancement",
+          "readOnly": "Lecture seule",
+          "here": "Vous êtes ici",
+          "milestones": "Jalons",
+          "status": {
+            "completed": "Terminé",
+            "in_progress": "En cours",
+            "pending": "À venir"
+          },
+          "sample": [
+            "Modèle de données",
+            "Flux principaux",
+            "Intégrations",
+            "Rapports et tableaux de bord",
+            "Version candidate"
+          ]
+        },
+        "steps": [
+          {
+            "title": "Vous recevez un code d'accès",
+            "description": "Au lancement, nous vous envoyons un code privé. Pas de compte, pas de mot de passe, rien à installer."
+          },
+          {
+            "title": "Ouvrez le Tracker",
+            "description": "Rendez-vous sur tracker.adapto-sh.com, saisissez le code et votre projet s'ouvre, sur n'importe quel appareil."
+          },
+          {
+            "title": "Toutes les phases sur une seule ligne du temps",
+            "description": "Chaque jalon, point de contrôle et livraison dans l'ordre : ce qui est fait, ce qui est en cours et ce qui vient ensuite."
+          },
+          {
+            "title": "Toujours à jour",
+            "description": "Notre équipe le met à jour au fil du travail : vous savez où en est le projet entre nos points hebdomadaires."
+          }
+        ],
+        "legend": {
+          "completed": "Terminé",
+          "in_progress": "En cours",
+          "pending": "À venir"
+        },
+        "footnote": "Aucun compte requis · Lecture seule",
+        "close": "Fermer"
       }
     },
-    "freeHeadline": "Les deux premières phases ne vous coûtent rien.",
-    "freeNote": "La découverte et la modélisation sont offertes. Vous ne payez qu'une fois la construction lancée — un prix fixé une fois le problème bien cerné, jamais avant."
+    "freeHeadline": "La préparation est GRATUITE."
   },
   "work": {
     "eyebrow": "Réalisations récentes",
@@ -191,6 +257,7 @@
   },
   "footer": {
     "tagline": "Un logiciel qui s'adapte à la façon dont votre entreprise fonctionne vraiment.",
+    "cta": "Un problème à résoudre ?",
     "sections": {
       "company": "Entreprise",
       "explore": "Explorer",

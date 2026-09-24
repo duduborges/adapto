@@ -41,6 +41,7 @@ export function JsonLd({ lang }: { lang: Locale }) {
         knowsLanguage: ['en-CA', 'fr-CA'],
         serviceType: [
           'Custom software development',
+          'Website and landing page development',
           'Business process automation',
           'Data dashboards and reporting',
           'Systems integration',

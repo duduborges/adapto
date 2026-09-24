@@ -52,20 +52,28 @@ body {
   color: var(--brand-cream);
 }
 
-/* Subtle scrollbar */
+/* Ember scrollbar on the ink background */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #1a1314;
+  background: var(--brand-ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: #3a2e2e;
+  background: var(--brand-ember);
+  border: 2px solid var(--brand-ink);
   border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-ember);
+  background: #e57b4d;
+}
+
+/* Firefox only — Chromium would let this override the rounded thumb above */
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: var(--brand-ember) var(--brand-ink);
+  }
 }
 
 @layer utilities {

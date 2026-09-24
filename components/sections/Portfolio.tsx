@@ -24,13 +24,13 @@ export function Portfolio({ dict }: PortfolioProps) {
       />
       <SectionLabel label={dict.work.eyebrow} />
 
-      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
+      <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
+          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
           {dict.work.title.replace(/\.$/, '')}
           <span className="text-ember">.</span>

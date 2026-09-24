@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        // Wide AND landscape. The hero's side-by-side layout needs both — a
+        // 1024px-wide portrait iPad Pro gets the stacked tablet layout instead.
+        desk: { raw: '(min-width: 1024px) and (orientation: landscape)' },
+      },
       colors: {
         // Adapto brand palette
         ink: {
@@ -63,6 +68,8 @@ const config: Config = {
         'slide-up': 'slideUp 0.6s ease-out',
         'glow': 'glow 4s ease-in-out infinite',
         'marquee': 'marquee 40s linear infinite',
+        // CSS-only so the hero is visible on first paint, before hydration
+        'hero-in': 'heroIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
       keyframes: {
         fadeIn: {
@@ -76,6 +83,10 @@ const config: Config = {
         glow: {
           '0%, 100%': { opacity: '0.35' },
           '50%': { opacity: '0.6' },
+        },
+        heroIn: {
+          '0%': { opacity: '0', transform: 'translateY(14px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         marquee: {
           '0%': { transform: 'translateX(0)' },

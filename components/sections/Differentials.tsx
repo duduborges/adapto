@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
+import { AdaptoFusion } from '@/components/ui/AdaptoFusion';
 
 interface DifferentialsProps {
   dict: any;
@@ -48,26 +49,35 @@ export function Differentials({ dict }: DifferentialsProps) {
 
       <SectionLabel label={dict.differentials.eyebrow} />
 
-      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
-        <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.02] tracking-[-0.015em] text-cream md:text-7xl"
-        >
-          {dict.differentials.title.replace(/\.$/, '')}
-          <span className="text-ember">.</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="col-span-12 max-w-2xl text-lg leading-relaxed text-cream/70 md:col-span-7 md:text-xl"
-        >
-          {dict.differentials.subtitle}
-        </motion.p>
+      <div className="mt-12 grid grid-cols-12 items-center gap-x-4 gap-y-8 md:mt-16 md:gap-8">
+        <div className="col-span-12 flex flex-col gap-8 lg:col-span-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6 }}
+            className="max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.02] tracking-[-0.015em] text-cream md:text-7xl"
+          >
+            {dict.differentials.title.replace(/\.$/, '')}
+            <span className="text-ember">.</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="max-w-2xl text-lg leading-relaxed text-cream/70 md:text-xl"
+          >
+            {dict.differentials.subtitle}
+          </motion.p>
+        </div>
+
+        {/* Adapto (ember) joining the client's company (ring) */}
+        <AdaptoFusion
+          youLabel={dict.differentials.visual.you}
+          usLabel={dict.differentials.visual.us}
+          className="col-span-12 mx-auto w-full max-w-[260px] md:max-w-[300px] lg:col-span-4 lg:max-w-[340px]"
+        />
       </div>
 
       <div className="mt-20 md:mt-24">

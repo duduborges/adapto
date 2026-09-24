@@ -3,9 +3,10 @@ import Link from 'next/link';
 import type { Locale } from '@/types';
 import { Container } from './Container';
 import { Logo } from './Logo';
+import { Button } from './Button';
 import { site, bookingHref, bookingIsExternal } from '@/lib/site';
 import { CookiePrefsLink } from '@/components/analytics/CookiePrefsLink';
-import { MapPin, Mail, Calendar } from 'lucide-react';
+import { MapPin, Calendar, ArrowRight } from 'lucide-react';
 
 interface FooterProps {
   lang: Locale;
@@ -16,10 +17,11 @@ export function Footer({ lang, dict }: FooterProps) {
   const year = new Date().getFullYear();
 
   const exploreLinks = [
-    { label: dict.footer.links.services, href: '#services' },
-    { label: dict.footer.links.process, href: '#process' },
-    { label: dict.footer.links.why, href: '#why' },
-    { label: dict.footer.links.manifesto, href: '#manifesto' },
+    { label: dict.footer.links.services, href: `/${lang}#services` },
+    { label: dict.footer.links.process, href: `/${lang}#process` },
+    { label: dict.footer.links.why, href: `/${lang}#why` },
+    { label: dict.footer.links.manifesto, href: `/${lang}#manifesto` },
+    { label: dict.nav.contact, href: `/${lang}#contact` },
   ];
 
   return (
@@ -27,13 +29,13 @@ export function Footer({ lang, dict }: FooterProps) {
       <Container size="wide" className="py-16 md:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
           <div className="md:col-span-1 lg:col-span-2 space-y-6">
-            <div className="flex items-center gap-5">
-              <Logo variant="lockup" sizeClass="h-28 md:h-36" />
-              <span className="font-mono text-base font-semibold uppercase leading-[1.05] tracking-[0.14em] text-cream/80 flex flex-col">
-                <span>Software</span>
-                <span className="text-ember">/ House</span>
-              </span>
-            </div>
+            <Link
+              href={`/${lang}`}
+              aria-label="Adapto — home"
+              className="-ml-4 inline-flex transition-opacity hover:opacity-80"
+            >
+              <Logo variant="lockup" sizeClass="h-40 md:h-52" />
+            </Link>
             <p className="max-w-sm text-sm leading-relaxed text-cream/60">
               {dict.footer.tagline}
             </p>
@@ -71,33 +73,24 @@ export function Footer({ lang, dict }: FooterProps) {
             </ul>
           </nav>
 
-          <div className="space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/40">
-              {dict.footer.sections.contact}
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href={bookingHref()}
-                  {...(bookingIsExternal()
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
-                  className="inline-flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-cream"
-                >
-                  <Calendar className="h-4 w-4 text-ember" />
-                  {dict.footer.links.book}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="inline-flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-cream"
-                >
-                  <Mail className="h-4 w-4 text-ember" />
-                  {site.email}
-                </a>
-              </li>
-            </ul>
+          <div className="space-y-5">
+            <p className="font-serif text-2xl leading-tight text-cream md:text-3xl">
+              {dict.footer.cta}
+            </p>
+            <Button
+              href={bookingHref()}
+              external={bookingIsExternal()}
+              variant="primary"
+              size="lg"
+              className="group"
+            >
+              <Calendar className="h-4 w-4" aria-hidden />
+              {dict.footer.links.book}
+              <ArrowRight
+                className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                aria-hidden
+              />
+            </Button>
           </div>
         </div>
 

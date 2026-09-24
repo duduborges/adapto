@@ -15,13 +15,13 @@ export function About({ dict }: AboutProps) {
       <SectionLabel label={dict.manifesto.eyebrow} />
 
       {/* Heading + lead — asymmetric editorial grid */}
-      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
+      <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
+          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
         >
           {dict.manifesto.title.split('.')[0]}
           <span className="text-ember">.</span>
