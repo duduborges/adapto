@@ -5,7 +5,7 @@ export const alt = 'Adapto Software House — Vancouver, Canada';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-const INK = '#2a2021';
+const INK = '#221a1a';
 const CREAM = '#fefefe';
 const EMBER = '#c35622';
 

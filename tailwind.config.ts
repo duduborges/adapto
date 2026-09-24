@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         // Adapto brand palette
         ink: {
-          DEFAULT: '#2a2021',
+          DEFAULT: '#221a1a',
           50: '#f5f3f3',
           100: '#e6e1e1',
           200: '#cdc3c3',
@@ -21,7 +21,7 @@ const config: Config = {
           600: '#473838',
           700: '#3a2e2e',
           800: '#332828',
-          900: '#2a2021',
+          900: '#221a1a',
           950: '#1a1314',
         },
         cream: {
