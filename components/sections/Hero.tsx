@@ -141,9 +141,6 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   <span>{dict.hero.cta}</span>
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
                 </a>
-                <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-cream/40 md:inline">
-                  30 min · No commitment
-                </span>
               </motion.div>
             </div>
 
