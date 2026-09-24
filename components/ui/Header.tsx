@@ -11,7 +11,7 @@ import { i18n, languageShort } from '@/lib/i18n/config';
 import { Logo } from './Logo';
 import { Button } from './Button';
 import { site, bookingHref, bookingIsExternal } from '@/lib/site';
-import { Menu, X, ArrowRight, MapPin, Mail } from 'lucide-react';
+import { Menu, X, ArrowRight, ArrowUpRight, MapPin, Mail } from 'lucide-react';
 
 interface HeaderProps {
   lang: Locale;
@@ -117,6 +117,16 @@ export function Header({ lang, dict }: HeaderProps) {
               </Link>
             ))}
           </div>
+
+          <a
+            href={site.trackerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-1.5 text-sm font-medium text-cream/70 transition-colors hover:text-cream"
+          >
+            {dict.process.tracker.cta.button}
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
 
           <Button href={bookingHref()} external={bookingIsExternal()} size="sm">
             {dict.nav.book}
@@ -273,9 +283,17 @@ function MobileDrawer({
             <span>{dict.nav.book}</span>
             <ArrowRight className="h-4 w-4 self-center transition-transform group-hover:translate-x-1" />
           </a>
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream/40">
-            30 min · No commitment
-          </p>
+
+          <a
+            href={site.trackerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-cream/50 transition-colors hover:text-cream/80"
+          >
+            {dict.process.tracker.cta.button}
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
         </motion.div>
 
         {/* Footer — language switcher + meta */}
