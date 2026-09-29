@@ -13,6 +13,97 @@ import { Button } from './Button';
 import { site, bookingHref, bookingIsExternal } from '@/lib/site';
 import { Menu, X, ArrowRight, ArrowUpRight, MapPin, Mail } from 'lucide-react';
 
+/** Page sections the desktop nav links to, in page order. */
+const SECTION_IDS = ['services', 'process', 'why', 'manifesto', 'contact'] as const;
+
+/**
+ * Drives the white pill behind the desktop nav link of the section in view.
+ * The pill is positioned straight from the scroll offset — as the boundary
+ * between two sections crosses the middle band of the viewport it slides
+ * (and resizes) from one link to the next, tracking the scroll rather than
+ * playing a fixed animation. Writes go to the DOM in a rAF, so scrolling
+ * never re-renders React; only the active index (for aria-current) is state.
+ */
+function useSectionPill(
+  listRef: React.RefObject<HTMLUListElement>,
+  pillRef: React.RefObject<HTMLLIElement>,
+  labelsRef: React.RefObject<HTMLDivElement>,
+) {
+  const [active, setActive] = useState(-1);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const list = listRef.current;
+      const pill = pillRef.current;
+      if (!list || !pill) return;
+
+      const sections = SECTION_IDS.map((id) => document.getElementById(id));
+      const links = Array.from(list.querySelectorAll<HTMLElement>('a'));
+      // Pages without these sections (privacy, 404), or nav hidden: no pill
+      if (
+        sections.some((el) => !el) ||
+        links.length !== SECTION_IDS.length ||
+        !list.offsetWidth
+      ) {
+        pill.style.opacity = '0';
+        setActive(-1);
+        return;
+      }
+
+      // Continuous position: -1 in the hero, i while section i fills the
+      // view, fractional while crossing from one section into the next.
+      const probe = window.scrollY + window.innerHeight * 0.4;
+      const zone = window.innerHeight * 0.5;
+      let pos = -1;
+      sections.forEach((el, i) => {
+        const start = el!.getBoundingClientRect().top + window.scrollY - zone / 2;
+        if (probe >= start) pos = i - 1 + Math.min(1, (probe - start) / zone);
+      });
+
+      const last = links.length - 1;
+      const from = Math.max(0, Math.min(Math.floor(pos), last));
+      const to = Math.min(from + 1, last);
+      const t = pos < 0 ? 0 : pos - Math.floor(pos);
+      const a = links[from];
+      const b = links[to];
+      const x = a.offsetLeft + (b.offsetLeft - a.offsetLeft) * t;
+      const w = a.offsetWidth + (b.offsetWidth - a.offsetWidth) * t;
+      const opacity = pos < 0 ? pos + 1 : 1; // fades in as Services arrives
+
+      pill.style.transform = `translateX(${x}px)`;
+      pill.style.width = `${w}px`;
+      // Keep the dark label copy fixed relative to the list while the pill moves
+      if (labelsRef.current) labelsRef.current.style.transform = `translateX(${-x}px)`;
+      pill.style.opacity = String(opacity);
+      setActive(opacity < 0.5 ? -1 : Math.round(Math.max(pos, 0)));
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    // Link widths change once the web font swaps in
+    const ro = new ResizeObserver(schedule);
+    if (listRef.current) ro.observe(listRef.current);
+    document.fonts?.ready.then(schedule).catch(() => {});
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      ro.disconnect();
+    };
+  }, [listRef, pillRef, labelsRef]);
+
+  return active;
+}
+
 interface HeaderProps {
   lang: Locale;
   dict: any;
@@ -24,6 +115,10 @@ export function Header({ lang, dict }: HeaderProps) {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const navListRef = useRef<HTMLUListElement>(null);
+  const pillRef = useRef<HTMLLIElement>(null);
+  const pillLabelsRef = useRef<HTMLDivElement>(null);
+  const activeSection = useSectionPill(navListRef, pillRef, pillLabelsRef);
 
   useEffect(() => setMounted(true), []);
 
@@ -56,13 +151,10 @@ export function Header({ lang, dict }: HeaderProps) {
     return segments.join('/');
   };
 
-  const navItems = [
-    { label: dict.nav.services, href: `/${lang}#services` },
-    { label: dict.nav.process, href: `/${lang}#process` },
-    { label: dict.nav.why, href: `/${lang}#why` },
-    { label: dict.nav.manifesto, href: `/${lang}#manifesto` },
-    { label: dict.nav.contact, href: `/${lang}#contact` },
-  ];
+  const navItems = SECTION_IDS.map((id) => ({
+    label: dict.nav[id] as string,
+    href: `/${lang}#${id}`,
+  }));
 
   return (
     <header
@@ -84,12 +176,35 @@ export function Header({ lang, dict }: HeaderProps) {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 lg:flex">
-          <ul className="flex items-center gap-7">
-            {navItems.map((item) => (
+          <ul ref={navListRef} className="relative flex items-center gap-1">
+            {/* Section indicator — positioned by useSectionPill */}
+            {/* Section indicator — positioned by useSectionPill. It sits above
+                the links and carries a dark copy of the labels, counter-shifted
+                so they line up with the real ones: wherever the pill covers a
+                word, even mid-slide, that part reads dark on white. */}
+            <li
+              ref={pillRef}
+              aria-hidden
+              role="presentation"
+              className="pointer-events-none absolute inset-y-0 left-0 z-10 overflow-hidden rounded-full bg-cream opacity-0 shadow-[0_4px_18px_-6px_rgba(254,254,254,0.35)] will-change-transform"
+            >
+              <div ref={pillLabelsRef} className="flex h-full items-center gap-1 will-change-transform">
+                {navItems.map((item) => (
+                  <span
+                    key={item.href}
+                    className="block whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium text-ink"
+                  >
+                    {item.label}
+                  </span>
+                ))}
+              </div>
+            </li>
+            {navItems.map((item, i) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-sm font-medium text-cream/70 transition-colors hover:text-cream"
+                  aria-current={activeSection === i ? 'location' : undefined}
+                  className="relative block whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium text-cream/70 transition-colors hover:text-cream"
                 >
                   {item.label}
                 </a>
