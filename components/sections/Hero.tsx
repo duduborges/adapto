@@ -176,11 +176,11 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
   // Stacked tablets (sm+, not desk) get a larger headline — it has the full width.
   const titleClamp =
     lang === 'fr'
-      ? 'text-[clamp(2rem,3.8vw,3.8rem)] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2rem,3.8vw,3.8rem)]'
-      : 'text-[clamp(2.6rem,5vw,4.4rem)] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
+      ? 'text-[clamp(2rem,3.8vw,3.8rem)] phone:[@media(max-height:700px)]:text-[1.85rem] phone:[@media(max-height:620px)]:text-[1.7rem] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2rem,3.8vw,3.8rem)]'
+      : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:[@media(max-height:700px)]:text-[2.2rem] phone:[@media(max-height:620px)]:text-[2rem] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-24 md:pt-28 snap-start [scroll-snap-stop:always]">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[100svh] phone:min-h-fit phone:pb-[calc(3.75rem+env(safe-area-inset-bottom))] sm:pt-24 md:pt-28 snap-start [scroll-snap-stop:always]">
       {/* subtle grid background */}
       <div
         aria-hidden
@@ -206,18 +206,35 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
         />
       </div>
 
-      <Container size="wide" className="relative flex w-full flex-1 flex-col pb-6 md:pb-8">
-        {/* Flex-1 wrapper: centers the content block between meta row and strip */}
-        <div className="flex flex-1 items-start pb-6 sm:items-center desk:py-6">
+      <Container size="wide" className="relative flex w-full flex-1 flex-col pb-4 sm:pb-6 md:pb-8">
+        {/* Flex-1 wrapper: centers the content block between meta row and strip.
+            On phones the whole chain is a flex column instead, so the hero is
+            exactly one screen tall: the text keeps its natural height and the
+            3D visual flexes to fill what's left (see the visual below).
+            The section's bottom padding on phones is a no-content zone: mobile
+            browsers increasingly put the address bar at the bottom (Safari by
+            default, Chrome as an option, floating over the page in newer iOS),
+            so nothing that matters — not even the scroll strip — sits there.
+            The subtitle is left out on phones: the headline and CTA carry the
+            first screen there (it stays in the HTML and on tablets/desktop). */}
+        <div className="flex flex-1 items-start pb-6 phone:flex-col phone:items-stretch phone:pb-4 sm:items-center desk:py-6">
           {/* Title + Visual two-column grid */}
-          <div className="grid w-full grid-cols-12 items-center gap-x-4 gap-y-8 desk:gap-12">
+          <div className="grid w-full grid-cols-12 items-center gap-x-4 gap-y-8 phone:flex phone:flex-1 phone:flex-col phone:items-stretch desk:gap-12">
             {/* Headline column */}
-            <div className="col-span-12 desk:col-span-5">
+            <div className="col-span-12 phone:flex phone:flex-1 phone:flex-col desk:col-span-5">
               {/* Mobile/tablet visual — bleeds to the screen edges and is framed
-                  tighter (MOBILE_ZOOM) so the object reads large; its height is
-                  capped by the viewport so short phones keep the CTA in view. */}
-              <div aria-hidden className="-mx-6 mb-2 flex justify-center md:-mx-8 desk:hidden">
-                <div className="relative aspect-[5/4] w-[min(100%,46svh)] animate-hero-in [@media(max-height:700px)]:w-[min(100%,34svh)] motion-reduce:animate-none">
+                  tighter (MOBILE_ZOOM) so the object reads large. Tablets: sized
+                  from the viewport height. Phones: it fills the space the text
+                  leaves (flex-1), never under 110px (80px on very short screens)
+                  nor over 44svh — past that the box gets too tall and narrow for
+                  the orbit rings. The box is
+                  absolutely positioned in that area so its own size never
+                  feeds back into the column's height. */}
+              <div
+                aria-hidden
+                className="-mx-6 mb-2 flex justify-center phone:relative phone:mb-3 phone:max-h-[44svh] phone:min-h-[110px] phone:flex-1 phone:[@media(max-height:620px)]:min-h-[80px] md:-mx-8 desk:hidden"
+              >
+                <div className="relative aspect-[5/4] w-[min(100%,46svh)] animate-hero-in motion-reduce:animate-none phone:absolute phone:inset-y-0 phone:left-1/2 phone:h-full phone:w-auto phone:max-w-full phone:-translate-x-1/2">
                   <HeroPoster
                     hidden={sceneSlot === 'mobile' && sceneReady}
                     animated
@@ -228,7 +245,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               </div>
 
               {/* Location chip — sits right above the headline */}
-              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none md:mb-6">
+              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:[@media(max-height:700px)]:mb-3 md:mb-6">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-cream/10 bg-cream/[0.04] px-2.5 py-1 text-[10px] font-medium text-cream/50 backdrop-blur-sm md:gap-2 md:px-3.5 md:py-1.5 md:text-xs md:text-cream/80">
                   <MapPin className="h-3 w-3 text-ember/70 md:h-3.5 md:w-3.5 md:text-ember" />
                   <span>Vancouver · BC · Canada</span>
@@ -248,14 +265,14 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
 
               <p
                 style={{ animationDelay: '200ms' }}
-                className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 sm:mt-5 sm:text-lg md:mt-7 md:text-xl"
+                className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 phone:hidden sm:mt-5 sm:text-lg md:mt-7 md:text-xl"
               >
                 {dict.hero.subtitle}
               </p>
 
               <div
                 style={{ animationDelay: '300ms' }}
-                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 md:mt-9"
+                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:[@media(max-height:700px)]:mt-4 md:mt-9"
               >
                 <a
                   href={bookingHref()}
@@ -269,16 +286,6 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                 </a>
               </div>
 
-              <p
-                style={{ animationDelay: '400ms' }}
-                className="mt-8 flex animate-hero-in items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-cream/50 motion-reduce:animate-none md:hidden"
-              >
-                <span className="relative flex h-1.5 w-1.5" aria-hidden>
-                  <span className="absolute inset-0 animate-ping rounded-full bg-success/60 motion-reduce:animate-none" />
-                  <span className="relative h-1.5 w-1.5 rounded-full bg-success" />
-                </span>
-                {dict.hero.available}
-              </p>
             </div>
 
             {/* Visual column */}
@@ -295,16 +302,26 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
         </div>
 
         {/* Bottom strip — always visible, sits below the flex-1 wrapper */}
-        <div className="flex items-center justify-between border-t border-cream/10 pt-5">
+        <div className="flex items-center justify-between gap-4 border-t border-cream/10 pt-4 sm:pt-5">
+          {/* Phones/tablets: availability lives here, not as an extra line under the CTA */}
+          <p className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-cream/50 md:hidden">
+            <span className="relative flex h-1.5 w-1.5" aria-hidden>
+              <span className="absolute inset-0 animate-ping rounded-full bg-success/60 motion-reduce:animate-none" />
+              <span className="relative h-1.5 w-1.5 rounded-full bg-success" />
+            </span>
+            {dict.hero.available}
+          </p>
           <p className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-cream/35 md:block">
             <span className="text-ember">↳</span> 2026 — Currently accepting projects
           </p>
           <a
             href="#services"
-            className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40 transition-colors hover:text-cream"
+            aria-label={dict.hero.scrollHint}
+            className="group inline-flex shrink-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40 transition-colors hover:text-cream"
           >
-            {dict.hero.scrollHint}
-            <ArrowDown className="h-3 w-3 text-ember transition-transform group-hover:translate-y-0.5" />
+            {/* Phones: arrow only — the label doesn't fit beside the status */}
+            <span className="phone:sr-only">{dict.hero.scrollHint}</span>
+            <ArrowDown className="h-3.5 w-3.5 text-ember transition-transform group-hover:translate-y-0.5 sm:h-3 sm:w-3" />
           </a>
         </div>
       </Container>

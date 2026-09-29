@@ -12,6 +12,9 @@ const config: Config = {
         // Wide AND landscape. The hero's side-by-side layout needs both — a
         // 1024px-wide portrait iPad Pro gets the stacked tablet layout instead.
         desk: { raw: '(min-width: 1024px) and (orientation: landscape)' },
+        // Phones only. Needed because a raw screen (desk) makes Tailwind drop
+        // the built-in max-* variants — `max-sm:` silently generates nothing.
+        phone: { raw: '(max-width: 639px)' },
       },
       colors: {
         // Adapto brand palette
