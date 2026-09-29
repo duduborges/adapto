@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
@@ -25,25 +24,21 @@ export function Portfolio({ dict }: PortfolioProps) {
       <SectionLabel label={dict.work.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
+        <h2
+          data-reveal
+          style={{ '--reveal-y': '12px' } as React.CSSProperties}
           className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
           {dict.work.title.replace(/\.$/, '')}
           <span className="text-ember">.</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+        </h2>
+        <p
+          data-reveal
+          style={{ '--reveal-delay': '0.1s' } as React.CSSProperties}
           className="col-span-12 self-end text-base leading-relaxed text-cream/60 md:col-span-4 md:text-lg"
         >
           {dict.work.subtitle}
-        </motion.p>
+        </p>
       </div>
 
       {!hasCases && (
@@ -58,11 +53,9 @@ export function Portfolio({ dict }: PortfolioProps) {
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-20 lg:grid-cols-3 lg:gap-8">
           {cases.map((c, i) => {
             const inner = (
-              <motion.article
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+              <article
+                data-reveal
+                style={{ '--reveal-y': '16px', '--reveal-duration': '0.5s', '--reveal-delay': `${i * 0.08}s` } as React.CSSProperties}
                 className="group flex h-full flex-col overflow-hidden rounded-xl border border-cream/15 bg-ink-800/40 transition-colors duration-300 hover:border-ember/40"
               >
                 {/* Image */}
@@ -114,7 +107,7 @@ export function Portfolio({ dict }: PortfolioProps) {
                     </span>
                   )}
                 </div>
-              </motion.article>
+              </article>
             );
 
             return c.link ? (
