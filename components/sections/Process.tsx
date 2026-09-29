@@ -76,21 +76,17 @@ export function Process({ dict }: ProcessProps) {
       <SectionLabel label={dict.process.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
+        <h2
+          data-reveal
+          style={{ '--reveal-y': '12px' } as React.CSSProperties}
           className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
           {dict.process.title.replace(/\.$/, '')}
           <span className="text-ember">.</span>
-        </motion.h2>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+        </h2>
+        <div
+          data-reveal
+          style={{ '--reveal-delay': '0.1s' } as React.CSSProperties}
           className="col-span-12 flex items-center gap-3 self-end md:col-span-4"
         >
           <span
@@ -102,15 +98,13 @@ export function Process({ dict }: ProcessProps) {
           <p className="text-sm font-semibold leading-snug text-ember md:text-base">
             {dict.process.freeHeadline}
           </p>
-        </motion.div>
+        </div>
       </div>
 
       {/* Desktop — the tracker pill */}
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6 }}
+      <div
+        data-reveal
+        style={{ '--reveal-y': '14px' } as React.CSSProperties}
         className="mt-20 hidden lg:block md:mt-24"
       >
         <div className="flex items-stretch rounded-full border border-cream/10 bg-cream/[0.02] p-2">
@@ -175,7 +169,9 @@ export function Process({ dict }: ProcessProps) {
         </div>
 
         <div className="mt-8 min-h-[3.5rem] max-w-2xl">
-          <AnimatePresence mode="wait">
+          {/* initial={false}: the first description is in the server HTML at full
+              opacity; the fade only plays when a visitor picks another phase */}
+          <AnimatePresence mode="wait" initial={false}>
             <motion.p
               key={selected}
               initial={{ opacity: 0 }}
@@ -188,7 +184,7 @@ export function Process({ dict }: ProcessProps) {
             </motion.p>
           </AnimatePresence>
         </div>
-      </motion.div>
+      </div>
 
       {/* Mobile / tablet — a plain rail */}
       <ol className="mt-16 lg:hidden">

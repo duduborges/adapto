@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Mail, MapPin, Globe2 } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
@@ -62,11 +61,9 @@ export function Contact({ dict }: ContactProps) {
       <SectionLabel label={dict.contact.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
+        <h2
+          data-reveal
+          style={{ '--reveal-y': '12px' } as React.CSSProperties}
           className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.02] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
         >
           {dict.contact.title.split('.')[0]}
@@ -79,16 +76,14 @@ export function Contact({ dict }: ContactProps) {
               </span>
             </>
           )}
-        </motion.h2>
+        </h2>
       </div>
 
       <div className="mt-16 grid grid-cols-12 gap-8 md:mt-20">
         {/* Big book-a-call CTA — left column */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5 }}
+        <div
+          data-reveal
+          style={{ '--reveal-y': '12px', '--reveal-duration': '0.5s' } as React.CSSProperties}
           className="col-span-12 md:col-span-5"
         >
           <p className="text-lg leading-relaxed text-cream/70 md:text-xl">
@@ -133,14 +128,12 @@ export function Contact({ dict }: ContactProps) {
               </a>
             </li>
           </ul>
-        </motion.div>
+        </div>
 
         {/* Form — right column */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+        <div
+          data-reveal
+          style={{ '--reveal-y': '12px', '--reveal-duration': '0.5s', '--reveal-delay': '0.1s' } as React.CSSProperties}
           className="col-span-12 md:col-span-6 md:col-start-7"
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
@@ -182,7 +175,7 @@ export function Contact({ dict }: ContactProps) {
               </button>
             </div>
           </form>
-        </motion.div>
+        </div>
       </div>
     </Section>
   );

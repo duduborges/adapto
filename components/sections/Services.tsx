@@ -36,25 +36,21 @@ export function Services({ dict }: ServicesProps) {
       <SectionLabel label={dict.services.eyebrow} />
 
       <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
+        <h2
+          data-reveal
+          style={{ '--reveal-y': '12px' } as React.CSSProperties}
           className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
           {dict.services.title.replace(/\.$/, '')}
           <span className="text-ember">.</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+        </h2>
+        <p
+          data-reveal
+          style={{ '--reveal-delay': '0.1s' } as React.CSSProperties}
           className="col-span-12 self-end text-base leading-relaxed text-cream/60 md:col-span-4 md:text-lg"
         >
           {dict.services.subtitle}
-        </motion.p>
+        </p>
       </div>
 
       <ul className="mt-20 border-t border-cream/15 md:mt-24">

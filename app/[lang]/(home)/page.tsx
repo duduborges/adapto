@@ -3,6 +3,7 @@ import type { Locale } from '@/types';
 import { Header } from '@/components/ui/Header';
 import { Footer } from '@/components/ui/Footer';
 import { ScrollSnap } from '@/components/ui/ScrollSnap';
+import { RevealObserver } from '@/components/ui/RevealObserver';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
@@ -21,6 +22,7 @@ export default async function Home({
   return (
     <>
       <ScrollSnap />
+      <RevealObserver />
       <Header lang={lang as Locale} dict={dict} />
       <main className="relative">
         {/* Order: Hero → Services (what we do) → Process (how we do it)

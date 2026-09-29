@@ -76,6 +76,31 @@ body {
   }
 }
 
+/*
+ * Scroll reveal (see components/ui/RevealObserver.tsx). Content is visible by
+ * default; it is only hidden once the observer has run on a wide screen and
+ * added `reveal-on`, and only until it scrolls in (`data-revealed`).
+ * Per-element tuning via --reveal-y, --reveal-duration and --reveal-delay.
+ */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html.reveal-on [data-reveal] {
+    transition:
+      opacity var(--reveal-duration, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+      transform var(--reveal-duration, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  }
+  html.reveal-on [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 0px));
+  }
+}
+
+/* The hero's entrance is a content reveal too: phones and tablets skip it. */
+@media (max-width: 1023px) {
+  .animate-hero-in {
+    animation: none;
+  }
+}
+
 @layer utilities {
   .text-gradient-ember {
     background-image: linear-gradient(135deg, #f4c6ad 0%, #c35622 50%, #e57b4d 100%);
