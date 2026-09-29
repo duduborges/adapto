@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
@@ -10,14 +10,24 @@ interface ServicesProps {
   dict: any;
 }
 
-const serviceKeys = ['custom', 'websites', 'automation', 'dashboards', 'integrations'] as const;
+const serviceKeys = [
+  'custom',
+  'websites',
+  'automation',
+  'dashboards',
+  'integrations',
+] as const;
 type ServiceKey = (typeof serviceKeys)[number];
 
 export function Services({ dict }: ServicesProps) {
   const [open, setOpen] = useState<ServiceKey | null>('custom');
 
   return (
-    <Section id="services" size="wide" className="relative overflow-hidden border-t border-cream/10">
+    <Section
+      id="services"
+      size="wide"
+      className="relative overflow-hidden border-t border-cream/10"
+    >
       {/* Ember bloom — left-center behind the accordion */}
       <div
         aria-hidden
@@ -58,13 +68,16 @@ export function Services({ dict }: ServicesProps) {
                 onClick={() => setOpen(isOpen ? null : key)}
                 className="group grid w-full grid-cols-12 items-center gap-6 px-2 py-8 text-left transition-colors hover:bg-cream/[0.02] md:gap-10 md:px-4 md:py-12"
                 aria-expanded={isOpen}
+                aria-controls={`service-panel-${key}`}
               >
                 <span className="col-span-2 font-mono text-sm font-semibold text-ember md:col-span-1">
                   0{i + 1}
                 </span>
                 <h3
                   className={`col-span-8 font-serif text-3xl leading-tight tracking-tight transition-colors md:col-span-9 md:text-5xl ${
-                    isOpen ? 'text-cream' : 'text-cream/70 group-hover:text-cream'
+                    isOpen
+                      ? 'text-cream'
+                      : 'text-cream/70 group-hover:text-cream'
                   }`}
                 >
                   {item.title}
@@ -83,42 +96,45 @@ export function Services({ dict }: ServicesProps) {
                 </span>
               </button>
 
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="grid grid-cols-12 gap-6 px-2 pb-14 pt-2 md:gap-10 md:px-4 md:pb-20 md:pt-4">
-                      <div className="col-span-12 col-start-1 md:col-span-7 md:col-start-2">
-                        <p className="text-lg leading-[1.65] text-cream/85 md:text-xl">
-                          {item.description}
-                        </p>
-                      </div>
-                      <div className="col-span-12 md:col-span-4 md:col-start-9">
-                        <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45">
-                          Stack & primitives
-                        </p>
-                        <ul className="flex flex-wrap gap-2">
-                          {item.tags.map((tag: string) => (
-                            <li
-                              key={tag}
-                              className="inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
-                            >
-                              <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.8)]" />
-                              {tag}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Always rendered, collapsed to zero height when closed: the
+                  descriptions are the most keyword-rich copy on the page, and
+                  unmounting them kept 4 of 5 out of the HTML search engines read. */}
+              <motion.div
+                id={`service-panel-${key}`}
+                initial={false}
+                animate={
+                  isOpen
+                    ? { height: 'auto', opacity: 1 }
+                    : { height: 0, opacity: 0 }
+                }
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden"
+                aria-hidden={!isOpen}
+              >
+                <div className="grid grid-cols-12 gap-6 px-2 pb-14 pt-2 md:gap-10 md:px-4 md:pb-20 md:pt-4">
+                  <div className="col-span-12 col-start-1 md:col-span-7 md:col-start-2">
+                    <p className="text-lg leading-[1.65] text-cream/85 md:text-xl">
+                      {item.description}
+                    </p>
+                  </div>
+                  <div className="col-span-12 md:col-span-4 md:col-start-9">
+                    <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45">
+                      {dict.services.stackLabel}
+                    </p>
+                    <ul className="flex flex-wrap gap-2">
+                      {item.tags.map((tag: string) => (
+                        <li
+                          key={tag}
+                          className="inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
+                        >
+                          <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.8)]" />
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
             </li>
           );
         })}

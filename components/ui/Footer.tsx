@@ -56,9 +56,9 @@ export function Footer({ lang, dict }: FooterProps) {
           </div>
 
           <nav className="space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/40">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/40">
               {dict.footer.sections.explore}
-            </h4>
+            </h2>
             <ul className="space-y-3">
               {exploreLinks.map((l) => (
                 <li key={l.href}>

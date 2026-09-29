@@ -11,6 +11,11 @@ import { Logo } from '@/components/ui/Logo';
 
 const LAST_UPDATED = '2026-08-27';
 
+const descriptions: Record<Locale, string> = {
+  en: 'How Adapto collects, uses and protects the data you share through this site: contact form, analytics cookies, retention and your rights.',
+  fr: "Comment Adapto recueille, utilise et protège les données partagées via ce site : formulaire de contact, témoins d'analyse, conservation et vos droits.",
+};
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
@@ -25,10 +30,17 @@ export async function generateMetadata({
 
   return {
     title: `${dict.privacy.title} · Adapto`,
+    // Its own description — otherwise it inherits the home page's, and Google
+    // sees two pages with the same snippet.
+    description: descriptions[lang as Locale] ?? descriptions.en,
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `/${lang}/privacy`,
-      languages: { en: '/en/privacy', fr: '/fr/privacy' },
+      languages: {
+        en: '/en/privacy',
+        fr: '/fr/privacy',
+        'x-default': '/en/privacy',
+      },
     },
     robots: { index: true, follow: true },
   };

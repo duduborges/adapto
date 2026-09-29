@@ -1,9 +1,28 @@
 import { site, siteUrl } from '@/lib/site';
+import { i18n } from '@/lib/i18n/config';
 import type { Locale } from '@/types';
 
 const descriptions: Record<Locale, string> = {
-  en: 'Adapto is a Canadian software studio in Vancouver building custom systems, automations and dashboards that adapt to how your business actually operates.',
-  fr: "Adapto est un studio logiciel canadien basé à Vancouver qui conçoit des systèmes sur mesure, des automatisations et des tableaux de bord adaptés au fonctionnement réel de votre entreprise.",
+  en: 'Adapto is a Canadian software studio in Vancouver building custom systems, websites, automations and dashboards that adapt to how your business actually operates.',
+  fr: "Adapto est un studio logiciel canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations et des tableaux de bord adaptés au fonctionnement réel de votre entreprise.",
+};
+
+/** What we sell, as schema.org Services — mirrors the Services section. */
+const services: Record<Locale, { name: string; description: string }[]> = {
+  en: [
+    { name: 'Custom software development', description: 'ERPs, CRMs, internal tools and web applications built around how your team works.' },
+    { name: 'Website and landing page development', description: 'Institutional websites, landing pages, online stores and client portals.' },
+    { name: 'Business process automation', description: 'Reports, approvals and data entry replaced by automated workflows.' },
+    { name: 'Dashboards and reporting', description: 'Real-time views of sales, stock, operations and people.' },
+    { name: 'Systems integration', description: 'Accounting, e-commerce, logistics and payment tools connected into one operation.' },
+  ],
+  fr: [
+    { name: 'Développement de logiciels sur mesure', description: "ERP, CRM, outils internes et applications web conçus autour du fonctionnement de votre équipe." },
+    { name: 'Création de sites web et landing pages', description: 'Sites institutionnels, landing pages, boutiques en ligne et portails clients.' },
+    { name: 'Automatisation des processus', description: 'Rapports, approbations et saisie de données remplacés par des flux automatisés.' },
+    { name: 'Tableaux de bord et reporting', description: 'Vues en temps réel des ventes, des stocks, des opérations et des équipes.' },
+    { name: 'Intégration de systèmes', description: 'Comptabilité, e-commerce, logistique et paiements reliés en une seule opération.' },
+  ],
 };
 
 /**
@@ -12,6 +31,9 @@ const descriptions: Record<Locale, string> = {
  */
 export function JsonLd({ lang }: { lang: Locale }) {
   const profiles = Object.values(site.social).filter(Boolean);
+  // One entity across locales: the organisation's URL is the canonical home
+  // (the bare domain only redirects there).
+  const homeUrl = `${siteUrl}/${i18n.defaultLocale}`;
 
   const graph = {
     '@context': 'https://schema.org',
@@ -21,7 +43,7 @@ export function JsonLd({ lang }: { lang: Locale }) {
         '@id': `${siteUrl}/#organization`,
         name: site.fullName,
         alternateName: site.name,
-        url: `${siteUrl}/${lang}`,
+        url: homeUrl,
         email: site.email,
         description: descriptions[lang] ?? descriptions.en,
         logo: `${siteUrl}/icon-512.png`,
@@ -39,18 +61,26 @@ export function JsonLd({ lang }: { lang: Locale }) {
           { '@type': 'Country', name: 'United States' },
         ],
         knowsLanguage: ['en-CA', 'fr-CA'],
-        serviceType: [
-          'Custom software development',
-          'Website and landing page development',
-          'Business process automation',
-          'Data dashboards and reporting',
-          'Systems integration',
-        ],
+        serviceType: (services[lang] ?? services.en).map((s) => s.name),
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Services',
+          itemListElement: (services[lang] ?? services.en).map((s) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: s.name,
+              description: s.description,
+              provider: { '@id': `${siteUrl}/#organization` },
+              areaServed: { '@type': 'Country', name: 'Canada' },
+            },
+          })),
+        },
       },
       {
         '@type': 'WebSite',
         '@id': `${siteUrl}/#website`,
-        url: `${siteUrl}/${lang}`,
+        url: homeUrl,
         name: site.fullName,
         inLanguage: lang === 'fr' ? 'fr-CA' : 'en-CA',
         publisher: { '@id': `${siteUrl}/#organization` },

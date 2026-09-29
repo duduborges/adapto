@@ -96,8 +96,8 @@ interface HeroProps {
  * in that one alone: mounting both would fetch Three.js (~134 KB gzip) once
  * but spin up a second WebGL context for an invisible canvas.
  *
- * On small screens the scene waits for the browser to go idle, so the text
- * and the static sphere paint first, and it is skipped entirely when the
+ * The scene waits for the browser to go idle, so the text and the static
+ * sphere paint first; on small screens it is skipped entirely when the
  * visitor has Save-Data on — the static sphere stays.
  */
 type SceneSlot = 'desktop' | 'mobile' | null;
@@ -124,13 +124,15 @@ function useSceneSlot(): SceneSlot {
 
     const sync = () => {
       cancelPending();
-      if (mq.matches) {
-        setSlot('desktop');
-        return;
-      }
       setSlot(null);
-      if (saveData) return;
-      const enable = () => setSlot('mobile');
+      const target: SceneSlot = mq.matches ? 'desktop' : 'mobile';
+      // Save-Data keeps the static sphere on small screens only; a desktop
+      // visitor with it on still gets the (idle-deferred) scene.
+      if (saveData && target === 'mobile') return;
+      // Both slots wait for idle: booting WebGL during page load blocked the
+      // main thread for seconds on desktop (Lighthouse TBT 5.1 s), and the
+      // static sphere already holds the spot until the first frame is drawn.
+      const enable = () => setSlot(target);
       if ('requestIdleCallback' in window) {
         idleHandle = window.requestIdleCallback(enable, { timeout: 2000 });
       } else {
@@ -195,6 +197,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
           width={1000}
           height={1000}
           sizes="80vh"
+          // It is the largest thing in the first desktop viewport, so the
+          // browser scores it as the LCP element — lazy-loading it delayed LCP.
+          loading="eager"
           className="h-[80svh] w-auto opacity-[0.12]"
         />
       </div>
@@ -210,7 +215,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   tighter (MOBILE_ZOOM) so the object reads large; its height is
                   capped by the viewport so short phones keep the CTA in view. */}
               <div aria-hidden className="-mx-6 mb-2 flex justify-center md:-mx-8 desk:hidden">
-                <div className="relative aspect-[5/4] w-[min(100%,46svh)] animate-hero-in motion-reduce:animate-none">
+                <div className="relative aspect-[5/4] w-[min(100%,46svh)] animate-hero-in [@media(max-height:700px)]:w-[min(100%,34svh)] motion-reduce:animate-none">
                   <HeroPoster
                     hidden={sceneSlot === 'mobile' && sceneReady}
                     animated
@@ -241,7 +246,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
 
               <p
                 style={{ animationDelay: '200ms' }}
-                className="mt-5 animate-hero-in motion-reduce:animate-none text-balance text-lg leading-[1.55] text-cream/75 md:mt-7 md:text-xl"
+                className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 sm:mt-5 sm:text-lg md:mt-7 md:text-xl"
               >
                 {dict.hero.subtitle}
               </p>

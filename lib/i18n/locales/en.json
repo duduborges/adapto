@@ -12,7 +12,7 @@
     "eyebrow": "Canadian software studio · Built by Brazilian engineers",
     "title": "Software that adapts",
     "titleAccent": "to how your business actually works.",
-    "subtitle": "",
+    "subtitle": "Custom software, websites and automations for growing businesses — designed and built in Vancouver, Canada.",
     "cta": "Book a conversation",
     "ctaSecondary": "See how we work",
     "scrollHint": "Scroll to explore",
@@ -92,7 +92,8 @@
           "Sync"
         ]
       }
-    }
+    },
+    "stackLabel": "Stack & primitives"
   },
   "differentials": {
     "eyebrow": "Why Adapto",

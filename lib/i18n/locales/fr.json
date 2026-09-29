@@ -12,7 +12,7 @@
     "eyebrow": "Studio logiciel canadien · Ingénierie brésilienne",
     "title": "Un logiciel qui s'adapte",
     "titleAccent": "à la façon dont votre entreprise fonctionne vraiment.",
-    "subtitle": "",
+    "subtitle": "Logiciels sur mesure, sites web et automatisations pour les entreprises en croissance — conçus et développés à Vancouver, au Canada.",
     "cta": "Prendre rendez-vous",
     "ctaSecondary": "Voir notre méthode",
     "scrollHint": "Faites défiler pour explorer",
@@ -92,7 +92,8 @@
           "Synchronisation"
         ]
       }
-    }
+    },
+    "stackLabel": "Technologies"
   },
   "differentials": {
     "eyebrow": "Pourquoi Adapto",
@@ -131,8 +132,8 @@
   },
   "process": {
     "eyebrow": "Notre méthode",
-    "title": "Cinq phases. Pas de magie.",
-    "subtitle": "Un processus reproductible et transparent — du premier appel au partenariat de long terme.",
+    "title": "Cinq phases. Suivies de bout en bout.",
+    "subtitle": "",
     "steps": {
       "discovery": {
         "number": "01",
@@ -233,7 +234,7 @@
   },
   "contact": {
     "eyebrow": "Parlons-en",
-    "title": "Apportez le problème. Nous apporterons les questions.",
+    "title": "Apportez le problème. Nous apporterons la solution.",
     "subtitle": "Réservez un appel de 30 minutes. Nous écoutons, posons des questions, et vous dirons honnêtement si nous sommes la bonne équipe.",
     "ctaPrimary": "Réserver dans notre agenda",
     "ctaSecondary": "Ou envoyez-nous un e-mail",

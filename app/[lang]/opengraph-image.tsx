@@ -15,8 +15,8 @@ const headlines: Record<Locale, string> = {
 };
 
 const kickers: Record<Locale, string> = {
-  en: 'Custom systems · Automations · Dashboards',
-  fr: 'Systèmes sur mesure · Automatisations · Tableaux de bord',
+  en: 'Custom systems · Websites · Automations · Dashboards',
+  fr: 'Systèmes sur mesure · Sites web · Automatisations · Tableaux de bord',
 };
 
 export default async function Image({

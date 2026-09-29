@@ -3,6 +3,15 @@ import { i18n } from '@/lib/i18n/config';
 import { bookingHref } from '@/lib/site';
 import type { Locale } from '@/types';
 import { NotFoundView } from '@/components/sections/NotFoundView';
+import type { Metadata } from 'next';
+
+// Override what the [lang] layout sets for real pages: a 404 must not be
+// indexable or claim the home page as its canonical.
+export const metadata: Metadata = {
+  title: '404 · Adapto',
+  robots: { index: false, follow: true },
+  alternates: { canonical: null, languages: {} },
+};
 
 // not-found.tsx receives no params: ship both locales' copy (a few KB) and let
 // the client pick one from the URL, so /fr/... gets a French 404.
