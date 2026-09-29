@@ -1,4 +1,7 @@
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
+import { getDictionary } from '@/lib/i18n/get-dictionary';
 import type { Locale } from '@/types';
 
 export const alt = 'Adapto Software House — Vancouver, Canada';
@@ -9,15 +12,15 @@ const INK = '#221a1a';
 const CREAM = '#fefefe';
 const EMBER = '#c35622';
 
-const headlines: Record<Locale, string> = {
-  en: 'Software that adapts to your business',
-  fr: "Un logiciel qui s'adapte à votre entreprise",
-};
-
 const kickers: Record<Locale, string> = {
   en: 'Custom systems · Websites · Automations · Dashboards',
   fr: 'Systèmes sur mesure · Sites web · Automatisations · Tableaux de bord',
 };
+
+// The mark's PNG has ~10% padding on every side, so a 340px box shows the
+// "A" ~305px tall — inside the 340px disc, clear of the header and footer rows.
+const MARK_SIZE = 340;
+const DISC = 340;
 
 export default async function Image({
   params,
@@ -26,6 +29,11 @@ export default async function Image({
 }) {
   const { lang } = await params;
   const locale = (lang === 'fr' ? 'fr' : 'en') as Locale;
+  // Same words as the hero headline, so the preview and the page never drift
+  const { hero } = await getDictionary(locale);
+
+  const mark = await readFile(join(process.cwd(), 'public/logos/adapto-mark.png'));
+  const markSrc = `data:image/png;base64,${mark.toString('base64')}`;
 
   return new ImageResponse(
     (
@@ -79,19 +87,56 @@ export default async function Image({
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+        {/* Headline + kicker on the left, the mark on the right */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 26, width: 700 }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                fontSize: locale === 'fr' ? 54 : 64,
+                lineHeight: 1.06,
+                letterSpacing: -1.5,
+              }}
+            >
+              <div style={{ color: CREAM }}>{hero.title}</div>
+              <div style={{ color: EMBER }}>{hero.titleAccent}</div>
+            </div>
+            <div style={{ fontSize: locale === 'fr' ? 20 : 26, color: CREAM, opacity: 0.6, whiteSpace: 'nowrap' }}>
+              {kickers[locale]}
+            </div>
+          </div>
+
           <div
             style={{
-              fontSize: 78,
-              lineHeight: 1.05,
-              color: CREAM,
-              maxWidth: 940,
-              letterSpacing: -2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: DISC,
+              height: DISC,
+              position: 'relative',
             }}
           >
-            {headlines[locale]}
+            {/* Soft ember disc behind the mark, echoing the site's bloom */}
+            <div
+              style={{
+                display: 'flex',
+                position: 'absolute',
+                width: DISC,
+                height: DISC,
+                borderRadius: 999,
+                backgroundImage: `linear-gradient(135deg, rgba(195,86,34,0.22), rgba(195,86,34,0.04))`,
+              }}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={markSrc}
+              width={MARK_SIZE}
+              height={MARK_SIZE}
+              alt=""
+              style={{ position: 'absolute', width: MARK_SIZE, height: MARK_SIZE }}
+            />
           </div>
-          <div style={{ fontSize: 30, color: EMBER }}>{kickers[locale]}</div>
         </div>
 
         <div
