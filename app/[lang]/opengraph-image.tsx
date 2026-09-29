@@ -1,7 +1,6 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { getDictionary } from '@/lib/i18n/get-dictionary';
+import { ADAPTO_MARK_PNG_DATA_URL } from '@/lib/brand/adapto-mark';
 import type { Locale } from '@/types';
 
 export const alt = 'Adapto Software House — Vancouver, Canada';
@@ -32,8 +31,6 @@ export default async function Image({
   // Same words as the hero headline, so the preview and the page never drift
   const { hero } = await getDictionary(locale);
 
-  const mark = await readFile(join(process.cwd(), 'public/logos/adapto-mark.png'));
-  const markSrc = `data:image/png;base64,${mark.toString('base64')}`;
 
   return new ImageResponse(
     (
@@ -130,7 +127,7 @@ export default async function Image({
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={markSrc}
+              src={ADAPTO_MARK_PNG_DATA_URL}
               width={MARK_SIZE}
               height={MARK_SIZE}
               alt=""
