@@ -5,7 +5,7 @@ export const alt = 'Adapto Software House — Vancouver, Canada';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-const INK = '#2a2021';
+const INK = '#221a1a';
 const CREAM = '#fefefe';
 const EMBER = '#c35622';
 
@@ -15,8 +15,8 @@ const headlines: Record<Locale, string> = {
 };
 
 const kickers: Record<Locale, string> = {
-  en: 'Custom systems · Automations · Dashboards',
-  fr: 'Systèmes sur mesure · Automatisations · Tableaux de bord',
+  en: 'Custom systems · Websites · Automations · Dashboards',
+  fr: 'Systèmes sur mesure · Sites web · Automatisations · Tableaux de bord',
 };
 
 export default async function Image({

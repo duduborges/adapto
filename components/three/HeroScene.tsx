@@ -9,7 +9,6 @@ import {
   DirectionalLight,
   Float32BufferAttribute,
   Group,
-  IcosahedronGeometry,
   LineBasicMaterial,
   LineLoop,
   LineSegments,
@@ -18,6 +17,7 @@ import {
   MeshBasicMaterial,
   MeshPhysicalMaterial,
   PerspectiveCamera,
+  Quaternion,
   PointLight,
   Scene,
   SphereGeometry,
@@ -35,36 +35,75 @@ function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
-// Cycle of target exponents the object settles into: ball → square (cube) → triangle (octahedron) → star → ball…
-const SHAPE_TARGETS = [2, 9, 1, 0.65];
+/**
+ * The shapes the object settles into, in order, looping back to the first.
+ * Keep 'sphere' first: the static stand-in shown before this scene loads
+ * (HeroPoster in Hero.tsx) is a sphere, and the canvas crossfades over it.
+ */
+type ShapeName = 'sphere' | 'cube' | 'tetrahedron';
+const SHAPES: ShapeName[] = ['sphere', 'cube', 'tetrahedron'];
 const SEGMENT_DURATION = 3.2; // seconds per hop (transition + hold)
 const TRANSITION_FRACTION = 0.55; // portion of the segment spent easing, rest is a hold
 
-function shapeExponentAt(t: number) {
-  const total = SEGMENT_DURATION * SHAPE_TARGETS.length;
+/** Where in the cycle we are: blending from shape `from` to `to` by `k` (0–1). */
+function shapeBlendAt(t: number) {
+  const total = SEGMENT_DURATION * SHAPES.length;
   const local = t % total;
-  const index = Math.floor(local / SEGMENT_DURATION);
-  const nextIndex = (index + 1) % SHAPE_TARGETS.length;
+  const from = Math.floor(local / SEGMENT_DURATION);
+  const to = (from + 1) % SHAPES.length;
   const segT = (local % SEGMENT_DURATION) / SEGMENT_DURATION;
-  const eased = easeInOutCubic(Math.min(segT / TRANSITION_FRACTION, 1));
-  return MathUtils.lerp(SHAPE_TARGETS[index], SHAPE_TARGETS[nextIndex], eased);
+  const k = easeInOutCubic(Math.min(segT / TRANSITION_FRACTION, 1));
+  return { from, to, k };
 }
 
-const RADIUS = 1.05;
+// Sizes, tuned so the three read as roughly the same mass on screen and the
+// cube's corners stay close to the orbit rings instead of swallowing them.
+const SPHERE_RADIUS = 1.05;
+const CUBE_HALF_SIDE = 0.82; // corners at ~1.42
+const TETRA_INRADIUS = 0.52; // tips at 3× this, ~1.56
+
+const INV_SQRT3 = 1 / Math.sqrt(3);
+const TETRA_NORMALS: [number, number, number][] = [
+  [1, 1, 1],
+  [1, -1, -1],
+  [-1, 1, -1],
+  [-1, -1, 1],
+].map(([x, y, z]) => [x * INV_SQRT3, y * INV_SQRT3, z * INV_SQRT3]);
 
 /**
- * Two quality tiers. The light one keeps the morphing shape — the signature of
- * the scene — but drops the orbit rings and satellite network and runs a
- * quarter of the geometry, which is where the per-frame cost actually lives.
+ * Distance from the centre to the shape's surface along unit direction
+ * (x, y, z). For a polyhedron with face normals n and inradius h that is
+ * h / max(n · d): the face the ray hits first is the one it points at most.
+ */
+function surfaceRadius(shape: ShapeName, x: number, y: number, z: number) {
+  switch (shape) {
+    case 'sphere':
+      return SPHERE_RADIUS;
+    case 'cube':
+      return CUBE_HALF_SIDE / Math.max(Math.abs(x), Math.abs(y), Math.abs(z));
+    case 'tetrahedron': {
+      let m = -Infinity;
+      for (const [nx, ny, nz] of TETRA_NORMALS) m = Math.max(m, nx * x + ny * y + nz * z);
+      return TETRA_INRADIUS / m;
+    }
+  }
+}
+
+/**
+ * Two quality tiers. The light one keeps the morphing shape and its orbit
+ * rings — the signature of the scene — but drops the satellite network and
+ * runs a quarter of the geometry, which is where the per-frame cost actually
+ * lives. The rings are three line loops and three dots: next to nothing.
  *
- * Hero.tsx only mounts this component at >=1024px today, so the light tier is
- * currently unreachable; it exists so that showing the scene on small screens
- * is a one-line change in Hero rather than a rewrite here. The threshold must
- * stay below that mount breakpoint — raising it would silently strip the rings
- * from small laptops, which do see the scene.
+ * Hero.tsx mounts the scene in the wide column on wide landscape screens and
+ * above the headline otherwise; phones and tablets under 1024px get the
+ * light tier (a portrait iPad Pro is fast enough for the full one). The
+ * threshold must stay aligned with that breakpoint — raising it would
+ * silently strip the rings from small laptops, which do see the full scene.
  */
 interface Tier {
-  detail: number;
+  /** Grid cells per cube face edge in the base mesh (see buildMorphMesh). */
+  segments: number;
   rings: boolean;
   satellites: boolean;
   maxPixelRatio: number;
@@ -76,15 +115,15 @@ function pickTier(): Tier {
   const coarse = window.matchMedia('(max-width: 1023px)').matches;
   return coarse
     ? {
-        detail: 2,
-        rings: false,
+        segments: 6,
+        rings: true,
         satellites: false,
         maxPixelRatio: 1.5,
         antialias: false,
         clearcoat: 0,
       }
     : {
-        detail: 3,
+        segments: 9,
         rings: true,
         satellites: true,
         maxPixelRatio: 2,
@@ -92,6 +131,86 @@ function pickTier(): Tier {
         clearcoat: 0.6,
       };
 }
+
+/**
+ * Base mesh for the morph: a cube whose faces are split into a grid, pushed
+ * out onto a sphere. An icosphere can't do this job — its triangles cut
+ * across the cube's and the tetrahedron's edges, which then render as
+ * sawteeth. Here every cube edge is a grid line, and every tetrahedron edge
+ * is a face diagonal of the cube (its corners are four of the cube's), so
+ * each quad is split along that diagonal and all three shapes keep crisp
+ * edges. The equal-angle (tan) spacing keeps the sphere evenly tessellated
+ * without moving points off those lines.
+ */
+function buildMorphMesh(segments: number) {
+  const positions: number[] = [];
+  const indices: number[] = [];
+  const faces: { axis: 0 | 1 | 2; sign: 1 | -1 }[] = [
+    { axis: 0, sign: 1 },
+    { axis: 0, sign: -1 },
+    { axis: 1, sign: 1 },
+    { axis: 1, sign: -1 },
+    { axis: 2, sign: 1 },
+    { axis: 2, sign: -1 },
+  ];
+
+  for (const { axis, sign } of faces) {
+    const base = positions.length / 3;
+    const [ua, va] = axis === 0 ? [1, 2] : axis === 1 ? [2, 0] : [0, 1];
+    for (let j = 0; j <= segments; j++) {
+      for (let i = 0; i <= segments; i++) {
+        const p = [0, 0, 0];
+        p[axis] = sign;
+        p[ua] = Math.tan(((i / segments) * 2 - 1) * (Math.PI / 4));
+        p[va] = Math.tan(((j / segments) * 2 - 1) * (Math.PI / 4));
+        const len = Math.hypot(p[0], p[1], p[2]);
+        positions.push(
+          (p[0] / len) * SPHERE_RADIUS,
+          (p[1] / len) * SPHERE_RADIUS,
+          (p[2] / len) * SPHERE_RADIUS,
+        );
+      }
+    }
+    // TETRA_NORMALS are face normals, so the tetrahedron's corners sit at the
+    // opposite cube corners, those with x·y·z = −1. On this face its edge
+    // therefore runs along u·v = −sign (u = −v on +faces, u = v on −faces).
+    const alongMain = sign === -1;
+    const row = segments + 1;
+    for (let j = 0; j < segments; j++) {
+      for (let i = 0; i < segments; i++) {
+        const a = base + j * row + i;
+        const b = a + 1;
+        const c = a + row;
+        const d = c + 1;
+        // Wind so faces point outwards whatever the face orientation
+        const tris = alongMain ? [[a, b, d], [a, d, c]] : [[a, b, c], [b, d, c]];
+        for (const [x, y, z] of tris) {
+          if (sign === 1) indices.push(x, y, z);
+          else indices.push(x, z, y);
+        }
+      }
+    }
+  }
+
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  return geometry;
+}
+
+/**
+ * Drag-to-rotate. The pointer spins the whole composition (object, rings,
+ * satellites); the object keeps morphing and turning on its own inside it.
+ * On release it coasts to a stop, then drifts back to its designed pose.
+ */
+const ROTATE_PER_PX = 0.009; // radians per pixel dragged
+const MAX_SPIN = 10; // rad/s — caps a hard flick
+const SPIN_DAMPING = 3; // higher = coasts for less time
+const RETURN_DELAY_MS = 2500; // idle time before easing back to the rest pose
+const RETURN_RATE = 1.2; // higher = eases back faster
+const WORLD_X = new Vector3(1, 0, 0);
+const WORLD_Y = new Vector3(0, 1, 0);
+const REST_POSE = new Quaternion();
 
 function ringPoints(radius: number, segments = 96) {
   const pts: Vector3[] = [];
@@ -109,8 +228,18 @@ interface Orbit {
   speed: number;
 }
 
-export default function HeroScene() {
+interface HeroSceneProps {
+  /** Fired once, right after the first frame is drawn. */
+  onReady?: () => void;
+  /** Camera zoom — >1 frames the object tighter (read once, on mount). */
+  zoom?: number;
+}
+
+export default function HeroScene({ onReady, zoom = 1 }: HeroSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const onReadyRef = useRef(onReady);
+  const zoomRef = useRef(zoom);
+  onReadyRef.current = onReady;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -125,6 +254,7 @@ export default function HeroScene() {
     const scene = new Scene();
     const camera = new PerspectiveCamera(36, 1, 0.1, 100);
     camera.position.set(0, 0, 5.6);
+    camera.zoom = zoomRef.current;
 
     const renderer = new WebGLRenderer({
       antialias: tier.antialias,
@@ -144,29 +274,26 @@ export default function HeroScene() {
     scene.add(emberLight);
 
     // Morphing object
-    const objectGroup = new Group();
-    scene.add(objectGroup);
+    // Everything the pointer can spin hangs off this group
+    const dragGroup = new Group();
+    scene.add(dragGroup);
 
-    const geometry = new IcosahedronGeometry(RADIUS, tier.detail);
+    const objectGroup = new Group();
+    dragGroup.add(objectGroup);
+
+    const geometry = buildMorphMesh(tier.segments);
     const posAttr = geometry.attributes.position as BufferAttribute;
     const vertexCount = posAttr.count;
 
     /**
-     * Each vertex sits on a unit sphere; re-normalizing by an Lp-norm reshapes
-     * the mesh (p=2 sphere, large p cube, p=1 octahedron, p<1 concave star).
-     *
-     * The directions never change, so |x|,|y|,|z| and their logs are computed
-     * once here. Per frame that turns `pow(|x|, p)` into `exp(p * logX)` —
-     * exp is markedly cheaper than pow, and this runs on every vertex, every
-     * frame. log(0) is -Infinity, and exp(p * -Infinity) is 0, which is the
-     * correct value for pow(0, p), so axis-aligned vertices need no special case.
+     * Each vertex keeps its direction from the centre; only its distance
+     * changes. That distance is precomputed per shape here, so a frame is
+     * just a lerp between two numbers per vertex.
      */
     const dirX = new Float32Array(vertexCount);
     const dirY = new Float32Array(vertexCount);
     const dirZ = new Float32Array(vertexCount);
-    const logX = new Float32Array(vertexCount);
-    const logY = new Float32Array(vertexCount);
-    const logZ = new Float32Array(vertexCount);
+    const shapeRadii = SHAPES.map(() => new Float32Array(vertexCount));
 
     for (let i = 0; i < vertexCount; i++) {
       const v = new Vector3(
@@ -177,9 +304,9 @@ export default function HeroScene() {
       dirX[i] = v.x;
       dirY[i] = v.y;
       dirZ[i] = v.z;
-      logX[i] = Math.log(Math.abs(v.x));
-      logY[i] = Math.log(Math.abs(v.y));
-      logZ[i] = Math.log(Math.abs(v.z));
+      SHAPES.forEach((shape, si) => {
+        shapeRadii[si][i] = surfaceRadius(shape, v.x, v.y, v.z);
+      });
     }
 
     const positions = posAttr.array as Float32Array;
@@ -239,7 +366,7 @@ export default function HeroScene() {
       ringConfigs.forEach((cfg) => {
         const group = new Group();
         group.rotation.set(...cfg.tilt);
-        scene.add(group);
+        dragGroup.add(group);
 
         const ringGeo = new BufferGeometry().setFromPoints(ringPoints(cfg.radius));
         const ringMat = new LineBasicMaterial({
@@ -269,7 +396,7 @@ export default function HeroScene() {
     const satelliteGroup = new Group();
 
     if (tier.satellites) {
-      scene.add(satelliteGroup);
+      dragGroup.add(satelliteGroup);
       const satelliteCount = 6;
       const satellitePositions: Vector3[] = [];
       const satelliteColors: string[] = [];
@@ -322,6 +449,77 @@ export default function HeroScene() {
       });
     }
 
+    // Pointer interaction
+    let dragging = false;
+    let activePointer = -1;
+    let dragIsTouch = false;
+    let lastX = 0;
+    let lastY = 0;
+    let lastMoveAt = 0;
+    let spinY = 0; // angular velocity around the vertical axis, rad/s
+    let spinX = 0; // around the horizontal axis
+    let idleSince = performance.now();
+
+    // pan-y: a vertical swipe still scrolls the page on touch screens; only
+    // horizontal swipes reach us, and those spin the object.
+    container.style.touchAction = 'pan-y';
+    container.style.cursor = 'grab';
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      dragging = true;
+      activePointer = e.pointerId;
+      dragIsTouch = e.pointerType !== 'mouse';
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastMoveAt = performance.now();
+      spinX = spinY = 0;
+      try {
+        // Keep receiving moves when the pointer leaves the canvas mid-drag
+        container.setPointerCapture(e.pointerId);
+      } catch {
+        // Pointer already gone (e.g. the browser took the gesture) — drag still works inside
+      }
+      container.style.cursor = 'grabbing';
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragging || e.pointerId !== activePointer) return;
+      const now = performance.now();
+      const dt = Math.max(now - lastMoveAt, 1) / 1000;
+      const angleY = (e.clientX - lastX) * ROTATE_PER_PX;
+      // Touch drags are horizontal only — vertical belongs to page scroll
+      const angleX = dragIsTouch ? 0 : (e.clientY - lastY) * ROTATE_PER_PX;
+      dragGroup.rotateOnWorldAxis(WORLD_Y, angleY);
+      if (angleX) dragGroup.rotateOnWorldAxis(WORLD_X, angleX);
+      // Smoothed so one jittery event doesn't decide the fling
+      spinY = MathUtils.clamp(spinY * 0.5 + (angleY / dt) * 0.5, -MAX_SPIN, MAX_SPIN);
+      spinX = MathUtils.clamp(spinX * 0.5 + (angleX / dt) * 0.5, -MAX_SPIN, MAX_SPIN);
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastMoveAt = now;
+      idleSince = now;
+    };
+
+    const endDrag = (e: PointerEvent) => {
+      if (!dragging || e.pointerId !== activePointer) return;
+      dragging = false;
+      // No releasePointerCapture here: capture ends on its own after
+      // pointerup/pointercancel, and releasing it by hand throws in Firefox
+      // once the pointer is gone (hasPointerCapture can still report true).
+      container.style.cursor = 'grab';
+      // Held still before letting go, or reduced motion: no coasting
+      if (reducedMotion || performance.now() - lastMoveAt > 80) spinX = spinY = 0;
+      idleSince = performance.now();
+    };
+
+    container.addEventListener('pointerdown', onPointerDown);
+    container.addEventListener('pointermove', onPointerMove);
+    container.addEventListener('pointerup', endDrag);
+    container.addEventListener('pointercancel', endDrag);
+    // Capture can be dropped without a pointerup (window switch, etc.)
+    container.addEventListener('lostpointercapture', endDrag);
+
     // Resize handling
     const resize = () => {
       const { clientWidth: w, clientHeight: h } = container;
@@ -342,22 +540,17 @@ export default function HeroScene() {
     let running = false;
     const clock = new Clock();
 
+    let firstFrameDrawn = false;
     const animate = () => {
       raf = requestAnimationFrame(animate);
       const delta = clock.getDelta();
       elapsed += reducedMotion ? delta * 0.15 : delta;
 
-      const p = shapeExponentAt(elapsed);
-      const invP = 1 / p;
+      const { from, to, k } = shapeBlendAt(elapsed);
+      const fromRadii = shapeRadii[from];
+      const toRadii = shapeRadii[to];
       for (let i = 0; i < vertexCount; i++) {
-        const n = Math.exp(
-          Math.log(
-            Math.exp(p * logX[i]) +
-              Math.exp(p * logY[i]) +
-              Math.exp(p * logZ[i]),
-          ) * invP,
-        );
-        const s = RADIUS / n;
+        const s = fromRadii[i] + (toRadii[i] - fromRadii[i]) * k;
         const j = i * 3;
         positions[j] = dirX[i] * s;
         positions[j + 1] = dirY[i] * s;
@@ -383,7 +576,28 @@ export default function HeroScene() {
 
       satelliteGroup.rotation.y -= delta * (reducedMotion ? 0.01 : 0.06);
 
+      if (!dragging) {
+        if (Math.abs(spinY) > 0.01 || Math.abs(spinX) > 0.01) {
+          dragGroup.rotateOnWorldAxis(WORLD_Y, spinY * delta);
+          dragGroup.rotateOnWorldAxis(WORLD_X, spinX * delta);
+          const decay = Math.exp(-SPIN_DAMPING * delta);
+          spinY *= decay;
+          spinX *= decay;
+          idleSince = performance.now();
+        } else if (
+          !reducedMotion &&
+          performance.now() - idleSince > RETURN_DELAY_MS &&
+          dragGroup.quaternion.angleTo(REST_POSE) > 0.001
+        ) {
+          dragGroup.quaternion.slerp(REST_POSE, 1 - Math.exp(-RETURN_RATE * delta));
+        }
+      }
+
       renderer.render(scene, camera);
+      if (!firstFrameDrawn) {
+        firstFrameDrawn = true;
+        onReadyRef.current?.();
+      }
     };
 
     /**
@@ -419,6 +633,11 @@ export default function HeroScene() {
       intersectionObserver.disconnect();
       resizeObserver.disconnect();
       document.removeEventListener('visibilitychange', sync);
+      container.removeEventListener('pointerdown', onPointerDown);
+      container.removeEventListener('pointermove', onPointerMove);
+      container.removeEventListener('pointerup', endDrag);
+      container.removeEventListener('pointercancel', endDrag);
+      container.removeEventListener('lostpointercapture', endDrag);
       container.removeChild(renderer.domElement);
 
       geometry.dispose();

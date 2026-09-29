@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --brand-ink: #2a2021;
+  --brand-ink: #221a1a;
   --brand-cream: #fefefe;
   --brand-ember: #c35622;
 }
@@ -12,6 +12,20 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Landing page: one wheel/swipe gesture advances a section. Short sections jump
+   straight to the next; sections taller than the viewport scroll freely until
+   their end, then snap into the next one. Scoped via a class (not globally on
+   html) so pages without section snap-points, like /privacy, scroll normally. */
+html.snap-scroll {
+  scroll-snap-type: y mandatory;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.snap-scroll {
+    scroll-snap-type: none;
+  }
 }
 
 /* Kill the default mobile tap highlight everywhere — interaction feedback is handled per-component */
@@ -38,20 +52,28 @@ body {
   color: var(--brand-cream);
 }
 
-/* Subtle scrollbar */
+/* Ember scrollbar on the ink background */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #1a1314;
+  background: var(--brand-ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: #3a2e2e;
+  background: var(--brand-ember);
+  border: 2px solid var(--brand-ink);
   border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-ember);
+  background: #e57b4d;
+}
+
+/* Firefox only — Chromium would let this override the rounded thumb above */
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: var(--brand-ember) var(--brand-ink);
+  }
 }
 
 @layer utilities {

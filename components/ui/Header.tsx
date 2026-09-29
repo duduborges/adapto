@@ -11,7 +11,98 @@ import { i18n, languageShort } from '@/lib/i18n/config';
 import { Logo } from './Logo';
 import { Button } from './Button';
 import { site, bookingHref, bookingIsExternal } from '@/lib/site';
-import { Menu, X, ArrowRight, MapPin, Mail } from 'lucide-react';
+import { Menu, X, ArrowRight, ArrowUpRight, MapPin, Mail } from 'lucide-react';
+
+/** Page sections the desktop nav links to, in page order. */
+const SECTION_IDS = ['services', 'process', 'why', 'manifesto', 'contact'] as const;
+
+/**
+ * Drives the white pill behind the desktop nav link of the section in view.
+ * The pill is positioned straight from the scroll offset — as the boundary
+ * between two sections crosses the middle band of the viewport it slides
+ * (and resizes) from one link to the next, tracking the scroll rather than
+ * playing a fixed animation. Writes go to the DOM in a rAF, so scrolling
+ * never re-renders React; only the active index (for aria-current) is state.
+ */
+function useSectionPill(
+  listRef: React.RefObject<HTMLUListElement>,
+  pillRef: React.RefObject<HTMLLIElement>,
+  labelsRef: React.RefObject<HTMLDivElement>,
+) {
+  const [active, setActive] = useState(-1);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const list = listRef.current;
+      const pill = pillRef.current;
+      if (!list || !pill) return;
+
+      const sections = SECTION_IDS.map((id) => document.getElementById(id));
+      const links = Array.from(list.querySelectorAll<HTMLElement>('a'));
+      // Pages without these sections (privacy, 404), or nav hidden: no pill
+      if (
+        sections.some((el) => !el) ||
+        links.length !== SECTION_IDS.length ||
+        !list.offsetWidth
+      ) {
+        pill.style.opacity = '0';
+        setActive(-1);
+        return;
+      }
+
+      // Continuous position: -1 in the hero, i while section i fills the
+      // view, fractional while crossing from one section into the next.
+      const probe = window.scrollY + window.innerHeight * 0.4;
+      const zone = window.innerHeight * 0.5;
+      let pos = -1;
+      sections.forEach((el, i) => {
+        const start = el!.getBoundingClientRect().top + window.scrollY - zone / 2;
+        if (probe >= start) pos = i - 1 + Math.min(1, (probe - start) / zone);
+      });
+
+      const last = links.length - 1;
+      const from = Math.max(0, Math.min(Math.floor(pos), last));
+      const to = Math.min(from + 1, last);
+      const t = pos < 0 ? 0 : pos - Math.floor(pos);
+      const a = links[from];
+      const b = links[to];
+      const x = a.offsetLeft + (b.offsetLeft - a.offsetLeft) * t;
+      const w = a.offsetWidth + (b.offsetWidth - a.offsetWidth) * t;
+      const opacity = pos < 0 ? pos + 1 : 1; // fades in as Services arrives
+
+      pill.style.transform = `translateX(${x}px)`;
+      pill.style.width = `${w}px`;
+      // Keep the dark label copy fixed relative to the list while the pill moves
+      if (labelsRef.current) labelsRef.current.style.transform = `translateX(${-x}px)`;
+      pill.style.opacity = String(opacity);
+      setActive(opacity < 0.5 ? -1 : Math.round(Math.max(pos, 0)));
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    // Link widths change once the web font swaps in
+    const ro = new ResizeObserver(schedule);
+    if (listRef.current) ro.observe(listRef.current);
+    document.fonts?.ready.then(schedule).catch(() => {});
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      ro.disconnect();
+    };
+  }, [listRef, pillRef, labelsRef]);
+
+  return active;
+}
 
 interface HeaderProps {
   lang: Locale;
@@ -24,6 +115,10 @@ export function Header({ lang, dict }: HeaderProps) {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const navListRef = useRef<HTMLUListElement>(null);
+  const pillRef = useRef<HTMLLIElement>(null);
+  const pillLabelsRef = useRef<HTMLDivElement>(null);
+  const activeSection = useSectionPill(navListRef, pillRef, pillLabelsRef);
 
   useEffect(() => setMounted(true), []);
 
@@ -56,13 +151,10 @@ export function Header({ lang, dict }: HeaderProps) {
     return segments.join('/');
   };
 
-  const navItems = [
-    { label: dict.nav.manifesto, href: '#manifesto' },
-    { label: dict.nav.services, href: '#services' },
-    { label: dict.nav.process, href: '#process' },
-    { label: dict.nav.work, href: '#work' },
-    { label: dict.nav.contact, href: '#contact' },
-  ];
+  const navItems = SECTION_IDS.map((id) => ({
+    label: dict.nav[id] as string,
+    href: `/${lang}#${id}`,
+  }));
 
   return (
     <header
@@ -76,24 +168,43 @@ export function Header({ lang, dict }: HeaderProps) {
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-24 md:px-8 lg:px-10">
         <Link
           href={`/${lang}`}
-          aria-label="Adapto Software House — home"
-          className="group inline-flex items-center gap-4 transition-opacity hover:opacity-80"
+          aria-label="Adapto — home"
+          className="group inline-flex items-center transition-opacity hover:opacity-80"
         >
-          <Logo variant="mark" sizeClass="h-11 md:h-12" priority />
-          <span className="font-mono text-[13px] font-semibold uppercase leading-[1.05] tracking-[0.14em] text-cream/85 inline-flex flex-col md:text-[14px] md:tracking-[0.15em]">
-            <span>Software</span>
-            <span className="text-ember">/ House</span>
-          </span>
+          <Logo variant="mark" sizeClass="h-14 md:h-16" priority />
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
-          <ul className="flex items-center gap-7">
-            {navItems.map((item) => (
+        <div className="hidden items-center gap-8 lg:flex">
+          <ul ref={navListRef} className="relative flex items-center gap-1">
+            {/* Section indicator — positioned by useSectionPill */}
+            {/* Section indicator — positioned by useSectionPill. It sits above
+                the links and carries a dark copy of the labels, counter-shifted
+                so they line up with the real ones: wherever the pill covers a
+                word, even mid-slide, that part reads dark on white. */}
+            <li
+              ref={pillRef}
+              aria-hidden
+              role="presentation"
+              className="pointer-events-none absolute inset-y-0 left-0 z-10 overflow-hidden rounded-full bg-cream opacity-0 shadow-[0_4px_18px_-6px_rgba(254,254,254,0.35)] will-change-transform"
+            >
+              <div ref={pillLabelsRef} className="flex h-full items-center gap-1 will-change-transform">
+                {navItems.map((item) => (
+                  <span
+                    key={item.href}
+                    className="block whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium text-ink"
+                  >
+                    {item.label}
+                  </span>
+                ))}
+              </div>
+            </li>
+            {navItems.map((item, i) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-sm font-medium text-cream/70 transition-colors hover:text-cream"
+                  aria-current={activeSection === i ? 'location' : undefined}
+                  className="relative block whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium text-cream/70 transition-colors hover:text-cream"
                 >
                   {item.label}
                 </a>
@@ -118,6 +229,16 @@ export function Header({ lang, dict }: HeaderProps) {
             ))}
           </div>
 
+          <a
+            href={site.trackerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-1.5 text-sm font-medium text-cream/70 transition-colors hover:text-cream"
+          >
+            {dict.process.tracker.cta.button}
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+
           <Button href={bookingHref()} external={bookingIsExternal()} size="sm">
             {dict.nav.book}
           </Button>
@@ -126,7 +247,7 @@ export function Header({ lang, dict }: HeaderProps) {
         {/* Mobile toggle — generous hit area, no default highlight */}
         <button
           type="button"
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream md:hidden"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream lg:hidden"
           onClick={() => setOpen((s) => !s)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -182,7 +303,7 @@ function MobileDrawer({
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className="fixed inset-0 z-[60] md:hidden"
+      className="fixed inset-0 z-[60] lg:hidden"
     >
       {/* Scrim — 50% black, dismissible */}
       <motion.button
@@ -260,7 +381,7 @@ function MobileDrawer({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="border-t border-cream/10 px-6 pb-6 pt-8"
+          className="flex flex-col items-start border-t border-cream/10 px-6 pb-6 pt-8"
         >
           <a
             href={bookingHref()}
@@ -273,9 +394,17 @@ function MobileDrawer({
             <span>{dict.nav.book}</span>
             <ArrowRight className="h-4 w-4 self-center transition-transform group-hover:translate-x-1" />
           </a>
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream/40">
-            30 min · No commitment
-          </p>
+
+          <a
+            href={site.trackerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-cream/50 transition-colors hover:text-cream/80"
+          >
+            {dict.process.tracker.cta.button}
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
         </motion.div>
 
         {/* Footer — language switcher + meta */}

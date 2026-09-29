@@ -13,10 +13,14 @@ export function middleware(request: NextRequest) {
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = i18n.defaultLocale;
+    const url = request.nextUrl.clone();
+    // `/` must land on `/en`, not `/en/` — the trailing slash cost a second
+    // redirect hop (Next normalises it away with its own 308).
+    url.pathname = `/${locale}${pathname === '/' ? '' : pathname}`;
 
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname}`, request.url)
-    );
+    // Permanent: the root is the most-linked URL, and a 307 tells search
+    // engines to keep treating `/` as the page to index instead of `/en`.
+    return NextResponse.redirect(url, 308);
   }
 }
 

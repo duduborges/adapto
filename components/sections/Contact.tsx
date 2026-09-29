@@ -29,6 +29,7 @@ export function Contact({ dict }: ContactProps) {
       email: String(formData.get('email') || ''),
       company: String(formData.get('company') || ''),
       message: String(formData.get('message') || ''),
+      website: String(formData.get('website') || ''),
     };
 
     try {
@@ -60,13 +61,13 @@ export function Contact({ dict }: ContactProps) {
       />
       <SectionLabel label={dict.contact.eyebrow} />
 
-      <div className="mt-12 grid grid-cols-12 gap-8 md:mt-16">
+      <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl leading-[1.02] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
+          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.02] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
         >
           {dict.contact.title.split('.')[0]}
           <span className="text-ember">.</span>
@@ -147,10 +148,18 @@ export function Contact({ dict }: ContactProps) {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-8">
-            <Field name="name" label={dict.contact.form.name} required />
-            <Field name="email" type="email" label={dict.contact.form.email} required />
-            <Field name="company" label={dict.contact.form.company} required />
-            <Field name="message" label={dict.contact.form.message} required textarea />
+            <Field name="name" label={dict.contact.form.name} required maxLength={100} />
+            <Field name="email" type="email" label={dict.contact.form.email} required maxLength={254} />
+            <Field name="company" label={dict.contact.form.company} required maxLength={150} />
+            <Field name="message" label={dict.contact.form.message} required textarea maxLength={5000} />
+
+            {/* Honeypot — hidden from people, filled in by bots; the API drops those */}
+            <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+              <label>
+                Website
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+              </label>
+            </div>
 
             <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:items-center sm:justify-between">
               <p role="status" aria-live="polite" className="text-sm">
@@ -185,12 +194,14 @@ function Field({
   type = 'text',
   required,
   textarea,
+  maxLength,
 }: {
   name: string;
   label: string;
   type?: string;
   required?: boolean;
   textarea?: boolean;
+  maxLength?: number;
 }) {
   const inputClass =
     'block w-full border-0 border-b border-cream/15 bg-transparent px-0 py-3 text-base text-cream placeholder:text-cream/30 transition-colors focus:border-ember focus:outline-none focus:ring-0';
@@ -201,9 +212,9 @@ function Field({
         {label} {required && <span className="text-ember">*</span>}
       </span>
       {textarea ? (
-        <textarea name={name} required={required} rows={3} className={inputClass} />
+        <textarea name={name} required={required} maxLength={maxLength} rows={3} className={inputClass} />
       ) : (
-        <input name={name} type={type} required={required} className={inputClass} />
+        <input name={name} type={type} required={required} maxLength={maxLength} className={inputClass} />
       )}
     </label>
   );

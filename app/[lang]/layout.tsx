@@ -23,17 +23,22 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-// Short tab title (browsers only show ~30-50 chars). Long-form goes into OG title.
-const tabTitle = 'Adapto · Software House';
+// Search-result titles: say what we do and where, brand last. Kept under
+// ~60 characters so Google shows them whole.
+const titles: Record<Locale, string> = {
+  en: 'Custom Software & Web Development in Vancouver | Adapto',
+  fr: 'Logiciels sur mesure et sites web à Vancouver | Adapto',
+};
 
 const ogTitles: Record<Locale, string> = {
   en: 'Adapto Software House — Software that adapts to your business',
   fr: "Adapto Software House — Un logiciel qui s'adapte à votre entreprise",
 };
 
+// ~150 characters: what, for whom, where — the snippet under the title.
 const descriptions: Record<Locale, string> = {
-  en: 'Adapto is a Canadian software studio in Vancouver. We build custom systems, automations and dashboards that adapt to how your business actually operates.',
-  fr: "Adapto est un studio logiciel canadien basé à Vancouver. Nous concevons des systèmes sur mesure, des automatisations et des tableaux de bord qui s'adaptent au fonctionnement réel de votre entreprise.",
+  en: 'Vancouver software studio building custom systems, websites, automations and dashboards that fit how your business actually works. Book a free call.',
+  fr: 'Studio logiciel à Vancouver : systèmes sur mesure, sites web, automatisations et tableaux de bord adaptés à votre entreprise. Appel gratuit.',
 };
 
 export async function generateMetadata({
@@ -45,8 +50,7 @@ export async function generateMetadata({
   const locale = lang as Locale;
 
   return {
-    // Tab title — short. Long form is below in openGraph.title for SEO/AEO.
-    title: tabTitle,
+    title: titles[locale] ?? titles.en,
     description: descriptions[locale] ?? descriptions.en,
     metadataBase: new URL(siteUrl),
     alternates: {
@@ -54,6 +58,8 @@ export async function generateMetadata({
       languages: {
         en: '/en',
         fr: '/fr',
+        // Where searchers matching neither language land
+        'x-default': '/en',
       },
     },
     openGraph: {
@@ -84,7 +90,7 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: '#2a2021',
+  themeColor: '#221a1a',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,

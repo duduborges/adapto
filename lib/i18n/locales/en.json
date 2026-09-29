@@ -4,6 +4,7 @@
     "services": "Services",
     "process": "Process",
     "work": "Work",
+    "why": "Why us",
     "contact": "Contact",
     "book": "Book a call"
   },
@@ -11,10 +12,11 @@
     "eyebrow": "Canadian software studio · Built by Brazilian engineers",
     "title": "Software that adapts",
     "titleAccent": "to how your business actually works.",
-    "subtitle": "We embed into your operation, learn the real workflow, and build the systems that let your company keep producing — with or without you in the room.",
+    "subtitle": "Custom software, websites and automations for growing businesses — designed and built in Vancouver, Canada.",
     "cta": "Book a conversation",
     "ctaSecondary": "See how we work",
-    "scrollHint": "Scroll to explore"
+    "scrollHint": "Scroll to explore",
+    "available": "Currently accepting projects"
   },
   "manifesto": {
     "eyebrow": "Manifesto",
@@ -42,7 +44,7 @@
   "services": {
     "eyebrow": "What we build",
     "title": "Anything that removes friction from your day.",
-    "subtitle": "If it's a system, an automation, or a dashboard — and it makes the operation lighter — we can build it.",
+    "subtitle": "",
     "items": {
       "custom": {
         "title": "Custom systems",
@@ -51,6 +53,16 @@
           "Web apps",
           "Internal tools",
           "ERP / CRM"
+        ]
+      },
+      "websites": {
+        "title": "Websites & landing pages",
+        "description": "Institutional websites, landing pages, online stores and client portals — fast, bilingual-ready, easy for your team to update and built to turn visitors into conversations.",
+        "tags": [
+          "Websites",
+          "Landing pages",
+          "E-commerce",
+          "Portals"
         ]
       },
       "automation": {
@@ -80,12 +92,17 @@
           "Sync"
         ]
       }
-    }
+    },
+    "stackLabel": "Stack & primitives"
   },
   "differentials": {
     "eyebrow": "Why Adapto",
     "title": "We're not a freelancer. We're not a generic agency.",
     "subtitle": "We're the engineering team that becomes part of your company for as long as you need us.",
+    "visual": {
+      "you": "Your company",
+      "us": "Adapto"
+    },
     "contrast": {
       "themHeading": "Most studios",
       "usHeading": "Adapto",
@@ -115,8 +132,8 @@
   },
   "process": {
     "eyebrow": "How we work",
-    "title": "Five phases. No magic.",
-    "subtitle": "A repeatable, transparent process from first call to long-term partnership.",
+    "title": "Five phases. Tracked end to end.",
+    "subtitle": "",
     "steps": {
       "discovery": {
         "number": "01",
@@ -148,11 +165,65 @@
       "focus": "In focus",
       "start": "First call",
       "end": "Partnership",
+      "free": "Free",
       "cta": {
         "description": "Already a client? Follow every phase live in the Adapto Tracker.",
         "button": "Open the Tracker"
+      },
+      "explainer": {
+        "prompt": "Want to understand how our Tracker works?",
+        "button": "See how it works",
+        "eyebrow": "Adapto Tracker",
+        "title": "How the Tracker works",
+        "lead": "A private, read-only view of your project, updated by our team as the work moves.",
+        "pillCaption": "Every phase is split into milestones. You see each one move from up next to done, as it happens.",
+        "demo": {
+          "project": "Sample project",
+          "progress": "Progress",
+          "readOnly": "Read-only",
+          "here": "You are here",
+          "milestones": "Milestones",
+          "status": {
+            "completed": "Done",
+            "in_progress": "In progress",
+            "pending": "Up next"
+          },
+          "sample": [
+            "Core data model",
+            "Main workflows",
+            "Integrations",
+            "Reports & dashboards",
+            "Release candidate"
+          ]
+        },
+        "steps": [
+          {
+            "title": "You get an access code",
+            "description": "At kickoff we send you a private code. No account, no password, nothing to install."
+          },
+          {
+            "title": "Open the Tracker",
+            "description": "Go to tracker.adapto-sh.com, enter the code and your project opens, on any device."
+          },
+          {
+            "title": "See every phase on one timeline",
+            "description": "Every milestone, checkpoint and delivery in order, with what's done, what's in progress and what's next."
+          },
+          {
+            "title": "Always up to date",
+            "description": "Our team updates it as the work moves, so you know where things stand between our weekly updates."
+          }
+        ],
+        "legend": {
+          "completed": "Done",
+          "in_progress": "In progress",
+          "pending": "Up next"
+        },
+        "footnote": "No account needed · Read-only view",
+        "close": "Close"
       }
-    }
+    },
+    "freeHeadline": "Prep work is FREE."
   },
   "work": {
     "eyebrow": "Recent work",
@@ -163,7 +234,7 @@
   },
   "contact": {
     "eyebrow": "Let's talk",
-    "title": "Bring us the problem. We'll bring the questions.",
+    "title": "Bring us the problem. We'll bring the solution.",
     "subtitle": "Book a 30-minute call. We'll listen, ask, and tell you honestly whether we're the right team for the job.",
     "ctaPrimary": "Book a call on our calendar",
     "ctaSecondary": "Or send us an email",
@@ -187,6 +258,7 @@
   },
   "footer": {
     "tagline": "Software that adapts to how your business actually works.",
+    "cta": "Have a problem worth solving?",
     "sections": {
       "company": "Company",
       "explore": "Explore",
@@ -197,6 +269,7 @@
       "services": "Services",
       "process": "Process",
       "work": "Work",
+      "why": "Why us",
       "book": "Book a call",
       "email": "Email us",
       "privacy": "Privacy policy",
