@@ -51,7 +51,9 @@ function HeroPoster({
           </radialGradient>
         </defs>
         <g transform={`translate(250 200) scale(${scale}) translate(-250 -200)`}>
-        <g className="animate-glow">
+        {/* Animations stop once the canvas has taken over — they'd keep the
+            compositor busy under an invisible layer for the whole visit. */}
+        <g className={hidden ? undefined : 'animate-glow'}>
           <circle cx="250" cy="200" r={r} fill="url(#hero-poster-fill)" />
         </g>
         <g fill="none" stroke="#c35622" strokeOpacity="0.45" strokeWidth="1">
@@ -72,8 +74,8 @@ function HeroPoster({
         <g
           fill="none"
           strokeWidth="1"
-          className={animated ? 'animate-[spin_36s_linear_infinite] motion-reduce:animate-none' : undefined}
-          style={animated ? { transformOrigin: '250px 200px', transformBox: 'view-box' } : undefined}
+          className={animated && !hidden ? 'animate-[spin_36s_linear_infinite] motion-reduce:animate-none' : undefined}
+          style={animated && !hidden ? { transformOrigin: '250px 200px', transformBox: 'view-box' } : undefined}
         >
           <ellipse cx="250" cy="200" rx="150" ry="46" transform="rotate(-18 250 200)" stroke="#c35622" strokeOpacity="0.25" />
           <ellipse cx="250" cy="200" rx="160" ry="60" transform="rotate(24 250 200)" stroke="#fefefe" strokeOpacity="0.1" />
