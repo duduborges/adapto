@@ -15,6 +15,7 @@ import {
   MathUtils,
   Mesh,
   MeshBasicMaterial,
+  MeshLambertMaterial,
   MeshPhysicalMaterial,
   PerspectiveCamera,
   Quaternion,
@@ -94,6 +95,11 @@ function surfaceRadius(shape: ShapeName, x: number, y: number, z: number) {
  * rings — the signature of the scene — but drops the satellite network and
  * runs a quarter of the geometry, which is where the per-frame cost actually
  * lives. The rings are three line loops and three dots: next to nothing.
+ * On phones it also swaps the physical material for a Lambert one (a far
+ * cheaper fragment shader — the body is translucent and flat-shaded, so it
+ * reads the same), renders at 1.25× and caps the loop at 24 fps: the shape
+ * turns slowly, so the lost frames don't show, and the cap cut main-thread
+ * busy time from 100% to ~35% under a 6× CPU throttle.
  *
  * Hero.tsx mounts the scene in the wide column on wide landscape screens and
  * above the headline otherwise; phones and tablets under 1024px get the
@@ -109,6 +115,10 @@ interface Tier {
   maxPixelRatio: number;
   antialias: boolean;
   clearcoat: number;
+  /** Cheap Lambert body instead of the physical (glass-like) one. */
+  cheapMaterial: boolean;
+  /** Render at most this many frames per second (0 = every display frame). */
+  maxFps: number;
 }
 
 function pickTier(): Tier {
@@ -118,9 +128,11 @@ function pickTier(): Tier {
         segments: 6,
         rings: true,
         satellites: false,
-        maxPixelRatio: 1.5,
+        maxPixelRatio: 1.25,
         antialias: false,
         clearcoat: 0,
+        cheapMaterial: true,
+        maxFps: 24,
       }
     : {
         segments: 9,
@@ -129,6 +141,8 @@ function pickTier(): Tier {
         maxPixelRatio: 2,
         antialias: true,
         clearcoat: 0.6,
+        cheapMaterial: false,
+        maxFps: 0,
       };
 }
 
@@ -199,8 +213,9 @@ function buildMorphMesh(segments: number) {
 }
 
 /**
- * Drag-to-rotate. The pointer spins the whole composition (object, rings,
- * satellites); the object keeps morphing and turning on its own inside it.
+ * Drag-to-rotate (mouse only). The pointer spins the whole composition
+ * (object, rings, satellites); the object keeps morphing and turning on its
+ * own inside it.
  * On release it coasts to a stop, then drifts back to its designed pose.
  */
 const ROTATE_PER_PX = 0.009; // radians per pixel dragged
@@ -317,21 +332,31 @@ export default function HeroScene({ onReady, zoom = 1 }: HeroSceneProps) {
      * opacity + clearcoat reads nearly the same against this near-flat
      * background for one render pass instead of two.
      */
-    const solidMaterial = new MeshPhysicalMaterial({
-      color: new Color(INK_700).lerp(new Color(EMBER), 0.2),
-      emissive: new Color(EMBER),
-      emissiveIntensity: 0.08,
-      roughness: 0.14,
-      metalness: 0.06,
-      clearcoat: tier.clearcoat,
-      clearcoatRoughness: 0.25,
-      transparent: true,
-      opacity: 0.5,
-      flatShading: true,
-      // Front faces only, still writing depth: the body has to occlude the far
-      // half of the wireframe shell, or the two sets of lines overlap and the
-      // shape reads as a tangle instead of a solid.
-    });
+    const bodyColor = new Color(INK_700).lerp(new Color(EMBER), 0.2);
+    const solidMaterial = tier.cheapMaterial
+      ? new MeshLambertMaterial({
+          color: bodyColor,
+          emissive: new Color(EMBER),
+          emissiveIntensity: 0.1,
+          transparent: true,
+          opacity: 0.5,
+          flatShading: true,
+        })
+      : new MeshPhysicalMaterial({
+          color: bodyColor,
+          emissive: new Color(EMBER),
+          emissiveIntensity: 0.08,
+          roughness: 0.14,
+          metalness: 0.06,
+          clearcoat: tier.clearcoat,
+          clearcoatRoughness: 0.25,
+          transparent: true,
+          opacity: 0.5,
+          flatShading: true,
+          // Front faces only, still writing depth: the body has to occlude the far
+          // half of the wireframe shell, or the two sets of lines overlap and the
+          // shape reads as a tangle instead of a solid.
+        });
     const solidMesh = new Mesh(geometry, solidMaterial);
     objectGroup.add(solidMesh);
 
@@ -449,10 +474,10 @@ export default function HeroScene({ onReady, zoom = 1 }: HeroSceneProps) {
       });
     }
 
-    // Pointer interaction
+    // Pointer interaction — mouse only. Touch drags were removed: on phones a
+    // swipe over the hero should just scroll the page.
     let dragging = false;
     let activePointer = -1;
-    let dragIsTouch = false;
     let lastX = 0;
     let lastY = 0;
     let lastMoveAt = 0;
@@ -460,16 +485,13 @@ export default function HeroScene({ onReady, zoom = 1 }: HeroSceneProps) {
     let spinX = 0; // around the horizontal axis
     let idleSince = performance.now();
 
-    // pan-y: a vertical swipe still scrolls the page on touch screens; only
-    // horizontal swipes reach us, and those spin the object.
-    container.style.touchAction = 'pan-y';
-    container.style.cursor = 'grab';
+    const canDrag = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (canDrag) container.style.cursor = 'grab';
 
     const onPointerDown = (e: PointerEvent) => {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
       dragging = true;
       activePointer = e.pointerId;
-      dragIsTouch = e.pointerType !== 'mouse';
       lastX = e.clientX;
       lastY = e.clientY;
       lastMoveAt = performance.now();
@@ -488,8 +510,7 @@ export default function HeroScene({ onReady, zoom = 1 }: HeroSceneProps) {
       const now = performance.now();
       const dt = Math.max(now - lastMoveAt, 1) / 1000;
       const angleY = (e.clientX - lastX) * ROTATE_PER_PX;
-      // Touch drags are horizontal only — vertical belongs to page scroll
-      const angleX = dragIsTouch ? 0 : (e.clientY - lastY) * ROTATE_PER_PX;
+      const angleX = (e.clientY - lastY) * ROTATE_PER_PX;
       dragGroup.rotateOnWorldAxis(WORLD_Y, angleY);
       if (angleX) dragGroup.rotateOnWorldAxis(WORLD_X, angleX);
       // Smoothed so one jittery event doesn't decide the fling
@@ -541,8 +562,14 @@ export default function HeroScene({ onReady, zoom = 1 }: HeroSceneProps) {
     const clock = new Clock();
 
     let firstFrameDrawn = false;
-    const animate = () => {
+    const frameInterval = tier.maxFps ? 1000 / tier.maxFps : 0;
+    let lastFrameAt = -Infinity;
+    const animate = (now: number = performance.now()) => {
       raf = requestAnimationFrame(animate);
+      // Frame cap (light tier): skip this display frame entirely. The clock
+      // isn't read, so the next drawn frame gets the whole elapsed delta.
+      if (frameInterval && now - lastFrameAt < frameInterval - 1) return;
+      lastFrameAt = now;
       const delta = clock.getDelta();
       elapsed += reducedMotion ? delta * 0.15 : delta;
 
