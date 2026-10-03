@@ -62,7 +62,11 @@ export function Process({ dict }: ProcessProps) {
     <Section
       id="process"
       size="wide"
-      className="relative overflow-hidden border-t border-cream/10"
+      // Desktop: exactly one screen tall with the content centred, so the
+      // section snaps in and out in a single scroll — when it was taller than
+      // the viewport, snap let the page stop inside it. Spacing below is in
+      // svh on desktop so it stays generous yet always fits (pt = header).
+      className="relative overflow-hidden border-t border-cream/10 desk:flex desk:h-[100svh] desk:min-h-[620px] desk:scroll-mt-0 desk:flex-col desk:justify-center desk:pb-[3svh] desk:pt-24"
     >
       <div
         aria-hidden
@@ -76,7 +80,7 @@ export function Process({ dict }: ProcessProps) {
 
       <SectionLabel label={dict.process.eyebrow} />
 
-      <div className="mt-12 grid grid-cols-12 gap-x-4 gap-y-8 md:mt-16 md:gap-8">
+      <div className="mt-14 grid grid-cols-12 gap-x-4 gap-y-10 md:mt-20 md:gap-8 desk:mt-[4.5svh]">
         <h2
           data-reveal
           style={{ '--reveal-y': '12px' } as React.CSSProperties}
@@ -106,24 +110,31 @@ export function Process({ dict }: ProcessProps) {
       <div
         data-reveal
         style={{ '--reveal-y': '14px' } as React.CSSProperties}
-        className="mt-20 hidden lg:block md:mt-24"
+        className="mt-24 hidden lg:block md:mt-28 desk:mt-[8svh]"
       >
-        <div className="flex items-stretch rounded-full border border-cream/10 bg-cream/[0.02] p-2">
-          <div className="flex h-32 w-28 shrink-0 items-center justify-center rounded-l-full border-l-2 border-l-ember bg-ink-800 pl-2 font-serif text-lg text-cream/70 xl:w-32">
+        {/* Segments pop in one after another (`.pill-seg`, --seg = order),
+            then a sheen keeps sweeping across the pill (globals.css) */}
+        <div className="pill relative flex items-stretch overflow-hidden rounded-full border border-cream/10 bg-cream/[0.02] p-2">
+          <span aria-hidden className="pill-sheen pointer-events-none absolute inset-y-0 left-0 z-10 w-1/5" />
+          <div
+            style={{ '--seg': 0 } as React.CSSProperties}
+            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-l-full xl:h-40 border-l-2 border-l-ember bg-ink-800 pl-2 font-serif text-lg text-cream/70 xl:w-32"
+          >
             {t.start}
           </div>
 
           <div className="flex min-w-0 flex-1 gap-px bg-cream/[0.06] px-px">
-            {phaseKeys.map((key) => {
+            {phaseKeys.map((key, i) => {
               const isSelected = selected === key;
               return (
                 <button
                   key={key}
+                  style={{ '--seg': i + 1 } as React.CSSProperties}
                   type="button"
                   onClick={() => setSelected(key)}
                   aria-pressed={isSelected}
                   className={cn(
-                    'relative flex h-32 min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-2 border-l-2 px-3 text-center',
+                    'pill-seg relative flex h-32 min-w-0 flex-1 xl:h-40 xl:gap-2.5 cursor-pointer flex-col items-center justify-center gap-2 border-l-2 px-3 text-center',
                     'ring-1 ring-inset ring-cream/[0.06] transition-all duration-300',
                     'hover:-translate-y-1 hover:shadow-[0_10px_24px_-10px_rgba(195,86,34,0.45)]',
                     'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ember',
@@ -164,12 +175,14 @@ export function Process({ dict }: ProcessProps) {
             })}
           </div>
 
-          <div className="flex h-32 w-28 shrink-0 items-center justify-center rounded-r-full border-r-2 border-r-ember/30 bg-ink-800 pr-2 font-serif text-lg text-cream/40 xl:w-32">
+          <div
+            style={{ '--seg': phaseKeys.length + 1 } as React.CSSProperties}
+            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-r-full xl:h-40 border-r-2 border-r-ember/30 bg-ink-800 pr-2 font-serif text-lg text-cream/40 xl:w-32">
             {t.end}
           </div>
         </div>
 
-        <div className="mt-8 min-h-[3.5rem] max-w-2xl">
+        <div className="mt-10 min-h-[3.5rem] max-w-2xl desk:mt-[4svh]">
           {/* initial={false}: the first description is in the server HTML at full
               opacity; the fade only plays when a visitor picks another phase */}
           <AnimatePresence mode="wait" initial={false}>
@@ -188,12 +201,12 @@ export function Process({ dict }: ProcessProps) {
       </div>
 
       {/* Mobile / tablet — a plain rail */}
-      <ol className="mt-16 lg:hidden">
+      <ol className="mt-20 lg:hidden">
         {phaseKeys.map((key, i) => {
           const step = steps[key];
           const isLast = i === phaseKeys.length - 1;
           return (
-            <li key={key} className="relative flex gap-5 pb-10 last:pb-0">
+            <li key={key} className="relative flex gap-5 pb-12 last:pb-0">
               <div className="relative flex w-2 shrink-0 justify-center">
                 <span
                   className={cn(
@@ -226,7 +239,7 @@ export function Process({ dict }: ProcessProps) {
       </ol>
 
       {/* Tracker CTA — explain it to prospects, open it for clients */}
-      <div className="mt-14 flex flex-col gap-8 border-t border-cream/10 pt-10 lg:flex-row lg:items-center lg:justify-between">
+      <div className="mt-20 flex flex-col gap-10 border-t border-cream/10 pt-12 desk:mt-[5svh] desk:pt-[4.5svh] lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
           <p className="font-serif text-2xl leading-tight text-cream md:text-3xl">
             {t.explainer.prompt}

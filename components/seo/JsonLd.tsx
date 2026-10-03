@@ -3,8 +3,8 @@ import { i18n } from '@/lib/i18n/config';
 import type { Locale } from '@/types';
 
 const descriptions: Record<Locale, string> = {
-  en: 'Adapto is a Canadian software studio in Vancouver building custom systems, websites, automations and dashboards that adapt to how your business actually operates.',
-  fr: "Adapto est un studio logiciel canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations et des tableaux de bord adaptés au fonctionnement réel de votre entreprise.",
+  en: 'Adapto is a Canadian software studio in Vancouver building custom systems, websites, automations, dashboards and AI integrations that adapt to how your business actually operates.',
+  fr: "Adapto est un studio logiciel canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations, des tableaux de bord et des intégrations d'IA adaptés au fonctionnement réel de votre entreprise.",
 };
 
 /** What we sell, as schema.org Services — mirrors the Services section. */
@@ -12,6 +12,7 @@ const services: Record<Locale, { name: string; description: string }[]> = {
   en: [
     { name: 'Custom software development', description: 'ERPs, CRMs, internal tools and web applications built around how your team works.' },
     { name: 'Website and landing page development', description: 'Institutional websites, landing pages, online stores and client portals.' },
+    { name: 'AI integration', description: 'AI assistants on your own data, document and email processing, smart triage and copilots inside existing tools.' },
     { name: 'Business process automation', description: 'Reports, approvals and data entry replaced by automated workflows.' },
     { name: 'Dashboards and reporting', description: 'Real-time views of sales, stock, operations and people.' },
     { name: 'Systems integration', description: 'Accounting, e-commerce, logistics and payment tools connected into one operation.' },
@@ -19,6 +20,7 @@ const services: Record<Locale, { name: string; description: string }[]> = {
   fr: [
     { name: 'Développement de logiciels sur mesure', description: "ERP, CRM, outils internes et applications web conçus autour du fonctionnement de votre équipe." },
     { name: 'Création de sites web et landing pages', description: 'Sites institutionnels, landing pages, boutiques en ligne et portails clients.' },
+    { name: "Intégration d'IA", description: 'Assistants IA sur vos propres données, traitement de documents et de courriels, tri intelligent et copilotes dans vos outils.' },
     { name: 'Automatisation des processus', description: 'Rapports, approbations et saisie de données remplacés par des flux automatisés.' },
     { name: 'Tableaux de bord et reporting', description: 'Vues en temps réel des ventes, des stocks, des opérations et des équipes.' },
     { name: 'Intégration de systèmes', description: 'Comptabilité, e-commerce, logistique et paiements reliés en une seule opération.' },

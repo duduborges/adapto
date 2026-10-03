@@ -90,6 +90,24 @@ const glyphs: Record<string, React.ReactNode> = {
       <line className="svc-caret" x1={27} y1={31.5} x2={27} y2={36.5} {...stroke} />
     </>
   ),
+  // AI: a spark that lights up, with smaller ones twinkling around it
+  ai: (
+    <>
+      <path className="svc-spark" d="M22 11 C24.4 23.6 24.4 23.6 37 26 C24.4 28.4 24.4 28.4 22 41 C19.6 28.4 19.6 28.4 7 26 C19.6 23.6 19.6 23.6 22 11 Z" {...stroke} style={{ transformOrigin: 'center' }} />
+      <path
+        className="svc-twinkle"
+        d="M38 4.5 C38.99 9.01 38.99 9.01 43.5 10 C38.99 10.99 38.99 10.99 38 15.5 C37.01 10.99 37.01 10.99 32.5 10 C37.01 9.01 37.01 9.01 38 4.5 Z"
+        {...stroke}
+        style={{ '--i': 0, transformOrigin: 'center' } as React.CSSProperties}
+      />
+      <path
+        className="svc-twinkle"
+        d="M39 33.5 C39.7 36.3 39.7 36.3 42.5 37 C39.7 37.7 39.7 37.7 39 40.5 C38.3 37.7 38.3 37.7 35.5 37 C38.3 36.3 38.3 36.3 39 33.5 Z"
+        {...stroke}
+        style={{ '--i': 1, transformOrigin: 'center' } as React.CSSProperties}
+      />
+    </>
+  ),
   // Two meshed gears that run on their own
   automation: (
     <>

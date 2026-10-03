@@ -14,6 +14,7 @@ interface ServicesProps {
 const serviceKeys = [
   'custom',
   'websites',
+  'ai',
   'automation',
   'dashboards',
   'integrations',
@@ -33,10 +34,10 @@ export function Services({ dict }: ServicesProps) {
       className="relative overflow-hidden border-t border-cream/10"
     >
       {/* Ember bloom — left-center behind the accordion */}
-            {/* Hero grid, lit only where this section's glow is */}
+            {/* Hero grid, lit only where this section's glow is (not on phones) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 grid-glow"
+        className="pointer-events-none absolute inset-0 -z-10 hidden grid-glow sm:block"
         style={{ '--glow': 'radial-gradient(560px circle at calc(-10% + 250px) 50%, black 0%, rgba(0,0,0,0.5) 40%, transparent 72%)' } as React.CSSProperties}
       />
       <div
