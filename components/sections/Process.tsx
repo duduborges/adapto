@@ -66,7 +66,8 @@ export function Process({ dict }: ProcessProps) {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40"
+        className="pointer-events-none absolute inset-0 -z-10 grid-glow"
+        style={{ '--glow': 'radial-gradient(640px circle at calc(25% + 350px) calc(75% - 250px), black 0%, rgba(0,0,0,0.5) 40%, transparent 72%)' } as React.CSSProperties}
       />
       <div
         aria-hidden
