@@ -180,7 +180,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
       : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:[@media(max-height:700px)]:text-[2.2rem] phone:[@media(max-height:620px)]:text-[2rem] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[100svh] phone:min-h-fit phone:pb-[calc(3.75rem+env(safe-area-inset-bottom))] sm:pt-24 md:pt-28 snap-start [scroll-snap-stop:always]">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[100svh] phone:min-h-fit phone:pb-[calc(3.75rem+env(safe-area-inset-bottom))] sm:pt-24 md:pt-28 desk:[@media(max-height:760px)]:pt-24 snap-start [scroll-snap-stop:always]">
       {/* subtle grid background */}
       <div
         aria-hidden
@@ -206,7 +206,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
         />
       </div>
 
-      <Container size="wide" className="relative flex w-full flex-1 flex-col pb-4 sm:pb-6 md:pb-8">
+      <Container size="wide" className="relative flex w-full flex-1 flex-col pb-4 sm:pb-6 md:pb-8 desk:[@media(max-height:760px)]:pb-5">
         {/* Flex-1 wrapper: centers the content block between meta row and strip.
             On phones the whole chain is a flex column instead, so the hero is
             exactly one screen tall: the text keeps its natural height and the
@@ -245,7 +245,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               </div>
 
               {/* Location chip — sits right above the headline */}
-              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:[@media(max-height:700px)]:mb-3 md:mb-6">
+              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:[@media(max-height:700px)]:mb-3 md:mb-6 desk:mb-11 desk:[@media(max-height:820px)]:mb-6">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-cream/10 bg-cream/[0.04] px-2.5 py-1 text-[10px] font-medium text-cream/50 backdrop-blur-sm md:gap-2 md:px-3.5 md:py-1.5 md:text-xs md:text-cream/80">
                   <MapPin className="h-3 w-3 text-ember/70 md:h-3.5 md:w-3.5 md:text-ember" />
                   <span>Vancouver · BC · Canada</span>
@@ -258,21 +258,21 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                 className={`${titleClamp} animate-hero-in motion-reduce:animate-none font-medium leading-[0.98] tracking-[-0.02em] text-cream`}
               >
                 <span className="block">{dict.hero.title}</span>
-                <span className="mt-2 block font-serif italic text-ember">
+                <span className="mt-2 block font-serif italic text-ember desk:mt-0">
                   {dict.hero.titleAccent}
                 </span>
               </h1>
 
               <p
                 style={{ animationDelay: '200ms' }}
-                className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 phone:hidden sm:mt-5 sm:text-lg md:mt-7 md:text-xl"
+                className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 phone:hidden sm:mt-6 sm:text-lg md:mt-7 md:text-xl desk:mt-12 desk:[@media(max-height:820px)]:mt-6"
               >
                 {dict.hero.subtitle}
               </p>
 
               <div
                 style={{ animationDelay: '300ms' }}
-                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:[@media(max-height:700px)]:mt-4 md:mt-9"
+                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:[@media(max-height:700px)]:mt-4 sm:mt-8 md:mt-10 desk:mt-14 desk:[@media(max-height:820px)]:mt-8"
               >
                 <a
                   href={bookingHref()}
@@ -293,7 +293,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               style={{ animationDelay: '150ms' }}
               className="col-span-12 hidden animate-hero-in motion-reduce:animate-none desk:col-span-7 desk:block"
             >
-              <div className="relative aspect-[5/4] w-full">
+              {/* On short desktop screens the 5:4 box, not the text, set the
+                  hero's height and pushed the bottom strip off-screen — cap it */}
+              <div className="relative mx-auto aspect-[5/4] w-full desk:[@media(max-height:820px)]:max-w-[600px] desk:[@media(max-height:760px)]:max-w-[540px]">
                 <HeroPoster hidden={sceneSlot === 'desktop' && sceneReady} />
                 {sceneSlot === 'desktop' && renderScene(1)}
               </div>

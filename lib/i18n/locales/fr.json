@@ -12,7 +12,7 @@
     "eyebrow": "Studio logiciel canadien · Ingénierie brésilienne",
     "title": "Un logiciel qui s'adapte",
     "titleAccent": "à la façon dont votre entreprise fonctionne vraiment.",
-    "subtitle": "Logiciels sur mesure, sites web et automatisations pour les entreprises en croissance — conçus et développés à Vancouver, au Canada.",
+    "subtitle": "Logiciels sur mesure, sites web, automatisations et intégration d'IA pour les entreprises en croissance — conçus et développés à Vancouver, au Canada.",
     "cta": "Prendre rendez-vous",
     "ctaSecondary": "Voir notre méthode",
     "scrollHint": "Faites défiler pour explorer",
@@ -63,6 +63,16 @@
           "Landing pages",
           "E-commerce",
           "Portails"
+        ]
+      },
+      "ai": {
+        "title": "Intégration d'IA",
+        "description": "Nous mettons l'IA au travail dans votre opération — assistants qui répondent à partir de vos propres données, lecture automatique de documents et de courriels, tri intelligent et copilotes dans les outils que votre équipe utilise déjà. Pratique, sécurisé et mesuré sur des résultats réels.",
+        "tags": [
+          "LLM et agents",
+          "Chatbots",
+          "IA documentaire",
+          "Copilotes"
         ]
       },
       "automation": {

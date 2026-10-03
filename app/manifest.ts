@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: site.fullName,
     short_name: site.name,
     description:
-      'Custom software, websites, automations and dashboards that adapt to how your business actually operates.',
+      'Custom software, websites, automations and AI integration that adapt to how your business actually operates.',
     start_url: '/en',
     display: 'standalone',
     background_color: '#221a1a',

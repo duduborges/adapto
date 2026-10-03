@@ -11,8 +11,8 @@
   "hero": {
     "eyebrow": "Canadian software studio · Built by Brazilian engineers",
     "title": "Software that adapts",
-    "titleAccent": "to how your business actually works.",
-    "subtitle": "Custom software, websites and automations for growing businesses — designed and built in Vancouver, Canada.",
+    "titleAccent": "to your business.",
+    "subtitle": "Custom software, websites, automations and AI integration for growing businesses",
     "cta": "Book a conversation",
     "ctaSecondary": "See how we work",
     "scrollHint": "Scroll to explore",
@@ -63,6 +63,16 @@
           "Landing pages",
           "E-commerce",
           "Portals"
+        ]
+      },
+      "ai": {
+        "title": "AI integration",
+        "description": "We put AI to work inside your operation — assistants that answer from your own data, automatic reading of documents and emails, smart triage and copilots inside the tools your team already uses. Practical, secure and measured against real results.",
+        "tags": [
+          "LLMs & agents",
+          "Chatbots",
+          "Document AI",
+          "Copilots"
         ]
       },
       "automation": {

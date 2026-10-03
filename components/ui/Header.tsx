@@ -18,11 +18,12 @@ const SECTION_IDS = ['services', 'process', 'why', 'manifesto', 'contact'] as co
 
 /**
  * Drives the white pill behind the desktop nav link of the section in view.
- * The pill is positioned straight from the scroll offset — as the boundary
- * between two sections crosses the middle band of the viewport it slides
- * (and resizes) from one link to the next, tracking the scroll rather than
- * playing a fixed animation. Writes go to the DOM in a rAF, so scrolling
- * never re-renders React; only the active index (for aria-current) is state.
+ * The scroll position sets a target (which link, how wide); the pill then
+ * chases it with spring physics, one spring per edge. The leading edge is
+ * stiffer than the trailing one, so on the way to the next link the pill
+ * stretches like a drop of liquid and then pulls itself together. Writes go
+ * straight to the DOM in a rAF loop that stops once both edges settle;
+ * only the active index (for aria-current) is React state.
  */
 function useSectionPill(
   listRef: React.RefObject<HTMLUListElement>,
@@ -32,10 +33,65 @@ function useSectionPill(
   const [active, setActive] = useState(-1);
 
   useEffect(() => {
-    let frame = 0;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Spring state for each edge: position and velocity (px, px/s)
+    const left = { x: 0, v: 0 };
+    const right = { x: 0, v: 0 };
+    let target = { l: 0, r: 0, opacity: 0 };
+    let opacity = 0;
+    let initialised = false;
+    let measureFrame = 0;
+    let animFrame = 0;
+    let lastTime = 0;
 
-    const update = () => {
-      frame = 0;
+    const render = () => {
+      const pill = pillRef.current;
+      if (!pill) return;
+      pill.style.transform = `translateX(${left.x}px)`;
+      pill.style.width = `${Math.max(0, right.x - left.x)}px`;
+      pill.style.opacity = String(opacity);
+      // Keep the dark label copy fixed relative to the list while the pill moves
+      if (labelsRef.current) labelsRef.current.style.transform = `translateX(${-left.x}px)`;
+    };
+
+    const step = (now: number) => {
+      animFrame = 0;
+      const dt = Math.min(0.032, (now - (lastTime || now)) / 1000) || 1 / 60;
+      lastTime = now;
+
+      const movingRight = target.l > left.x;
+      // Leading edge: snappy. Trailing edge: lags behind, then catches up.
+      const lead = { k: 340, c: 30 };
+      const trail = { k: 150, c: 23 };
+      const springs: [typeof left, number, { k: number; c: number }][] = [
+        [left, target.l, movingRight ? trail : lead],
+        [right, target.r, movingRight ? lead : trail],
+      ];
+      let settled = true;
+      for (const [edge, goal, { k, c }] of springs) {
+        const a = k * (goal - edge.x) - c * edge.v;
+        edge.v += a * dt;
+        edge.x += edge.v * dt;
+        if (Math.abs(goal - edge.x) > 0.3 || Math.abs(edge.v) > 5) settled = false;
+      }
+      opacity += (target.opacity - opacity) * Math.min(1, dt * 10);
+      if (Math.abs(target.opacity - opacity) > 0.01) settled = false;
+
+      if (settled) {
+        left.x = target.l;
+        right.x = target.r;
+        left.v = right.v = 0;
+        opacity = target.opacity;
+        render();
+        lastTime = 0;
+        return;
+      }
+      render();
+      animFrame = requestAnimationFrame(step);
+    };
+
+    const measure = () => {
+      measureFrame = 0;
       const list = listRef.current;
       const pill = pillRef.current;
       if (!list || !pill) return;
@@ -64,28 +120,35 @@ function useSectionPill(
       });
 
       const last = links.length - 1;
-      const from = Math.max(0, Math.min(Math.floor(pos), last));
-      const to = Math.min(from + 1, last);
-      const t = pos < 0 ? 0 : pos - Math.floor(pos);
-      const a = links[from];
-      const b = links[to];
-      const x = a.offsetLeft + (b.offsetLeft - a.offsetLeft) * t;
-      const w = a.offsetWidth + (b.offsetWidth - a.offsetWidth) * t;
-      const opacity = pos < 0 ? pos + 1 : 1; // fades in as Services arrives
+      // Aim at the nearest link rather than a point in between: the springs
+      // supply the in-between motion, which is what makes it read as fluid.
+      const idx = Math.max(0, Math.min(Math.round(pos), last));
+      const link = links[idx];
+      target = {
+        l: link.offsetLeft,
+        r: link.offsetLeft + link.offsetWidth,
+        opacity: pos < -0.5 ? 0 : 1, // shows up as Services arrives
+      };
+      setActive(target.opacity ? idx : -1);
 
-      pill.style.transform = `translateX(${x}px)`;
-      pill.style.width = `${w}px`;
-      // Keep the dark label copy fixed relative to the list while the pill moves
-      if (labelsRef.current) labelsRef.current.style.transform = `translateX(${-x}px)`;
-      pill.style.opacity = String(opacity);
-      setActive(opacity < 0.5 ? -1 : Math.round(Math.max(pos, 0)));
+      if (!initialised || reduce) {
+        // First paint (or reduced motion): jump straight to the target
+        initialised = true;
+        left.x = target.l;
+        right.x = target.r;
+        left.v = right.v = 0;
+        opacity = target.opacity;
+        render();
+        return;
+      }
+      if (!animFrame) animFrame = requestAnimationFrame(step);
     };
 
     const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
+      if (!measureFrame) measureFrame = requestAnimationFrame(measure);
     };
 
-    update();
+    measure();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
     // Link widths change once the web font swaps in
@@ -94,7 +157,8 @@ function useSectionPill(
     document.fonts?.ready.then(schedule).catch(() => {});
 
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(measureFrame);
+      cancelAnimationFrame(animFrame);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
       ro.disconnect();
