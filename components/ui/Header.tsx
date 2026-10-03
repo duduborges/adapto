@@ -161,8 +161,8 @@ export function Header({ lang, dict }: HeaderProps) {
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-300',
         scrolled || open
-          ? 'border-b border-cream/10 bg-ink/85 backdrop-blur-xl'
-          : 'border-b border-transparent bg-transparent',
+          ? 'bg-ink/85 backdrop-blur-xl'
+          : 'bg-transparent',
       )}
     >
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-24 md:px-8 lg:px-10">

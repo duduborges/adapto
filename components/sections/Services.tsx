@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
+import { ServiceGlyph } from './ServiceGlyph';
 
 interface ServicesProps {
   dict: any;
@@ -21,6 +22,9 @@ type ServiceKey = (typeof serviceKeys)[number];
 
 export function Services({ dict }: ServicesProps) {
   const [open, setOpen] = useState<ServiceKey | null>('custom');
+  // The open-topic motion only plays after a click — not for the topic that is
+  // open on load, so nothing in the first paint starts hidden or mid-animation.
+  const [animKey, setAnimKey] = useState<ServiceKey | null>(null);
 
   return (
     <Section
@@ -29,6 +33,12 @@ export function Services({ dict }: ServicesProps) {
       className="relative overflow-hidden border-t border-cream/10"
     >
       {/* Ember bloom — left-center behind the accordion */}
+            {/* Hero grid, lit only where this section's glow is */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 grid-glow"
+        style={{ '--glow': 'radial-gradient(560px circle at calc(-10% + 250px) 50%, black 0%, rgba(0,0,0,0.5) 40%, transparent 72%)' } as React.CSSProperties}
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute left-[-10%] top-1/2 -z-10 h-[600px] w-[500px] -translate-y-1/2 rounded-full bg-ember/[0.07] blur-[150px]"
@@ -58,10 +68,20 @@ export function Services({ dict }: ServicesProps) {
           const item = dict.services.items[key];
           const isOpen = open === key;
           return (
-            <li key={key} className="border-b border-cream/15">
+            <li
+              key={key}
+              data-reveal
+              data-open={isOpen || undefined}
+              data-anim={(isOpen && animKey === key) || undefined}
+              style={{ '--reveal-y': '18px', '--reveal-delay': `${i * 0.09}s` } as React.CSSProperties}
+              className="svc-row border-b border-cream/15"
+            >
               <button
                 type="button"
-                onClick={() => setOpen(isOpen ? null : key)}
+                onClick={() => {
+                  setOpen(isOpen ? null : key);
+                  setAnimKey(isOpen ? null : key);
+                }}
                 className="group grid w-full grid-cols-12 items-center gap-6 px-2 py-8 text-left transition-colors hover:bg-cream/[0.02] md:gap-10 md:px-4 md:py-12"
                 aria-expanded={isOpen}
                 aria-controls={`service-panel-${key}`}
@@ -69,15 +89,20 @@ export function Services({ dict }: ServicesProps) {
                 <span className="col-span-2 font-mono text-sm font-semibold text-ember md:col-span-1">
                   0{i + 1}
                 </span>
-                <h3
-                  className={`col-span-8 font-serif text-3xl leading-tight tracking-tight transition-colors md:col-span-9 md:text-5xl ${
-                    isOpen
-                      ? 'text-cream'
-                      : 'text-cream/70 group-hover:text-cream'
-                  }`}
-                >
-                  {item.title}
-                </h3>
+                <div className="col-span-8 flex items-center gap-4 md:col-span-9 md:gap-6">
+                  <span className="svc-tile flex shrink-0 items-center justify-center rounded-xl border">
+                    <ServiceGlyph kind={key} />
+                  </span>
+                  <h3
+                    className={`font-serif text-3xl leading-tight tracking-tight transition-colors md:text-5xl ${
+                      isOpen
+                        ? 'text-cream'
+                        : 'text-cream/70 group-hover:text-cream'
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
+                </div>
                 <span
                   aria-hidden
                   className={`col-span-2 flex h-10 w-10 items-center justify-end justify-self-end text-cream/40 transition-colors group-hover:text-ember md:col-span-2 md:h-12 md:w-12 ${
@@ -109,19 +134,20 @@ export function Services({ dict }: ServicesProps) {
               >
                 <div className="grid grid-cols-12 gap-6 px-2 pb-14 pt-2 md:gap-10 md:px-4 md:pb-20 md:pt-4">
                   <div className="col-span-12 col-start-1 md:col-span-7 md:col-start-2">
-                    <p className="text-lg leading-[1.65] text-cream/85 md:text-xl">
+                    <p className="svc-in text-lg leading-[1.65] text-cream/85 md:text-xl">
                       {item.description}
                     </p>
                   </div>
                   <div className="col-span-12 md:col-span-4 md:col-start-9">
-                    <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45">
+                    <p className="svc-in mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45" style={{ '--d': '0.12s' } as React.CSSProperties}>
                       {dict.services.stackLabel}
                     </p>
                     <ul className="flex flex-wrap gap-2">
-                      {item.tags.map((tag: string) => (
+                      {item.tags.map((tag: string, t: number) => (
                         <li
                           key={tag}
-                          className="inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
+                          style={{ '--d': `${0.18 + t * 0.07}s` } as React.CSSProperties}
+                          className="svc-in inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
                         >
                           <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.8)]" />
                           {tag}

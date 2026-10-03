@@ -49,6 +49,12 @@ export function Contact({ dict }: ContactProps) {
   return (
     <Section id="contact" size="wide" className="relative overflow-hidden border-t border-cream/10">
       {/* Ember bloom — behind the booking CTA */}
+            {/* Hero grid, lit only where this section's glow is */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 grid-glow"
+        style={{ '--glow': 'radial-gradient(560px circle at calc(-5% + 250px) calc(25% + 300px), black 0%, rgba(0,0,0,0.5) 40%, transparent 72%), radial-gradient(420px circle at calc(100% - 200px) calc(100% - 200px), black 0%, rgba(0,0,0,0.5) 40%, transparent 72%)' } as React.CSSProperties}
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute left-[-5%] top-1/4 -z-10 h-[600px] w-[500px] rounded-full bg-ember/[0.08] blur-[140px]"

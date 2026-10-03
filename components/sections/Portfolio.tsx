@@ -17,6 +17,12 @@ export function Portfolio({ dict }: PortfolioProps) {
   return (
     <Section id="work" size="wide" className="relative overflow-hidden border-t border-cream/10">
       {/* Ember bloom — top-right accent */}
+            {/* Hero grid, lit only where this section's glow is */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 grid-glow"
+        style={{ '--glow': 'radial-gradient(520px circle at calc(105% - 250px) 250px, black 0%, rgba(0,0,0,0.5) 40%, transparent 72%)' } as React.CSSProperties}
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute right-[-5%] top-0 -z-10 h-[500px] w-[500px] rounded-full bg-ember/[0.06] blur-[130px]"
