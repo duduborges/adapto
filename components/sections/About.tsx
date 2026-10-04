@@ -20,8 +20,10 @@ export function About({ dict }: AboutProps) {
           style={{ '--reveal-y': '12px' } as React.CSSProperties}
           className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
         >
-          {dict.manifesto.title.split('.')[0]}
-          <span className="text-ember">.</span>
+          {/* The closing mark (. ? !) is the ember accent; a title without one
+              gets a period. French keeps its non-breaking space before "?" */}
+          {dict.manifesto.title.replace(/[.?!]$/, '')}
+          <span className="text-ember">{dict.manifesto.title.match(/[.?!]$/)?.[0] ?? '.'}</span>
         </h2>
       </div>
 
@@ -33,10 +35,10 @@ export function About({ dict }: AboutProps) {
           className="col-span-12 space-y-3 md:col-span-3"
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
-            ↳ Marginalia
+            ↳ {dict.manifesto.marginaliaLabel}
           </p>
           <p className="font-serif text-base italic leading-snug text-cream/50">
-            “The brief is what you tell us; the answer comes from what we see.”
+            “{dict.manifesto.marginalia}”
           </p>
         </aside>
 

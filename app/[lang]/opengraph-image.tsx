@@ -13,7 +13,7 @@ const EMBER = '#c35622';
 
 const kickers: Record<Locale, string> = {
   en: 'Custom systems · Websites · AI integration · Automations',
-  fr: 'Systèmes sur mesure · Sites web · IA · Automatisations',
+  fr: 'Systèmes sur mesure · Sites web · Intégration d’IA · Automatisations',
 };
 
 // The mark's PNG has ~10% padding on every side, so a 340px box shows the

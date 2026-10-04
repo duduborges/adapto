@@ -38,7 +38,7 @@ const ogTitles: Record<Locale, string> = {
 // ~150 characters: what, for whom, where — the snippet under the title.
 const descriptions: Record<Locale, string> = {
   en: 'Vancouver software studio building custom systems, websites, automations and AI integrations that fit how your business actually works. Book a free call.',
-  fr: 'Studio logiciel à Vancouver : systèmes sur mesure, sites web, automatisations et intégration d’IA adaptés à votre entreprise. Appel gratuit.',
+  fr: 'Studio logiciel à Vancouver : systèmes sur mesure, sites web, automatisations et intégration d’IA adaptés à votre façon de travailler. Appel gratuit.',
 };
 
 export async function generateMetadata({
