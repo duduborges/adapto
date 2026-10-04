@@ -250,7 +250,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   <MapPin className="h-3 w-3 text-ember/70 md:h-3.5 md:w-3.5 md:text-ember" />
                   <span>Vancouver · BC · Canada</span>
                   <span className="hidden text-cream/30 md:inline">—</span>
-                  <span className="hidden text-cream/55 md:inline">Remote-friendly worldwide</span>
+                  <span className="hidden text-cream/55 md:inline">{dict.hero.remote}</span>
                 </span>
               </div>
               <h1
@@ -314,7 +314,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
             {dict.hero.available}
           </p>
           <p className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-cream/35 md:block">
-            <span className="text-ember">↳</span> 2026 — Currently accepting projects
+            <span className="text-ember">↳</span> {dict.hero.availableStrip}
           </p>
           <a
             href="#services"

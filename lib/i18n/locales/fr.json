@@ -9,41 +9,45 @@
     "book": "Prendre rendez-vous"
   },
   "hero": {
-    "eyebrow": "Studio logiciel canadien · Ingénierie brésilienne",
-    "title": "Un logiciel qui s'adapte",
-    "titleAccent": "à la façon dont votre entreprise fonctionne vraiment.",
-    "subtitle": "Logiciels sur mesure, sites web, automatisations et intégration d'IA pour les entreprises en croissance — conçus et développés à Vancouver, au Canada.",
+    "eyebrow": "Studio de software canadien · Conçu par des ingénieurs brésiliens",
+    "title": "Un software qui",
+    "titleAccent": "s'adapte à votre entreprise.",
+    "subtitle": "Software sur mesure, sites web, automatisations et intégration d'IA. Conçus autour de votre entreprise, rien que pour vous.",
     "cta": "Prendre rendez-vous",
     "ctaSecondary": "Voir notre méthode",
     "scrollHint": "Faites défiler pour explorer",
-    "available": "Nouveaux projets acceptés"
+    "available": "Nouveaux projets acceptés",
+    "remote": "En télétravail partout",
+    "availableStrip": "2026 — Nouveaux projets acceptés"
   },
   "manifesto": {
     "eyebrow": "Manifeste",
-    "title": "Nous ne vendons pas de logiciel sur étagère.",
-    "lead": "La plupart des studios logiciels arrivent avec un produit cherchant un problème. Nous faisons l'inverse : nous entrons dans votre entreprise, nous asseyons aux côtés de votre équipe et apprenons l'opération avant d'écrire la moindre ligne de code.",
+    "title": "L'innovation arrive sans prévenir. Votre entreprise saura-t-elle s'adapter ?",
+    "lead": "Votre entreprise a une façon unique de travailler. Nous comprenons votre entreprise, parlons avec votre équipe et apprenons comment vous fonctionnez avant d'écrire la moindre ligne de code.",
+    "marginaliaLabel": "En marge",
+    "marginalia": "La culture est ce qui distingue une entreprise. Votre software devrait porter la vôtre.",
     "paragraphs": [
-      "Adapto est un studio logiciel concentré sur l'évolution du fonctionnement des entreprises par la technologie. Nous éliminons les tâches manuelles et vous donnons un véritable contrôle — de l'inventaire à la gestion des équipes — pour que votre entreprise continue à croître même quand vous prenez du recul.",
-      "Le changement vient de l'intérieur. Nous nous adaptons à votre culture, à votre processus, à vos gens. Le résultat est un logiciel qui s'intègre comme s'il avait toujours été là."
+      "Votre entreprise est unique, et nous le comprenons. Votre software fait partie de votre évolution. Nous éliminons le travail manuel de votre équipe et vous donnons un vrai contrôle, des stocks aux équipes, pour que votre entreprise continue de grandir même en votre absence.",
+      "C'est pourquoi le changement commence de l'intérieur : votre culture, vos processus, vos gens et votre entreprise face au monde. Le résultat : un software qui propulse, accélère et s'adapte à votre entreprise comme s'il en avait toujours fait partie."
     ],
     "pillars": {
       "inside": {
         "title": "De l'intérieur vers l'extérieur",
-        "description": "Nous comprenons votre opération avant de proposer une solution. Le brief, c'est ce que vous nous dites ; la réponse vient de ce que nous voyons."
+        "description": "Nous apprenons votre opération avant de proposer quoi que ce soit. Le brief, c'est ce que vous nous dites ; la réponse vient de ce que nous voyons dans votre entreprise."
       },
       "process": {
         "title": "Le processus avant le produit",
-        "description": "Votre flux de travail est la spécification. Nous ne remodelons pas votre équipe pour qu'elle entre dans un outil — nous façonnons l'outil pour qu'il entre dans votre équipe."
+        "description": "Votre façon de travailler est le cahier des charges. Nous n'adaptons pas votre équipe à un outil — nous façonnons l'outil autour de votre équipe."
       },
       "partnership": {
         "title": "Partenariat de long terme",
-        "description": "Nous livrons, et nous restons. Adapto continue d'évoluer le système au rythme de votre entreprise."
+        "description": "Nous livrons, et nous restons — pour faire évoluer votre système au rythme de votre entreprise."
       }
     }
   },
   "services": {
     "eyebrow": "Ce que nous construisons",
-    "title": "Tout ce qui enlève de la friction à votre journée.",
+    "title": "Tout ce dont votre entreprise a besoin, construit à sa façon.",
     "subtitle": "",
     "items": {
       "custom": {
@@ -77,7 +81,7 @@
       },
       "automation": {
         "title": "Automatisation",
-        "description": "Nous cartographions le travail répétitif — rapports, approbations, saisie de données — et le remplaçons par des automatisations silencieuses.",
+        "description": "Nous cartographions le travail répétitif de votre équipe — rapports, approbations, saisie de données — et le remplaçons par des automatisations silencieuses qui tournent pendant que vous dormez.",
         "tags": [
           "Flux",
           "Intégrations",
@@ -85,8 +89,8 @@
         ]
       },
       "dashboards": {
-        "title": "Tableaux de bord",
-        "description": "Vues en temps réel de ce qui compte : ventes, stocks, opérations, équipes. Les décisions ne reposent plus sur l'intuition.",
+        "title": "Tableaux de bord et visibilité",
+        "description": "Vues en temps réel de ce qui compte pour votre entreprise : ventes, stocks, opérations, équipes. Vos décisions ne reposent plus sur l'intuition.",
         "tags": [
           "BI",
           "Reporting",
@@ -95,7 +99,7 @@
       },
       "integrations": {
         "title": "Intégrations",
-        "description": "Reliez les outils que vous utilisez déjà — comptabilité, e-commerce, logistique, paiements — dans une opération unique et cohérente.",
+        "description": "Reliez les outils que votre entreprise utilise déjà — comptabilité, e-commerce, logistique, paiements — dans une opération unique et cohérente.",
         "tags": [
           "APIs",
           "Webhooks",
@@ -103,12 +107,12 @@
         ]
       }
     },
-    "stackLabel": "Technologies"
+    "stackLabel": "Stack et outils"
   },
   "differentials": {
     "eyebrow": "Pourquoi Adapto",
-    "title": "Ni freelance. Ni agence générique.",
-    "subtitle": "Nous sommes l'équipe d'ingénierie qui devient partie de votre entreprise aussi longtemps que vous en avez besoin.",
+    "title": "Nous construisons le software dont votre entreprise a besoin.",
+    "subtitle": "Une équipe d'ingénierie qui devient partie de votre entreprise — votre culture, vos rituels, vos objectifs — aussi longtemps que vous en avez besoin.",
     "visual": {
       "you": "Votre entreprise",
       "us": "Adapto"
@@ -128,27 +132,27 @@
       },
       "diagnostic": {
         "title": "Diagnostic d'abord, code ensuite",
-        "description": "Chaque projet commence par une découverte — documentée, validée, signée. Pas de code avant que le problème soit clair et le périmètre défini."
+        "description": "Chaque projet commence par comprendre votre entreprise — par écrit, validé, signé. Aucun code tant que votre problème n'est pas réel et le périmètre clair."
       },
       "honest": {
         "title": "Livraison honnête",
-        "description": "Mises à jour hebdomadaires, logiciel fonctionnel chaque sprint, et un périmètre fixe qui respecte votre budget. Si quelque chose dérape, vous l'apprenez de nous d'abord."
+        "description": "Mises à jour hebdomadaires, software fonctionnel chaque sprint, et un périmètre fixe qui respecte votre budget. Si quelque chose dérape, vous l'apprenez de nous d'abord."
       },
       "lasting": {
         "title": "Conçu pour durer",
-        "description": "Architecture propre, code documenté et une remise qui vous permet de continuer à faire tourner le système bien après notre passage."
+        "description": "Architecture propre, code documenté et une passation qui permet à votre équipe de faire tourner le système longtemps après la livraison."
       }
     }
   },
   "process": {
     "eyebrow": "Notre méthode",
-    "title": "Cinq phases. Suivies de bout en bout.",
+    "title": "Cinq phases. Vous voyez chaque étape.",
     "subtitle": "",
     "steps": {
       "discovery": {
         "number": "01",
         "title": "Découverte",
-        "description": "Nous rencontrons votre équipe, cartographions la douleur, documentons le problème et définissons l'objectif — avant toute discussion technique."
+        "description": "Nous rencontrons votre équipe, identifions vos points de friction, documentons le problème et définissons votre objectif."
       },
       "modeling": {
         "number": "02",
@@ -158,12 +162,12 @@
       "execution": {
         "number": "03",
         "title": "Exécution",
-        "description": "Sprints courts en agile. Vous voyez du logiciel fonctionnel tous les quelques jours, avec revue de code, tests et livraisons propres."
+        "description": "Sprints courts en agile. Vous voyez du software fonctionnel tous les quelques jours, avec revue de code, tests et livraisons propres."
       },
       "control": {
         "number": "04",
         "title": "Qualité et contrôle",
-        "description": "Tests continus, suivi du périmètre, et statut hebdomadaire. Les risques émergent tôt ; rien ne nous surprend au lancement."
+        "description": "Tests continus, suivi du périmètre et point hebdomadaire. Les risques sont signalés tôt : rien ne vous surprend au lancement."
       },
       "delivery": {
         "number": "05",
@@ -244,8 +248,8 @@
   },
   "contact": {
     "eyebrow": "Parlons-en",
-    "title": "Apportez le problème. Nous apporterons la solution.",
-    "subtitle": "Réservez un appel de 30 minutes. Nous écoutons, posons des questions, et vous dirons honnêtement si nous sommes la bonne équipe.",
+    "title": "Apportez-nous votre problème. Nous apporterons la solution.",
+    "subtitle": "Réservez un appel de 30 minutes. Nous écoutons comment fonctionne votre entreprise et vous disons honnêtement si nous sommes la bonne équipe pour vous.",
     "ctaPrimary": "Réserver dans notre agenda",
     "ctaSecondary": "Ou envoyez-nous un e-mail",
     "form": {
@@ -267,8 +271,8 @@
     }
   },
   "footer": {
-    "tagline": "Un logiciel qui s'adapte à la façon dont votre entreprise fonctionne vraiment.",
-    "cta": "Un problème à résoudre ?",
+    "tagline": "Un software qui s'adapte à votre entreprise — de l'intérieur vers l'extérieur.",
+    "cta": "Prêt à vous adapter de l'intérieur vers l'extérieur ?",
     "sections": {
       "company": "Entreprise",
       "explore": "Explorer",
@@ -311,7 +315,7 @@
     "sections": [
       {
         "heading": "Qui nous sommes",
-        "body": "Adapto Software House est un studio logiciel établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à hello@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
+        "body": "Adapto Software House est un studio de software établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à hello@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
       },
       {
         "heading": "Ce que nous recueillons",

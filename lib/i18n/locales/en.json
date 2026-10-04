@@ -10,40 +10,44 @@
   },
   "hero": {
     "eyebrow": "Canadian software studio · Built by Brazilian engineers",
-    "title": "Software that adapts",
-    "titleAccent": "to your business.",
-    "subtitle": "Custom software, websites, automations and AI integration for growing businesses",
+    "title": "Software that",
+    "titleAccent": "adapts to your business.",
+    "subtitle": "Custom software, websites, automations and AI integration. Built around your company, just for you.",
     "cta": "Book a conversation",
     "ctaSecondary": "See how we work",
     "scrollHint": "Scroll to explore",
-    "available": "Currently accepting projects"
+    "available": "Currently accepting projects",
+    "remote": "Remote-friendly worldwide",
+    "availableStrip": "2026 — Currently accepting projects"
   },
   "manifesto": {
     "eyebrow": "Manifesto",
-    "title": "We don't sell software off the shelf.",
-    "lead": "Most software houses arrive with a product looking for a problem. We do the opposite: we walk into your company, sit next to your team, and learn the operation before writing a single line of code.",
+    "title": "Innovation arrives without warning. Will your company adapt?",
+    "lead": "Your company has a unique way of working. We understand your company, talk to your team, and learn about how you operate before writing a single line of code.",
+    "marginaliaLabel": "Marginalia",
+    "marginalia": "Culture is what sets a company apart. Your software should carry yours.",
     "paragraphs": [
-      "Adapto is a software studio focused on evolving how businesses operate through technology. We eliminate manual tasks and give you real control — from inventory to team management — so your company keeps growing even when you step away.",
-      "The change starts from the inside. We adapt to your culture, your process, your people. The result is software that fits like it was always there."
+      "Your company is unique, and we understand that. Your software is part of your evolution. We eliminate manual work for your team and give you real control, from inventory to people, so your business continues to grow even when you're away.",
+      "That's why the change starts from the inside: your culture, your process, your people and your company to the world. The result is software that drives, accelerates, and adapts to your company as if it had always been a part of it."
     ],
     "pillars": {
       "inside": {
         "title": "From the inside out",
-        "description": "We learn your operation before we propose a solution. The brief is what you tell us; the answer comes from what we see."
+        "description": "We learn your operation before we propose anything. The brief is what you tell us; the answer comes from what we see in your company."
       },
       "process": {
         "title": "Process over product",
-        "description": "Your workflow is the spec. We don't reshape your team to fit a tool — we shape the tool to fit your team."
+        "description": "Your workflow is the spec. We don't reshape your team to fit a tool — we shape the tool around your team."
       },
       "partnership": {
         "title": "Long-term partnership",
-        "description": "We ship, we stay. Adapto sticks around to evolve the system as your business grows."
+        "description": "We ship, and we stay — evolving your system as your business grows."
       }
     }
   },
   "services": {
     "eyebrow": "What we build",
-    "title": "Anything that removes friction from your day.",
+    "title": "Everything your company needs, built the way it works.",
     "subtitle": "",
     "items": {
       "custom": {
@@ -77,7 +81,7 @@
       },
       "automation": {
         "title": "Automation",
-        "description": "We map the repetitive work — reports, approvals, data entry — and replace it with quiet automations that run while you sleep.",
+        "description": "We map your team's repetitive work — reports, approvals, data entry — and replace it with quiet automations that run while you sleep.",
         "tags": [
           "Workflows",
           "Integrations",
@@ -86,7 +90,7 @@
       },
       "dashboards": {
         "title": "Dashboards & visibility",
-        "description": "Real-time views of what matters: sales, stock, operations, people. Decisions stop relying on gut feeling.",
+        "description": "Real-time views of what matters to your business: sales, stock, operations, people. Your decisions stop relying on gut feeling.",
         "tags": [
           "BI",
           "Reporting",
@@ -95,7 +99,7 @@
       },
       "integrations": {
         "title": "Integrations",
-        "description": "Connect the tools you already use — accounting, e-commerce, logistics, payments — into one consistent operation.",
+        "description": "Connect the tools your company already uses — accounting, e-commerce, logistics, payments — into one consistent operation.",
         "tags": [
           "APIs",
           "Webhooks",
@@ -107,8 +111,8 @@
   },
   "differentials": {
     "eyebrow": "Why Adapto",
-    "title": "We're not a freelancer. We're not a generic agency.",
-    "subtitle": "We're the engineering team that becomes part of your company for as long as you need us.",
+    "title": "We build the software your company needs.",
+    "subtitle": "An engineering team that becomes part of your company — your culture, your rituals, your goals — for as long as you need us.",
     "visual": {
       "you": "Your company",
       "us": "Adapto"
@@ -128,7 +132,7 @@
       },
       "diagnostic": {
         "title": "Diagnosis first, code second",
-        "description": "Every project starts with a discovery — written down, agreed on, signed off. No code until the problem is real and the scope is clear."
+        "description": "Every project starts by understanding your business — written down, agreed on, signed off. No code until your problem is real and the scope is clear."
       },
       "honest": {
         "title": "Honest delivery",
@@ -136,19 +140,19 @@
       },
       "lasting": {
         "title": "Built to last",
-        "description": "Clean architecture, documented code and a handover that lets you keep the system running long after we ship."
+        "description": "Clean architecture, documented code and a handover that lets your team keep the system running long after we ship."
       }
     }
   },
   "process": {
     "eyebrow": "How we work",
-    "title": "Five phases. Tracked end to end.",
+    "title": "Five phases. You see every step.",
     "subtitle": "",
     "steps": {
       "discovery": {
         "number": "01",
         "title": "Discovery",
-        "description": "We meet your team, map the pain, document the problem and define the goal — before anyone talks about technology."
+        "description": "We meet your team, map your pain points, document the problem and define your goal."
       },
       "modeling": {
         "number": "02",
@@ -163,7 +167,7 @@
       "control": {
         "number": "04",
         "title": "Quality & control",
-        "description": "Continuous testing, scope tracking and weekly status. Risks are flagged early; nothing surprises us at launch."
+        "description": "Continuous testing, scope tracking and weekly status. Risks are flagged early, so nothing surprises you at launch."
       },
       "delivery": {
         "number": "05",
@@ -244,8 +248,8 @@
   },
   "contact": {
     "eyebrow": "Let's talk",
-    "title": "Bring us the problem. We'll bring the solution.",
-    "subtitle": "Book a 30-minute call. We'll listen, ask, and tell you honestly whether we're the right team for the job.",
+    "title": "Bring us your problem. We'll bring the solution.",
+    "subtitle": "Book a 30-minute call. We'll listen to how your company works and tell you honestly whether we're the right team for you.",
     "ctaPrimary": "Book a call on our calendar",
     "ctaSecondary": "Or send us an email",
     "form": {
@@ -267,8 +271,8 @@
     }
   },
   "footer": {
-    "tagline": "Software that adapts to how your business actually works.",
-    "cta": "Have a problem worth solving?",
+    "tagline": "Software that adapts to your business — from the inside out.",
+    "cta": "Ready to adapt from the inside out?",
     "sections": {
       "company": "Company",
       "explore": "Explore",
