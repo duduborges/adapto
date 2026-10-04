@@ -4,7 +4,7 @@ import type { Locale } from '@/types';
 
 const descriptions: Record<Locale, string> = {
   en: 'Adapto is a Canadian software studio in Vancouver building custom systems, websites, automations, dashboards and AI integrations that adapt to how your business actually operates.',
-  fr: "Adapto est un studio logiciel canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations, des tableaux de bord et des intégrations d'IA adaptés au fonctionnement réel de votre entreprise.",
+  fr: "Adapto est un studio de software canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations, des tableaux de bord et des intégrations d'IA adaptés au fonctionnement réel de votre entreprise.",
 };
 
 /** What we sell, as schema.org Services — mirrors the Services section. */
@@ -18,7 +18,7 @@ const services: Record<Locale, { name: string; description: string }[]> = {
     { name: 'Systems integration', description: 'Accounting, e-commerce, logistics and payment tools connected into one operation.' },
   ],
   fr: [
-    { name: 'Développement de logiciels sur mesure', description: "ERP, CRM, outils internes et applications web conçus autour du fonctionnement de votre équipe." },
+    { name: 'Développement de software sur mesure', description: "ERP, CRM, outils internes et applications web conçus autour du fonctionnement de votre équipe." },
     { name: 'Création de sites web et landing pages', description: 'Sites institutionnels, landing pages, boutiques en ligne et portails clients.' },
     { name: "Intégration d'IA", description: 'Assistants IA sur vos propres données, traitement de documents et de courriels, tri intelligent et copilotes dans vos outils.' },
     { name: 'Automatisation des processus', description: 'Rapports, approbations et saisie de données remplacés par des flux automatisés.' },

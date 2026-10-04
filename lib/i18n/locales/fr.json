@@ -9,10 +9,10 @@
     "book": "Prendre rendez-vous"
   },
   "hero": {
-    "eyebrow": "Studio logiciel canadien · Conçu par des ingénieurs brésiliens",
-    "title": "Un logiciel qui",
+    "eyebrow": "Studio de software canadien · Conçu par des ingénieurs brésiliens",
+    "title": "Un software qui",
     "titleAccent": "s'adapte à votre entreprise.",
-    "subtitle": "Logiciels sur mesure, sites web, automatisations et intégration d'IA. Conçus autour de votre entreprise, rien que pour vous.",
+    "subtitle": "Software sur mesure, sites web, automatisations et intégration d'IA. Conçus autour de votre entreprise, rien que pour vous.",
     "cta": "Prendre rendez-vous",
     "ctaSecondary": "Voir notre méthode",
     "scrollHint": "Faites défiler pour explorer",
@@ -25,10 +25,10 @@
     "title": "L'innovation arrive sans prévenir. Votre entreprise saura-t-elle s'adapter ?",
     "lead": "Votre entreprise a une façon unique de travailler. Nous comprenons votre entreprise, parlons avec votre équipe et apprenons comment vous fonctionnez avant d'écrire la moindre ligne de code.",
     "marginaliaLabel": "En marge",
-    "marginalia": "La culture est ce qui distingue une entreprise. Votre logiciel devrait porter la vôtre.",
+    "marginalia": "La culture est ce qui distingue une entreprise. Votre software devrait porter la vôtre.",
     "paragraphs": [
-      "Votre entreprise est unique, et nous le comprenons. Votre logiciel fait partie de votre évolution. Nous éliminons le travail manuel de votre équipe et vous donnons un vrai contrôle, des stocks aux équipes, pour que votre entreprise continue de grandir même en votre absence.",
-      "C'est pourquoi le changement commence de l'intérieur : votre culture, vos processus, vos gens et votre entreprise face au monde. Le résultat : un logiciel qui propulse, accélère et s'adapte à votre entreprise comme s'il en avait toujours fait partie."
+      "Votre entreprise est unique, et nous le comprenons. Votre software fait partie de votre évolution. Nous éliminons le travail manuel de votre équipe et vous donnons un vrai contrôle, des stocks aux équipes, pour que votre entreprise continue de grandir même en votre absence.",
+      "C'est pourquoi le changement commence de l'intérieur : votre culture, vos processus, vos gens et votre entreprise face au monde. Le résultat : un software qui propulse, accélère et s'adapte à votre entreprise comme s'il en avait toujours fait partie."
     ],
     "pillars": {
       "inside": {
@@ -111,7 +111,7 @@
   },
   "differentials": {
     "eyebrow": "Pourquoi Adapto",
-    "title": "Nous construisons le logiciel dont votre entreprise a besoin.",
+    "title": "Nous construisons le software dont votre entreprise a besoin.",
     "subtitle": "Une équipe d'ingénierie qui devient partie de votre entreprise — votre culture, vos rituels, vos objectifs — aussi longtemps que vous en avez besoin.",
     "visual": {
       "you": "Votre entreprise",
@@ -136,7 +136,7 @@
       },
       "honest": {
         "title": "Livraison honnête",
-        "description": "Mises à jour hebdomadaires, logiciel fonctionnel chaque sprint, et un périmètre fixe qui respecte votre budget. Si quelque chose dérape, vous l'apprenez de nous d'abord."
+        "description": "Mises à jour hebdomadaires, software fonctionnel chaque sprint, et un périmètre fixe qui respecte votre budget. Si quelque chose dérape, vous l'apprenez de nous d'abord."
       },
       "lasting": {
         "title": "Conçu pour durer",
@@ -162,7 +162,7 @@
       "execution": {
         "number": "03",
         "title": "Exécution",
-        "description": "Sprints courts en agile. Vous voyez du logiciel fonctionnel tous les quelques jours, avec revue de code, tests et livraisons propres."
+        "description": "Sprints courts en agile. Vous voyez du software fonctionnel tous les quelques jours, avec revue de code, tests et livraisons propres."
       },
       "control": {
         "number": "04",
@@ -271,7 +271,7 @@
     }
   },
   "footer": {
-    "tagline": "Un logiciel qui s'adapte à votre entreprise — de l'intérieur vers l'extérieur.",
+    "tagline": "Un software qui s'adapte à votre entreprise — de l'intérieur vers l'extérieur.",
     "cta": "Prêt à vous adapter de l'intérieur vers l'extérieur ?",
     "sections": {
       "company": "Entreprise",
@@ -315,7 +315,7 @@
     "sections": [
       {
         "heading": "Qui nous sommes",
-        "body": "Adapto Software House est un studio logiciel établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à hello@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
+        "body": "Adapto Software House est un studio de software établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à hello@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
       },
       {
         "heading": "Ce que nous recueillons",

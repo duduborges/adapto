@@ -27,18 +27,18 @@ export async function generateStaticParams() {
 // ~60 characters so Google shows them whole.
 const titles: Record<Locale, string> = {
   en: 'Custom Software, AI & Web Development in Vancouver | Adapto',
-  fr: 'Logiciels sur mesure, IA et sites web à Vancouver | Adapto',
+  fr: 'Software sur mesure, IA et sites web à Vancouver | Adapto',
 };
 
 const ogTitles: Record<Locale, string> = {
   en: 'Adapto Software House — Software that adapts to your business',
-  fr: "Adapto Software House — Un logiciel qui s'adapte à votre entreprise",
+  fr: "Adapto Software House — Un software qui s'adapte à votre entreprise",
 };
 
 // ~150 characters: what, for whom, where — the snippet under the title.
 const descriptions: Record<Locale, string> = {
   en: 'Vancouver software studio building custom systems, websites, automations and AI integrations that fit how your business actually works. Book a free call.',
-  fr: 'Studio logiciel à Vancouver : systèmes sur mesure, sites web, automatisations et intégration d’IA adaptés à votre façon de travailler. Appel gratuit.',
+  fr: 'Studio de software à Vancouver : systèmes sur mesure, sites web, automatisations et intégration d’IA adaptés à votre façon de travailler. Appel gratuit.',
 };
 
 export async function generateMetadata({
