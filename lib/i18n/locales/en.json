@@ -6,29 +6,30 @@
     "work": "Work",
     "why": "Why us",
     "contact": "Contact",
-    "book": "Book a call"
+    "book": "Book a free call"
   },
   "hero": {
     "eyebrow": "Canadian software studio · Built by Brazilian engineers",
     "title": "Software that",
     "titleAccent": "adapts to your business.",
-    "subtitle": "Custom software, websites, automations and AI integration. Built around your company, just for you.",
-    "cta": "Book a conversation",
+    "subtitle": "Custom software, websites, automations and AI integration, built around the way your company works.",
+    "subtitleShort": "Custom software, websites, automation and AI.",
+    "cta": "Book a free call",
     "ctaSecondary": "See how we work",
     "scrollHint": "Scroll to explore",
     "available": "Currently accepting projects",
-    "remote": "Remote-friendly worldwide",
+    "remote": "Serving Canada and the United States",
     "availableStrip": "2026 — Currently accepting projects"
   },
   "manifesto": {
     "eyebrow": "Manifesto",
-    "title": "Innovation arrives without warning. Will your company adapt?",
-    "lead": "Your company has a unique way of working. We understand your company, talk to your team, and learn about how you operate before writing a single line of code.",
+    "title": "Innovation arrives without warning. Your software should adapt with you.",
+    "lead": "Your company has a unique way of working. We get to know it, talk to your team, and learn how you operate before writing a single line of code.",
     "marginaliaLabel": "Marginalia",
     "marginalia": "Culture is what sets a company apart. Your software should carry yours.",
     "paragraphs": [
-      "Your company is unique, and we understand that. Your software is part of your evolution. We eliminate manual work for your team and give you real control, from inventory to people, so your business continues to grow even when you're away.",
-      "That's why the change starts from the inside: your culture, your process, your people and your company to the world. The result is software that drives, accelerates, and adapts to your company as if it had always been a part of it."
+      "Your software is part of how your company grows. We eliminate manual work for your team and give you real control, from inventory to people, so your business keeps growing even when you're away.",
+      "That's why the change starts from the inside: your culture, your processes, your people and the way your company shows up to the world. The result is software that drives, accelerates and adapts to your company as if it had always been part of it."
     ],
     "pillars": {
       "inside": {
@@ -107,11 +108,11 @@
         ]
       }
     },
-    "stackLabel": "Stack & primitives"
+    "stackLabel": "What's included"
   },
   "differentials": {
     "eyebrow": "Why Adapto",
-    "title": "We build the software your company needs.",
+    "title": "Built with you, not just for you.",
     "subtitle": "An engineering team that becomes part of your company — your culture, your rituals, your goals — for as long as you need us.",
     "visual": {
       "you": "Your company",
@@ -132,11 +133,11 @@
       },
       "diagnostic": {
         "title": "Diagnosis first, code second",
-        "description": "Every project starts by understanding your business — written down, agreed on, signed off. No code until your problem is real and the scope is clear."
+        "description": "Every project starts by understanding your business. The scope is written down, priced and signed into the contract. No code until the problem is clear and you've agreed on the plan."
       },
       "honest": {
         "title": "Honest delivery",
-        "description": "Weekly updates, working software every sprint, and a fixed scope that respects your budget. If something slips, you hear it from us first."
+        "description": "Scope, timeline and cost are set in your contract before we start. Daily and weekly updates, working software every sprint. If something slips, you hear it from us first."
       },
       "lasting": {
         "title": "Built to last",
@@ -156,18 +157,18 @@
       },
       "modeling": {
         "number": "02",
-        "title": "Modeling",
-        "description": "Requirements, architecture, wireframes and a realistic roadmap. You approve every assumption before we start."
+        "title": "Scope",
+        "description": "Requirements, architecture, wireframes, timeline and cost, all written into your contract. You know what you'll get, when, and for how much. The materials are handed over once the contract is signed."
       },
       "execution": {
         "number": "03",
         "title": "Execution",
-        "description": "Agile builds in short cycles. You see working software every few days, with code review, tests and clean releases."
+        "description": "Agile builds in short cycles. Daily updates and working software every sprint, with code review, tests and clean releases."
       },
       "control": {
         "number": "04",
         "title": "Quality & control",
-        "description": "Continuous testing, scope tracking and weekly status. Risks are flagged early, so nothing surprises you at launch."
+        "description": "Continuous testing, scope tracking and a weekly status report. Risks are flagged early, so nothing surprises you at launch."
       },
       "delivery": {
         "number": "05",
@@ -225,7 +226,7 @@
           },
           {
             "title": "Always up to date",
-            "description": "Our team updates it as the work moves, so you know where things stand between our weekly updates."
+            "description": "Our team updates it as the work moves, so you always know where things stand, on top of our daily and weekly updates."
           }
         ],
         "legend": {
@@ -237,11 +238,11 @@
         "close": "Close"
       }
     },
-    "freeHeadline": "Prep work is FREE."
+    "freeHeadline": "Discovery and scope are FREE."
   },
   "work": {
     "eyebrow": "Recent work",
-    "title": "A few of the operations we've reshaped.",
+    "title": "Selected work.",
     "subtitle": "Custom builds for retail, services, logistics and operations teams.",
     "empty": "Cases coming soon — currently building with our first cohort of clients.",
     "viewCase": "View case"
@@ -250,7 +251,7 @@
     "eyebrow": "Let's talk",
     "title": "Bring us your problem. We'll bring the solution.",
     "subtitle": "Book a 30-minute call. We'll listen to how your company works and tell you honestly whether we're the right team for you.",
-    "ctaPrimary": "Book a call on our calendar",
+    "ctaPrimary": "Book a free call",
     "ctaSecondary": "Or send us an email",
     "form": {
       "name": "Full name",
@@ -267,12 +268,12 @@
       "locationLabel": "Based in",
       "location": "Vancouver, BC · Canada",
       "remoteLabel": "Working with teams in",
-      "remote": "North America, LATAM and Europe"
+      "remote": "Canada and the United States"
     }
   },
   "footer": {
     "tagline": "Software that adapts to your business — from the inside out.",
-    "cta": "Ready to adapt from the inside out?",
+    "cta": "Ready for software that adapts to your company?",
     "sections": {
       "company": "Company",
       "explore": "Explore",
@@ -284,7 +285,7 @@
       "process": "Process",
       "work": "Work",
       "why": "Why us",
-      "book": "Book a call",
+      "book": "Book a free call",
       "email": "Email us",
       "privacy": "Privacy policy",
       "cookiePrefs": "Cookie preferences"
@@ -299,7 +300,7 @@
     "body": "The link may be broken, or the page may have moved. Pick a section below or go back to the home page.",
     "routesLabel": "Go to",
     "cta": "Back to home",
-    "secondary": "Book a call"
+    "secondary": "Book a free call"
   },
   "cookies": {
     "title": "We use cookies",
@@ -315,7 +316,7 @@
     "sections": [
       {
         "heading": "Who we are",
-        "body": "Adapto Software House is a software studio based in Vancouver, British Columbia, Canada. You can reach us at hello@adapto-sh.com for any question about this policy or the data we hold."
+        "body": "Adapto Software House is a software studio based in Vancouver, British Columbia, Canada. You can reach us at adapto.vancouver@gmail.com for any question about this policy or the data we hold."
       },
       {
         "heading": "What we collect",
@@ -335,7 +336,7 @@
       },
       {
         "heading": "Your rights",
-        "body": "You can ask us to show you, correct or delete any personal data we hold about you, or withdraw your consent to analytics. Write to hello@adapto-sh.com and we will respond within 30 days. If you are in Quebec, Law 25 gives you these rights; if you are in the European Economic Area, the GDPR does."
+        "body": "You can ask us to show you, correct or delete any personal data we hold about you, or withdraw your consent to analytics. Write to adapto.vancouver@gmail.com and we will respond within 30 days. If you are in Quebec, Law 25 gives you these rights."
       }
     ]
   }

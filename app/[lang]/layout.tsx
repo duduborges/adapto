@@ -9,6 +9,7 @@ import type { Locale } from '@/types';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Analytics } from '@/components/analytics/Analytics';
 import { CookieBanner } from '@/components/analytics/CookieBanner';
+import { MotionProvider } from '@/components/ui/MotionProvider';
 import '../globals.css';
 
 const instrumentSerif = Instrument_Serif({
@@ -117,8 +118,10 @@ export default async function LangLayout({
         <JsonLd lang={locale} />
       </head>
       <body className="bg-ink font-sans text-cream antialiased">
-        {children}
-        <CookieBanner lang={locale} dict={dict} />
+        <MotionProvider>
+          {children}
+          <CookieBanner lang={locale} dict={dict} />
+        </MotionProvider>
         <Analytics />
       </body>
     </html>

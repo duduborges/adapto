@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useCallback, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Gift } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
@@ -55,6 +54,7 @@ export function Process({ dict }: ProcessProps) {
   const t = dict.process.tracker;
   const steps = dict.process.steps as Record<PhaseKey, Step>;
   const [selected, setSelected] = useState<PhaseKey>(focusKey);
+  const [hasPicked, setHasPicked] = useState(false);
   const [explainerOpen, setExplainerOpen] = useState(false);
   const closeExplainer = useCallback(() => setExplainerOpen(false), []);
 
@@ -131,7 +131,10 @@ export function Process({ dict }: ProcessProps) {
                   key={key}
                   style={{ '--seg': i + 1 } as React.CSSProperties}
                   type="button"
-                  onClick={() => setSelected(key)}
+                  onClick={() => {
+                    setSelected(key);
+                    setHasPicked(true);
+                  }}
                   aria-pressed={isSelected}
                   className={cn(
                     'pill-seg relative flex h-32 min-w-0 flex-1 xl:h-40 xl:gap-2.5 cursor-pointer flex-col items-center justify-center gap-2 border-l-2 px-3 text-center',
@@ -183,20 +186,18 @@ export function Process({ dict }: ProcessProps) {
         </div>
 
         <div className="mt-10 min-h-[3.5rem] max-w-2xl desk:mt-[4svh]">
-          {/* initial={false}: the first description is in the server HTML at full
-              opacity; the fade only plays when a visitor picks another phase */}
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.p
-              key={selected}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="text-base leading-relaxed text-cream/60 md:text-lg"
-            >
-              {steps[selected].description}
-            </motion.p>
-          </AnimatePresence>
+          {/* The first description is in the server HTML at full opacity;
+              the fade (CSS, re-keyed per phase) only plays once a visitor
+              picks another phase */}
+          <p
+            key={selected}
+            className={cn(
+              'text-base leading-relaxed text-cream/60 md:text-lg',
+              hasPicked && 'animate-[fadeIn_0.2s_ease-out] motion-reduce:animate-none',
+            )}
+          >
+            {steps[selected].description}
+          </p>
         </div>
       </div>
 

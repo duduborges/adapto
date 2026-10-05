@@ -14,12 +14,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Landing page: one wheel/swipe gesture advances a section. Short sections jump
-   straight to the next; sections taller than the viewport scroll freely until
-   their end, then snap into the next one. Scoped via a class (not globally on
-   html) so pages without section snap-points, like /privacy, scroll normally. */
+/* Landing page: sections settle into place when a scroll ends near their top.
+   `proximity`, not `mandatory`: mandatory pulled readers away from the end of
+   sections taller than the viewport (Services with an item open) to the next
+   snap point. Scoped via a class (not globally on html) so pages without
+   section snap-points, like /privacy, scroll normally. */
 html.snap-scroll {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 @media (prefers-reduced-motion: reduce) {

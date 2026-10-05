@@ -8,9 +8,13 @@ import { Container } from '@/components/ui/Container';
 import { cn } from '@/lib/utils';
 import { bookingHref, bookingIsExternal } from '@/lib/site';
 
-// WebGL scene — client-only, no server render
-// The static HeroPoster below holds its place until the first frame is drawn.
+// Client-only scenes, no server render: WebGL (Three.js) on desktop, its
+// Canvas 2D twin on phones and tablets. The static HeroPoster below holds
+// their place until the first frame is drawn.
 const HeroScene = dynamic(() => import('@/components/three/HeroScene'), {
+  ssr: false,
+});
+const HeroScene2D = dynamic(() => import('@/components/three/HeroScene2D'), {
   ssr: false,
 });
 
@@ -94,13 +98,14 @@ interface HeroProps {
 /**
  * The hero has two visual slots — the wide column (`desk`: ≥1024px and
  * landscape) and the one above the headline on phones and portrait tablets.
- * Only one is visible, so mount the WebGL scene
- * in that one alone: mounting both would fetch Three.js (~134 KB gzip) once
- * but spin up a second WebGL context for an invisible canvas.
+ * Only one is visible, so mount a scene in that one alone. Desktop gets the
+ * WebGL scene; phones and portrait tablets get HeroScene2D, the same object
+ * drawn with Canvas 2D — booting WebGL there blocked a mid-range phone's main
+ * thread for ~2 s during load (Lighthouse TBT), and the 2D one never loads
+ * Three.js at all.
  *
- * The scene waits for the browser to go idle, so the text and the static
- * sphere paint first; on small screens it is skipped entirely when the
- * visitor has Save-Data on — the static sphere stays.
+ * Both wait for the browser to go idle, so the text and the static sphere
+ * paint first.
  */
 type SceneSlot = 'desktop' | 'mobile' | null;
 
@@ -112,9 +117,6 @@ function useSceneSlot(): SceneSlot {
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px) and (orientation: landscape)');
-    const saveData = Boolean(
-      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData,
-    );
     let idleHandle: number | undefined;
     let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
 
@@ -128,12 +130,9 @@ function useSceneSlot(): SceneSlot {
       cancelPending();
       setSlot(null);
       const target: SceneSlot = mq.matches ? 'desktop' : 'mobile';
-      // Save-Data keeps the static sphere on small screens only; a desktop
-      // visitor with it on still gets the (idle-deferred) scene.
-      if (saveData && target === 'mobile') return;
-      // Both slots wait for idle: booting WebGL during page load blocked the
-      // main thread for seconds on desktop (Lighthouse TBT 5.1 s), and the
-      // static sphere already holds the spot until the first frame is drawn.
+      // Booting a scene during page load blocked the main thread for seconds
+      // (Lighthouse TBT 5.1 s with WebGL on desktop), and the static sphere
+      // already holds the spot until the first frame is drawn.
       const enable = () => setSlot(target);
       if ('requestIdleCallback' in window) {
         idleHandle = window.requestIdleCallback(enable, { timeout: 2000 });
@@ -161,14 +160,14 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
   // A new slot means a fresh canvas: show the static sphere until it draws
   useEffect(() => setSceneReady(false), [sceneSlot]);
 
-  const renderScene = (zoom: number) => (
+  const renderScene = (Scene: typeof HeroScene, zoom: number) => (
     <div
       className={cn(
         'absolute inset-0 transition-opacity duration-1000',
         sceneReady ? 'opacity-100' : 'opacity-0',
       )}
     >
-      <HeroScene onReady={onSceneReady} zoom={zoom} />
+      <Scene onReady={onSceneReady} zoom={zoom} />
     </div>
   );
 
@@ -215,8 +214,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
             browsers increasingly put the address bar at the bottom (Safari by
             default, Chrome as an option, floating over the page in newer iOS),
             so nothing that matters — not even the scroll strip — sits there.
-            The subtitle is left out on phones: the headline and CTA carry the
-            first screen there (it stays in the HTML and on tablets/desktop). */}
+            Phones get a one-line subtitle (subtitleShort) instead of the full
+            one, so the first screen still says what we build without taking
+            the room the 3D visual needs. The full one stays in the HTML. */}
         <div className="flex flex-1 items-start pb-6 phone:flex-col phone:items-stretch phone:pb-4 sm:items-center desk:py-6">
           {/* Title + Visual two-column grid */}
           <div className="grid w-full grid-cols-12 items-center gap-x-4 gap-y-8 phone:flex phone:flex-1 phone:flex-col phone:items-stretch desk:gap-12">
@@ -240,7 +240,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                     animated
                     scale={MOBILE_ZOOM}
                   />
-                  {sceneSlot === 'mobile' && renderScene(MOBILE_ZOOM)}
+                  {sceneSlot === 'mobile' && renderScene(HeroScene2D, MOBILE_ZOOM)}
                 </div>
               </div>
 
@@ -268,6 +268,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                 className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 phone:hidden sm:mt-6 sm:text-lg md:mt-7 md:text-xl desk:mt-12 desk:[@media(max-height:820px)]:mt-6"
               >
                 {dict.hero.subtitle}
+              </p>
+              <p className="mt-3 hidden text-[0.95rem] leading-snug text-cream/70 phone:block phone:[@media(max-height:620px)]:hidden">
+                {dict.hero.subtitleShort}
               </p>
 
               <div
@@ -297,7 +300,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   hero's height and pushed the bottom strip off-screen — cap it */}
               <div className="relative mx-auto aspect-[5/4] w-full desk:[@media(max-height:820px)]:max-w-[600px] desk:[@media(max-height:760px)]:max-w-[540px]">
                 <HeroPoster hidden={sceneSlot === 'desktop' && sceneReady} />
-                {sceneSlot === 'desktop' && renderScene(1)}
+                {sceneSlot === 'desktop' && renderScene(HeroScene, 1)}
               </div>
             </div>
           </div>

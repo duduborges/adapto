@@ -6,29 +6,30 @@
     "work": "Réalisations",
     "why": "Pourquoi nous",
     "contact": "Contact",
-    "book": "Prendre rendez-vous"
+    "book": "Réserver un appel gratuit"
   },
   "hero": {
     "eyebrow": "Studio de software canadien · Conçu par des ingénieurs brésiliens",
     "title": "Un software qui",
     "titleAccent": "s'adapte à votre entreprise.",
-    "subtitle": "Software sur mesure, sites web, automatisations et intégration d'IA. Conçus autour de votre entreprise, rien que pour vous.",
-    "cta": "Prendre rendez-vous",
+    "subtitle": "Software sur mesure, sites web, automatisations et intégration d'IA, conçus autour de la façon dont votre entreprise fonctionne.",
+    "subtitleShort": "Software sur mesure, sites web, automatisation et IA.",
+    "cta": "Réserver un appel gratuit",
     "ctaSecondary": "Voir notre méthode",
     "scrollHint": "Faites défiler pour explorer",
     "available": "Nouveaux projets acceptés",
-    "remote": "En télétravail partout",
+    "remote": "Au service du Canada et des États-Unis",
     "availableStrip": "2026 — Nouveaux projets acceptés"
   },
   "manifesto": {
     "eyebrow": "Manifeste",
-    "title": "L'innovation arrive sans prévenir. Votre entreprise saura-t-elle s'adapter ?",
-    "lead": "Votre entreprise a une façon unique de travailler. Nous comprenons votre entreprise, parlons avec votre équipe et apprenons comment vous fonctionnez avant d'écrire la moindre ligne de code.",
+    "title": "L'innovation arrive sans prévenir. Votre software doit s'adapter avec vous.",
+    "lead": "Votre entreprise a une façon unique de travailler. Nous apprenons à la connaître, parlons avec votre équipe et comprenons comment vous fonctionnez avant d'écrire la moindre ligne de code.",
     "marginaliaLabel": "En marge",
     "marginalia": "La culture est ce qui distingue une entreprise. Votre software devrait porter la vôtre.",
     "paragraphs": [
-      "Votre entreprise est unique, et nous le comprenons. Votre software fait partie de votre évolution. Nous éliminons le travail manuel de votre équipe et vous donnons un vrai contrôle, des stocks aux équipes, pour que votre entreprise continue de grandir même en votre absence.",
-      "C'est pourquoi le changement commence de l'intérieur : votre culture, vos processus, vos gens et votre entreprise face au monde. Le résultat : un software qui propulse, accélère et s'adapte à votre entreprise comme s'il en avait toujours fait partie."
+      "Votre software fait partie de la croissance de votre entreprise. Nous éliminons le travail manuel de votre équipe et vous donnons un vrai contrôle, des stocks aux équipes, pour que votre entreprise continue de grandir même en votre absence.",
+      "C'est pourquoi le changement commence de l'intérieur : votre culture, vos processus, vos gens et la façon dont votre entreprise se présente au monde. Le résultat : un software qui propulse, accélère et s'adapte à votre entreprise comme s'il en avait toujours fait partie."
     ],
     "pillars": {
       "inside": {
@@ -107,11 +108,11 @@
         ]
       }
     },
-    "stackLabel": "Stack et outils"
+    "stackLabel": "Ce qui est inclus"
   },
   "differentials": {
     "eyebrow": "Pourquoi Adapto",
-    "title": "Nous construisons le software dont votre entreprise a besoin.",
+    "title": "Construit avec vous, pas seulement pour vous.",
     "subtitle": "Une équipe d'ingénierie qui devient partie de votre entreprise — votre culture, vos rituels, vos objectifs — aussi longtemps que vous en avez besoin.",
     "visual": {
       "you": "Votre entreprise",
@@ -132,11 +133,11 @@
       },
       "diagnostic": {
         "title": "Diagnostic d'abord, code ensuite",
-        "description": "Chaque projet commence par comprendre votre entreprise — par écrit, validé, signé. Aucun code tant que votre problème n'est pas réel et le périmètre clair."
+        "description": "Chaque projet commence par comprendre votre entreprise. Le périmètre est écrit, chiffré et intégré au contrat. Aucun code tant que le problème n'est pas clair et que vous n'avez pas validé le plan."
       },
       "honest": {
         "title": "Livraison honnête",
-        "description": "Mises à jour hebdomadaires, software fonctionnel chaque sprint, et un périmètre fixe qui respecte votre budget. Si quelque chose dérape, vous l'apprenez de nous d'abord."
+        "description": "Périmètre, délais et coût sont fixés dans votre contrat avant de commencer. Mises à jour quotidiennes et hebdomadaires, software fonctionnel chaque sprint. Si quelque chose dérape, vous l'apprenez de nous d'abord."
       },
       "lasting": {
         "title": "Conçu pour durer",
@@ -156,18 +157,18 @@
       },
       "modeling": {
         "number": "02",
-        "title": "Modélisation",
-        "description": "Exigences, architecture, wireframes et feuille de route réaliste. Vous validez chaque hypothèse avant que nous démarrions."
+        "title": "Périmètre",
+        "description": "Exigences, architecture, wireframes, délais et coût, le tout inscrit dans votre contrat. Vous savez ce que vous obtiendrez, quand et à quel prix. Les livrables vous sont remis une fois le contrat signé."
       },
       "execution": {
         "number": "03",
         "title": "Exécution",
-        "description": "Sprints courts en agile. Vous voyez du software fonctionnel tous les quelques jours, avec revue de code, tests et livraisons propres."
+        "description": "Sprints courts en agile. Mises à jour quotidiennes et software fonctionnel chaque sprint, avec revue de code, tests et livraisons propres."
       },
       "control": {
         "number": "04",
         "title": "Qualité et contrôle",
-        "description": "Tests continus, suivi du périmètre et point hebdomadaire. Les risques sont signalés tôt : rien ne vous surprend au lancement."
+        "description": "Tests continus, suivi du périmètre et rapport hebdomadaire. Les risques sont signalés tôt : rien ne vous surprend au lancement."
       },
       "delivery": {
         "number": "05",
@@ -225,7 +226,7 @@
           },
           {
             "title": "Toujours à jour",
-            "description": "Notre équipe le met à jour au fil du travail : vous savez où en est le projet entre nos points hebdomadaires."
+            "description": "Notre équipe le met à jour au fil du travail : vous savez toujours où en est le projet, en plus de nos mises à jour quotidiennes et hebdomadaires."
           }
         ],
         "legend": {
@@ -237,11 +238,11 @@
         "close": "Fermer"
       }
     },
-    "freeHeadline": "La préparation est GRATUITE."
+    "freeHeadline": "La découverte et le périmètre sont GRATUITS."
   },
   "work": {
     "eyebrow": "Réalisations récentes",
-    "title": "Quelques opérations que nous avons remodelées.",
+    "title": "Réalisations choisies.",
     "subtitle": "Projets sur mesure pour le commerce, les services, la logistique et les équipes d'opération.",
     "empty": "Cas à venir — actuellement en construction avec notre première vague de clients.",
     "viewCase": "Voir le cas"
@@ -250,7 +251,7 @@
     "eyebrow": "Parlons-en",
     "title": "Apportez-nous votre problème. Nous apporterons la solution.",
     "subtitle": "Réservez un appel de 30 minutes. Nous écoutons comment fonctionne votre entreprise et vous disons honnêtement si nous sommes la bonne équipe pour vous.",
-    "ctaPrimary": "Réserver dans notre agenda",
+    "ctaPrimary": "Réserver un appel gratuit",
     "ctaSecondary": "Ou envoyez-nous un e-mail",
     "form": {
       "name": "Nom complet",
@@ -267,12 +268,12 @@
       "locationLabel": "Basés à",
       "location": "Vancouver, BC · Canada",
       "remoteLabel": "Avec des équipes en",
-      "remote": "Amérique du Nord, Amérique latine et Europe"
+      "remote": "Canada et États-Unis"
     }
   },
   "footer": {
     "tagline": "Un software qui s'adapte à votre entreprise — de l'intérieur vers l'extérieur.",
-    "cta": "Prêt à vous adapter de l'intérieur vers l'extérieur ?",
+    "cta": "Prêt pour un software qui s'adapte à votre entreprise ?",
     "sections": {
       "company": "Entreprise",
       "explore": "Explorer",
@@ -284,7 +285,7 @@
       "process": "Processus",
       "work": "Réalisations",
       "why": "Pourquoi nous",
-      "book": "Prendre rendez-vous",
+      "book": "Réserver un appel gratuit",
       "email": "Écrivez-nous",
       "privacy": "Politique de confidentialité",
       "cookiePrefs": "Préférences de témoins"
@@ -299,7 +300,7 @@
     "body": "Le lien est peut-être rompu, ou la page a été déplacée. Choisissez une section ci-dessous ou revenez à l'accueil.",
     "routesLabel": "Aller à",
     "cta": "Retour à l'accueil",
-    "secondary": "Réserver un appel"
+    "secondary": "Réserver un appel gratuit"
   },
   "cookies": {
     "title": "Nous utilisons des témoins",
@@ -315,7 +316,7 @@
     "sections": [
       {
         "heading": "Qui nous sommes",
-        "body": "Adapto Software House est un studio de software établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à hello@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
+        "body": "Adapto Software House est un studio de software établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à adapto.vancouver@gmail.com pour toute question sur cette politique ou sur les données que nous détenons."
       },
       {
         "heading": "Ce que nous recueillons",
@@ -335,7 +336,7 @@
       },
       {
         "heading": "Vos droits",
-        "body": "Vous pouvez nous demander de consulter, corriger ou supprimer les données personnelles que nous détenons à votre sujet, ou retirer votre consentement à l'analyse. Écrivez à hello@adapto-sh.com et nous répondrons dans les 30 jours. Si vous résidez au Québec, la Loi 25 vous accorde ces droits; dans l'Espace économique européen, c'est le RGPD."
+        "body": "Vous pouvez nous demander de consulter, corriger ou supprimer les données personnelles que nous détenons à votre sujet, ou retirer votre consentement à l'analyse. Écrivez à adapto.vancouver@gmail.com et nous répondrons dans les 30 jours. Si vous résidez au Québec, la Loi 25 vous accorde ces droits."
       }
     ]
   }
