@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/types';
 import { i18n, languageShort } from '@/lib/i18n/config';
@@ -370,7 +370,7 @@ function MobileDrawer({
       className="fixed inset-0 z-[60] lg:hidden"
     >
       {/* Scrim — 50% black, dismissible */}
-      <motion.button
+      <m.button
         type="button"
         aria-label="Close menu"
         onClick={onClose}
@@ -382,7 +382,7 @@ function MobileDrawer({
       />
 
       {/* Drawer panel — slides from the right */}
-      <motion.aside
+      <m.aside
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
         exit={{ x: '100%' }}
@@ -413,7 +413,7 @@ function MobileDrawer({
         <nav className="flex-1 px-6 py-10">
           <ul className="space-y-1">
             {navItems.map((item, i) => (
-              <motion.li
+              <m.li
                 key={item.href}
                 initial={{ opacity: 0, x: 12 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -435,13 +435,13 @@ function MobileDrawer({
                     {item.label}
                   </span>
                 </a>
-              </motion.li>
+              </m.li>
             ))}
           </ul>
         </nav>
 
         {/* CTA — editorial underline style, matches Hero/Contact */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -469,10 +469,10 @@ function MobileDrawer({
             {dict.process.tracker.cta.button}
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
-        </motion.div>
+        </m.div>
 
         {/* Footer — language switcher + meta */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.45 }}
@@ -518,8 +518,8 @@ function MobileDrawer({
               </a>
             </li>
           </ul>
-        </motion.div>
-      </motion.aside>
+        </m.div>
+      </m.aside>
     </div>
   );
 }

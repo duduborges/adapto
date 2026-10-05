@@ -4,7 +4,7 @@ A modern, responsive landing page for Adapto - a software house specializing in 
 
 ## Features
 
-- 🌍 **Multilingual Support** - Available in English, Portuguese, and Spanish
+- 🌍 **Multilingual Support** - Available in English and French
 - ⚡ **Next.js 15** - Built with the latest Next.js App Router
 - 🎨 **Tailwind CSS** - Modern, utility-first CSS framework
 - 🎭 **Framer Motion** - Smooth animations and transitions
@@ -56,7 +56,6 @@ npm run dev
 │   │   ├── Services.tsx
 │   │   ├── Differentials.tsx
 │   │   ├── Portfolio.tsx
-│   │   ├── Testimonials.tsx
 │   │   ├── Process.tsx
 │   │   └── Contact.tsx
 │   └── ui/                # Reusable UI components
@@ -71,8 +70,7 @@ npm run dev
 │   │   ├── get-dictionary.ts
 │   │   └── locales/       # Translation files
 │   │       ├── en.json
-│   │       ├── pt.json
-│   │       └── es.json
+│   │       └── fr.json
 │   └── utils/             # Helper functions
 ├── types/                 # TypeScript types
 └── public/                # Static assets
@@ -86,20 +84,15 @@ npm run dev
 
 ## Internationalization
 
-The site supports three languages:
-- English (`/en`)
-- Portuguese (`/pt`)
-- Spanish (`/es`)
+The site supports two languages:
+- English (`/en`, default)
+- French (`/fr`)
 
 Translations are stored in JSON files under `lib/i18n/locales/`.
 
 ## Contact Form
 
-The contact form sends data to `/api/contact`. Currently, it logs submissions to the console. To enable email notifications:
-
-1. Choose an email service (SendGrid, Resend, etc.)
-2. Install the appropriate package
-3. Update `app/api/contact/route.ts` with your email logic
+The contact form posts to `/api/contact`, which sends the message through [Resend](https://resend.com) to `site.email` (or `CONTACT_TO`) and a confirmation to the visitor. See `.env.example` for the required variables.
 
 ## Deployment
 
@@ -141,8 +134,7 @@ Alternatively, you can deploy to any platform that supports Next.js.
 
 **Adapto** - Custom Software Solutions
 - Location: Vancouver, BC, Canada
-- Email: eduardoborges.dev31@gmail.com
-- Phone: +1 (672) 755-3873
+- Email: adapto.vancouver@gmail.com
 
 ## License
 

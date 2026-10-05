@@ -21,7 +21,7 @@ interface NotFoundCopy {
 }
 
 interface NavCopy {
-  work: string;
+  why: string;
   process: string;
   services: string;
   manifesto: string;
@@ -33,7 +33,7 @@ interface NotFoundViewProps {
   bookingHref: string;
 }
 
-const ROUTES = ['work', 'services', 'process', 'manifesto', 'contact'] as const;
+const ROUTES = ['services', 'process', 'why', 'manifesto', 'contact'] as const;
 
 // not-found.tsx gets no params, so the locale comes from the URL itself.
 function splitPath(pathname: string) {

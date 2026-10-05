@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import {
   ArrowUpRight,
   ChartGantt,
@@ -180,7 +180,7 @@ export function TrackerExplainer({
           aria-labelledby="tracker-explainer-title"
           className="fixed inset-0 z-[70] flex items-end justify-center md:items-center md:p-6"
         >
-          <motion.button
+          <m.button
             type="button"
             aria-label={e.close}
             onClick={onClose}
@@ -191,7 +191,7 @@ export function TrackerExplainer({
             className="absolute inset-0 bg-ink-950/60 backdrop-blur-sm motion-reduce:backdrop-blur-none"
           />
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
@@ -456,7 +456,7 @@ export function TrackerExplainer({
                 <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
               </Button>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>,

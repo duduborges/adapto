@@ -147,9 +147,9 @@ export function Contact({ dict }: ContactProps) {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-8">
-            <Field name="name" label={dict.contact.form.name} required maxLength={100} />
-            <Field name="email" type="email" label={dict.contact.form.email} required maxLength={254} />
-            <Field name="company" label={dict.contact.form.company} required maxLength={150} />
+            <Field name="name" label={dict.contact.form.name} required maxLength={100} autoComplete="name" />
+            <Field name="email" type="email" label={dict.contact.form.email} required maxLength={254} autoComplete="email" />
+            <Field name="company" label={dict.contact.form.company} maxLength={150} autoComplete="organization" />
             <Field name="message" label={dict.contact.form.message} required textarea maxLength={5000} />
 
             {/* Honeypot — hidden from people, filled in by bots; the API drops those */}
@@ -194,6 +194,7 @@ function Field({
   required,
   textarea,
   maxLength,
+  autoComplete,
 }: {
   name: string;
   label: string;
@@ -201,6 +202,7 @@ function Field({
   required?: boolean;
   textarea?: boolean;
   maxLength?: number;
+  autoComplete?: string;
 }) {
   const inputClass =
     'block w-full border-0 border-b border-cream/15 bg-transparent px-0 py-3 text-base text-cream placeholder:text-cream/30 transition-colors focus:border-ember focus:outline-none focus:ring-0';
@@ -213,7 +215,7 @@ function Field({
       {textarea ? (
         <textarea name={name} required={required} maxLength={maxLength} rows={3} className={inputClass} />
       ) : (
-        <input name={name} type={type} required={required} maxLength={maxLength} className={inputClass} />
+        <input name={name} type={type} required={required} maxLength={maxLength} autoComplete={autoComplete} className={inputClass} />
       )}
     </label>
   );

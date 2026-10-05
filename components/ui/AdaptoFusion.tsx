@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import {
   animate,
-  motion,
+  m,
   useInView,
   useMotionValue,
   useReducedMotion,
@@ -99,7 +99,7 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
         />
 
         {/* Warmth that builds inside the company as Adapto settles in */}
-        <motion.circle
+        <m.circle
           cx={RING.cx}
           cy={RING.cy}
           r={RING.r}
@@ -108,7 +108,7 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
         />
 
         {/* Adapto before joining — a dashed outline */}
-        <motion.circle
+        <m.circle
           cx={cx}
           cy={RING.cy}
           r={DISC_R}
@@ -121,7 +121,7 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
 
         {/* Adapto inside — only the part within the ring is solid */}
         <g clipPath="url(#adapto-fusion-ring)">
-          <motion.circle cx={cx} cy={RING.cy} r={DISC_R} fill="#c35622" />
+          <m.circle cx={cx} cy={RING.cy} r={DISC_R} fill="#c35622" />
         </g>
 
         {/* The client's company */}
@@ -149,7 +149,7 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
         ))}
 
         {/* Adapto — engineering, travelling with the disc */}
-        <motion.g style={{ x: usOffset }}>
+        <m.g style={{ x: usOffset }}>
           <CodeXml
             x={END_CX - US_ICON / 2}
             y={RING.cy - US_ICON / 2}
@@ -159,7 +159,7 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
             className="text-cream"
             aria-hidden
           />
-        </motion.g>
+        </m.g>
       </svg>
 
     </div>

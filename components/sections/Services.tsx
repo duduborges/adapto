@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { ServiceGlyph } from './ServiceGlyph';
+import { cn } from '@/lib/utils';
 
 interface ServicesProps {
   dict: any;
@@ -120,44 +120,43 @@ export function Services({ dict }: ServicesProps) {
 
               {/* Always rendered, collapsed to zero height when closed: the
                   descriptions are the most keyword-rich copy on the page, and
-                  unmounting them kept 4 of 5 out of the HTML search engines read. */}
-              <motion.div
+                  unmounting them kept 4 of 5 out of the HTML search engines read.
+                  Height animates via grid rows 0fr→1fr, CSS-only. */}
+              <div
                 id={`service-panel-${key}`}
-                initial={false}
-                animate={
-                  isOpen
-                    ? { height: 'auto', opacity: 1 }
-                    : { height: 0, opacity: 0 }
-                }
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="overflow-hidden"
+                className={cn(
+                  'grid transition-[grid-template-rows,opacity] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+                  isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
+                )}
                 aria-hidden={!isOpen}
               >
-                <div className="grid grid-cols-12 gap-6 px-2 pb-14 pt-2 md:gap-10 md:px-4 md:pb-20 md:pt-4">
-                  <div className="col-span-12 col-start-1 md:col-span-7 md:col-start-2">
-                    <p className="svc-in text-lg leading-[1.65] text-cream/85 md:text-xl">
-                      {item.description}
-                    </p>
-                  </div>
-                  <div className="col-span-12 md:col-span-4 md:col-start-9">
-                    <p className="svc-in mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45" style={{ '--d': '0.12s' } as React.CSSProperties}>
-                      {dict.services.stackLabel}
-                    </p>
-                    <ul className="flex flex-wrap gap-2">
-                      {item.tags.map((tag: string, t: number) => (
-                        <li
-                          key={tag}
-                          style={{ '--d': `${0.18 + t * 0.07}s` } as React.CSSProperties}
-                          className="svc-in inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
-                        >
-                          <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.8)]" />
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
+                <div className="min-h-0 overflow-hidden">
+                  <div className="grid grid-cols-12 gap-6 px-2 pb-14 pt-2 md:gap-10 md:px-4 md:pb-20 md:pt-4">
+                    <div className="col-span-12 col-start-1 md:col-span-7 md:col-start-2">
+                      <p className="svc-in text-lg leading-[1.65] text-cream/85 md:text-xl">
+                        {item.description}
+                      </p>
+                    </div>
+                    <div className="col-span-12 md:col-span-4 md:col-start-9">
+                      <p className="svc-in mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45" style={{ '--d': '0.12s' } as React.CSSProperties}>
+                        {dict.services.stackLabel}
+                      </p>
+                      <ul className="flex flex-wrap gap-2">
+                        {item.tags.map((tag: string, t: number) => (
+                          <li
+                            key={tag}
+                            style={{ '--d': `${0.18 + t * 0.07}s` } as React.CSSProperties}
+                            className="svc-in inline-flex items-center gap-2 rounded-md border border-ember/25 bg-ember/[0.06] px-3 py-1.5 text-sm font-medium text-cream/90"
+                          >
+                            <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.8)]" />
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </li>
           );
         })}

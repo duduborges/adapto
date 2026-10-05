@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { ADAPTO_MARK_INLINE_DATA_URL } from '@/lib/brand/adapto-mark-inline';
+import { LOGO_BLUR_DATA_URLS } from '@/lib/brand/logo-blur';
 
 type Variant = 'mark' | 'lockup' | 'wordmark' | 'mark-inverse';
 
@@ -66,16 +68,32 @@ export function Logo({
         className,
       )}
     >
-      <Image
-        src={asset.src}
-        alt={asset.alt}
-        width={asset.width}
-        height={asset.height}
-        priority={priority}
-        loading={priority ? undefined : 'lazy'}
-        sizes="(max-width: 768px) 120px, 220px"
-        className="h-full w-auto"
-      />
+      {variant === 'mark' && priority ? (
+        // Above the fold: inlined, so it paints with the HTML instead of
+        // waiting on its own request (see adapto-mark-inline.ts)
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={ADAPTO_MARK_INLINE_DATA_URL}
+          alt={asset.alt}
+          width={160}
+          height={160}
+          decoding="sync"
+          className="h-full w-auto"
+        />
+      ) : (
+        <Image
+          src={asset.src}
+          alt={asset.alt}
+          width={asset.width}
+          height={asset.height}
+          priority={priority}
+          loading={priority ? undefined : 'lazy'}
+          sizes="(max-width: 768px) 120px, 220px"
+          placeholder="blur"
+          blurDataURL={LOGO_BLUR_DATA_URLS[variant]}
+          className="h-full w-auto"
+        />
+      )}
     </span>
   );
 }

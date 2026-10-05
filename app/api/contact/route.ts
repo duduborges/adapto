@@ -119,7 +119,7 @@ export async function POST(request: Request) {
       message: field('message'),
     };
 
-    if (!data.name || !data.email || !data.company || !data.message) {
+    if (!data.name || !data.email || !data.message) {
       return bad('Missing required fields');
     }
     for (const k of Object.keys(LIMITS) as (keyof typeof LIMITS)[]) {
@@ -157,7 +157,7 @@ export async function POST(request: Request) {
       from: `Adapto Website <${FROM_EMAIL}>`,
       to: TO_EMAIL,
       replyTo: data.email,
-      subject: `New conversation request — ${data.name} (${data.company})`,
+      subject: `New conversation request — ${data.name}${data.company ? ` (${data.company})` : ''}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2a2021;">
           <div style="background: #2a2021; padding: 24px; border-radius: 12px 12px 0 0;">
@@ -180,7 +180,7 @@ export async function POST(request: Request) {
               </tr>
               <tr>
                 <td style="padding: 10px 0; color: #5b4a4a; font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; vertical-align: top;">Company</td>
-                <td style="padding: 10px 0; color: #2a2021; font-size: 15px;">${company}</td>
+                <td style="padding: 10px 0; color: #2a2021; font-size: 15px;">${company || '—'}</td>
               </tr>
               <tr>
                 <td style="padding: 16px 0 6px; color: #5b4a4a; font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; vertical-align: top;" colspan="2">Problem to solve</td>
@@ -210,6 +210,8 @@ export async function POST(request: Request) {
       await resend.emails.send({
         from: `Adapto <${FROM_EMAIL}>`,
         to: data.email,
+        // Resend can't send from a Gmail address, so replies are routed there.
+        replyTo: site.email,
         subject: 'Thanks — we received your message',
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #2a2021;">
@@ -233,7 +235,7 @@ export async function POST(request: Request) {
                 — The Adapto team
               </p>
               <p style="margin: 18px 0 0; padding-top: 16px; border-top: 1px solid #e6e1e1; color: #a89898; font-size: 12px;">
-                Vancouver, BC · Canada &nbsp;·&nbsp; <a href="https://adapto-sh.com" style="color: #a89898;">adapto-sh.com</a>
+                Vancouver, BC · Canada &nbsp;·&nbsp; <a href="https://www.adapto-sh.com" style="color: #a89898;">adapto-sh.com</a>
               </p>
             </div>
           </div>
