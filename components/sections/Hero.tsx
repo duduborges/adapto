@@ -224,7 +224,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
       : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:text-[clamp(2rem,5.2svh,2.6rem)] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[100svh] phone:min-h-fit phone:pb-[calc(3.75rem+env(safe-area-inset-bottom))] sm:pt-24 md:pt-28 desk:[@media(max-height:760px)]:pt-24 snap-start [scroll-snap-stop:always]">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[100svh] phone:min-h-fit phone:pb-[3.75rem] sm:pt-24 md:pt-28 desk:[@media(max-height:760px)]:pt-24 snap-start [scroll-snap-stop:always]">
       {/* subtle grid background */}
       <div
         aria-hidden
@@ -265,6 +265,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
             browsers increasingly put the address bar at the bottom (Safari by
             default, Chrome as an option, floating over the page in newer iOS),
             so nothing that matters — not even the scroll strip — sits there.
+            It is a fixed 3.75rem: it used to add env(safe-area-inset-bottom),
+            which changes when the toolbar collapses and re-laid the whole
+            hero out on the first scroll.
             Phones get a one-line subtitle (subtitleShort) instead of the full
             one, so the first screen still says what we build without taking
             the room the 3D visual needs. The full one stays in the HTML. */}
