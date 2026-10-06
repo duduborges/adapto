@@ -26,7 +26,7 @@ function useRowSequence(listRef: React.RefObject<HTMLDivElement>) {
     const rows = Array.from(list.querySelectorAll<HTMLElement>('[data-row]'));
     // One row at a time, top to bottom: a row only starts once it has been
     // reached AND the row above it started at least GAP ms earlier.
-    const GAP = 1100;
+    const GAP = 650;
     const reached = new Set<HTMLElement>();
     let lastStart = 0;
     let timer: ReturnType<typeof setTimeout> | undefined;

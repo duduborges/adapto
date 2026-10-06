@@ -34,14 +34,14 @@ const titles: Record<Locale, string> = {
 };
 
 const ogTitles: Record<Locale, string> = {
-  en: 'Adapto Software House — Software that adapts to your business',
-  fr: "Adapto Software House — Un software qui s'adapte à votre entreprise",
+  en: 'Adapto Software House — Adapt your business',
+  fr: 'Adapto Software House — Adaptez votre entreprise',
 };
 
 // ~150 characters: what, for whom, where — the snippet under the title.
 const descriptions: Record<Locale, string> = {
-  en: 'Vancouver software studio building custom systems, websites, automations and AI integrations that fit how your business actually works. Book a free call.',
-  fr: 'Studio de software à Vancouver : systèmes sur mesure, sites web, automatisations et intégration d’IA adaptés à votre façon de travailler. Appel gratuit.',
+  en: 'Vancouver software studio: custom systems, websites, automations and AI integrations that help your business adapt and grow. Book a free call.',
+  fr: 'Studio de software à Vancouver : systèmes sur mesure, sites web, automatisations et intégration d’IA pour que votre entreprise s’adapte et grandisse.',
 };
 
 export async function generateMetadata({

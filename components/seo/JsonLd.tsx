@@ -4,8 +4,8 @@ import { SERVICES } from '@/lib/services';
 import type { Locale } from '@/types';
 
 const descriptions: Record<Locale, string> = {
-  en: 'Adapto is a Canadian software studio in Vancouver building custom systems, websites, automations, dashboards and AI integrations that adapt to how your business actually operates.',
-  fr: "Adapto est un studio de software canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations, des tableaux de bord et des intégrations d'IA adaptés au fonctionnement réel de votre entreprise.",
+  en: 'Adapto is a Canadian software studio in Vancouver building custom systems, websites, automations, dashboards and AI integrations that help your business adapt and grow.',
+  fr: "Adapto est un studio de software canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations, des tableaux de bord et des intégrations d'IA qui aident votre entreprise à s'adapter et à grandir.",
 };
 
 /**
