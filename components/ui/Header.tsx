@@ -270,7 +270,10 @@ export function Header({ lang, dict }: HeaderProps) {
         ref={backdropRef}
         aria-hidden
         className={cn(
-          'pointer-events-none absolute inset-0 -z-10 bg-ink/85 backdrop-blur-xl',
+          // Phones: a plain solid backdrop. A blurred fixed layer has to be
+          // re-rendered whenever the browser's toolbars move, which showed as
+          // a jolt on the first scroll; the blur stays from md up.
+          'pointer-events-none absolute inset-0 -z-10 bg-ink/95 md:bg-ink/85 md:backdrop-blur-xl',
           open && '!opacity-100',
         )}
         style={{ opacity: 0 }}
