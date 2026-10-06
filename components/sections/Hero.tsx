@@ -211,12 +211,17 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
     </div>
   );
 
+  // Phone sizes follow svh, not max-height breakpoints: svh is the height with
+  // the browser's address bar shown and never changes, while a height media
+  // query flipped (and the headline grew) the moment the bar collapsed on the
+  // first scroll. The values match the old breakpoints (2.2rem at 700px, 2rem
+  // at 620px of height, and so on), just reached continuously.
   // French copy is longer — pull the headline ceiling down so it doesn't overflow.
   // Stacked tablets (sm+, not desk) get a larger headline — it has the full width.
   const titleClamp =
     lang === 'fr'
-      ? 'text-[clamp(2rem,3.8vw,3.8rem)] phone:[@media(max-height:700px)]:text-[1.85rem] phone:[@media(max-height:620px)]:text-[1.7rem] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2rem,3.8vw,3.8rem)]'
-      : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:[@media(max-height:700px)]:text-[2.2rem] phone:[@media(max-height:620px)]:text-[2rem] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
+      ? 'text-[clamp(2rem,3.8vw,3.8rem)] phone:text-[clamp(1.7rem,4.25svh,2rem)] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2rem,3.8vw,3.8rem)]'
+      : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:text-[clamp(2rem,5.2svh,2.6rem)] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
 
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[100svh] phone:min-h-fit phone:pb-[calc(3.75rem+env(safe-area-inset-bottom))] sm:pt-24 md:pt-28 desk:[@media(max-height:760px)]:pt-24 snap-start [scroll-snap-stop:always]">
@@ -278,7 +283,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   feeds back into the column's height. */}
               <div
                 aria-hidden
-                className="-mx-6 mb-2 flex justify-center phone:relative phone:mb-3 phone:max-h-[44svh] phone:min-h-[110px] phone:flex-1 phone:[@media(max-height:620px)]:min-h-[80px] md:-mx-8 desk:hidden"
+                className="-mx-6 mb-2 flex justify-center phone:relative phone:mb-3 phone:max-h-[44svh] phone:min-h-[clamp(80px,calc(100svh-540px),110px)] phone:flex-1 md:-mx-8 desk:hidden"
               >
                 <div className="relative aspect-[5/4] w-[min(100%,46svh)] animate-hero-in motion-reduce:animate-none phone:absolute phone:inset-y-0 phone:left-1/2 phone:h-full phone:w-auto phone:max-w-full phone:-translate-x-1/2">
                   <HeroGlow size="92%" />
@@ -292,7 +297,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               </div>
 
               {/* Location chip — sits right above the headline */}
-              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:[@media(max-height:700px)]:mb-3 md:mb-6 desk:mb-11 desk:[@media(max-height:820px)]:mb-6">
+              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:mb-[clamp(0.75rem,calc(5.3svh-25px),1.25rem)] md:mb-6 desk:mb-11 desk:[@media(max-height:820px)]:mb-6">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-cream/10 bg-cream/[0.04] px-2.5 py-1 text-[10px] font-medium text-cream/50 backdrop-blur-sm md:gap-2 md:px-3.5 md:py-1.5 md:text-xs md:text-cream/80">
                   <MapPin className="h-3 w-3 text-ember/70 md:h-3.5 md:w-3.5 md:text-ember" />
                   <span>Vancouver · BC · Canada</span>
@@ -316,13 +321,13 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               >
                 {dict.hero.subtitle}
               </p>
-              <p className="mt-3 hidden text-[0.95rem] leading-snug text-cream/70 phone:block phone:[@media(max-height:620px)]:hidden">
+              <p className="hidden overflow-hidden text-[0.95rem] leading-snug text-cream/70 phone:block phone:mt-[clamp(0px,calc((100svh-620px)*100),0.75rem)] phone:max-h-[clamp(0px,calc((100svh-620px)*100),6rem)]">
                 {dict.hero.subtitleShort}
               </p>
 
               <div
                 style={{ animationDelay: '300ms' }}
-                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:[@media(max-height:700px)]:mt-4 sm:mt-8 md:mt-10 desk:mt-14 desk:[@media(max-height:820px)]:mt-8"
+                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:mt-[clamp(1rem,calc(8svh-40px),1.75rem)] sm:mt-8 md:mt-10 desk:mt-14 desk:[@media(max-height:820px)]:mt-8"
               >
                 <a
                   href={bookingHref()}
