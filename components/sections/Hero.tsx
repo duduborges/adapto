@@ -46,7 +46,6 @@ function HeroPoster({
         hidden && 'opacity-0',
       )}
     >
-      <div className="absolute inset-x-[-6%] inset-y-[-4%] rounded-[2.5rem] bg-gradient-to-br from-ember/16 via-ember/5 to-transparent blur-[90px]" />
       <svg viewBox="0 0 500 400" className="absolute inset-0 h-full w-full">
         <defs>
           <radialGradient id="hero-poster-fill" cx="42%" cy="38%" r="70%">
@@ -91,46 +90,43 @@ function HeroPoster({
 }
 
 /**
- * The accent line, its first word ("adapts" / "s'adapte") trying on nine
- * very different typefaces before switching back to the brand one, as
- * software adapting to each company (.adapt-* in globals.css).
- * The alternates are drawn by a pseudo-element from data-word, so the heading
- * text stays one plain word for crawlers and screen readers, and the word
- * keeps its own width, so the rest of the line never moves.
+ * The accent line, its first word ("adapts" / "s'adapte") breathing along
+ * Outfit's weight axis: it thins, swells to bold and settles back, as if
+ * reshaping itself (.adapt-word in globals.css, large screens only).
+ * Letter-spacing moves the other way to hold the word's width, so the rest of
+ * the line stays put. The word starts at rest (the headline paints at once)
+ * and is a single text node (it reads and indexes as a normal word).
  */
-/** The subset faces the animation flicks through (@font-face in globals.css). */
-const ADAPT_FACES = [
-  '1em "Adapt Pixel"',
-  '1em "Adapt Abril"',
-  '1em "Adapt Typewriter"',
-  '1em "Adapt Bungee"',
-  '1em "Adapt Monoton"',
-];
-
 function AdaptWord({ text }: { text: string }) {
-  // Fetch the alternate faces (2-9 KB each) once the page is idle, so the
-  // first flick already shows them instead of the fallback
-  useEffect(() => {
-    if (!document.fonts?.load) return;
-    const warm = () => ADAPT_FACES.forEach((f) => document.fonts.load(f, text).catch(() => {}));
-    if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(warm, { timeout: 3000 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const id = setTimeout(warm, 1000);
-    return () => clearTimeout(id);
-  }, [text]);
-
   const space = text.indexOf(' ');
   const word = space === -1 ? text : text.slice(0, space);
   const rest = space === -1 ? '' : text.slice(space);
   return (
     <>
-      <span className="adapt-word" data-word={word}>
-        <span className="adapt-ink">{word}</span>
-      </span>
+      <span className="adapt-word">{word}</span>
       {rest}
     </>
+  );
+}
+
+/**
+ * Ember light behind the hero object, centred on it. It lives in the visual
+ * slot itself (not in the poster or the scene), so it stays put while the
+ * canvas crossfades over the static sphere. `size` = its diameter as a share
+ * of the slot's width: about 1.6x the object's, which the phone slot frames
+ * larger (MOBILE_ZOOM). Breathes slowly; still under reduced motion.
+ */
+function HeroGlow({ size }: { size: string }) {
+  return (
+    <div
+      aria-hidden
+      style={{
+        width: size,
+        background:
+          'radial-gradient(circle, rgba(195,86,34,0.8) 0%, rgba(195,86,34,0.36) 42%, rgba(195,86,34,0) 70%)',
+      }}
+      className="pointer-events-none absolute left-1/2 top-1/2 aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl animate-[hero-glow_6s_ease-in-out_infinite] motion-reduce:animate-none"
+    />
   );
 }
 
@@ -229,10 +225,16 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 grid-bg mask-radial opacity-50"
       />
-      {/* warm ember bloom behind the visual */}
+      {/* Ember light coming in from outside: its source sits past the right
+          edge, just below the top corner. Large screens only; phones and
+          tablets keep just the object's own glow (HeroGlow) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute right-0 top-1/4 -z-10 h-[520px] w-[520px] rounded-full bg-ember/15 blur-[140px]"
+        className="pointer-events-none absolute inset-0 -z-10 hidden desk:block"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 65% at 112% 15%, rgba(195,86,34,0.2) 0%, rgba(195,86,34,0.08) 38%, rgba(195,86,34,0) 72%)',
+        }}
       />
       {/* Large brand mark watermark — slightly lighter than bg, bleeds off the right edge */}
       <div aria-hidden className="pointer-events-none absolute right-[-18%] top-1/2 hidden -translate-y-1/2 select-none desk:block">
@@ -279,6 +281,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                 className="-mx-6 mb-2 flex justify-center phone:relative phone:mb-3 phone:max-h-[44svh] phone:min-h-[110px] phone:flex-1 phone:[@media(max-height:620px)]:min-h-[80px] md:-mx-8 desk:hidden"
               >
                 <div className="relative aspect-[5/4] w-[min(100%,46svh)] animate-hero-in motion-reduce:animate-none phone:absolute phone:inset-y-0 phone:left-1/2 phone:h-full phone:w-auto phone:max-w-full phone:-translate-x-1/2">
+                  <HeroGlow size="92%" />
                   <HeroPoster
                     hidden={sceneSlot === 'mobile' && sceneReady}
                     animated
@@ -343,6 +346,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               {/* On short desktop screens the 5:4 box, not the text, set the
                   hero's height and pushed the bottom strip off-screen — cap it */}
               <div className="relative mx-auto aspect-[5/4] w-full desk:[@media(max-height:820px)]:max-w-[600px] desk:[@media(max-height:760px)]:max-w-[540px]">
+                <HeroGlow size="72%" />
                 <HeroPoster hidden={sceneSlot === 'desktop' && sceneReady} />
                 {sceneSlot === 'desktop' && renderScene(HeroScene, 1)}
               </div>

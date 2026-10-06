@@ -526,11 +526,7 @@ export default function HeroScene({ onReady, zoom = 1 }: HeroSceneProps) {
 
   return (
     <div className="relative mx-auto aspect-[5/4] w-full max-w-[540px] lg:max-w-none">
-      {/* Warm bloom behind the 3D object, matching the section's ember glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-[-6%] inset-y-[-4%] rounded-[2.5rem] bg-gradient-to-br from-ember/16 via-ember/5 to-transparent blur-[90px]"
-      />
+      {/* The ember light behind the object lives in the hero slot (HeroGlow) */}
       <div ref={containerRef} className="absolute inset-0" />
     </div>
   );

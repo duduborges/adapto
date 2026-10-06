@@ -88,6 +88,10 @@ const config: Config = {
           '0%, 100%': { opacity: '0.35' },
           '50%': { opacity: '0.6' },
         },
+        'hero-glow': {
+          '0%, 100%': { opacity: '0.85', transform: 'translate(-50%, -50%) scale(1)' },
+          '50%': { opacity: '1', transform: 'translate(-50%, -50%) scale(1.06)' },
+        },
         heroIn: {
           '0%': { opacity: '0', transform: 'translateY(14px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
