@@ -6,6 +6,7 @@ import { Logo } from './Logo';
 import { Button } from './Button';
 import { site, bookingHref, bookingIsExternal } from '@/lib/site';
 import { CookiePrefsLink } from '@/components/analytics/CookiePrefsLink';
+import { SERVICES } from '@/lib/services';
 import { MapPin, Calendar, ArrowRight } from 'lucide-react';
 
 interface FooterProps {
@@ -21,14 +22,20 @@ export function Footer({ lang, dict }: FooterProps) {
     { label: dict.footer.links.process, href: `/${lang}#process` },
     { label: dict.footer.links.why, href: `/${lang}#why` },
     { label: dict.footer.links.manifesto, href: `/${lang}#manifesto` },
+    { label: dict.footer.links.faq, href: `/${lang}/faq` },
     { label: dict.nav.contact, href: `/${lang}#contact` },
   ];
+
+  const serviceLinks = SERVICES.map(({ slug, key }) => ({
+    label: dict.services.items[key].title as string,
+    href: `/${lang}/services/${slug}`,
+  }));
 
   return (
     <footer className="relative border-t border-cream/10 bg-ink-950 snap-start scroll-mt-20 md:scroll-mt-24">
       <Container size="wide" className="py-16 md:py-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:grid-cols-4">
-          <div className="md:col-span-1 lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
+          <div className="space-y-6 sm:col-span-2 lg:col-span-4">
             <Link
               href={`/${lang}`}
               aria-label="Adapto — home"
@@ -55,7 +62,25 @@ export function Footer({ lang, dict }: FooterProps) {
             </address>
           </div>
 
-          <nav className="space-y-4">
+          <nav className="space-y-4 lg:col-span-3">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/40">
+              {dict.footer.sections.services}
+            </h2>
+            <ul className="space-y-3">
+              {serviceLinks.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-cream/70 transition-colors hover:text-cream"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav className="space-y-4 lg:col-span-2">
             <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/40">
               {dict.footer.sections.explore}
             </h2>
@@ -73,7 +98,7 @@ export function Footer({ lang, dict }: FooterProps) {
             </ul>
           </nav>
 
-          <div className="space-y-5">
+          <div className="space-y-5 sm:col-span-2 lg:col-span-3">
             <p className="font-serif text-2xl leading-tight text-cream md:text-3xl">
               {dict.footer.cta}
             </p>

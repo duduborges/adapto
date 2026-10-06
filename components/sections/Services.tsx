@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import Link from 'next/link';
+import { Plus, Minus, ArrowRight } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { ServiceGlyph } from './ServiceGlyph';
@@ -9,7 +10,18 @@ import { cn } from '@/lib/utils';
 
 interface ServicesProps {
   dict: any;
+  lang: string;
 }
+
+/** Each category's page under /[lang]/services (see lib/services). */
+const serviceSlugs = {
+  custom: 'custom-software',
+  websites: 'websites',
+  ai: 'ai-integration',
+  automation: 'automation',
+  dashboards: 'dashboards',
+  integrations: 'integrations',
+} as const;
 
 const serviceKeys = [
   'custom',
@@ -21,7 +33,7 @@ const serviceKeys = [
 ] as const;
 type ServiceKey = (typeof serviceKeys)[number];
 
-export function Services({ dict }: ServicesProps) {
+export function Services({ dict, lang }: ServicesProps) {
   const [open, setOpen] = useState<ServiceKey | null>('custom');
   // The open-topic motion only plays after a click — not for the topic that is
   // open on load, so nothing in the first paint starts hidden or mid-animation.
@@ -136,6 +148,17 @@ export function Services({ dict }: ServicesProps) {
                       <p className="svc-in text-lg leading-[1.65] text-cream/85 md:text-xl">
                         {item.description}
                       </p>
+                      <Link
+                        href={`/${lang}/services/${serviceSlugs[key]}`}
+                        // Closed panels stay in the HTML for crawlers but
+                        // must not catch keyboard focus
+                        tabIndex={isOpen ? undefined : -1}
+                        style={{ '--d': '0.1s' } as React.CSSProperties}
+                        className="svc-in group/link mt-8 inline-flex items-baseline gap-3 border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
+                      >
+                        <span>{item.link}</span>
+                        <ArrowRight className="h-5 w-5 self-center transition-transform group-hover/link:translate-x-1" />
+                      </Link>
                     </div>
                     <div className="col-span-12 md:col-span-4 md:col-start-9">
                       <p className="svc-in mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45" style={{ '--d': '0.12s' } as React.CSSProperties}>

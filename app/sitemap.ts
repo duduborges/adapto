@@ -1,10 +1,17 @@
 import type { MetadataRoute } from 'next';
-import { i18n } from '@/lib/i18n/config';
+import { i18n, hreflang } from '@/lib/i18n/config';
 import { siteUrl } from '@/lib/site';
+import { SERVICES } from '@/lib/services';
 
 /** Pages that exist under every locale prefix. */
 const routes = [
   { path: '', priority: 1, changeFrequency: 'monthly' as const },
+  ...SERVICES.map(({ slug }) => ({
+    path: `/services/${slug}`,
+    priority: 0.8,
+    changeFrequency: 'monthly' as const,
+  })),
+  { path: '/faq', priority: 0.6, changeFrequency: 'monthly' as const },
   { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' as const },
 ];
 
@@ -19,14 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/${locale}${route.path}`,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
-      alternates: {
-        languages: {
-          ...Object.fromEntries(
-            i18n.locales.map((l) => [l, `${siteUrl}/${l}${route.path}`]),
-          ),
-          'x-default': `${siteUrl}/${i18n.defaultLocale}${route.path}`,
-        },
-      },
+      alternates: { languages: hreflang(route.path, siteUrl) },
     })),
   );
 }

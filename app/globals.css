@@ -353,3 +353,25 @@ body {
     animation: none;
   }
 }
+
+/*
+ * FAQ (components/sections/Faq.tsx): native <details>, with the height
+ * animated where the browser supports animating to `auto` (Chromium 131+).
+ * Elsewhere the answer simply appears, which is the same content.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  :root { interpolate-size: allow-keywords; }
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease,
+      content-visibility 0.4s allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}

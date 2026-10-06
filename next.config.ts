@@ -63,6 +63,12 @@ const nextConfig: NextConfig = {
     // Only pull the icons actually imported instead of the whole lucide barrel.
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
+  async redirects() {
+    return [
+      // There is no services index page: the list lives on the home page
+      { source: '/:lang(en|fr)/services', destination: '/:lang#services', permanent: false },
+    ];
+  },
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },

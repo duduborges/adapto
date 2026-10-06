@@ -27,9 +27,10 @@ export default async function Home({
       <main className="relative">
         {/* Order: Hero → Services (what we do) → Process (how we do it)
             → Differentials (why us) → About (who we are) → Contact
+            (the FAQ has its own page, /[lang]/faq)
             Portfolio (work) is pulled out for now — no real cases to show yet. */}
         <Hero dict={dict} lang={lang} />
-        <Services dict={dict} />
+        <Services dict={dict} lang={lang} />
         <Process dict={dict} />
         <Differentials dict={dict} />
         <About dict={dict} />

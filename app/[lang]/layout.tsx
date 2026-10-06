@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { Instrument_Serif } from 'next/font/google';
-import { i18n } from '@/lib/i18n/config';
+import { i18n, hreflang } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/get-dictionary';
 import { siteUrl } from '@/lib/site';
 import type { Locale } from '@/types';
@@ -56,12 +56,7 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `/${locale}`,
-      languages: {
-        en: '/en',
-        fr: '/fr',
-        // Where searchers matching neither language land
-        'x-default': '/en',
-      },
+      languages: hreflang(),
     },
     openGraph: {
       type: 'website',

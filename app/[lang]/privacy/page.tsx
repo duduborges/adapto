@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { getDictionary } from '@/lib/i18n/get-dictionary';
-import { i18n } from '@/lib/i18n/config';
+import { i18n, hreflang } from '@/lib/i18n/config';
 import { siteUrl } from '@/lib/site';
 import type { Locale } from '@/types';
 import { Container } from '@/components/ui/Container';
@@ -36,11 +36,7 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `/${lang}/privacy`,
-      languages: {
-        en: '/en/privacy',
-        fr: '/fr/privacy',
-        'x-default': '/en/privacy',
-      },
+      languages: hreflang('/privacy'),
     },
     robots: { index: true, follow: true },
   };
