@@ -196,52 +196,139 @@
         "prompt": "Want to understand how our Tracker works?",
         "button": "See how it works",
         "eyebrow": "Adapto Tracker",
-        "title": "How the Tracker works",
-        "lead": "A private, read-only view of your project, updated by our team as the work moves.",
-        "pillCaption": "Every phase is split into milestones. You see each one move from up next to done, as it happens.",
+        "title": "Your project, stage by stage.",
+        "lead": "Like tracking a delivery, but for your software. A private page that shows where your project is, what each sprint delivers and when we need something from you. You read; our team keeps it up to date.",
         "demo": {
-          "project": "Sample project",
-          "progress": "Progress",
+          "project": "Sample project · Inventory system",
+          "code": "RM-7F3K9Q2WXA",
           "readOnly": "Read-only",
           "here": "You are here",
-          "milestones": "Milestones",
+          "hint": "Tap a stage to see what you'd read there.",
           "status": {
             "completed": "Done",
             "in_progress": "In progress",
             "pending": "Up next"
           },
-          "sample": [
-            "Core data model",
-            "Main workflows",
-            "Integrations",
-            "Reports & dashboards",
-            "Release candidate"
+          "types": {
+            "start": "Start",
+            "milestone": "Sprint",
+            "checkpoint": "Checkpoint",
+            "end": "End"
+          },
+          "fields": {
+            "objective": "Objective",
+            "aligned": "What we agreed",
+            "links": "Links",
+            "delivers": "What this sprint delivers",
+            "screens": "Screens",
+            "email": "Email sent to you",
+            "summary": "Summary",
+            "finalLink": "Your project"
+          },
+          "nodes": [
+            {
+              "type": "start",
+              "status": "completed",
+              "title": "Kickoff",
+              "date": "Mar 3",
+              "objective": "One system for inventory, sales and purchasing, replacing three spreadsheets.",
+              "aligned": "Built mobile-first for the warehouse team. The accountant gets read-only access.",
+              "links": [
+                "Scope document",
+                "Wireframes"
+              ]
+            },
+            {
+              "type": "milestone",
+              "status": "completed",
+              "title": "Data model & sign-in",
+              "date": "Mar 3 – 14",
+              "delivers": "Your team signs in with their own accounts, and every product, supplier and warehouse lives in one place."
+            },
+            {
+              "type": "milestone",
+              "status": "completed",
+              "title": "Inventory",
+              "date": "Mar 17 – 28",
+              "delivers": "Stock levels per warehouse, updated with every entry and exit, with an alert when an item runs low."
+            },
+            {
+              "type": "checkpoint",
+              "status": "completed",
+              "title": "Review meeting",
+              "date": "Mar 31",
+              "email": "Sprint 2 is ready for your review. Shall we walk through the inventory together on Thursday at 10 a.m.?"
+            },
+            {
+              "type": "milestone",
+              "status": "in_progress",
+              "title": "Sales & invoices",
+              "date": "Apr 1 – 11",
+              "delivers": "Quotes and invoices created straight from the inventory, with taxes calculated automatically."
+            },
+            {
+              "type": "checkpoint",
+              "status": "pending",
+              "title": "Waiting on you",
+              "date": "Apr 14",
+              "email": "To finish the next sprint we need your price list and tax settings. Could you send them by Friday?"
+            },
+            {
+              "type": "milestone",
+              "status": "pending",
+              "title": "Reports",
+              "date": "Apr 14 – 25",
+              "delivers": "Sales, margin and stock reports, ready to export or to receive by email every Monday."
+            },
+            {
+              "type": "end",
+              "status": "pending",
+              "title": "Launch",
+              "date": "Apr 30",
+              "summary": "When the project ends, this is where you read what was delivered and find the link to your live system.",
+              "link": "inventory.yourcompany.com"
+            }
           ]
         },
+        "typesLabel": "Four kinds of stages",
+        "types": {
+          "start": {
+            "title": "Start",
+            "description": "Where the project begins: the plan, the objectives, what we agreed with you, key dates and links."
+          },
+          "milestone": {
+            "title": "Milestone",
+            "description": "One development sprint, in plain language: what it delivers and why it matters to you. Up next, in progress or done."
+          },
+          "checkpoint": {
+            "title": "Checkpoint",
+            "description": "A pause in the project: a meeting to schedule, an issue to flag or something we need from you. Every checkpoint also reaches you by email."
+          },
+          "end": {
+            "title": "End",
+            "description": "The finish line: a summary of everything that was built and the link to your final project."
+          }
+        },
+        "stepsLabel": "How you use it",
         "steps": [
           {
-            "title": "You get an access code",
-            "description": "At kickoff we send you a private code. No account, no password, nothing to install."
+            "title": "You get a room code",
+            "description": "Each project is a private room. At kickoff we send you its access code. No account, no password."
           },
           {
             "title": "Open the Tracker",
-            "description": "Go to tracker.adapto-sh.com, enter the code and your project opens, on any device."
+            "description": "Go to tracker.adapto-sh.com, enter the code and your project opens on any device. You can read everything; only our team edits."
           },
           {
-            "title": "See every phase on one timeline",
-            "description": "Every milestone, checkpoint and delivery in order, with what's done, what's in progress and what's next."
+            "title": "Follow every sprint",
+            "description": "Sprints and checkpoints in order, so you always know what is done, what is being built and what comes next."
           },
           {
-            "title": "Always up to date",
-            "description": "Our team updates it as the work moves, so you always know where things stand, on top of our daily and weekly updates."
+            "title": "Talk to us anytime",
+            "description": "A question about a stage? Message us on WhatsApp or by email, straight from the Tracker."
           }
         ],
-        "legend": {
-          "completed": "Done",
-          "in_progress": "In progress",
-          "pending": "Up next"
-        },
-        "footnote": "No account needed · Read-only view",
+        "footnote": "No account needed · Read-only · Updated by our team",
         "close": "Close"
       }
     },

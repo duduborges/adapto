@@ -276,7 +276,6 @@ export function Process({ dict }: ProcessProps) {
         open={explainerOpen}
         onClose={closeExplainer}
         t={t}
-        steps={steps}
       />
     </Section>
   );
