@@ -196,52 +196,139 @@
         "prompt": "Vous voulez comprendre comment fonctionne notre Tracker ?",
         "button": "Voir comment ça marche",
         "eyebrow": "Adapto Tracker",
-        "title": "Comment fonctionne le Tracker",
-        "lead": "Un accès privé, en lecture seule, à votre projet, mis à jour par notre équipe au fil du travail.",
-        "pillCaption": "Chaque phase est découpée en jalons. Vous voyez chacun passer de « à venir » à « terminé », en temps réel.",
+        "title": "Votre projet, étape par étape.",
+        "lead": "Comme le suivi d'une livraison, mais pour votre software. Une page privée qui montre où en est votre projet, ce que livre chaque sprint et quand nous avons besoin de vous. Vous consultez ; notre équipe la tient à jour.",
         "demo": {
-          "project": "Projet exemple",
-          "progress": "Avancement",
+          "project": "Projet exemple · Système d’inventaire",
+          "code": "RM-7F3K9Q2WXA",
           "readOnly": "Lecture seule",
           "here": "Vous êtes ici",
-          "milestones": "Jalons",
+          "hint": "Touchez une étape pour voir ce que vous y liriez.",
           "status": {
             "completed": "Terminé",
             "in_progress": "En cours",
             "pending": "À venir"
           },
-          "sample": [
-            "Modèle de données",
-            "Flux principaux",
-            "Intégrations",
-            "Rapports et tableaux de bord",
-            "Version candidate"
+          "types": {
+            "start": "Départ",
+            "milestone": "Sprint",
+            "checkpoint": "Point de contrôle",
+            "end": "Fin"
+          },
+          "fields": {
+            "objective": "Objectif",
+            "aligned": "Ce que nous avons convenu",
+            "links": "Liens",
+            "delivers": "Ce que livre ce sprint",
+            "screens": "Écrans",
+            "email": "Courriel envoyé",
+            "summary": "Résumé",
+            "finalLink": "Votre projet"
+          },
+          "nodes": [
+            {
+              "type": "start",
+              "status": "completed",
+              "title": "Lancement",
+              "date": "3 mars",
+              "objective": "Un seul système pour l'inventaire, les ventes et les achats, à la place de trois tableurs.",
+              "aligned": "Pensé d'abord pour le mobile de l'équipe d'entrepôt. Le comptable a un accès en lecture seule.",
+              "links": [
+                "Document de périmètre",
+                "Maquettes"
+              ]
+            },
+            {
+              "type": "milestone",
+              "status": "completed",
+              "title": "Données et connexion",
+              "date": "3 – 14 mars",
+              "delivers": "Votre équipe se connecte avec ses propres comptes, et chaque produit, fournisseur et entrepôt est au même endroit."
+            },
+            {
+              "type": "milestone",
+              "status": "completed",
+              "title": "Inventaire",
+              "date": "17 – 28 mars",
+              "delivers": "Les stocks par entrepôt, mis à jour à chaque entrée et sortie, avec une alerte quand un article s'épuise."
+            },
+            {
+              "type": "checkpoint",
+              "status": "completed",
+              "title": "Réunion de revue",
+              "date": "31 mars",
+              "email": "Le sprint 2 est prêt pour votre revue. On parcourt l'inventaire ensemble jeudi à 10 h ?"
+            },
+            {
+              "type": "milestone",
+              "status": "in_progress",
+              "title": "Ventes et factures",
+              "date": "1er – 11 avril",
+              "delivers": "Soumissions et factures créées directement depuis l'inventaire, avec les taxes calculées automatiquement."
+            },
+            {
+              "type": "checkpoint",
+              "status": "pending",
+              "title": "En attente de vous",
+              "date": "14 avril",
+              "email": "Pour terminer le prochain sprint, il nous faut votre liste de prix et vos paramètres de taxes. Pourriez-vous nous les envoyer d’ici vendredi ?"
+            },
+            {
+              "type": "milestone",
+              "status": "pending",
+              "title": "Rapports",
+              "date": "14 – 25 avril",
+              "delivers": "Rapports de ventes, de marges et de stocks, prêts à exporter ou à recevoir par courriel chaque lundi."
+            },
+            {
+              "type": "end",
+              "status": "pending",
+              "title": "Mise en ligne",
+              "date": "30 avril",
+              "summary": "À la fin du projet, vous lisez ici ce qui a été livré et trouvez le lien vers votre système en ligne.",
+              "link": "inventaire.votreentreprise.com"
+            }
           ]
         },
+        "typesLabel": "Quatre types d'étapes",
+        "types": {
+          "start": {
+            "title": "Départ",
+            "description": "Le début du projet : le plan, les objectifs, ce que nous avons convenu avec vous, les dates clés et les liens."
+          },
+          "milestone": {
+            "title": "Jalon",
+            "description": "Un sprint de développement, en langage clair : ce qu'il livre et pourquoi c'est important pour vous. À venir, en cours ou terminé."
+          },
+          "checkpoint": {
+            "title": "Point de contrôle",
+            "description": "Une pause dans le projet : une réunion à planifier, un problème à signaler ou quelque chose dont nous avons besoin. Chaque point de contrôle vous parvient aussi par courriel."
+          },
+          "end": {
+            "title": "Fin",
+            "description": "La ligne d'arrivée : un résumé de tout ce qui a été construit et le lien vers votre projet final."
+          }
+        },
+        "stepsLabel": "Comment vous l’utilisez",
         "steps": [
           {
-            "title": "Vous recevez un code d'accès",
-            "description": "Au lancement, nous vous envoyons un code privé. Pas de compte, pas de mot de passe, rien à installer."
+            "title": "Vous recevez un code de salle",
+            "description": "Chaque projet est une salle privée. Au lancement, nous vous envoyons son code d'accès. Pas de compte, pas de mot de passe."
           },
           {
             "title": "Ouvrez le Tracker",
-            "description": "Rendez-vous sur tracker.adapto-sh.com, saisissez le code et votre projet s'ouvre, sur n'importe quel appareil."
+            "description": "Rendez-vous sur tracker.adapto-sh.com, saisissez le code et votre projet s'ouvre, sur n'importe quel appareil. Vous pouvez tout lire ; seule notre équipe modifie."
           },
           {
-            "title": "Toutes les phases sur une seule ligne du temps",
-            "description": "Chaque jalon, point de contrôle et livraison dans l'ordre : ce qui est fait, ce qui est en cours et ce qui vient ensuite."
+            "title": "Suivez chaque sprint",
+            "description": "Sprints et points de contrôle dans l'ordre, pour toujours savoir ce qui est fait, ce qui se construit et ce qui suit."
           },
           {
-            "title": "Toujours à jour",
-            "description": "Notre équipe le met à jour au fil du travail : vous savez toujours où en est le projet, en plus de nos mises à jour quotidiennes et hebdomadaires."
+            "title": "Parlez-nous à tout moment",
+            "description": "Une question sur une étape ? Écrivez-nous sur WhatsApp ou par courriel, directement depuis le Tracker."
           }
         ],
-        "legend": {
-          "completed": "Terminé",
-          "in_progress": "En cours",
-          "pending": "À venir"
-        },
-        "footnote": "Aucun compte requis · Lecture seule",
+        "footnote": "Aucun compte requis · Lecture seule · Mis à jour par notre équipe",
         "close": "Fermer"
       }
     },
