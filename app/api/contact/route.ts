@@ -8,7 +8,7 @@ import { site } from '@/lib/site';
 export const dynamic = 'force-dynamic';
 
 const FROM_EMAIL =
-  process.env.RESEND_FROM || 'contact@resend.eduardoborges.dev.br';
+  process.env.RESEND_FROM || 'Adapto <contact@adapto-sh.com>';
 const TO_EMAIL = process.env.CONTACT_TO || site.email;
 
 const esc = (s: string) =>
