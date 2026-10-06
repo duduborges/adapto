@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { getDictionary } from '@/lib/i18n/get-dictionary';
 import { ADAPTO_MARK_PNG_DATA_URL } from '@/lib/brand/adapto-mark';
+import { outfitFonts } from '@/lib/brand/outfit-og';
 import type { Locale } from '@/types';
 
 export const alt = 'Adapto Software House — Vancouver, Canada';
@@ -43,6 +44,7 @@ export default async function Image({
           justifyContent: 'space-between',
           // Satori bands radial gradients and renders `filter: blur` as a hard
           // box — a linear gradient is the only warm wash it draws cleanly.
+          fontFamily: 'Outfit',
           backgroundImage: `linear-gradient(135deg, ${INK} 0%, ${INK} 50%, #3d2823 100%)`,
           padding: '72px 80px',
           position: 'relative',
@@ -93,6 +95,7 @@ export default async function Image({
                 flexDirection: 'column',
                 fontSize: locale === 'fr' ? 54 : 64,
                 lineHeight: 1.06,
+                fontWeight: 600,
                 letterSpacing: -1.5,
               }}
             >
@@ -150,6 +153,6 @@ export default async function Image({
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts: outfitFonts() },
   );
 }

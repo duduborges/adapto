@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { ADAPTO_MARK_PNG_DATA_URL } from '@/lib/brand/adapto-mark';
+import { outfitFonts } from '@/lib/brand/outfit-og';
 import { getServiceContent, isServiceSlug } from '@/lib/services';
 import type { Locale } from '@/types';
 
@@ -35,6 +36,7 @@ export default async function Image({
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
+          fontFamily: 'Outfit',
           backgroundImage: `linear-gradient(135deg, ${INK} 0%, ${INK} 50%, #3d2823 100%)`,
           padding: '72px 80px',
           position: 'relative',
@@ -75,6 +77,7 @@ export default async function Image({
                 flexDirection: 'column',
                 fontSize: long ? 54 : 64,
                 lineHeight: 1.06,
+                fontWeight: 600,
                 letterSpacing: -1.5,
               }}
             >
@@ -129,6 +132,6 @@ export default async function Image({
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts: outfitFonts() },
   );
 }

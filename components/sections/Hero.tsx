@@ -91,7 +91,7 @@ function HeroPoster({
 }
 
 /**
- * The accent line, its first word ("adapts" / "s'adapte") trying on fifteen
+ * The accent line, its first word ("adapts" / "s'adapte") trying on ten
  * very different typefaces before switching back to the brand one, as
  * software adapting to each company (.adapt-* in globals.css).
  * The alternates are drawn by a pseudo-element from data-word, so the heading
@@ -101,13 +101,9 @@ function HeroPoster({
 /** The subset faces the animation flicks through (@font-face in globals.css). */
 const ADAPT_FACES = [
   'italic 700 1em "Adapt Playfair"',
-  '1em "Adapt Pacifico"',
-  '1em "Adapt Bebas"',
   '1em "Adapt Pixel"',
   '1em "Adapt Abril"',
   '1em "Adapt Typewriter"',
-  '1em "Adapt Gothic"',
-  '700 1em "Adapt Caveat"',
   '1em "Adapt Bungee"',
   '1em "Adapt Monoton"',
 ];

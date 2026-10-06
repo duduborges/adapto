@@ -393,25 +393,22 @@ body {
  * the animation does, and Hero.tsx warms them up once the page is idle.
  */
 @font-face { font-family: 'Adapt Playfair'; src: url('/fonts/adapt/playfair.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Pacifico'; src: url('/fonts/adapt/pacifico.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Bebas'; src: url('/fonts/adapt/bebas.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Pixel'; src: url('/fonts/adapt/pixel.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Abril'; src: url('/fonts/adapt/abril.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Typewriter'; src: url('/fonts/adapt/typewriter.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Gothic'; src: url('/fonts/adapt/gothic.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Caveat'; src: url('/fonts/adapt/caveat.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Bungee'; src: url('/fonts/adapt/bungee.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Monoton'; src: url('/fonts/adapt/monoton.woff2') format('woff2'); font-display: swap; }
 
 /*
  * Hero headline: the word "adapts" (components/sections/Hero.tsx, AdaptWord).
- * Every 11s it flicks through 15 very different typefaces, about a third of
- * a second each (mono, playfair, black, pacifico, thin, bebas, pixel, abril, outline, gothic, caps, typewriter, bungee, caveat, monoton),
- * then switches straight back to Outfit. The alternates are the ::after
- * (content from data-word) laid over the word, which is hidden meanwhile; the
- * word keeps its box, so the line never reflows. Faces wider than the word are
- * scaled down uniformly to fit (ratios measured in Chrome per language,
- * "adapts" / "s'adapte").
+ * Every 10.5s it flicks through 10 very different typefaces, under half a
+ * second each (Geist Mono, Playfair italic, Geist Black, Press Start 2P,
+ * Abril Fatface, Outfit outline, Geist caps, Special Elite, Bungee, Monoton),
+ * then switches straight back to Outfit. The alternates are the
+ * ::after (content from data-word) laid over the word, which is hidden
+ * meanwhile; the word keeps its box, so the line never reflows. Faces wider
+ * than the word are scaled down uniformly to fit (ratios measured in Chrome
+ * per language, "adapts" / "s'adapte").
  */
 .adapt-word {
   position: relative;
@@ -431,31 +428,26 @@ body {
   transform-origin: 0 85%;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .adapt-ink { animation: adapt-ink 11s 1.2s infinite; }
-  .adapt-word::after { animation: adapt-alt 11s 1.2s infinite; }
+  .adapt-ink { animation: adapt-ink 10.5s 1.2s infinite; }
+  .adapt-word::after { animation: adapt-alt 10.5s 1.2s infinite; }
 }
 /* Hidden while an alternate shows, then back in one frame: no settle motion */
 @keyframes adapt-ink {
   0%, 2% { opacity: 1; }
-  2.001%, 42.909% { opacity: 0; }
-  42.910%, 100% { opacity: 1; }
+  2.001%, 44.857% { opacity: 0; }
+  44.858%, 100% { opacity: 1; }
 }
 @keyframes adapt-alt {
   0%, 2% { opacity: 0; }
-  2.001%, 4.727% { opacity: 1; font-family: var(--font-geist-mono), ui-monospace, monospace; font-weight: 500; font-style: normal; text-transform: none; letter-spacing: -0.04em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-mono)); }
-  4.728%, 7.455% { opacity: 1; font-family: 'Adapt Playfair', serif; font-weight: 700; font-style: italic; text-transform: none; letter-spacing: -0.01em; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  7.456%, 10.182% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 900; font-style: normal; text-transform: none; letter-spacing: -0.05em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-black)); }
-  10.183%, 12.909% { opacity: 1; font-family: 'Adapt Pacifico', cursive; letter-spacing: 0; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  12.910%, 15.636% { opacity: 1; font-family: var(--font-outfit), sans-serif; font-weight: 100; font-style: normal; text-transform: none; letter-spacing: -0.01em; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  15.637%, 18.364% { opacity: 1; font-family: 'Adapt Bebas', sans-serif; letter-spacing: 0.02em; font-weight: 400; font-style: normal; text-transform: uppercase; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  18.365%, 21.091% { opacity: 1; font-family: 'Adapt Pixel', monospace; letter-spacing: -0.06em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-pixel)); }
-  21.092%, 23.818% { opacity: 1; font-family: 'Adapt Abril', serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  23.819%, 26.545% { opacity: 1; font-family: var(--font-outfit), sans-serif; font-weight: 700; font-style: normal; text-transform: none; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 0.03em #c35622; transform: scale(var(--fit-outline)); }
-  26.546%, 29.273% { opacity: 1; font-family: 'Adapt Gothic', serif; letter-spacing: 0; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  29.274%, 32.000% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 700; font-style: normal; text-transform: uppercase; letter-spacing: 0; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-caps)); }
-  32.001%, 34.727% { opacity: 1; font-family: 'Adapt Typewriter', monospace; letter-spacing: -0.03em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-typewriter)); }
-  34.728%, 37.455% { opacity: 1; font-family: 'Adapt Bungee', sans-serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-bungee)); }
-  37.456%, 40.182% { opacity: 1; font-family: 'Adapt Caveat', cursive; letter-spacing: 0; font-weight: 700; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  40.183%, 42.909% { opacity: 1; font-family: 'Adapt Monoton', sans-serif; letter-spacing: -0.04em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-monoton)); }
-  42.910%, 100% { opacity: 0; }
+  2.001%, 6.286% { opacity: 1; font-family: var(--font-geist-mono), ui-monospace, monospace; font-weight: 500; font-style: normal; text-transform: none; letter-spacing: -0.04em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-mono)); }
+  6.287%, 10.571% { opacity: 1; font-family: 'Adapt Playfair', serif; font-weight: 700; font-style: italic; text-transform: none; letter-spacing: -0.01em; color: inherit; -webkit-text-stroke: 0; transform: none; }
+  10.572%, 14.857% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 900; font-style: normal; text-transform: none; letter-spacing: -0.05em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-black)); }
+  14.858%, 19.143% { opacity: 1; font-family: 'Adapt Pixel', monospace; letter-spacing: -0.06em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-pixel)); }
+  19.144%, 23.429% { opacity: 1; font-family: 'Adapt Abril', serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: none; }
+  23.430%, 27.714% { opacity: 1; font-family: var(--font-outfit), sans-serif; font-weight: 700; font-style: normal; text-transform: none; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 0.03em #c35622; transform: scale(var(--fit-outline)); }
+  27.715%, 32.000% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 700; font-style: normal; text-transform: uppercase; letter-spacing: 0; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-caps)); }
+  32.001%, 36.286% { opacity: 1; font-family: 'Adapt Typewriter', monospace; letter-spacing: -0.03em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-typewriter)); }
+  36.287%, 40.571% { opacity: 1; font-family: 'Adapt Bungee', sans-serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-bungee)); }
+  40.572%, 44.857% { opacity: 1; font-family: 'Adapt Monoton', sans-serif; letter-spacing: -0.04em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-monoton)); }
+  44.858%, 100% { opacity: 0; }
 }
