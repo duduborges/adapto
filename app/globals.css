@@ -24,13 +24,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Landing page: sections settle into place when a scroll ends near their top.
-   `proximity`, not `mandatory`: mandatory pulled readers away from the end of
-   sections taller than the viewport (Services with an item open) to the next
-   snap point. Scoped via a class (not globally on html) so pages without
-   section snap-points, like /privacy, scroll normally. */
+/* Landing page: one wheel/swipe gesture advances a section. Short sections jump
+   straight to the next; sections taller than the viewport scroll freely until
+   their end, then snap into the next one. Scoped via a class (not globally on
+   html) so pages without section snap-points, like /privacy, scroll normally. */
 html.snap-scroll {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -120,17 +119,18 @@ body {
  * the fold (data-armed) and plays this sequence when one scrolls in (data-on):
  *
  * Rows below the one playing stay fully hidden; they enter one at a time.
- *   0.0s  the row fades up, claim in white
- *   0.6s  strike sweeps across it (every wrapped line, in reading order)
- *   1.4s  it greys out, the ✕ appears
- *   2.0s  the Adapto panel slides in: bar grows, ring pops, check is drawn,
+ * (Timings are 0.6x the first version: the full row now plays in about 2s.)
+ *   0s  the row fades up, claim in white
+ *   0.36s  strike sweeps across it (every wrapped line, in reading order)
+ *   0.84s  it greys out, the ✕ appears
+ *   1.2s  the Adapto panel slides in: bar grows, ring pops, check is drawn,
  *         the background lights up left to right, then a sheen crosses it
  */
 .why-them {
   font-size: 1.125rem;
   line-height: 1.6;
   color: rgba(254, 254, 254, 0.45);
-  transition: color 0.9s ease 1.4s;
+  transition: color 0.54s ease 0.84s;
 }
 @media (min-width: 768px) {
   .why-them { font-size: 1.25rem; }
@@ -142,21 +142,21 @@ body {
   background-repeat: no-repeat;
   background-position: 0 58%;
   background-size: 100% 2px;
-  transition: background-size 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.6s;
+  transition: background-size 0.48s cubic-bezier(0.65, 0, 0.35, 1) 0.36s;
 }
-.why-x { transition: opacity 0.4s ease 1.5s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s; }
-.why-panel { transition: opacity 0.6s ease 2s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2s; }
-.why-bar { transform-origin: top; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 2.15s; }
-.why-glow { transform-origin: left; transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1) 2.3s; }
-.why-ring { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.3s, opacity 0.3s ease 2.3s; }
-.why-check path { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1s cubic-bezier(0.65, 0, 0.35, 1) 2.55s; }
-.why-title { transition: color 0.8s ease 2.4s; }
+.why-x { transition: opacity 0.24s ease 0.9s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s; }
+.why-panel { transition: opacity 0.36s ease 1.2s, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1) 1.2s; }
+.why-bar { transform-origin: top; transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1) 1.29s; }
+.why-glow { transform-origin: left; transition: transform 0.78s cubic-bezier(0.22, 1, 0.36, 1) 1.38s; }
+.why-ring { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 1.38s, opacity 0.18s ease 1.38s; }
+.why-check path { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 0.6s cubic-bezier(0.65, 0, 0.35, 1) 1.53s; }
+.why-title { transition: color 0.48s ease 1.44s; }
 .why-sheen { opacity: 0; }
-.why-row { transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.why-row { transition: opacity 0.36s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1); }
 [data-armed]:not([data-on]).why-row { opacity: 0; transform: translateY(28px); transition: none; }
 
 /* Rewinding must be instant — with the transitions above it would play the
-   sequence backwards (the panel fading out over ~2s) right after load. */
+   sequence backwards (the panel fading out over ~1.2s) right after load. */
 [data-armed]:not([data-on]) :is(.why-them, .why-strike, .why-x, .why-panel, .why-bar, .why-glow, .why-ring, .why-title),
 [data-armed]:not([data-on]) .why-check path {
   transition: none;
@@ -170,7 +170,7 @@ body {
 [data-armed]:not([data-on]) .why-ring { transform: scale(0.4); opacity: 0; }
 [data-armed]:not([data-on]) .why-check path { stroke-dashoffset: 1; }
 [data-armed]:not([data-on]) .why-title { color: rgba(254, 254, 254, 0.55); }
-[data-on] .why-sheen { animation: why-sheen 1.5s cubic-bezier(0.22, 1, 0.36, 1) 2.7s both; }
+[data-on] .why-sheen { animation: why-sheen 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.62s both; }
 
 @keyframes why-sheen {
   0% { opacity: 0; transform: translateX(-120%); }
@@ -388,11 +388,10 @@ body {
 
 /*
  * Extra typefaces for the hero's "adapts" (see .adapt-word below), all from
- * Google Fonts (OFL), cut down to the letters of "adapts" / "s'adapte" with
+ * Google Fonts (OFL), cut down to the letters of "adapts" / "s'adapte" (and "adapter") with
  * the API's text= parameter, 2-9 KB each. Nothing on the page uses them until
  * the animation does, and Hero.tsx warms them up once the page is idle.
  */
-@font-face { font-family: 'Adapt Playfair'; src: url('/fonts/adapt/playfair.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Pixel'; src: url('/fonts/adapt/pixel.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Abril'; src: url('/fonts/adapt/abril.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Adapt Typewriter'; src: url('/fonts/adapt/typewriter.woff2') format('woff2'); font-display: swap; }
@@ -401,10 +400,10 @@ body {
 
 /*
  * Hero headline: the word "adapts" (components/sections/Hero.tsx, AdaptWord).
- * Every 10.5s it flicks through 10 very different typefaces, under half a
- * second each (Geist Mono, Playfair italic, Geist Black, Press Start 2P,
- * Abril Fatface, Outfit outline, Geist caps, Special Elite, Bungee, Monoton),
- * then switches straight back to Outfit. The alternates are the
+ * Every 10s it flicks through 9 very different typefaces, under half a
+ * second each (Geist Mono, Geist Black, Press Start 2P, Abril Fatface, Outfit
+ * outline, Geist caps, Special Elite, Bungee, Monoton), then switches straight
+ * back to Outfit. The alternates are the
  * ::after (content from data-word) laid over the word, which is hidden
  * meanwhile; the word keeps its box, so the line never reflows. Faces wider
  * than the word are scaled down uniformly to fit (ratios measured in Chrome
@@ -414,9 +413,9 @@ body {
   position: relative;
   display: inline-block;
   white-space: nowrap;
-  --fit-mono: 0.906; --fit-black: 0.924; --fit-pixel: 0.540; --fit-outline: 0.983; --fit-caps: 0.763; --fit-typewriter: 0.960; --fit-bungee: 0.736; --fit-monoton: 0.706;
+  --fit-mono: 0.906; --fit-black: 0.924; --fit-pixel: 0.540; --fit-abril: 1.000; --fit-outline: 0.983; --fit-caps: 0.763; --fit-typewriter: 0.960; --fit-bungee: 0.736; --fit-monoton: 0.706;
 }
-:lang(fr) .adapt-word { --fit-mono: 0.827; --fit-black: 0.918; --fit-pixel: 0.493; --fit-outline: 0.981; --fit-caps: 0.775; --fit-typewriter: 0.963; --fit-bungee: 0.725; --fit-monoton: 0.719; }
+:lang(fr) .adapt-word { --fit-mono: 0.827; --fit-black: 0.918; --fit-pixel: 0.493; --fit-abril: 1.000; --fit-outline: 0.981; --fit-caps: 0.775; --fit-typewriter: 0.963; --fit-bungee: 0.725; --fit-monoton: 0.719; }
 .adapt-word::after {
   content: attr(data-word);
   position: absolute;
@@ -428,26 +427,52 @@ body {
   transform-origin: 0 85%;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .adapt-ink { animation: adapt-ink 10.5s 1.2s infinite; }
-  .adapt-word::after { animation: adapt-alt 10.5s 1.2s infinite; }
+  .adapt-ink { animation: adapt-ink 10s 1.2s infinite; }
+  .adapt-word::after { animation: adapt-alt 10s 1.2s infinite; }
 }
 /* Hidden while an alternate shows, then back in one frame: no settle motion */
 @keyframes adapt-ink {
   0%, 2% { opacity: 1; }
-  2.001%, 44.857% { opacity: 0; }
-  44.858%, 100% { opacity: 1; }
+  2.001%, 42.500% { opacity: 0; }
+  42.501%, 100% { opacity: 1; }
 }
 @keyframes adapt-alt {
   0%, 2% { opacity: 0; }
-  2.001%, 6.286% { opacity: 1; font-family: var(--font-geist-mono), ui-monospace, monospace; font-weight: 500; font-style: normal; text-transform: none; letter-spacing: -0.04em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-mono)); }
-  6.287%, 10.571% { opacity: 1; font-family: 'Adapt Playfair', serif; font-weight: 700; font-style: italic; text-transform: none; letter-spacing: -0.01em; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  10.572%, 14.857% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 900; font-style: normal; text-transform: none; letter-spacing: -0.05em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-black)); }
-  14.858%, 19.143% { opacity: 1; font-family: 'Adapt Pixel', monospace; letter-spacing: -0.06em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-pixel)); }
-  19.144%, 23.429% { opacity: 1; font-family: 'Adapt Abril', serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: none; }
-  23.430%, 27.714% { opacity: 1; font-family: var(--font-outfit), sans-serif; font-weight: 700; font-style: normal; text-transform: none; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 0.03em #c35622; transform: scale(var(--fit-outline)); }
-  27.715%, 32.000% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 700; font-style: normal; text-transform: uppercase; letter-spacing: 0; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-caps)); }
-  32.001%, 36.286% { opacity: 1; font-family: 'Adapt Typewriter', monospace; letter-spacing: -0.03em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-typewriter)); }
-  36.287%, 40.571% { opacity: 1; font-family: 'Adapt Bungee', sans-serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-bungee)); }
-  40.572%, 44.857% { opacity: 1; font-family: 'Adapt Monoton', sans-serif; letter-spacing: -0.04em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-monoton)); }
-  44.858%, 100% { opacity: 0; }
+  2.001%, 6.500% { opacity: 1; font-family: var(--font-geist-mono), ui-monospace, monospace; font-weight: 500; font-style: normal; text-transform: none; letter-spacing: -0.04em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-mono)); }
+  6.501%, 11.000% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 900; font-style: normal; text-transform: none; letter-spacing: -0.05em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-black)); }
+  11.001%, 15.500% { opacity: 1; font-family: 'Adapt Pixel', monospace; letter-spacing: -0.06em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-pixel)); }
+  15.501%, 20.000% { opacity: 1; font-family: 'Adapt Abril', serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: scale(var(--fit-abril)); color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-abril)); }
+  20.001%, 24.500% { opacity: 1; font-family: var(--font-outfit), sans-serif; font-weight: 700; font-style: normal; text-transform: none; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 0.03em #c35622; transform: scale(var(--fit-outline)); }
+  24.501%, 29.000% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 700; font-style: normal; text-transform: uppercase; letter-spacing: 0; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-caps)); }
+  29.001%, 33.500% { opacity: 1; font-family: 'Adapt Typewriter', monospace; letter-spacing: -0.03em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-typewriter)); }
+  33.501%, 38.000% { opacity: 1; font-family: 'Adapt Bungee', sans-serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-bungee)); }
+  38.001%, 42.500% { opacity: 1; font-family: 'Adapt Monoton', sans-serif; letter-spacing: -0.04em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-monoton)); }
+  42.501%, 100% { opacity: 0; }
 }
+
+/*
+ * How we work pill icons (components/sections/PhaseGlyph.tsx). The selected
+ * phase's icon moves a little: the lens scans, the checklist ticks itself,
+ * the sprint loop turns, the shield's check is drawn, the rocket idles on its
+ * flame. Ticks are visible by default, so the icon reads the same with or
+ * without the motion.
+ */
+.phase-glyph * { transform-box: fill-box; }
+.phase-glyph .pg-tick { stroke-dasharray: 1; stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .phase-glyph[data-active] .pg-scan { animation: pg-scan 2.8s ease-in-out infinite; }
+  .phase-glyph[data-active] .pg-tick { animation: pg-tick 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both; }
+  .phase-glyph[data-active] .pg-tick-2 { animation-delay: 0.45s; }
+  .phase-glyph[data-active] .pg-cycle { transform-origin: center; animation: pg-spin 6s linear infinite; }
+  .phase-glyph[data-active] .pg-rocket { animation: pg-bob 1.8s ease-in-out infinite; }
+  .phase-glyph[data-active] .pg-flame { transform-origin: 50% 0; animation: pg-flame 0.5s ease-in-out infinite alternate; }
+}
+@keyframes pg-scan {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-1.5px, 1px); }
+  66% { transform: translate(1.5px, -1px); }
+}
+@keyframes pg-tick { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes pg-spin { to { transform: rotate(360deg); } }
+@keyframes pg-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+@keyframes pg-flame { from { transform: scaleY(0.8); } to { transform: scaleY(1.1); } }

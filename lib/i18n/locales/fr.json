@@ -12,7 +12,7 @@
   "hero": {
     "title": "Un software qui",
     "titleAccent": "s'adapte à votre entreprise.",
-    "subtitle": "Software sur mesure, sites web, automatisations et intégration d'IA, conçus autour de la façon dont votre entreprise fonctionne.",
+    "subtitle": "Software sur mesure, sites web, automatisations et intégration d'IA pour que votre entreprise s'adapte à ce qui vient.",
     "subtitleShort": "Software sur mesure, sites web, automatisation et IA.",
     "cta": "Réserver un appel gratuit",
     "ctaSecondary": "Voir notre méthode",
@@ -23,13 +23,13 @@
   },
   "manifesto": {
     "eyebrow": "Manifeste",
-    "title": "L'innovation arrive sans prévenir. Votre software doit s'adapter avec vous.",
+    "title": "L'innovation arrive sans prévenir. Votre entreprise est-elle prête à s'adapter ?",
     "lead": "Votre entreprise a une façon unique de travailler. Nous apprenons à la connaître, parlons avec votre équipe et comprenons comment vous fonctionnez avant d'écrire la moindre ligne de code.",
     "marginaliaLabel": "En marge",
     "marginalia": "La culture est ce qui distingue une entreprise. Votre software devrait porter la vôtre.",
     "paragraphs": [
       "Votre software fait partie de la croissance de votre entreprise. Nous éliminons le travail manuel de votre équipe et vous donnons un vrai contrôle, des stocks aux équipes, pour que votre entreprise continue de grandir même en votre absence.",
-      "C'est pourquoi le changement commence de l'intérieur : votre culture, vos processus, vos gens et la façon dont votre entreprise se présente au monde. Le résultat : un software qui propulse, accélère et s'adapte à votre entreprise comme s'il en avait toujours fait partie."
+      "C'est pourquoi le changement commence de l'intérieur : votre culture, vos processus, vos gens et la façon dont votre entreprise se présente au monde. Le résultat : une entreprise qui s'adapte plus vite, portée par un software qui semble en avoir toujours fait partie."
     ],
     "pillars": {
       "inside": {
@@ -410,8 +410,8 @@
     }
   },
   "footer": {
-    "tagline": "Un software qui s'adapte à votre entreprise — de l'intérieur vers l'extérieur.",
-    "cta": "Prêt pour un software qui s'adapte à votre entreprise ?",
+    "tagline": "Adaptez votre entreprise, de l'intérieur vers l'extérieur.",
+    "cta": "Prêt à adapter votre entreprise ?",
     "sections": {
       "company": "Entreprise",
       "explore": "Explorer",

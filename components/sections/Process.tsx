@@ -6,6 +6,7 @@ import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { Button } from '@/components/ui/Button';
 import { TrackerExplainer } from '@/components/ui/TrackerExplainer';
+import { PhaseGlyph } from './PhaseGlyph';
 import { site } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -157,8 +158,17 @@ export function Process({ dict }: ProcessProps) {
                       className="absolute right-3 top-3 h-1.5 w-1.5 animate-pulse rounded-full bg-ember"
                     />
                   )}
-                  <span className="font-mono text-[10px] tracking-widest text-cream/35">
+                  {/* Number in the corner, so the icon fits without making the pill taller */}
+                  <span className="absolute left-3 top-3 font-mono text-[10px] tracking-widest text-cream/35">
                     {steps[key].number}
+                  </span>
+                  <span
+                    className={cn(
+                      'h-8 w-8 shrink-0 transition-colors duration-300 xl:h-10 xl:w-10',
+                      isSelected ? 'text-ember' : 'text-cream/45',
+                    )}
+                  >
+                    <PhaseGlyph kind={key} active={isSelected} />
                   </span>
                   <span
                     className={cn(
@@ -225,6 +235,9 @@ export function Process({ dict }: ProcessProps) {
                   {step.number}
                 </span>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
+                  <span className="h-6 w-6 shrink-0 text-ember/85">
+                    <PhaseGlyph kind={key} active={key === focusKey} />
+                  </span>
                   <h3 className="font-brand text-2xl text-cream">{step.title}</h3>
                   {freePhases.includes(key) && (
                     <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember">

@@ -12,7 +12,7 @@
   "hero": {
     "title": "Software that",
     "titleAccent": "adapts to your business.",
-    "subtitle": "Custom software, websites, automations and AI integration, built around the way your company works.",
+    "subtitle": "Custom software, websites, automations and AI integration that help your company adapt to what comes next.",
     "subtitleShort": "Custom software, websites, automation and AI.",
     "cta": "Book a free call",
     "ctaSecondary": "See how we work",
@@ -23,13 +23,13 @@
   },
   "manifesto": {
     "eyebrow": "Manifesto",
-    "title": "Innovation arrives without warning. Your software should adapt with you.",
+    "title": "Innovation arrives without warning. Is your company ready to adapt?",
     "lead": "Your company has a unique way of working. We get to know it, talk to your team, and learn how you operate before writing a single line of code.",
     "marginaliaLabel": "Marginalia",
     "marginalia": "Culture is what sets a company apart. Your software should carry yours.",
     "paragraphs": [
       "Your software is part of how your company grows. We eliminate manual work for your team and give you real control, from inventory to people, so your business keeps growing even when you're away.",
-      "That's why the change starts from the inside: your culture, your processes, your people and the way your company shows up to the world. The result is software that drives, accelerates and adapts to your company as if it had always been part of it."
+      "That's why the change starts from the inside: your culture, your processes, your people and the way your company shows up to the world. The result is a company that adapts faster, running on software that feels like it was always part of it."
     ],
     "pillars": {
       "inside": {
@@ -410,8 +410,8 @@
     }
   },
   "footer": {
-    "tagline": "Software that adapts to your business — from the inside out.",
-    "cta": "Ready for software that adapts to your company?",
+    "tagline": "Adapt your business, from the inside out.",
+    "cta": "Ready to adapt your company?",
     "sections": {
       "company": "Company",
       "explore": "Explore",
