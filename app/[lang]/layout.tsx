@@ -71,6 +71,8 @@ export async function generateMetadata({
       title: ogTitles[locale] ?? ogTitles.en,
       description: descriptions[locale] ?? descriptions.en,
     },
+    // Google Search Console ownership. Keep it: removing the tag un-verifies the property.
+    verification: { google: 'DylUNzT1McCdMac6X3rFHhKs3r91Hda55yBBrjf8ceQ' },
     robots: {
       index: true,
       follow: true,
