@@ -391,67 +391,63 @@ body {
 }
 
 /*
- * Extra typefaces for the hero's "adapts" (see .adapt-word below), all from
- * Google Fonts (OFL), cut down to the letters of "adapts" / "s'adapte" (and "adapter") with
- * the API's text= parameter, 2-9 KB each. Nothing on the page uses them until
- * the animation does, and Hero.tsx warms them up once the page is idle.
+ * Hero headline: the word "adapts" (components/sections/Hero.tsx, AdaptWord),
+ * large screens only (the `desk` screen; phones keep it still). It breathes
+ * along Outfit's weight axis: SemiBold (rest) -> Light -> ExtraBold ->
+ * SemiBold, every 7s. Heavier letters are wider, and not linearly (width
+ * barely moves below 500, then climbs), so each keyframe pairs the weight
+ * with the letter-spacing that holds the word's width and the rest of the
+ * line never moves: offsets measured in Chrome every 25 units of weight,
+ * averaged over "adapts" and "s'adapte" (they match within 0.002em per
+ * letter). The easing is baked into the keyframes, hence the linear timing.
+ * -0.02em is the headline's own tracking.
  */
-@font-face { font-family: 'Adapt Pixel'; src: url('/fonts/adapt/pixel.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Abril'; src: url('/fonts/adapt/abril.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Typewriter'; src: url('/fonts/adapt/typewriter.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Bungee'; src: url('/fonts/adapt/bungee.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Adapt Monoton'; src: url('/fonts/adapt/monoton.woff2') format('woff2'); font-display: swap; }
-
-/*
- * Hero headline: the word "adapts" (components/sections/Hero.tsx, AdaptWord).
- * Every 10s it flicks through 9 very different typefaces, under half a
- * second each (Geist Mono, Geist Black, Press Start 2P, Abril Fatface, Outfit
- * outline, Geist caps, Special Elite, Bungee, Monoton), then switches straight
- * back to Outfit. The alternates are the
- * ::after (content from data-word) laid over the word, which is hidden
- * meanwhile; the word keeps its box, so the line never reflows. Faces wider
- * than the word are scaled down uniformly to fit (ratios measured in Chrome
- * per language, "adapts" / "s'adapte").
- */
-.adapt-word {
-  position: relative;
-  display: inline-block;
-  white-space: nowrap;
-  --fit-mono: 0.906; --fit-black: 0.924; --fit-pixel: 0.540; --fit-abril: 1.000; --fit-outline: 0.983; --fit-caps: 0.763; --fit-typewriter: 0.960; --fit-bungee: 0.736; --fit-monoton: 0.706;
+.adapt-word { display: inline-block; white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) and (orientation: landscape) {
+  .adapt-word { animation: adapt-breathe 7s linear 1.2s infinite; }
 }
-:lang(fr) .adapt-word { --fit-mono: 0.827; --fit-black: 0.918; --fit-pixel: 0.493; --fit-abril: 1.000; --fit-outline: 0.981; --fit-caps: 0.775; --fit-typewriter: 0.963; --fit-bungee: 0.725; --fit-monoton: 0.719; }
-.adapt-word::after {
-  content: attr(data-word);
-  position: absolute;
-  left: 0;
-  top: 0;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transform-origin: 0 85%;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .adapt-ink { animation: adapt-ink 10s 1.2s infinite; }
-  .adapt-word::after { animation: adapt-alt 10s 1.2s infinite; }
-}
-/* Hidden while an alternate shows, then back in one frame: no settle motion */
-@keyframes adapt-ink {
-  0%, 2% { opacity: 1; }
-  2.001%, 42.500% { opacity: 0; }
-  42.501%, 100% { opacity: 1; }
-}
-@keyframes adapt-alt {
-  0%, 2% { opacity: 0; }
-  2.001%, 6.500% { opacity: 1; font-family: var(--font-geist-mono), ui-monospace, monospace; font-weight: 500; font-style: normal; text-transform: none; letter-spacing: -0.04em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-mono)); }
-  6.501%, 11.000% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 900; font-style: normal; text-transform: none; letter-spacing: -0.05em; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-black)); }
-  11.001%, 15.500% { opacity: 1; font-family: 'Adapt Pixel', monospace; letter-spacing: -0.06em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-pixel)); }
-  15.501%, 20.000% { opacity: 1; font-family: 'Adapt Abril', serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: scale(var(--fit-abril)); color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-abril)); }
-  20.001%, 24.500% { opacity: 1; font-family: var(--font-outfit), sans-serif; font-weight: 700; font-style: normal; text-transform: none; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 0.03em #c35622; transform: scale(var(--fit-outline)); }
-  24.501%, 29.000% { opacity: 1; font-family: var(--font-geist-sans), system-ui, sans-serif; font-weight: 700; font-style: normal; text-transform: uppercase; letter-spacing: 0; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-caps)); }
-  29.001%, 33.500% { opacity: 1; font-family: 'Adapt Typewriter', monospace; letter-spacing: -0.03em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-typewriter)); }
-  33.501%, 38.000% { opacity: 1; font-family: 'Adapt Bungee', sans-serif; letter-spacing: -0.01em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-bungee)); }
-  38.001%, 42.500% { opacity: 1; font-family: 'Adapt Monoton', sans-serif; letter-spacing: -0.04em; font-weight: 400; font-style: normal; text-transform: none; color: inherit; -webkit-text-stroke: 0; transform: scale(var(--fit-monoton)); }
-  42.501%, 100% { opacity: 0; }
+@keyframes adapt-breathe {
+  0% { font-weight: 600; letter-spacing: -0.0200em; }
+  2.5% { font-weight: 596; letter-spacing: -0.0196em; }
+  5% { font-weight: 585; letter-spacing: -0.0185em; }
+  7.5% { font-weight: 567; letter-spacing: -0.0167em; }
+  10% { font-weight: 544; letter-spacing: -0.0144em; }
+  12.5% { font-weight: 515; letter-spacing: -0.0117em; }
+  15% { font-weight: 483; letter-spacing: -0.0102em; }
+  17.5% { font-weight: 450; letter-spacing: -0.0094em; }
+  20% { font-weight: 417; letter-spacing: -0.0092em; }
+  22.5% { font-weight: 385; letter-spacing: -0.0086em; }
+  25% { font-weight: 356; letter-spacing: -0.0080em; }
+  27.5% { font-weight: 333; letter-spacing: -0.0078em; }
+  30% { font-weight: 315; letter-spacing: -0.0077em; }
+  32.5% { font-weight: 304; letter-spacing: -0.0077em; }
+  35% { font-weight: 300; letter-spacing: -0.0077em; }
+  37.5% { font-weight: 305; letter-spacing: -0.0077em; }
+  40% { font-weight: 319; letter-spacing: -0.0077em; }
+  42.5% { font-weight: 342; letter-spacing: -0.0078em; }
+  45% { font-weight: 373; letter-spacing: -0.0085em; }
+  47.5% { font-weight: 411; letter-spacing: -0.0091em; }
+  50% { font-weight: 454; letter-spacing: -0.0095em; }
+  52.5% { font-weight: 501; letter-spacing: -0.0104em; }
+  55% { font-weight: 550; letter-spacing: -0.0150em; }
+  57.5% { font-weight: 599; letter-spacing: -0.0199em; }
+  60% { font-weight: 646; letter-spacing: -0.0237em; }
+  62.5% { font-weight: 689; letter-spacing: -0.0279em; }
+  65% { font-weight: 727; letter-spacing: -0.0315em; }
+  67.5% { font-weight: 758; letter-spacing: -0.0344em; }
+  70% { font-weight: 781; letter-spacing: -0.0367em; }
+  72.5% { font-weight: 795; letter-spacing: -0.0381em; }
+  75% { font-weight: 800; letter-spacing: -0.0385em; }
+  77.5% { font-weight: 795; letter-spacing: -0.0381em; }
+  80% { font-weight: 781; letter-spacing: -0.0367em; }
+  82.5% { font-weight: 759; letter-spacing: -0.0345em; }
+  85% { font-weight: 731; letter-spacing: -0.0319em; }
+  87.5% { font-weight: 700; letter-spacing: -0.0290em; }
+  90% { font-weight: 669; letter-spacing: -0.0259em; }
+  92.5% { font-weight: 641; letter-spacing: -0.0233em; }
+  95% { font-weight: 619; letter-spacing: -0.0212em; }
+  97.5% { font-weight: 605; letter-spacing: -0.0203em; }
+  100% { font-weight: 600; letter-spacing: -0.0200em; }
 }
 
 /*

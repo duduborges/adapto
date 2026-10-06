@@ -379,11 +379,7 @@ export default function HeroScene2D({ onReady, zoom = 1 }: HeroScene2DProps) {
 
   return (
     <div className="relative mx-auto aspect-[5/4] w-full max-w-[540px] lg:max-w-none">
-      {/* Warm bloom behind the object, matching the section's ember glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-[-6%] inset-y-[-4%] rounded-[2.5rem] bg-gradient-to-br from-ember/16 via-ember/5 to-transparent blur-[90px]"
-      />
+      {/* The ember light behind the object lives in the hero slot (HeroGlow) */}
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
     </div>
   );
