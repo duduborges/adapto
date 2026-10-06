@@ -24,12 +24,16 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Landing page: one wheel/swipe gesture advances a section. Short sections jump
-   straight to the next; sections taller than the viewport scroll freely until
-   their end, then snap into the next one. Scoped via a class (not globally on
-   html) so pages without section snap-points, like /privacy, scroll normally. */
-html.snap-scroll {
-  scroll-snap-type: y mandatory;
+/* Landing page, large screens only (the `desk` screen in tailwind.config.ts):
+   one wheel/swipe gesture advances a section. Short sections jump straight to
+   the next; sections taller than the viewport scroll freely until their end,
+   then snap into the next one. Phones and tablets scroll normally. Scoped via
+   a class (not globally on html) so pages without section snap-points, like
+   /privacy, scroll normally. */
+@media (min-width: 1024px) and (orientation: landscape) {
+  html.snap-scroll {
+    scroll-snap-type: y mandatory;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

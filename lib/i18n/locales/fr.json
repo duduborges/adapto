@@ -391,6 +391,8 @@
     "subtitle": "Réservez un appel de 30 minutes. Nous écoutons comment fonctionne votre entreprise et vous disons honnêtement si nous sommes la bonne équipe pour vous.",
     "ctaPrimary": "Réserver un appel gratuit",
     "ctaSecondary": "Ou envoyez-nous un e-mail",
+    "formTitle": "Vous préférez écrire ? Envoyez-nous un message.",
+    "formNote": "Nous répondons en un jour ouvrable.",
     "form": {
       "name": "Nom complet",
       "email": "E-mail professionnel",
