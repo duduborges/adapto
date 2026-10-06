@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { ArrowRight, ArrowDown, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import { getImageProps } from 'next/image';
 import dynamic from 'next/dynamic';
 import { Container } from '@/components/ui/Container';
 import { cn } from '@/lib/utils';
@@ -130,6 +130,39 @@ function HeroGlow({ size }: { size: string }) {
   );
 }
 
+/** Transparent 1x1 GIF: what the watermark's <img> falls back to off desktop. */
+const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAACH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+/**
+ * The brand mark behind the desktop hero. Desktop only, so its sources sit
+ * behind a <source media> that matches the `desk` screen: a plain <img> in a
+ * display:none box is still downloaded, and on a throttled phone that 1200px
+ * image competed with the headline (Lighthouse mobile LCP 3.7 s). On desktop
+ * it is the largest thing in the first viewport, so the browser scores it as
+ * the LCP element: eager and high priority.
+ */
+function BrandWatermark() {
+  const {
+    props: { srcSet, src: _src, ...rest },
+  } = getImageProps({
+    src: '/logos/adapto-mark.png',
+    alt: '',
+    width: 1000,
+    height: 1000,
+    sizes: '80vh',
+    loading: 'eager',
+    fetchPriority: 'high',
+    className: 'h-[80svh] w-auto opacity-[0.12]',
+  });
+  return (
+    <picture>
+      <source media="(min-width: 1024px) and (orientation: landscape)" srcSet={srcSet} sizes="80vh" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img {...rest} alt="" src={BLANK_GIF} />
+    </picture>
+  );
+}
+
 interface HeroProps {
   dict: any;
   lang?: string;
@@ -144,13 +177,17 @@ interface HeroProps {
  * thread for ~2 s during load (Lighthouse TBT), and the 2D one never loads
  * Three.js at all.
  *
- * Both wait for the browser to go idle, so the text and the static sphere
- * paint first.
+ * Both wait for the visitor's first input (or a few seconds after load),
+ * then for the browser to go idle, so the text and the static sphere paint
+ * first and the boot stays out of the load window.
  */
 type SceneSlot = 'desktop' | 'mobile' | null;
 
 /** How much tighter the phone/tablet slot frames the object than desktop. */
 const MOBILE_ZOOM = 1.3;
+
+/** With no input, how long after `load` the scene still boots on its own. */
+const LATE_START_MS = 3500;
 
 function useSceneSlot(): SceneSlot {
   const [slot, setSlot] = useState<SceneSlot>(null);
@@ -181,9 +218,34 @@ function useSceneSlot(): SceneSlot {
       }
     };
 
-    sync();
-    mq.addEventListener('change', sync);
+    // Even on idle, the scene's boot (Three.js parse + WebGL setup, or the 2D
+    // twin) landed inside the load window and was most of the Total Blocking
+    // Time PageSpeed reported (370 ms desktop). So it waits for the visitor's
+    // first input, or a few seconds after load if none comes; the animated
+    // static sphere holds the spot until then.
+    let started = false;
+    const inputs = ['pointermove', 'pointerdown', 'wheel', 'scroll', 'keydown', 'touchstart'] as const;
+    const start = () => {
+      if (started) return;
+      started = true;
+      inputs.forEach((e) => window.removeEventListener(e, start));
+      window.removeEventListener('load', onLoad);
+      clearTimeout(lateHandle);
+      sync();
+      mq.addEventListener('change', sync);
+    };
+    let lateHandle: ReturnType<typeof setTimeout> | undefined;
+    const onLoad = () => {
+      lateHandle = setTimeout(start, LATE_START_MS);
+    };
+    inputs.forEach((e) => window.addEventListener(e, start, { passive: true, once: true }));
+    if (document.readyState === 'complete') onLoad();
+    else window.addEventListener('load', onLoad, { once: true });
+
     return () => {
+      inputs.forEach((e) => window.removeEventListener(e, start));
+      window.removeEventListener('load', onLoad);
+      clearTimeout(lateHandle);
       cancelPending();
       mq.removeEventListener('change', sync);
     };
@@ -211,20 +273,22 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
     </div>
   );
 
-  // Phone sizes follow svh, not max-height breakpoints: svh is the height with
-  // the browser's address bar shown and never changes, while a height media
-  // query flipped (and the headline grew) the moment the bar collapsed on the
-  // first scroll. The values match the old breakpoints (2.2rem at 700px, 2rem
-  // at 620px of height, and so on), just reached continuously.
+  // Phone sizes follow --svh: 1% of the screen height, measured once before
+  // first paint and frozen (see the script in app/[lang]/layout.tsx). Not
+  // height breakpoints, which flipped when the address bar collapsed on the
+  // first scroll, and not plain svh, which iOS Chrome and in-app browsers
+  // update as the bar moves, so the headline and the 3D visual jumped. The
+  // values match the old breakpoints (2.2rem at 700px, 2rem at 620px of
+  // height...), reached continuously; plain svh is the no-JS fallback.
   // French copy is longer — pull the headline ceiling down so it doesn't overflow.
   // Stacked tablets (sm+, not desk) get a larger headline — it has the full width.
   const titleClamp =
     lang === 'fr'
-      ? 'text-[clamp(2rem,3.8vw,3.8rem)] phone:text-[clamp(1.7rem,4.25svh,2rem)] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2rem,3.8vw,3.8rem)]'
-      : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:text-[clamp(2rem,5.2svh,2.6rem)] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
+      ? 'text-[clamp(2rem,3.8vw,3.8rem)] phone:text-[clamp(1.7rem,calc(var(--svh,1svh)*4.25),2rem)] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2rem,3.8vw,3.8rem)]'
+      : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:text-[clamp(2rem,calc(var(--svh,1svh)*5.2),2.6rem)] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[100svh] phone:min-h-fit phone:pb-[3.75rem] sm:pt-24 md:pt-28 desk:[@media(max-height:760px)]:pt-24 snap-start [scroll-snap-stop:always]">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[calc(var(--svh,1svh)*100)] phone:min-h-fit phone:pb-[3.75rem] sm:pt-24 md:pt-28 desk:[@media(max-height:760px)]:pt-24 snap-start [scroll-snap-stop:always]">
       {/* subtle grid background */}
       <div
         aria-hidden
@@ -243,17 +307,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
       />
       {/* Large brand mark watermark — slightly lighter than bg, bleeds off the right edge */}
       <div aria-hidden className="pointer-events-none absolute right-[-18%] top-1/2 hidden -translate-y-1/2 select-none desk:block">
-        <Image
-          src="/logos/adapto-mark.png"
-          alt=""
-          width={1000}
-          height={1000}
-          sizes="80vh"
-          // It is the largest thing in the first desktop viewport, so the
-          // browser scores it as the LCP element — lazy-loading it delayed LCP.
-          loading="eager"
-          className="h-[80svh] w-auto opacity-[0.12]"
-        />
+        <BrandWatermark />
       </div>
 
       <Container size="wide" className="relative flex w-full flex-1 flex-col pb-4 sm:pb-6 md:pb-8 desk:[@media(max-height:760px)]:pb-5">
@@ -286,9 +340,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   feeds back into the column's height. */}
               <div
                 aria-hidden
-                className="-mx-6 mb-2 flex justify-center phone:relative phone:mb-3 phone:max-h-[44svh] phone:min-h-[clamp(80px,calc(100svh-540px),110px)] phone:flex-1 md:-mx-8 desk:hidden"
+                className="-mx-6 mb-2 flex justify-center phone:relative phone:mb-3 phone:max-h-[calc(var(--svh,1svh)*44)] phone:min-h-[clamp(80px,calc(var(--svh,1svh)*100-540px),110px)] phone:flex-1 md:-mx-8 desk:hidden"
               >
-                <div className="relative aspect-[5/4] w-[min(100%,46svh)] animate-hero-in motion-reduce:animate-none phone:absolute phone:inset-y-0 phone:left-1/2 phone:h-full phone:w-auto phone:max-w-full phone:-translate-x-1/2">
+                <div className="relative aspect-[5/4] w-[min(100%,calc(var(--svh,1svh)*46))] animate-hero-in motion-reduce:animate-none phone:absolute phone:inset-y-0 phone:left-1/2 phone:h-full phone:w-auto phone:max-w-full phone:-translate-x-1/2">
                   <HeroGlow size="92%" />
                   <HeroPoster
                     hidden={sceneSlot === 'mobile' && sceneReady}
@@ -300,11 +354,11 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               </div>
 
               {/* Location chip — sits right above the headline */}
-              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:mb-[clamp(0.75rem,calc(5.3svh-25px),1.25rem)] md:mb-6 desk:mb-11 desk:[@media(max-height:820px)]:mb-6">
+              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:mb-[clamp(0.75rem,calc(var(--svh,1svh)*5.3-25px),1.25rem)] md:mb-6 desk:mb-11 desk:[@media(max-height:820px)]:mb-6">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-cream/10 bg-cream/[0.04] px-2.5 py-1 text-[10px] font-medium text-cream/50 backdrop-blur-sm md:gap-2 md:px-3.5 md:py-1.5 md:text-xs md:text-cream/80">
                   <MapPin className="h-3 w-3 text-ember/70 md:h-3.5 md:w-3.5 md:text-ember" />
                   <span>Vancouver · BC · Canada</span>
-                  <span className="hidden text-cream/30 md:inline">—</span>
+                  <span className="hidden text-cream/50 md:inline">—</span>
                   <span className="hidden text-cream/55 md:inline">{dict.hero.remote}</span>
                 </span>
               </div>
@@ -324,13 +378,13 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               >
                 {dict.hero.subtitle}
               </p>
-              <p className="hidden overflow-hidden text-[0.95rem] leading-snug text-cream/70 phone:block phone:mt-[clamp(0px,calc((100svh-620px)*100),0.75rem)] phone:max-h-[clamp(0px,calc((100svh-620px)*100),6rem)]">
+              <p className="hidden overflow-hidden text-[0.95rem] leading-snug text-cream/70 phone:block phone:mt-[clamp(0px,calc((var(--svh,1svh)*100-620px)*100),0.75rem)] phone:max-h-[clamp(0px,calc((var(--svh,1svh)*100-620px)*100),6rem)]">
                 {dict.hero.subtitleShort}
               </p>
 
               <div
                 style={{ animationDelay: '300ms' }}
-                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:mt-[clamp(1rem,calc(8svh-40px),1.75rem)] sm:mt-8 md:mt-10 desk:mt-14 desk:[@media(max-height:820px)]:mt-8"
+                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:mt-[clamp(1rem,calc(var(--svh,1svh)*8-40px),1.75rem)] sm:mt-8 md:mt-10 desk:mt-14 desk:[@media(max-height:820px)]:mt-8"
               >
                 <a
                   href={bookingHref()}
@@ -372,13 +426,13 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
             </span>
             {dict.hero.available}
           </p>
-          <p className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-cream/35 md:block">
+          <p className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50 md:block">
             <span className="text-ember">↳</span> {dict.hero.availableStrip}
           </p>
           <a
             href="#services"
             aria-label={dict.hero.scrollHint}
-            className="group inline-flex shrink-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40 transition-colors hover:text-cream"
+            className="group inline-flex shrink-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50 transition-colors hover:text-cream"
           >
             {/* Phones: arrow only — the label doesn't fit beside the status */}
             <span className="phone:sr-only">{dict.hero.scrollHint}</span>

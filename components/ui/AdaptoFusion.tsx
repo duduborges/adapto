@@ -1,14 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import {
-  animate,
-  m,
-  useInView,
-  useMotionValue,
-  useReducedMotion,
-  useTransform,
-} from 'framer-motion';
 import { CodeXml, UserRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -42,31 +34,69 @@ const teamPositions = Array.from({ length: TEAM_SIZE }, (_, i) => {
   };
 });
 
+/** Linear map of `v` from [a, b] to [c, d], clamped to the output range. */
+function remap(v: number, a: number, b: number, c: number, d: number) {
+  const t = Math.min(1, Math.max(0, (v - a) / (b - a)));
+  return c + (d - c) * t;
+}
+
+/** cubic-bezier(0.65, 0, 0.35, 1), the ease-in-out-cubic curve. */
+const easeInOutCubic = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+const DURATION_MS = 2200;
+const DELAY_MS = 300;
+
 export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-120px' });
-  const reduceMotion = useReducedMotion();
+  const glowRef = useRef<SVGCircleElement>(null);
+  const ghostRef = useRef<SVGCircleElement>(null);
+  const discRef = useRef<SVGCircleElement>(null);
+  const usRef = useRef<SVGGElement>(null);
 
-  const cx = useMotionValue(reduceMotion ? END_CX : START_CX);
-  // Outside the ring Adapto is only a dashed outline; it gains substance
-  // (and the ring warms up) as it moves in.
-  const ghostOpacity = useTransform(cx, [START_CX, END_CX], [0.7, 0]);
-  const glowOpacity = useTransform(cx, [START_CX + 80, END_CX], [0, 1]);
-  const usOffset = useTransform(cx, (v) => v - END_CX);
-
+  // The disc's centre drives everything. Outside the ring Adapto is only a
+  // dashed outline; it gains substance (and the ring warms up) as it moves
+  // in. Written straight to the SVG attributes, one rAF tween, once in view.
   useEffect(() => {
-    if (!inView) return;
-    if (reduceMotion) {
-      cx.set(END_CX);
+    const draw = (cx: number) => {
+      glowRef.current?.style.setProperty('opacity', String(remap(cx, START_CX + 80, END_CX, 0, 1)));
+      ghostRef.current?.setAttribute('cx', String(cx));
+      ghostRef.current?.style.setProperty('opacity', String(remap(cx, START_CX, END_CX, 0.7, 0)));
+      discRef.current?.setAttribute('cx', String(cx));
+      usRef.current?.setAttribute('transform', `translate(${cx - END_CX} 0)`);
+    };
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      draw(END_CX);
       return;
     }
-    const controls = animate(cx, END_CX, {
-      duration: 2.2,
-      delay: 0.3,
-      ease: [0.65, 0, 0.35, 1],
-    });
-    return () => controls.stop();
-  }, [inView, reduceMotion, cx]);
+
+    let raf = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        timer = setTimeout(() => {
+          const start = performance.now();
+          const tick = (now: number) => {
+            const t = Math.min(1, (now - start) / DURATION_MS);
+            draw(START_CX + (END_CX - START_CX) * easeInOutCubic(t));
+            if (t < 1) raf = requestAnimationFrame(tick);
+          };
+          raf = requestAnimationFrame(tick);
+        }, DELAY_MS);
+      },
+      { rootMargin: '-120px' },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      clearTimeout(timer);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
     <div ref={ref} className={cn('relative', className)}>
@@ -99,29 +129,31 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
         />
 
         {/* Warmth that builds inside the company as Adapto settles in */}
-        <m.circle
+        <circle
+          ref={glowRef}
           cx={RING.cx}
           cy={RING.cy}
           r={RING.r}
           fill="url(#adapto-fusion-glow)"
-          style={{ opacity: glowOpacity }}
+          style={{ opacity: 0 }}
         />
 
         {/* Adapto before joining — a dashed outline */}
-        <m.circle
-          cx={cx}
+        <circle
+          ref={ghostRef}
+          cx={START_CX}
           cy={RING.cy}
           r={DISC_R}
           fill="none"
           stroke="#c35622"
           strokeWidth={1.5}
           strokeDasharray="3 5"
-          style={{ opacity: ghostOpacity }}
+          style={{ opacity: 0.7 }}
         />
 
         {/* Adapto inside — only the part within the ring is solid */}
         <g clipPath="url(#adapto-fusion-ring)">
-          <m.circle cx={cx} cy={RING.cy} r={DISC_R} fill="#c35622" />
+          <circle ref={discRef} cx={START_CX} cy={RING.cy} r={DISC_R} fill="#c35622" />
         </g>
 
         {/* The client's company */}
@@ -149,7 +181,7 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
         ))}
 
         {/* Adapto — engineering, travelling with the disc */}
-        <m.g style={{ x: usOffset }}>
+        <g ref={usRef} transform={`translate(${START_CX - END_CX} 0)`}>
           <CodeXml
             x={END_CX - US_ICON / 2}
             y={RING.cy - US_ICON / 2}
@@ -159,7 +191,7 @@ export function AdaptoFusion({ youLabel, usLabel, className }: AdaptoFusionProps
             className="text-cream"
             aria-hidden
           />
-        </m.g>
+        </g>
       </svg>
 
     </div>

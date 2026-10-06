@@ -64,7 +64,7 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
         >
           <Logo variant="lockup" sizeClass="h-20 md:h-24" priority />
         </Link>
-        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
           {t.code}
         </span>
       </Container>
@@ -74,10 +74,10 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
         className="grid w-full flex-1 content-center gap-16 py-16 lg:grid-cols-12 lg:gap-10"
       >
         <div className="lg:col-span-7">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
             {t.requested}
           </p>
-          <p className="mt-4 break-all font-mono text-[clamp(1.1rem,2.6vw,1.9rem)] leading-snug text-cream/45">
+          <p className="mt-4 break-all font-mono text-[clamp(1.1rem,2.6vw,1.9rem)] leading-snug text-cream/50">
             <span>{known}</span>
             {missing && (
               <span className="nf-strike text-cream">{missing}</span>
@@ -106,7 +106,7 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
         </div>
 
         <nav aria-label={t.routesLabel} className="self-end lg:col-span-4 lg:col-start-9">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
             {t.routesLabel}
           </p>
           <ul className="mt-4 border-t border-cream/10">
@@ -119,7 +119,7 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
                   <span className="font-brand text-2xl text-cream/85 transition-colors group-hover:text-cream md:text-3xl">
                     {nav[route]}
                   </span>
-                  <span className="font-mono text-xs text-cream/30 transition-colors group-hover:text-ember">
+                  <span className="font-mono text-xs text-cream/50 transition-colors group-hover:text-ember">
                     {`${home}#${route}`}
                   </span>
                 </Link>

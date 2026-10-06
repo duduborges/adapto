@@ -149,13 +149,13 @@ export function Differentials({ dict }: DifferentialsProps) {
       <div ref={listRef} className="mt-20 md:mt-24">
         {/* Column headers — Adapto column has stronger visual weight */}
         <div className="grid grid-cols-12 items-center gap-4 border-b border-cream/15 pb-4 md:gap-8">
-          <span className="col-span-1 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+          <span className="col-span-1 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
             #
           </span>
-          <span className="col-span-5 font-mono text-xs uppercase tracking-[0.2em] text-cream/45">
+          <span className="col-span-5 font-mono text-xs uppercase tracking-[0.2em] text-cream/50">
             {dict.differentials.contrast.themHeading}
           </span>
-          <span className="col-span-6 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-ember">
+          <span className="col-span-6 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-ember-500">
             <span className="h-1.5 w-1.5 rounded-full bg-ember shadow-[0_0_6px_rgba(195,86,34,0.9)]" />
             {dict.differentials.contrast.usHeading}
           </span>
@@ -167,14 +167,14 @@ export function Differentials({ dict }: DifferentialsProps) {
             data-row
             className="why-row grid grid-cols-12 gap-4 border-b border-cream/10 py-10 md:gap-8 md:py-16"
           >
-            <span className="col-span-1 pt-1 font-mono text-sm text-cream/40">
+            <span className="col-span-1 pt-1 font-mono text-sm text-cream/50">
               0{i + 1}
             </span>
 
             {/* "Them" — shows large and white, gets struck, then shrinks and greys */}
             <div className="col-span-11 md:col-span-5">
               <div className="flex items-start gap-3">
-                <X className="why-x mt-1.5 h-5 w-5 shrink-0 text-cream/35" aria-hidden />
+                <X className="why-x mt-1.5 h-5 w-5 shrink-0 text-cream/50" aria-hidden />
                 <p className="why-them">
                   <span className="why-strike">{row.them}</span>
                 </p>

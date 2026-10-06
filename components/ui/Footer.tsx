@@ -51,7 +51,7 @@ export function Footer({ lang, dict }: FooterProps) {
                 <MapPin className="h-4 w-4 text-ember" />
                 {dict.contact.info.location}
               </div>
-              <p className="text-sm text-cream/40">
+              <p className="text-sm text-cream/50">
                 <a
                   href={`mailto:${site.email}`}
                   className="transition-colors hover:text-cream/70"
@@ -63,7 +63,7 @@ export function Footer({ lang, dict }: FooterProps) {
           </div>
 
           <nav className="space-y-4 lg:col-span-3">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/40">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/50">
               {dict.footer.sections.services}
             </h2>
             <ul className="space-y-3">
@@ -81,7 +81,7 @@ export function Footer({ lang, dict }: FooterProps) {
           </nav>
 
           <nav className="space-y-4 lg:col-span-2">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/40">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/50">
               {dict.footer.sections.explore}
             </h2>
             <ul className="space-y-3">
@@ -119,7 +119,7 @@ export function Footer({ lang, dict }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-cream/10 pt-8 text-xs text-cream/40 md:flex-row md:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-cream/10 pt-8 text-xs text-cream/50 md:flex-row md:items-center">
           <p>
             © {year} {site.fullName}. {dict.footer.rights}
           </p>

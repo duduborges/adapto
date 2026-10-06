@@ -1,3 +1,4 @@
+import path from 'node:path';
 import type { NextConfig } from 'next';
 
 /**
@@ -57,11 +58,29 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365,
   },
   experimental: {
-    // CSS goes into the HTML instead of two render-blocking requests: on a
-    // throttled phone that took first paint (= LCP) from 2.4 s to 1.6 s.
-    inlineCss: true,
+    // Off: inlined, the 70 KB stylesheet went into every HTML response three
+    // times (a <style> plus two copies in the RSC payload), 79 KB gzipped
+    // instead of 35. Lighthouse mobile scored the linked stylesheet higher
+    // (LCP 3.2 -> 3.0 s), and it stays cached between pages.
+    inlineCss: false,
     // Only pull the icons actually imported instead of the whole lucide barrel.
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react'],
+  },
+  webpack(config, { isServer }) {
+    // Next's client polyfills target browsers older than any we support
+    // (lib/polyfills.js says which): swap them for the one still needed.
+    if (!isServer) {
+      // Next requires it by relative path, which the alias sees resolved
+      // but without the extension.
+      const polyfill = require
+        .resolve('next/dist/build/polyfills/polyfill-module')
+        .replace(/\.js$/, '');
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        [polyfill]: path.resolve(__dirname, 'lib/polyfills.js'),
+      };
+    }
+    return config;
   },
   async redirects() {
     return [

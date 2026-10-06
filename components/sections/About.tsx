@@ -34,7 +34,7 @@ export function About({ dict }: AboutProps) {
           style={{ '--reveal-duration': '0.5s' } as React.CSSProperties}
           className="col-span-12 space-y-3 md:col-span-3"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
             ↳ {dict.manifesto.marginaliaLabel}
           </p>
           <p className="font-brand text-base leading-snug text-cream/50">
@@ -62,7 +62,7 @@ export function About({ dict }: AboutProps) {
       {/* Pillars as a numbered list, not cards */}
       <div className="mt-28 grid grid-cols-12 gap-x-4 gap-y-8 md:gap-8 md:mt-36">
         <div className="col-span-12 md:col-span-3">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
             ↳ Three principles
           </p>
         </div>
@@ -77,7 +77,7 @@ export function About({ dict }: AboutProps) {
                   key={key}
                   className="group grid grid-cols-12 items-baseline gap-4 py-8 md:gap-8 md:py-10"
                 >
-                  <span className="col-span-2 font-mono text-sm text-ember md:col-span-1">
+                  <span className="col-span-2 font-mono text-sm text-ember-500 md:col-span-1">
                     0{i + 1}
                   </span>
                   <h3 className="col-span-10 font-brand text-2xl text-cream md:col-span-4 md:text-3xl">

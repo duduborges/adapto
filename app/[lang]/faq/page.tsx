@@ -87,7 +87,7 @@ export default async function FaqPage({ params }: { params: Params }) {
         }}
       />
       <RevealObserver />
-      <Header lang={locale} dict={dict} />
+      <Header lang={locale} dict={{ nav: dict.nav, contact: dict.contact, process: dict.process }} />
       <main className="relative">
         {/* ---------- Hero ---------- */}
         <section className="relative isolate overflow-hidden pb-16 pt-32 md:pb-20 md:pt-40">
@@ -102,7 +102,7 @@ export default async function FaqPage({ params }: { params: Params }) {
           />
           <Container size="wide">
             <nav aria-label="Breadcrumb">
-              <ol className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-cream/45">
+              <ol className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-cream/50">
                 <li>
                   <Link href={`/${locale}`} className="transition-colors hover:text-cream">
                     {ui.home}
@@ -138,7 +138,7 @@ export default async function FaqPage({ params }: { params: Params }) {
 
             {/* Topic shortcuts */}
             <nav aria-label={t.topics} className="mt-16 border-t border-cream/10 pt-8 md:mt-20">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-cream/45">{t.topics}</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-cream/50">{t.topics}</p>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {groups.map((g) => (
                   <li key={g.id}>
@@ -173,7 +173,7 @@ export default async function FaqPage({ params }: { params: Params }) {
               <div className="grid grid-cols-12 gap-x-4 gap-y-10 md:gap-x-8">
                 <div className="col-span-12 lg:col-span-4">
                   <div className="lg:sticky lg:top-32">
-                    <span className="font-mono text-xs font-semibold text-ember">
+                    <span className="font-mono text-xs font-semibold text-ember-500">
                       {String(gi + 1).padStart(2, '0')}
                     </span>
                     <div className="mt-5 flex items-center gap-4">
@@ -209,7 +209,7 @@ export default async function FaqPage({ params }: { params: Params }) {
           </section>
         ))}
 
-        <Contact dict={dict} />
+        <Contact dict={{ contact: dict.contact }} />
       </main>
       <Footer lang={locale} dict={dict} />
     </>

@@ -78,9 +78,9 @@ export function Portfolio({ dict }: PortfolioProps) {
                 {/* Meta + content */}
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-center justify-between">
-                    <p className="font-mono text-sm text-ember">0{i + 1}</p>
+                    <p className="font-mono text-sm text-ember-500">0{i + 1}</p>
                     {c.year && (
-                      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
                         {c.year}
                       </p>
                     )}
@@ -98,7 +98,7 @@ export function Portfolio({ dict }: PortfolioProps) {
                       {c.tags.map((t) => (
                         <li
                           key={t}
-                          className="font-mono text-[11px] uppercase tracking-[0.18em] text-cream/40"
+                          className="font-mono text-[11px] uppercase tracking-[0.18em] text-cream/50"
                         >
                           · {t}
                         </li>

@@ -101,7 +101,7 @@ export function Process({ dict }: ProcessProps) {
           >
             <Gift className="h-3.5 w-3.5 md:h-4 md:w-4" />
           </span>
-          <p className="text-sm font-semibold leading-snug text-ember md:text-base">
+          <p className="text-sm font-semibold leading-snug text-ember-500 md:text-base">
             {dict.process.freeHeadline}
           </p>
         </div>
@@ -159,13 +159,13 @@ export function Process({ dict }: ProcessProps) {
                     />
                   )}
                   {/* Number in the corner, so the icon fits without making the pill taller */}
-                  <span className="absolute left-3 top-3 font-mono text-[10px] tracking-widest text-cream/35">
+                  <span className="absolute left-3 top-3 font-mono text-[10px] tracking-widest text-cream/50">
                     {steps[key].number}
                   </span>
                   <span
                     className={cn(
                       'h-8 w-8 shrink-0 transition-colors duration-300 xl:h-10 xl:w-10',
-                      isSelected ? 'text-ember' : 'text-cream/45',
+                      isSelected ? 'text-ember' : 'text-cream/50',
                     )}
                   >
                     <PhaseGlyph kind={key} active={isSelected} />
@@ -179,7 +179,7 @@ export function Process({ dict }: ProcessProps) {
                     {steps[key].title}
                   </span>
                   {freePhases.includes(key) && (
-                    <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember">
+                    <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember-500">
                       {t.free}
                     </span>
                   )}
@@ -190,7 +190,7 @@ export function Process({ dict }: ProcessProps) {
 
           <div
             style={{ '--seg': phaseKeys.length + 1 } as React.CSSProperties}
-            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-r-full xl:h-40 border-r-2 border-r-ember/30 bg-ink-800 pr-2 font-brand text-lg text-cream/40 xl:w-32">
+            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-r-full xl:h-40 border-r-2 border-r-ember/30 bg-ink-800 pr-2 font-brand text-lg text-cream/50 xl:w-32">
             {t.end}
           </div>
         </div>
@@ -231,7 +231,7 @@ export function Process({ dict }: ProcessProps) {
                 )}
               </div>
               <div className="min-w-0">
-                <span className="font-mono text-[10px] tracking-widest text-cream/35">
+                <span className="font-mono text-[10px] tracking-widest text-cream/50">
                   {step.number}
                 </span>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
@@ -240,7 +240,7 @@ export function Process({ dict }: ProcessProps) {
                   </span>
                   <h3 className="font-brand text-2xl text-cream">{step.title}</h3>
                   {freePhases.includes(key) && (
-                    <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember">
+                    <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember-500">
                       {t.free}
                     </span>
                   )}

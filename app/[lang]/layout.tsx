@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { notFound } from 'next/navigation';
 import { Outfit } from 'next/font/google';
 import { i18n, hreflang } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/get-dictionary';
@@ -9,7 +8,7 @@ import type { Locale } from '@/types';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Analytics } from '@/components/analytics/Analytics';
 import { CookieBanner } from '@/components/analytics/CookieBanner';
-import { MotionProvider } from '@/components/ui/MotionProvider';
+import { geistSans, geistMono } from '@/lib/fonts';
 import '../globals.css';
 
 // The wordmark's typeface ("dapto" in the logo is Outfit SemiBold): every
@@ -104,23 +103,35 @@ export default async function LangLayout({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+  // The middleware skips paths with a dot, so /anything.txt lands here with
+  // lang = "anything.txt": without this it rendered the home page with a 200
+  // (a soft 404, and duplicate content for search engines).
+  if (!(i18n.locales as readonly string[]).includes(lang)) notFound();
   const locale = lang as Locale;
   const dict = await getDictionary(locale);
 
   return (
     <html
       lang={locale === 'fr' ? 'fr-CA' : 'en-CA'}
-      className={`${GeistSans.variable} ${GeistMono.variable} ${outfit.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable}`}
       suppressHydrationWarning
     >
       <head>
+        {/* Freezes --svh (1% of the screen height) before first paint. The
+            hero's phone layout is sized from it; it only changes when the
+            width does (rotation), never when a mobile browser's toolbar
+            collapses on scroll, which used to resize the hero mid-scroll. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var r=document.documentElement,w=0;function s(){if(innerWidth===w)return;w=innerWidth;r.style.setProperty('--svh',innerHeight/100+'px')}s();addEventListener('resize',s)})();",
+          }}
+        />
         <JsonLd lang={locale} />
       </head>
       <body className="bg-ink font-sans text-cream antialiased">
-        <MotionProvider>
-          {children}
-          <CookieBanner lang={locale} dict={dict} />
-        </MotionProvider>
+        {children}
+        <CookieBanner lang={locale} dict={{ cookies: dict.cookies }} />
         <Analytics />
       </body>
     </html>

@@ -4,14 +4,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, m } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { usePresence } from '@/lib/use-presence';
 import type { Locale } from '@/types';
 import { i18n, languageShort } from '@/lib/i18n/config';
 import { Logo } from './Logo';
 import { Button } from './Button';
 import { site, bookingHref, bookingIsExternal } from '@/lib/site';
 import { Menu, X, ArrowRight, ArrowUpRight, MapPin, Mail } from 'lucide-react';
+
+/** The mobile drawer's slide, in and out. */
+const DRAWER_MS = 320;
 
 /** Page sections the desktop nav links to, in page order. */
 const SECTION_IDS = ['services', 'process', 'why', 'manifesto', 'contact'] as const;
@@ -196,6 +199,8 @@ export function Header({ lang, dict }: HeaderProps) {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  // Kept mounted while the panel slides out (DRAWER_MS)
+  const drawer = usePresence(open, DRAWER_MS);
   const navListRef = useRef<HTMLUListElement>(null);
   const pillRef = useRef<HTMLLIElement>(null);
   const pillLabelsRef = useRef<HTMLDivElement>(null);
@@ -378,20 +383,17 @@ export function Header({ lang, dict }: HeaderProps) {
       {/* Editorial mobile drawer — portaled to body to escape the header's
           backdrop-filter containing block, which traps fixed-position children. */}
       {mounted &&
+        drawer.rendered &&
         createPortal(
-          <AnimatePresence>
-            {open && (
-              <MobileDrawer
-                key="mobile-drawer"
-                dict={dict}
-                lang={lang}
-                navItems={navItems}
-                switchLanguage={switchLanguage}
-                onClose={() => setOpen(false)}
-                closeButtonRef={closeButtonRef}
-              />
-            )}
-          </AnimatePresence>,
+          <MobileDrawer
+            shown={drawer.shown}
+            dict={dict}
+            lang={lang}
+            navItems={navItems}
+            switchLanguage={switchLanguage}
+            onClose={() => setOpen(false)}
+            closeButtonRef={closeButtonRef}
+          />,
           document.body,
         )}
     </header>
@@ -399,6 +401,8 @@ export function Header({ lang, dict }: HeaderProps) {
 }
 
 interface MobileDrawerProps {
+  /** Visible state (false while entering and exiting): see usePresence. */
+  shown: boolean;
   dict: any;
   lang: Locale;
   navItems: { label: string; href: string }[];
@@ -408,6 +412,7 @@ interface MobileDrawerProps {
 }
 
 function MobileDrawer({
+  shown,
   dict,
   lang,
   navItems,
@@ -424,32 +429,26 @@ function MobileDrawer({
       className="fixed inset-0 z-[60] lg:hidden"
     >
       {/* Scrim — 50% black, dismissible */}
-      <m.button
+      <button
         type="button"
         aria-label="Close menu"
         onClick={onClose}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="absolute inset-0 bg-ink-950/55 backdrop-blur-sm motion-reduce:backdrop-blur-none"
+        className={cn(
+          'absolute inset-0 bg-ink-950/55 backdrop-blur-sm transition-opacity duration-200 motion-reduce:backdrop-blur-none',
+          shown ? 'opacity-100' : 'opacity-0',
+        )}
       />
 
       {/* Drawer panel — slides from the right */}
-      <m.aside
-        initial={{ x: '100%' }}
-        animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-        transition={{
-          type: 'tween',
-          ease: [0.22, 1, 0.36, 1],
-          duration: 0.32,
-        }}
-        className="absolute inset-y-0 right-0 flex w-full max-w-[420px] flex-col overflow-y-auto bg-ink shadow-[-30px_0_60px_-20px_rgba(0,0,0,0.6)] motion-reduce:transition-none"
+      <aside
+        className={cn(
+          'absolute inset-y-0 right-0 flex w-full max-w-[420px] flex-col overflow-y-auto bg-ink shadow-[-30px_0_60px_-20px_rgba(0,0,0,0.6)] transition-transform duration-[320ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+          shown ? 'translate-x-0' : 'translate-x-full',
+        )}
       >
         {/* Top bar inside drawer */}
         <div className="flex h-20 items-center justify-between border-b border-cream/10 px-6">
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50">
             Menu
           </span>
           <button
@@ -467,39 +466,37 @@ function MobileDrawer({
         <nav className="flex-1 px-6 py-10">
           <ul className="space-y-1">
             {navItems.map((item, i) => (
-              <m.li
+              <li
                 key={item.href}
-                initial={{ opacity: 0, x: 12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 0.3,
-                  delay: 0.08 + i * 0.05,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
+                style={{ transitionDelay: shown ? `${80 + i * 50}ms` : '0ms' }}
+                className={cn(
+                  'transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+                  shown ? 'translate-x-0 opacity-100' : 'translate-x-3 opacity-0',
+                )}
               >
                 <a
                   href={item.href}
                   onClick={onClose}
                   className="group flex items-baseline gap-4 py-3 transition-colors"
                 >
-                  <span className="font-mono text-xs text-cream/30 transition-colors group-hover:text-ember">
+                  <span className="font-mono text-xs text-cream/50 transition-colors group-hover:text-ember">
                     0{i + 1}
                   </span>
                   <span className="font-brand text-3xl leading-tight tracking-tight text-cream transition-colors group-hover:text-ember">
                     {item.label}
                   </span>
                 </a>
-              </m.li>
+              </li>
             ))}
           </ul>
         </nav>
 
         {/* CTA — editorial underline style, matches Hero/Contact */}
-        <m.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-start border-t border-cream/10 px-6 pb-6 pt-8"
+        <div
+          className={cn(
+            'flex flex-col items-start border-t border-cream/10 px-6 pb-6 pt-8 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+            shown ? 'translate-y-0 opacity-100 delay-[400ms]' : 'translate-y-2 opacity-0',
+          )}
         >
           <a
             href={bookingHref()}
@@ -523,17 +520,17 @@ function MobileDrawer({
             {dict.process.tracker.cta.button}
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
-        </m.div>
+        </div>
 
         {/* Footer — language switcher + meta */}
-        <m.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 0.45 }}
-          className="border-t border-cream/10 px-6 py-6"
+        <div
+          className={cn(
+            'border-t border-cream/10 px-6 py-6 transition-opacity duration-300 motion-reduce:transition-none',
+            shown ? 'opacity-100 delay-[450ms]' : 'opacity-0',
+          )}
         >
           <div className="flex items-center justify-between">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-cream/40">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-cream/50">
               Language
             </span>
             <div className="flex items-center gap-3" role="group" aria-label="Language switcher">
@@ -547,7 +544,7 @@ function MobileDrawer({
                     'font-mono text-xs font-semibold tracking-[0.2em] transition-colors',
                     locale === lang
                       ? 'text-ember'
-                      : 'text-cream/40 hover:text-cream',
+                      : 'text-cream/50 hover:text-cream',
                   )}
                 >
                   {languageShort[locale]}
@@ -572,8 +569,8 @@ function MobileDrawer({
               </a>
             </li>
           </ul>
-        </m.div>
-      </m.aside>
+        </div>
+      </aside>
     </div>
   );
 }

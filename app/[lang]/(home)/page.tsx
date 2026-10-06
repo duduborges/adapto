@@ -19,22 +19,25 @@ export default async function Home({
   const { lang } = await params;
   const dict = await getDictionary(lang as Locale);
 
+  // Client sections get only their slice of the dictionary: each prop is
+  // serialized into the page's RSC payload, and the whole dictionary per
+  // section was most of the HTML's weight on a throttled phone.
   return (
     <>
       <ScrollSnap />
       <RevealObserver />
-      <Header lang={lang as Locale} dict={dict} />
+      <Header lang={lang as Locale} dict={{ nav: dict.nav, contact: dict.contact, process: dict.process }} />
       <main className="relative">
         {/* Order: Hero → Services (what we do) → Process (how we do it)
             → Differentials (why us) → About (who we are) → Contact
             (the FAQ has its own page, /[lang]/faq)
             Portfolio (work) is pulled out for now — no real cases to show yet. */}
-        <Hero dict={dict} lang={lang} />
-        <Services dict={dict} lang={lang} />
-        <Process dict={dict} />
-        <Differentials dict={dict} />
-        <About dict={dict} />
-        <Contact dict={dict} />
+        <Hero dict={{ hero: dict.hero }} lang={lang} />
+        <Services dict={{ services: dict.services }} lang={lang} />
+        <Process dict={{ process: dict.process }} />
+        <Differentials dict={{ differentials: dict.differentials }} />
+        <About dict={{ manifesto: dict.manifesto }} />
+        <Contact dict={{ contact: dict.contact }} />
       </main>
       <Footer lang={lang as Locale} dict={dict} />
     </>
