@@ -33,7 +33,7 @@ export function Portfolio({ dict }: PortfolioProps) {
         <h2
           data-reveal
           style={{ '--reveal-y': '12px' } as React.CSSProperties}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
+          className="col-span-12 max-w-5xl text-balance font-brand text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
           {dict.work.title.replace(/\.$/, '')}
           <span className="text-ember">.</span>
@@ -49,7 +49,7 @@ export function Portfolio({ dict }: PortfolioProps) {
 
       {!hasCases && (
         <div className="mt-16 border-y border-dashed border-cream/15 px-6 py-16 text-center">
-          <p className="font-serif text-2xl italic text-cream/50">
+          <p className="font-brand text-2xl text-cream/50">
             {dict.work.empty}
           </p>
         </div>
@@ -86,7 +86,7 @@ export function Portfolio({ dict }: PortfolioProps) {
                     )}
                   </div>
 
-                  <h3 className="mt-4 font-serif text-2xl leading-tight tracking-tight text-cream">
+                  <h3 className="mt-4 font-brand text-2xl leading-tight tracking-tight text-cream">
                     {c.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-cream/60">

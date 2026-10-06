@@ -84,7 +84,7 @@ export function Process({ dict }: ProcessProps) {
         <h2
           data-reveal
           style={{ '--reveal-y': '12px' } as React.CSSProperties}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
+          className="col-span-12 max-w-5xl text-balance font-brand text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
           {dict.process.title.replace(/\.$/, '')}
           <span className="text-ember">.</span>
@@ -118,7 +118,7 @@ export function Process({ dict }: ProcessProps) {
           <span aria-hidden className="pill-sheen pointer-events-none absolute inset-y-0 left-0 z-10 w-1/5" />
           <div
             style={{ '--seg': 0 } as React.CSSProperties}
-            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-l-full xl:h-40 border-l-2 border-l-ember bg-ink-800 pl-2 font-serif text-lg text-cream/70 xl:w-32"
+            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-l-full xl:h-40 border-l-2 border-l-ember bg-ink-800 pl-2 font-brand text-lg text-cream/70 xl:w-32"
           >
             {t.start}
           </div>
@@ -162,7 +162,7 @@ export function Process({ dict }: ProcessProps) {
                   </span>
                   <span
                     className={cn(
-                      'font-serif text-xl leading-[1.1] transition-colors duration-300 xl:text-2xl',
+                      'font-brand text-xl leading-[1.1] transition-colors duration-300 xl:text-2xl',
                       isSelected ? 'text-cream' : 'text-cream/60',
                     )}
                   >
@@ -180,7 +180,7 @@ export function Process({ dict }: ProcessProps) {
 
           <div
             style={{ '--seg': phaseKeys.length + 1 } as React.CSSProperties}
-            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-r-full xl:h-40 border-r-2 border-r-ember/30 bg-ink-800 pr-2 font-serif text-lg text-cream/40 xl:w-32">
+            className="pill-seg flex h-32 w-28 shrink-0 items-center justify-center rounded-r-full xl:h-40 border-r-2 border-r-ember/30 bg-ink-800 pr-2 font-brand text-lg text-cream/40 xl:w-32">
             {t.end}
           </div>
         </div>
@@ -225,7 +225,7 @@ export function Process({ dict }: ProcessProps) {
                   {step.number}
                 </span>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
-                  <h3 className="font-serif text-2xl text-cream">{step.title}</h3>
+                  <h3 className="font-brand text-2xl text-cream">{step.title}</h3>
                   {freePhases.includes(key) && (
                     <span className="inline-flex items-center rounded-full border border-ember/30 bg-ember/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ember">
                       {t.free}
@@ -242,7 +242,7 @@ export function Process({ dict }: ProcessProps) {
       {/* Tracker CTA — explain it to prospects, open it for clients */}
       <div className="mt-20 flex flex-col gap-10 border-t border-cream/10 pt-12 desk:mt-[5svh] desk:pt-[4.5svh] lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
-          <p className="font-serif text-2xl leading-tight text-cream md:text-3xl">
+          <p className="font-brand text-2xl leading-tight text-cream md:text-3xl">
             {t.explainer.prompt}
           </p>
           <Button

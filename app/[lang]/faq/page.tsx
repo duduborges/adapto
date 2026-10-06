@@ -116,9 +116,9 @@ export default async function FaqPage({ params }: { params: Params }) {
             </nav>
 
             <div className="mt-12 grid grid-cols-12 items-end gap-x-4 gap-y-10 md:mt-16 lg:gap-x-12">
-              <h1 className="col-span-12 text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[1.02] tracking-[-0.02em] text-cream lg:col-span-7">
-                <span className="block">{t.title}</span>
-                <span className="mt-1 block font-serif font-normal italic text-ember">
+              <h1 className="col-span-12 text-[clamp(2.6rem,6vw,5rem)] font-brand font-semibold leading-[1.02] tracking-[-0.02em] text-cream lg:col-span-7">
+                <span className="block">{t.title}</span>{' '}
+                <span className="mt-1 block font-brand font-semibold text-ember">
                   {t.titleAccent}
                 </span>
               </h1>
@@ -128,7 +128,7 @@ export default async function FaqPage({ params }: { params: Params }) {
                   href={bookingHref()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group mt-8 inline-flex items-baseline gap-3 border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
+                  className="group mt-8 inline-flex items-baseline gap-3 border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
                 >
                   <span>{dict.nav.book}</span>
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
@@ -182,7 +182,7 @@ export default async function FaqPage({ params }: { params: Params }) {
                           <ServiceGlyph kind={g.key} />
                         </span>
                       )}
-                      <h2 className="font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:text-5xl">
+                      <h2 className="font-brand text-4xl leading-[1.05] tracking-[-0.01em] text-cream md:text-5xl">
                         {g.title}
                         <span className="text-ember">.</span>
                       </h2>

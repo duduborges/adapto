@@ -70,7 +70,7 @@ export function Contact({ dict }: ContactProps) {
         <h2
           data-reveal
           style={{ '--reveal-y': '12px' } as React.CSSProperties}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.02] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
+          className="col-span-12 max-w-5xl text-balance font-brand text-4xl sm:text-5xl leading-[1.02] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
         >
           {dict.contact.title.split('.')[0]}
           <span className="text-ember">.</span>
@@ -85,7 +85,7 @@ export function Contact({ dict }: ContactProps) {
         </h2>
       </div>
 
-      <div className="mt-16 grid grid-cols-12 gap-8 md:mt-20">
+      <div className="mt-16 grid grid-cols-12 gap-x-4 gap-y-8 md:gap-8 md:mt-20">
         {/* Big book-a-call CTA — left column */}
         <div
           data-reveal
@@ -101,7 +101,7 @@ export function Contact({ dict }: ContactProps) {
             {...(bookingIsExternal()
               ? { target: '_blank', rel: 'noopener noreferrer' }
               : {})}
-            className="group mt-10 inline-flex max-w-full items-baseline gap-3 border-b border-ember pb-1 font-serif text-3xl leading-tight text-cream transition-colors hover:text-ember md:text-4xl"
+            className="group mt-10 inline-flex max-w-full items-baseline gap-3 border-b border-ember pb-1 font-brand text-3xl leading-tight text-cream transition-colors hover:text-ember md:text-4xl"
           >
             <Calendar className="h-6 w-6 self-center" />
             <span>{dict.contact.ctaPrimary}</span>
@@ -172,7 +172,7 @@ export function Contact({ dict }: ContactProps) {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="group inline-flex items-baseline gap-3 self-start whitespace-nowrap border-b border-ember pb-1 font-serif text-xl text-cream transition-colors hover:text-ember disabled:opacity-50 md:text-2xl"
+                className="group inline-flex items-baseline gap-3 self-start whitespace-nowrap border-b border-ember pb-1 font-brand text-xl text-cream transition-colors hover:text-ember disabled:opacity-50 md:text-2xl"
               >
                 {status === 'sending'
                   ? dict.contact.form.sending

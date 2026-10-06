@@ -90,6 +90,55 @@ function HeroPoster({
   );
 }
 
+/**
+ * The accent line, its first word ("adapts" / "s'adapte") trying on fifteen
+ * very different typefaces before switching back to the brand one, as
+ * software adapting to each company (.adapt-* in globals.css).
+ * The alternates are drawn by a pseudo-element from data-word, so the heading
+ * text stays one plain word for crawlers and screen readers, and the word
+ * keeps its own width, so the rest of the line never moves.
+ */
+/** The subset faces the animation flicks through (@font-face in globals.css). */
+const ADAPT_FACES = [
+  'italic 700 1em "Adapt Playfair"',
+  '1em "Adapt Pacifico"',
+  '1em "Adapt Bebas"',
+  '1em "Adapt Pixel"',
+  '1em "Adapt Abril"',
+  '1em "Adapt Typewriter"',
+  '1em "Adapt Gothic"',
+  '700 1em "Adapt Caveat"',
+  '1em "Adapt Bungee"',
+  '1em "Adapt Monoton"',
+];
+
+function AdaptWord({ text }: { text: string }) {
+  // Fetch the alternate faces (2-9 KB each) once the page is idle, so the
+  // first flick already shows them instead of the fallback
+  useEffect(() => {
+    if (!document.fonts?.load) return;
+    const warm = () => ADAPT_FACES.forEach((f) => document.fonts.load(f, text).catch(() => {}));
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(warm, { timeout: 3000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(warm, 1000);
+    return () => clearTimeout(id);
+  }, [text]);
+
+  const space = text.indexOf(' ');
+  const word = space === -1 ? text : text.slice(0, space);
+  const rest = space === -1 ? '' : text.slice(space);
+  return (
+    <>
+      <span className="adapt-word" data-word={word}>
+        <span className="adapt-ink">{word}</span>
+      </span>
+      {rest}
+    </>
+  );
+}
+
 interface HeroProps {
   dict: any;
   lang?: string;
@@ -255,11 +304,11 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               </div>
               <h1
                 style={{ animationDelay: '60ms' }}
-                className={`${titleClamp} animate-hero-in motion-reduce:animate-none font-medium leading-[0.98] tracking-[-0.02em] text-cream`}
+                className={`${titleClamp} animate-hero-in motion-reduce:animate-none font-brand font-semibold leading-[0.98] tracking-[-0.02em] text-cream`}
               >
-                <span className="block">{dict.hero.title}</span>
-                <span className="mt-2 block font-serif italic text-ember desk:mt-0">
-                  {dict.hero.titleAccent}
+                <span className="block">{dict.hero.title}</span>{' '}
+                <span className="mt-2 block text-ember desk:mt-1">
+                  <AdaptWord text={dict.hero.titleAccent} />
                 </span>
               </h1>
 
@@ -282,7 +331,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   {...(bookingIsExternal()
                     ? { target: '_blank', rel: 'noopener noreferrer' }
                     : {})}
-                  className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
+                  className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
                 >
                   <span>{dict.hero.cta}</span>
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />

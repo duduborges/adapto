@@ -62,7 +62,7 @@ export function Services({ dict, lang }: ServicesProps) {
         <h2
           data-reveal
           style={{ '--reveal-y': '12px' } as React.CSSProperties}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
+          className="col-span-12 max-w-5xl text-balance font-brand text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:col-span-8 md:text-6xl"
         >
           {dict.services.title.replace(/\.$/, '')}
           <span className="text-ember">.</span>
@@ -95,19 +95,19 @@ export function Services({ dict, lang }: ServicesProps) {
                   setOpen(isOpen ? null : key);
                   setAnimKey(isOpen ? null : key);
                 }}
-                className="group grid w-full grid-cols-12 items-center gap-6 px-2 py-8 text-left transition-colors hover:bg-cream/[0.02] md:gap-10 md:px-4 md:py-12"
+                className="group grid w-full grid-cols-12 items-center gap-x-3 gap-y-6 px-2 py-8 text-left transition-colors hover:bg-cream/[0.02] md:gap-10 md:px-4 md:py-12"
                 aria-expanded={isOpen}
                 aria-controls={`service-panel-${key}`}
               >
-                <span className="col-span-2 font-mono text-sm font-semibold text-ember md:col-span-1">
+                <span className="col-span-1 font-mono text-sm font-semibold text-ember">
                   0{i + 1}
                 </span>
-                <div className="col-span-8 flex items-center gap-4 md:col-span-9 md:gap-6">
+                <div className="col-span-9 flex min-w-0 items-center gap-4 md:gap-6">
                   <span className="svc-tile flex shrink-0 items-center justify-center rounded-xl border">
                     <ServiceGlyph kind={key} />
                   </span>
                   <h3
-                    className={`font-serif text-3xl leading-tight tracking-tight transition-colors md:text-5xl ${
+                    className={`min-w-0 hyphens-auto font-brand text-[1.45rem] leading-tight tracking-tight transition-colors sm:text-3xl md:text-5xl ${
                       isOpen
                         ? 'text-cream'
                         : 'text-cream/70 group-hover:text-cream'
@@ -154,7 +154,7 @@ export function Services({ dict, lang }: ServicesProps) {
                         // must not catch keyboard focus
                         tabIndex={isOpen ? undefined : -1}
                         style={{ '--d': '0.1s' } as React.CSSProperties}
-                        className="svc-in group/link mt-8 inline-flex items-baseline gap-3 border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
+                        className="svc-in group/link mt-8 inline-flex items-baseline gap-3 border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
                       >
                         <span>{item.link}</span>
                         <ArrowRight className="h-5 w-5 self-center transition-transform group-hover/link:translate-x-1" />

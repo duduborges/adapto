@@ -34,8 +34,8 @@ export function Footer({ lang, dict }: FooterProps) {
   return (
     <footer className="relative border-t border-cream/10 bg-ink-950 snap-start scroll-mt-20 md:scroll-mt-24">
       <Container size="wide" className="py-16 md:py-20">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
-          <div className="space-y-6 sm:col-span-2 lg:col-span-4">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-6 lg:gap-y-12">
+          <div className="space-y-6 sm:col-span-2 lg:col-span-3">
             <Link
               href={`/${lang}`}
               aria-label="Adapto — home"
@@ -98,8 +98,8 @@ export function Footer({ lang, dict }: FooterProps) {
             </ul>
           </nav>
 
-          <div className="space-y-5 sm:col-span-2 lg:col-span-3">
-            <p className="font-serif text-2xl leading-tight text-cream md:text-3xl">
+          <div className="space-y-5 sm:col-span-2 lg:col-span-4">
+            <p className="font-brand text-2xl leading-tight text-cream md:text-3xl">
               {dict.footer.cta}
             </p>
             <Button

@@ -33,7 +33,7 @@ function Heading({ text }: { text: string }) {
 }
 
 const h2Class =
-  'text-balance font-serif text-4xl leading-[1.05] tracking-[-0.01em] text-cream sm:text-5xl md:text-6xl';
+  'text-balance font-brand text-4xl leading-[1.05] tracking-[-0.01em] text-cream sm:text-5xl md:text-6xl';
 
 export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageProps) {
   const index = SERVICES.findIndex((s) => s.slug === slug);
@@ -83,9 +83,9 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                 <span className="text-ember">{ui.service} {String(index + 1).padStart(2, '0')}</span>
                 <span className="text-cream/25"> / {String(SERVICES.length).padStart(2, '0')}</span>
               </p>
-              <h1 className="mt-6 text-[clamp(2.6rem,6vw,4.75rem)] font-medium leading-[1.02] tracking-[-0.02em] text-cream">
-                <span className="block">{content.title}</span>
-                <span className="mt-1 block font-serif font-normal italic text-ember">
+              <h1 className="mt-6 text-[clamp(2.6rem,6vw,4.75rem)] font-brand font-semibold leading-[1.02] tracking-[-0.02em] text-cream">
+                <span className="block">{content.title}</span>{' '}
+                <span className="mt-1 block font-brand font-semibold text-ember">
                   {content.titleAccent}
                 </span>
               </h1>
@@ -98,7 +98,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                   href={bookingHref()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
+                  className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
                 >
                   <span>{dict.nav.book}</span>
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
@@ -221,7 +221,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
               <span className="font-mono text-xs font-semibold text-ember">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h3 className="mt-6 font-serif text-2xl leading-tight text-cream md:text-[1.75rem]">
+              <h3 className="mt-6 font-brand text-2xl leading-tight text-cream md:text-[1.75rem]">
                 {item.title}
               </h3>
               <p className="mt-3 text-base leading-relaxed text-cream/60">{item.description}</p>
@@ -254,7 +254,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
               <span className="font-mono text-xs font-semibold tracking-widest text-ember">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h3 className="mt-3 font-serif text-2xl leading-tight text-cream">{step.title}</h3>
+              <h3 className="mt-3 font-brand text-2xl leading-tight text-cream">{step.title}</h3>
               <p className="mt-3 text-base leading-relaxed text-cream/60">{step.description}</p>
             </li>
           ))}
@@ -274,7 +274,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                 <Gift aria-hidden className="h-5 w-5" />
               </span>
               <div>
-                <p className="font-serif text-3xl leading-tight text-cream md:text-4xl">
+                <p className="font-brand text-3xl leading-tight text-cream md:text-4xl">
                   <Heading text={ui.free.title} />
                 </p>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-cream/70 md:text-lg">
@@ -313,7 +313,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
               <span className="flex h-9 w-9 items-center justify-center rounded-full border border-ember/50 bg-ember/10 text-ember">
                 <Check aria-hidden className="h-4 w-4" />
               </span>
-              <h3 className="mt-6 font-serif text-2xl leading-tight text-cream">
+              <h3 className="mt-6 font-brand text-2xl leading-tight text-cream">
                 {dict.differentials.items[k].title}
               </h3>
               <p className="mt-3 text-base leading-relaxed text-cream/60">
@@ -356,7 +356,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cream/[0.12] bg-cream/[0.02] p-2 text-ember/75 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-ember/50 group-hover:text-ember md:h-12 md:w-12 md:p-2.5">
                       <ServiceGlyph kind={s.key} />
                     </span>
-                    <span className="font-serif text-2xl leading-tight text-cream/75 transition-colors group-hover:text-cream md:text-4xl">
+                    <span className="font-brand text-2xl leading-tight text-cream/75 transition-colors group-hover:text-cream md:text-4xl">
                       {dict.services.items[s.key].title}
                     </span>
                   </span>

@@ -185,7 +185,7 @@ function NodeDetail({ node, d }: { node: DemoNode; d: Copy['demo'] }) {
           <Icon aria-hidden className="h-4 w-4" strokeWidth={1.75} />
         </span>
         <span className={label}>{d.types[node.type]}</span>
-        <span className="font-serif text-xl leading-tight text-cream">{node.title}</span>
+        <span className="font-brand text-xl leading-tight text-cream">{node.title}</span>
         <StatusChip status={node.status} label={d.status[node.status]} />
         <span className="ml-auto font-mono text-[11px] text-cream/40">{node.date}</span>
       </div>
@@ -343,7 +343,7 @@ export function TrackerExplainer({ open, onClose, t }: TrackerExplainerProps) {
                 </span>
                 <h3
                   id="tracker-explainer-title"
-                  className="mt-4 text-balance font-serif text-3xl leading-[1.1] text-cream md:text-5xl"
+                  className="mt-4 text-balance font-brand text-3xl leading-[1.1] text-cream md:text-5xl"
                 >
                   {e.title.replace(/\.$/, '')}
                   <span className="text-ember">.</span>
@@ -382,7 +382,7 @@ export function TrackerExplainer({ open, onClose, t }: TrackerExplainerProps) {
                 <div className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 md:px-6 md:py-5">
                   <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2">
                     <span className="h-2 w-2 rounded-full bg-ember" aria-hidden />
-                    <span className="font-serif text-lg text-cream md:text-xl">{d.project}</span>
+                    <span className="font-brand text-lg text-cream md:text-xl">{d.project}</span>
                     <span className="inline-flex items-center gap-1.5 rounded-md border border-cream/10 bg-cream/[0.03] px-2 py-0.5 font-mono text-[10px] text-cream/55">
                       <KeyRound aria-hidden className="h-3 w-3 text-ember" />
                       {d.code}
@@ -437,7 +437,7 @@ export function TrackerExplainer({ open, onClose, t }: TrackerExplainerProps) {
                           </span>
                           <span
                             className={cn(
-                              'font-serif text-base leading-[1.15] xl:text-lg',
+                              'font-brand text-base leading-[1.15] xl:text-lg',
                               node.status === 'pending' ? 'text-cream/55' : 'text-cream',
                             )}
                           >
@@ -496,7 +496,7 @@ export function TrackerExplainer({ open, onClose, t }: TrackerExplainerProps) {
                                 </span>
                                 <span
                                   className={cn(
-                                    'mt-0.5 block truncate font-serif text-lg leading-tight',
+                                    'mt-0.5 block truncate font-brand text-lg leading-tight',
                                     node.status === 'pending' ? 'text-cream/55' : 'text-cream',
                                   )}
                                 >
@@ -567,7 +567,7 @@ export function TrackerExplainer({ open, onClose, t }: TrackerExplainerProps) {
                       >
                         <Icon aria-hidden className="h-[18px] w-[18px]" strokeWidth={1.75} />
                       </span>
-                      <h4 className="mt-4 font-serif text-2xl leading-tight text-cream">{e.types[type].title}</h4>
+                      <h4 className="mt-4 font-brand text-2xl leading-tight text-cream">{e.types[type].title}</h4>
                       <p className="mt-2 text-sm leading-relaxed text-cream/60">{e.types[type].description}</p>
                     </li>
                   );
@@ -600,7 +600,7 @@ export function TrackerExplainer({ open, onClose, t }: TrackerExplainerProps) {
                       )}
 
                       <div className="min-w-0">
-                        <h4 className="font-serif text-xl leading-tight text-cream md:mt-5 md:text-2xl">
+                        <h4 className="font-brand text-xl leading-tight text-cream md:mt-5 md:text-2xl">
                           <span className="mr-2 font-mono text-[11px] text-cream/35 md:hidden">0{i + 1}</span>
                           {step.title}
                         </h4>
