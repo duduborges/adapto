@@ -134,7 +134,7 @@ Alternatively, you can deploy to any platform that supports Next.js.
 
 **Adapto** - Custom Software Solutions
 - Location: Vancouver, BC, Canada
-- Email: adapto.vancouver@gmail.com
+- Email: contact@adapto-sh.com
 
 ## License
 
