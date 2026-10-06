@@ -191,7 +191,7 @@ interface HeaderProps {
 }
 
 export function Header({ lang, dict }: HeaderProps) {
-  const [scrolled, setScrolled] = useState(false);
+  const backdropRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
@@ -209,11 +209,26 @@ export function Header({ lang, dict }: HeaderProps) {
 
   useEffect(() => setMounted(true), []);
 
+  // The header's backdrop fades in with the scroll, over its first 80px,
+  // instead of switching on at once: on phones the old switch landed while the
+  // browser's address bar was collapsing, and the pair read as the page jumping.
+  // Written straight to the DOM on each frame, so it follows the finger.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    let frame = 0;
+    const paint = () => {
+      frame = 0;
+      const el = backdropRef.current;
+      if (el) el.style.opacity = String(Math.min(1, Math.max(0, window.scrollY / 80)));
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    paint();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Body scroll lock + ESC handler when drawer is open
@@ -248,14 +263,18 @@ export function Header({ lang, dict }: HeaderProps) {
   ];
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled || open
-          ? 'bg-ink/85 backdrop-blur-xl'
-          : 'bg-transparent',
-      )}
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* Backdrop: opacity driven by the scroll (above); fully on while the
+          menu is open */}
+      <div
+        ref={backdropRef}
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute inset-0 -z-10 bg-ink/85 backdrop-blur-xl',
+          open && '!opacity-100',
+        )}
+        style={{ opacity: 0 }}
+      />
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-24 md:px-8 lg:px-10">
         <Link
           href={`/${lang}`}
