@@ -29,6 +29,8 @@ function useSectionPill(
   listRef: React.RefObject<HTMLUListElement>,
   pillRef: React.RefObject<HTMLLIElement>,
   labelsRef: React.RefObject<HTMLDivElement>,
+  /** Index of a link that is the current page (the FAQ on /faq), or -1. */
+  pageIndex: number,
 ) {
   const [active, setActive] = useState(-1);
 
@@ -98,10 +100,30 @@ function useSectionPill(
 
       const sections = SECTION_IDS.map((id) => document.getElementById(id));
       const links = Array.from(list.querySelectorAll<HTMLElement>('a'));
-      // Pages without these sections (privacy, 404), or nav hidden: no pill
+      const jumpTo = () => {
+        // First paint (or reduced motion): straight to the target
+        initialised = true;
+        left.x = target.l;
+        right.x = target.r;
+        left.v = right.v = 0;
+        opacity = target.opacity;
+        render();
+      };
+
+      // A page of its own (the FAQ): the pill rests on its link
+      if (pageIndex >= 0 && links[pageIndex] && list.offsetWidth) {
+        const link = links[pageIndex];
+        target = { l: link.offsetLeft, r: link.offsetLeft + link.offsetWidth, opacity: 1 };
+        setActive(pageIndex);
+        jumpTo();
+        return;
+      }
+
+      // Pages without the home sections (privacy, services, 404), or nav
+      // hidden: no pill
       if (
         sections.some((el) => !el) ||
-        links.length !== SECTION_IDS.length ||
+        links.length < SECTION_IDS.length ||
         !list.offsetWidth
       ) {
         pill.style.opacity = '0';
@@ -119,7 +141,8 @@ function useSectionPill(
         if (probe >= start) pos = i - 1 + Math.min(1, (probe - start) / zone);
       });
 
-      const last = links.length - 1;
+      // Only the section links follow the scroll (page links come after them)
+      const last = SECTION_IDS.length - 1;
       // Aim at the nearest link rather than a point in between: the springs
       // supply the in-between motion, which is what makes it read as fluid.
       const idx = Math.max(0, Math.min(Math.round(pos), last));
@@ -132,13 +155,7 @@ function useSectionPill(
       setActive(target.opacity ? idx : -1);
 
       if (!initialised || reduce) {
-        // First paint (or reduced motion): jump straight to the target
-        initialised = true;
-        left.x = target.l;
-        right.x = target.r;
-        left.v = right.v = 0;
-        opacity = target.opacity;
-        render();
+        jumpTo();
         return;
       }
       if (!animFrame) animFrame = requestAnimationFrame(step);
@@ -163,7 +180,7 @@ function useSectionPill(
       window.removeEventListener('resize', schedule);
       ro.disconnect();
     };
-  }, [listRef, pillRef, labelsRef]);
+  }, [listRef, pillRef, labelsRef, pageIndex]);
 
   return active;
 }
@@ -182,7 +199,13 @@ export function Header({ lang, dict }: HeaderProps) {
   const navListRef = useRef<HTMLUListElement>(null);
   const pillRef = useRef<HTMLLIElement>(null);
   const pillLabelsRef = useRef<HTMLDivElement>(null);
-  const activeSection = useSectionPill(navListRef, pillRef, pillLabelsRef);
+  const faqHref = `/${lang}/faq`;
+  const activeSection = useSectionPill(
+    navListRef,
+    pillRef,
+    pillLabelsRef,
+    pathname === faqHref ? SECTION_IDS.length : -1,
+  );
 
   useEffect(() => setMounted(true), []);
 
@@ -215,10 +238,14 @@ export function Header({ lang, dict }: HeaderProps) {
     return segments.join('/');
   };
 
-  const navItems = SECTION_IDS.map((id) => ({
-    label: dict.nav[id] as string,
-    href: `/${lang}#${id}`,
-  }));
+  // Home sections first (the pill tracks them by scroll), then the FAQ page
+  const navItems = [
+    ...SECTION_IDS.map((id) => ({
+      label: dict.nav[id] as string,
+      href: `/${lang}#${id}`,
+    })),
+    { label: dict.nav.faq as string, href: faqHref },
+  ];
 
   return (
     <header
@@ -239,7 +266,7 @@ export function Header({ lang, dict }: HeaderProps) {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-5 lg:flex xl:gap-8">
           <ul ref={navListRef} className="relative flex items-center gap-1">
             {/* Section indicator — positioned by useSectionPill */}
             {/* Section indicator — positioned by useSectionPill. It sits above
@@ -267,7 +294,9 @@ export function Header({ lang, dict }: HeaderProps) {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  aria-current={activeSection === i ? 'location' : undefined}
+                  aria-current={
+                    activeSection === i ? (item.href === faqHref ? 'page' : 'location') : undefined
+                  }
                   className="relative block whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium text-cream/70 transition-colors hover:text-cream"
                 >
                   {item.label}
@@ -297,7 +326,10 @@ export function Header({ lang, dict }: HeaderProps) {
             href={site.trackerUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 text-sm font-medium text-cream/70 transition-colors hover:text-cream"
+            // Hidden on small laptops: with the FAQ link and the longer
+            // French CTA the row no longer fits at 1024px. The Tracker stays
+            // in the mobile drawer and the Process section.
+            className="group hidden items-center gap-1.5 whitespace-nowrap text-sm font-medium text-cream/70 transition-colors hover:text-cream xl:inline-flex"
           >
             {dict.process.tracker.cta.button}
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

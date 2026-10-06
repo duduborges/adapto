@@ -6,6 +6,7 @@
     "work": "Work",
     "why": "Why us",
     "contact": "Contact",
+    "faq": "FAQ",
     "book": "Book a free call"
   },
   "hero": {
@@ -54,6 +55,7 @@
       "custom": {
         "title": "Custom systems",
         "description": "ERPs, CRMs, internal tools and full applications designed around the exact way your team works.",
+        "link": "Explore custom systems",
         "tags": [
           "Web apps",
           "Internal tools",
@@ -63,6 +65,7 @@
       "websites": {
         "title": "Websites & landing pages",
         "description": "Institutional websites, landing pages, online stores and client portals — fast, bilingual-ready, easy for your team to update and built to turn visitors into conversations.",
+        "link": "Explore websites & landing pages",
         "tags": [
           "Websites",
           "Landing pages",
@@ -73,6 +76,7 @@
       "ai": {
         "title": "AI integration",
         "description": "We put AI to work inside your operation — assistants that answer from your own data, automatic reading of documents and emails, smart triage and copilots inside the tools your team already uses. Practical, secure and measured against real results.",
+        "link": "Explore AI integration",
         "tags": [
           "LLMs & agents",
           "Chatbots",
@@ -83,6 +87,7 @@
       "automation": {
         "title": "Automation",
         "description": "We map your team's repetitive work — reports, approvals, data entry — and replace it with quiet automations that run while you sleep.",
+        "link": "Explore automation",
         "tags": [
           "Workflows",
           "Integrations",
@@ -92,6 +97,7 @@
       "dashboards": {
         "title": "Dashboards & visibility",
         "description": "Real-time views of what matters to your business: sales, stock, operations, people. Your decisions stop relying on gut feeling.",
+        "link": "Explore dashboards",
         "tags": [
           "BI",
           "Reporting",
@@ -101,6 +107,7 @@
       "integrations": {
         "title": "Integrations",
         "description": "Connect the tools your company already uses — accounting, e-commerce, logistics, payments — into one consistent operation.",
+        "link": "Explore integrations",
         "tags": [
           "APIs",
           "Webhooks",
@@ -247,6 +254,51 @@
     "empty": "Cases coming soon — currently building with our first cohort of clients.",
     "viewCase": "View case"
   },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions, answered.",
+    "subtitle": "Still have a question? Book a free call and ask us directly.",
+    "items": [
+      {
+        "q": "How much does a project cost?",
+        "a": "Every project is priced from its scope. Discovery and scope are free: we map your needs and write the scope, timeline and price into a contract proposal before you commit to anything."
+      },
+      {
+        "q": "Are discovery and scope really free?",
+        "a": "Yes. We meet your team, document the problem and prepare the scope, timeline and cost at no charge. The materials are handed over once the contract is signed."
+      },
+      {
+        "q": "How long does a project take?",
+        "a": "It depends on the scope. Smaller tools take weeks; larger systems are delivered in phases over months. The timeline is written into your contract, and you see working software every sprint."
+      },
+      {
+        "q": "How will I know how the project is going?",
+        "a": "You get daily and weekly updates, and you can follow every phase and milestone live in the Adapto Tracker with a private access code."
+      },
+      {
+        "q": "What kind of companies do you work with?",
+        "a": "Small and mid-sized businesses whose processes don't fit off-the-shelf software, from retail and services to logistics and operations."
+      },
+      {
+        "q": "Do you only work with companies in Vancouver?",
+        "a": "We're based in Vancouver and work with companies across Canada and the United States."
+      },
+      {
+        "q": "What happens after launch?",
+        "a": "You get documentation, training and a warranty period. After that, we can keep evolving the system with you, or hand it over to your own team."
+      }
+    ],
+    "page": {
+      "metaTitle": "FAQ: Pricing, Timelines & How We Work | Adapto",
+      "metaDescription": "Answers about working with Adapto: pricing, timelines, free discovery and scope, project updates, and each service from custom software to AI.",
+      "title": "Your questions,",
+      "titleAccent": "answered.",
+      "lead": "Everything about how we work, what we build and how a project starts. Can't find your answer? Send us a message below or book a free call.",
+      "topics": "Topics",
+      "general": "General",
+      "explore": "Explore the service"
+    }
+  },
   "contact": {
     "eyebrow": "Let's talk",
     "title": "Bring us your problem. We'll bring the solution.",
@@ -277,6 +329,7 @@
     "sections": {
       "company": "Company",
       "explore": "Explore",
+      "services": "Services",
       "contact": "Contact"
     },
     "links": {
@@ -285,6 +338,7 @@
       "process": "Process",
       "work": "Work",
       "why": "Why us",
+      "faq": "FAQ",
       "book": "Book a free call",
       "email": "Email us",
       "privacy": "Privacy policy",

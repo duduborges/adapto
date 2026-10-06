@@ -1,5 +1,6 @@
 import { site, siteUrl } from '@/lib/site';
 import { i18n } from '@/lib/i18n/config';
+import { SERVICES } from '@/lib/services';
 import type { Locale } from '@/types';
 
 const descriptions: Record<Locale, string> = {
@@ -7,7 +8,10 @@ const descriptions: Record<Locale, string> = {
   fr: "Adapto est un studio de software canadien basé à Vancouver qui conçoit des systèmes sur mesure, des sites web, des automatisations, des tableaux de bord et des intégrations d'IA adaptés au fonctionnement réel de votre entreprise.",
 };
 
-/** What we sell, as schema.org Services — mirrors the Services section. */
+/**
+ * What we sell, as schema.org Services — mirrors the Services section, in
+ * the same order as SERVICES (each links to its page).
+ */
 const services: Record<Locale, { name: string; description: string }[]> = {
   en: [
     { name: 'Custom software development', description: 'ERPs, CRMs, internal tools and web applications built around how your team works.' },
@@ -67,14 +71,19 @@ export function JsonLd({ lang }: { lang: Locale }) {
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: 'Services',
-          itemListElement: (services[lang] ?? services.en).map((s) => ({
+          itemListElement: (services[lang] ?? services.en).map((s, i) => ({
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
+              '@id': `${siteUrl}/${lang}/services/${SERVICES[i].slug}#service`,
               name: s.name,
               description: s.description,
+              url: `${siteUrl}/${lang}/services/${SERVICES[i].slug}`,
               provider: { '@id': `${siteUrl}/#organization` },
-              areaServed: { '@type': 'Country', name: 'Canada' },
+              areaServed: [
+                { '@type': 'Country', name: 'Canada' },
+                { '@type': 'Country', name: 'United States' },
+              ],
             },
           })),
         },

@@ -6,6 +6,7 @@
     "work": "Réalisations",
     "why": "Pourquoi nous",
     "contact": "Contact",
+    "faq": "FAQ",
     "book": "Réserver un appel gratuit"
   },
   "hero": {
@@ -54,6 +55,7 @@
       "custom": {
         "title": "Systèmes sur mesure",
         "description": "ERP, CRM, outils internes et applications complètes conçus exactement autour du fonctionnement de votre équipe.",
+        "link": "Découvrir les systèmes sur mesure",
         "tags": [
           "Web apps",
           "Outils internes",
@@ -63,6 +65,7 @@
       "websites": {
         "title": "Sites web et landing pages",
         "description": "Sites institutionnels, landing pages, boutiques en ligne et portails clients — rapides, prêts pour le bilinguisme, faciles à mettre à jour par votre équipe et pensés pour transformer les visiteurs en conversations.",
+        "link": "Découvrir les sites web",
         "tags": [
           "Sites web",
           "Landing pages",
@@ -73,6 +76,7 @@
       "ai": {
         "title": "Intégration d'IA",
         "description": "Nous mettons l'IA au travail dans votre opération — assistants qui répondent à partir de vos propres données, lecture automatique de documents et de courriels, tri intelligent et copilotes dans les outils que votre équipe utilise déjà. Pratique, sécurisé et mesuré sur des résultats réels.",
+        "link": "Découvrir l'intégration d'IA",
         "tags": [
           "LLM et agents",
           "Chatbots",
@@ -83,6 +87,7 @@
       "automation": {
         "title": "Automatisation",
         "description": "Nous cartographions le travail répétitif de votre équipe — rapports, approbations, saisie de données — et le remplaçons par des automatisations silencieuses qui tournent pendant que vous dormez.",
+        "link": "Découvrir l'automatisation",
         "tags": [
           "Flux",
           "Intégrations",
@@ -92,6 +97,7 @@
       "dashboards": {
         "title": "Tableaux de bord et visibilité",
         "description": "Vues en temps réel de ce qui compte pour votre entreprise : ventes, stocks, opérations, équipes. Vos décisions ne reposent plus sur l'intuition.",
+        "link": "Découvrir les tableaux de bord",
         "tags": [
           "BI",
           "Reporting",
@@ -101,6 +107,7 @@
       "integrations": {
         "title": "Intégrations",
         "description": "Reliez les outils que votre entreprise utilise déjà — comptabilité, e-commerce, logistique, paiements — dans une opération unique et cohérente.",
+        "link": "Découvrir les intégrations",
         "tags": [
           "APIs",
           "Webhooks",
@@ -247,6 +254,51 @@
     "empty": "Cas à venir — actuellement en construction avec notre première vague de clients.",
     "viewCase": "Voir le cas"
   },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Vos questions, nos réponses.",
+    "subtitle": "Une autre question ? Réservez un appel gratuit et posez-la-nous directement.",
+    "items": [
+      {
+        "q": "Combien coûte un projet ?",
+        "a": "Chaque projet est chiffré à partir de son périmètre. La découverte et le périmètre sont gratuits : nous cartographions vos besoins et inscrivons le périmètre, les délais et le prix dans une proposition de contrat avant que vous vous engagiez."
+      },
+      {
+        "q": "La découverte et le périmètre sont-ils vraiment gratuits ?",
+        "a": "Oui. Nous rencontrons votre équipe, documentons le problème et préparons le périmètre, les délais et le coût sans frais. Les livrables vous sont remis une fois le contrat signé."
+      },
+      {
+        "q": "Combien de temps dure un projet ?",
+        "a": "Cela dépend du périmètre. Les petits outils prennent des semaines ; les systèmes plus importants sont livrés par phases sur plusieurs mois. Les délais sont inscrits dans votre contrat, et vous voyez du software fonctionnel à chaque sprint."
+      },
+      {
+        "q": "Comment suivre l'avancement du projet ?",
+        "a": "Vous recevez des mises à jour quotidiennes et hebdomadaires, et pouvez suivre chaque phase et chaque jalon en direct dans l'Adapto Tracker avec un code d'accès privé."
+      },
+      {
+        "q": "Avec quel type d'entreprises travaillez-vous ?",
+        "a": "Des PME dont les processus ne rentrent pas dans un software générique, du commerce de détail aux services, en passant par la logistique et les opérations."
+      },
+      {
+        "q": "Travaillez-vous seulement avec des entreprises de Vancouver ?",
+        "a": "Nous sommes établis à Vancouver et travaillons avec des entreprises partout au Canada et aux États-Unis."
+      },
+      {
+        "q": "Que se passe-t-il après le lancement ?",
+        "a": "Vous recevez la documentation, une formation et une période de garantie. Ensuite, nous pouvons continuer à faire évoluer le système avec vous, ou le confier à votre propre équipe."
+      }
+    ],
+    "page": {
+      "metaTitle": "FAQ : prix, délais et méthode | Adapto",
+      "metaDescription": "Réponses sur le travail avec Adapto : prix, délais, découverte et périmètre gratuits, suivi de projet, et chaque service, du software sur mesure à l'IA.",
+      "title": "Vos questions,",
+      "titleAccent": "nos réponses.",
+      "lead": "Tout sur notre méthode, ce que nous construisons et la façon dont un projet commence. Vous ne trouvez pas votre réponse ? Écrivez-nous plus bas ou réservez un appel gratuit.",
+      "topics": "Sujets",
+      "general": "Général",
+      "explore": "Découvrir le service"
+    }
+  },
   "contact": {
     "eyebrow": "Parlons-en",
     "title": "Apportez-nous votre problème. Nous apporterons la solution.",
@@ -277,6 +329,7 @@
     "sections": {
       "company": "Entreprise",
       "explore": "Explorer",
+      "services": "Services",
       "contact": "Contact"
     },
     "links": {
@@ -285,6 +338,7 @@
       "process": "Processus",
       "work": "Réalisations",
       "why": "Pourquoi nous",
+      "faq": "FAQ",
       "book": "Réserver un appel gratuit",
       "email": "Écrivez-nous",
       "privacy": "Politique de confidentialité",
