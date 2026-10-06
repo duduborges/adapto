@@ -391,6 +391,8 @@
     "subtitle": "Book a 30-minute call. We'll listen to how your company works and tell you honestly whether we're the right team for you.",
     "ctaPrimary": "Book a free call",
     "ctaSecondary": "Or send us an email",
+    "formTitle": "Prefer to write? Send us a message.",
+    "formNote": "We reply within one business day.",
     "form": {
       "name": "Full name",
       "email": "Work email",
