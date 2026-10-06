@@ -1,4 +1,4 @@
-import { GeistSans } from 'geist/font/sans';
+import { geistSans } from '@/lib/fonts';
 import { i18n } from '@/lib/i18n/config';
 import './globals.css';
 
@@ -8,10 +8,10 @@ import './globals.css';
  */
 export default function RootNotFound() {
   return (
-    <html lang="en" className={GeistSans.variable}>
+    <html lang="en" className={geistSans.variable}>
       <body className="flex min-h-screen items-center justify-center bg-ink font-sans text-cream antialiased">
         <main className="px-6 text-center">
-          <p className="font-mono text-sm uppercase tracking-[0.28em] text-ember">
+          <p className="font-mono text-sm uppercase tracking-[0.28em] text-ember-500">
             404
           </p>
           <h1 className="mt-4 text-3xl font-medium tracking-tight">
@@ -19,7 +19,7 @@ export default function RootNotFound() {
           </h1>
           <a
             href={`/${i18n.defaultLocale}`}
-            className="mt-8 inline-flex rounded-full bg-ember px-6 py-3 text-sm font-medium text-cream transition-all hover:brightness-110"
+            className="mt-8 inline-flex rounded-full bg-ember-fill px-6 py-3 text-sm font-medium text-cream transition-all hover:brightness-110"
           >
             Back to home
           </a>

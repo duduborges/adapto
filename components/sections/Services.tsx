@@ -99,7 +99,7 @@ export function Services({ dict, lang }: ServicesProps) {
                 aria-expanded={isOpen}
                 aria-controls={`service-panel-${key}`}
               >
-                <span className="col-span-1 font-mono text-sm font-semibold text-ember">
+                <span className="col-span-1 font-mono text-sm font-semibold text-ember-400">
                   0{i + 1}
                 </span>
                 <div className="col-span-9 flex min-w-0 items-center gap-4 md:gap-6">
@@ -118,7 +118,7 @@ export function Services({ dict, lang }: ServicesProps) {
                 </div>
                 <span
                   aria-hidden
-                  className={`col-span-2 flex h-10 w-10 items-center justify-end justify-self-end text-cream/40 transition-colors group-hover:text-ember md:col-span-2 md:h-12 md:w-12 ${
+                  className={`col-span-2 flex h-10 w-10 items-center justify-end justify-self-end text-cream/50 transition-colors group-hover:text-ember md:col-span-2 md:h-12 md:w-12 ${
                     isOpen ? 'text-ember' : ''
                   }`}
                 >
@@ -161,7 +161,7 @@ export function Services({ dict, lang }: ServicesProps) {
                       </Link>
                     </div>
                     <div className="col-span-12 md:col-span-4 md:col-start-9">
-                      <p className="svc-in mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/45" style={{ '--d': '0.12s' } as React.CSSProperties}>
+                      <p className="svc-in mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/50" style={{ '--d': '0.12s' } as React.CSSProperties}>
                         {dict.services.stackLabel}
                       </p>
                       <ul className="flex flex-wrap gap-2">

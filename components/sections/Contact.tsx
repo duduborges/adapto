@@ -84,7 +84,7 @@ export function Contact({ dict }: ContactProps) {
           {dict.contact.title.includes('.') && dict.contact.title.split('.').slice(1).join('.').trim() && (
             <>
               <br />
-              <span className="text-cream/45">
+              <span className="text-cream/50">
                 {dict.contact.title.split('.').slice(1).join('.').trim()}
               </span>
             </>
@@ -119,7 +119,7 @@ export function Contact({ dict }: ContactProps) {
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-ember" />
               <span>
-                <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-cream/40">
+                <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-cream/50">
                   {dict.contact.info.locationLabel}
                 </span>
                 {dict.contact.info.location}
@@ -128,7 +128,7 @@ export function Contact({ dict }: ContactProps) {
             <li className="flex items-start gap-3">
               <Globe2 className="mt-0.5 h-4 w-4 shrink-0 text-ember" />
               <span>
-                <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-cream/40">
+                <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-cream/50">
                   {dict.contact.info.remoteLabel}
                 </span>
                 {dict.contact.info.remote}
@@ -192,7 +192,7 @@ export function Contact({ dict }: ContactProps) {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="group inline-flex items-center justify-center gap-2 self-start whitespace-nowrap rounded-full bg-ember px-6 py-3 font-medium text-cream shadow-[0_8px_30px_-12px_rgba(195,86,34,0.7)] transition-all hover:brightness-110 hover:shadow-[0_12px_40px_-10px_rgba(195,86,34,0.85)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-ink disabled:opacity-50 sm:self-auto"
+                  className="group inline-flex items-center justify-center gap-2 self-start whitespace-nowrap rounded-full bg-ember-fill px-6 py-3 font-medium text-cream shadow-[0_8px_30px_-12px_rgba(195,86,34,0.7)] transition-all hover:brightness-110 hover:shadow-[0_12px_40px_-10px_rgba(195,86,34,0.85)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-ink disabled:opacity-50 sm:self-auto"
                 >
                   {status === 'sending'
                     ? dict.contact.form.sending

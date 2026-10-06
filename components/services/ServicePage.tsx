@@ -58,7 +58,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
 
         <Container size="wide">
           <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-cream/45">
+            <ol className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-cream/50">
               <li>
                 <Link href={`/${lang}`} className="transition-colors hover:text-cream">
                   {ui.home}
@@ -79,7 +79,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
 
           <div className="mt-12 grid grid-cols-12 items-center gap-x-4 gap-y-14 md:mt-16 lg:gap-x-12">
             <div className="col-span-12 lg:col-span-7">
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-cream/45">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-cream/50">
                 <span className="text-ember">{ui.service} {String(index + 1).padStart(2, '0')}</span>
                 <span className="text-cream/25"> / {String(SERVICES.length).padStart(2, '0')}</span>
               </p>
@@ -111,7 +111,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                 </Link>
               </div>
 
-              <p className="mt-8 inline-flex items-center gap-2.5 text-sm font-medium text-ember">
+              <p className="mt-8 inline-flex items-center gap-2.5 text-sm font-medium text-ember-500">
                 <span className="flex h-6 w-6 items-center justify-center rounded-full border border-ember/40 bg-ember/10">
                   <Gift aria-hidden className="h-3 w-3" />
                 </span>
@@ -181,7 +181,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                 style={{ '--reveal-y': '12px', '--reveal-delay': `${i * 0.06}s` } as React.CSSProperties}
                 className="flex items-start gap-5 border-b border-cream/10 py-6 first:pt-0 md:py-7 md:first:pt-0"
               >
-                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-cream/15 text-cream/40">
+                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-cream/15 text-cream/50">
                   <X aria-hidden className="h-3.5 w-3.5" />
                 </span>
                 <p className="text-lg leading-relaxed text-cream/75 md:text-xl">{item}</p>
@@ -218,7 +218,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                 aria-hidden
                 className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-ember/0 blur-3xl transition-colors duration-500 group-hover:bg-ember/20"
               />
-              <span className="font-mono text-xs font-semibold text-ember">
+              <span className="font-mono text-xs font-semibold text-ember-500">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h3 className="mt-6 font-brand text-2xl leading-tight text-cream md:text-[1.75rem]">
@@ -251,7 +251,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                   i === 0 ? 'bg-ember shadow-[0_0_0_4px_rgba(195,86,34,0.15)]' : 'bg-cream/30'
                 }`}
               />
-              <span className="font-mono text-xs font-semibold tracking-widest text-ember">
+              <span className="font-mono text-xs font-semibold tracking-widest text-ember-500">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h3 className="mt-3 font-brand text-2xl leading-tight text-cream">{step.title}</h3>
@@ -349,7 +349,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                   href={`/${lang}/services/${s.slug}`}
                   className="group grid grid-cols-12 items-center gap-4 px-2 py-6 transition-colors hover:bg-cream/[0.02] md:gap-8 md:px-4 md:py-8"
                 >
-                  <span className="col-span-2 font-mono text-sm font-semibold text-ember md:col-span-1">
+                  <span className="col-span-2 font-mono text-sm font-semibold text-ember-500 md:col-span-1">
                     {String(n).padStart(2, '0')}
                   </span>
                   <span className="col-span-8 flex items-center gap-4 md:col-span-6 md:gap-6">
@@ -366,7 +366,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
                   <span className="col-span-2 flex justify-end md:col-span-1">
                     <ArrowUpRight
                       aria-hidden
-                      className="h-6 w-6 text-cream/40 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ember"
+                      className="h-6 w-6 text-cream/50 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ember"
                     />
                   </span>
                 </Link>

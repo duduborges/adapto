@@ -53,6 +53,9 @@ const config: Config = {
           800: '#823920',
           900: '#6b321e',
           950: '#39170d',
+          // Ember a shade darker, for fills under cream text (buttons): the
+          // brand ember gives 4.45:1 there, just under WCAG AA's 4.5.
+          fill: '#bf5421',
         },
         // Status colours shared with the Adapto Tracker (its dark theme).
         success: '#6fbf87',

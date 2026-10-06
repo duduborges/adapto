@@ -77,7 +77,7 @@ export default async function PrivacyPage({
           <h1 className="mt-8 text-[clamp(2rem,4vw,3rem)] font-medium leading-tight tracking-tight text-cream">
             {dict.privacy.title}
           </h1>
-          <p className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-cream/40">
+          <p className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-cream/50">
             {dict.privacy.updated} — {formatted}
           </p>
 

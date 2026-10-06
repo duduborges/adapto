@@ -106,7 +106,7 @@ export function FaqList({
         <li key={item.q} className="border-b border-cream/15">
           <details className="faq-item group" open={openFirst && i === 0}>
             <summary className="flex cursor-pointer list-none items-start gap-5 py-7 transition-colors hover:bg-cream/[0.02] md:gap-8 md:px-2 md:py-9 [&::-webkit-details-marker]:hidden">
-              <span className="mt-1.5 font-mono text-xs font-semibold text-ember md:mt-2 md:text-sm">
+              <span className="mt-1.5 font-mono text-xs font-semibold text-ember-500 md:mt-2 md:text-sm">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span className="flex-1 font-brand text-xl leading-snug text-cream/75 transition-colors group-open:text-cream group-hover:text-cream md:text-2xl">
