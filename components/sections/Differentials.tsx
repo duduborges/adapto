@@ -116,7 +116,7 @@ export function Differentials({ dict }: DifferentialsProps) {
           <h2
             data-reveal
             style={{ '--reveal-y': '12px' } as React.CSSProperties}
-            className="max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.02] tracking-[-0.015em] text-cream md:text-7xl"
+            className="max-w-5xl text-balance font-brand text-4xl sm:text-5xl leading-[1.02] tracking-[-0.015em] text-cream md:text-7xl"
           >
             {dict.differentials.title.replace(/\.$/, '')}
             <span className="text-ember">.</span>
@@ -209,7 +209,7 @@ export function Differentials({ dict }: DifferentialsProps) {
                     </svg>
                   </span>
                   <div>
-                    <h3 className="why-title font-serif text-3xl leading-tight text-cream md:text-4xl">
+                    <h3 className="why-title font-brand text-3xl leading-tight text-cream md:text-4xl">
                       {row.us}
                     </h3>
                     <p className="mt-3 text-base leading-relaxed text-cream/75 md:text-lg">

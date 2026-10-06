@@ -18,7 +18,7 @@ export function About({ dict }: AboutProps) {
         <h2
           data-reveal
           style={{ '--reveal-y': '12px' } as React.CSSProperties}
-          className="col-span-12 max-w-5xl text-balance font-serif text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
+          className="col-span-12 max-w-5xl text-balance font-brand text-4xl sm:text-5xl leading-[1.05] tracking-[-0.01em] text-cream md:text-6xl lg:text-7xl"
         >
           {/* The closing mark (. ? !) is the ember accent; a title without one
               gets a period. French keeps its non-breaking space before "?" */}
@@ -28,7 +28,7 @@ export function About({ dict }: AboutProps) {
       </div>
 
       {/* Long-form body with drop cap */}
-      <div className="mt-20 grid grid-cols-12 gap-8 md:mt-24">
+      <div className="mt-20 grid grid-cols-12 gap-x-4 gap-y-8 md:gap-8 md:mt-24">
         <aside
           data-reveal
           style={{ '--reveal-duration': '0.5s' } as React.CSSProperties}
@@ -37,7 +37,7 @@ export function About({ dict }: AboutProps) {
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
             ↳ {dict.manifesto.marginaliaLabel}
           </p>
-          <p className="font-serif text-base italic leading-snug text-cream/50">
+          <p className="font-brand text-base leading-snug text-cream/50">
             “{dict.manifesto.marginalia}”
           </p>
         </aside>
@@ -60,7 +60,7 @@ export function About({ dict }: AboutProps) {
       </div>
 
       {/* Pillars as a numbered list, not cards */}
-      <div className="mt-28 grid grid-cols-12 gap-8 md:mt-36">
+      <div className="mt-28 grid grid-cols-12 gap-x-4 gap-y-8 md:gap-8 md:mt-36">
         <div className="col-span-12 md:col-span-3">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-cream/40">
             ↳ Three principles
@@ -80,7 +80,7 @@ export function About({ dict }: AboutProps) {
                   <span className="col-span-2 font-mono text-sm text-ember md:col-span-1">
                     0{i + 1}
                   </span>
-                  <h3 className="col-span-10 font-serif text-2xl text-cream md:col-span-4 md:text-3xl">
+                  <h3 className="col-span-10 font-brand text-2xl text-cream md:col-span-4 md:text-3xl">
                     {p.title}
                   </h3>
                   <p className="col-span-12 text-base leading-relaxed text-cream/60 md:col-span-7">

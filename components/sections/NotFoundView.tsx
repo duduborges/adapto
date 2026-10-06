@@ -85,9 +85,9 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
             <span aria-hidden className="nf-caret ml-1 inline-block h-[1em] w-[0.5em] translate-y-[0.15em] bg-ember" />
           </p>
 
-          <h1 className="mt-12 text-[clamp(2.6rem,6.5vw,5.25rem)] font-medium leading-[0.98] tracking-tight text-cream">
-            {t.title}
-            <span className="block font-serif font-normal italic text-ember">
+          <h1 className="mt-12 text-[clamp(2.6rem,6.5vw,5.25rem)] font-brand font-semibold leading-[0.98] tracking-tight text-cream">
+            {t.title}{' '}
+            <span className="block font-brand font-semibold text-ember">
               {t.titleAccent}
             </span>
           </h1>
@@ -116,7 +116,7 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
                   href={`${home}#${route}`}
                   className="group flex items-baseline justify-between gap-4 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
                 >
-                  <span className="font-serif text-2xl text-cream/85 transition-colors group-hover:text-cream md:text-3xl">
+                  <span className="font-brand text-2xl text-cream/85 transition-colors group-hover:text-cream md:text-3xl">
                     {nav[route]}
                   </span>
                   <span className="font-mono text-xs text-cream/30 transition-colors group-hover:text-ember">

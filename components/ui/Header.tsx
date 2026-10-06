@@ -463,7 +463,7 @@ function MobileDrawer({
                   <span className="font-mono text-xs text-cream/30 transition-colors group-hover:text-ember">
                     0{i + 1}
                   </span>
-                  <span className="font-serif text-3xl leading-tight tracking-tight text-cream transition-colors group-hover:text-ember">
+                  <span className="font-brand text-3xl leading-tight tracking-tight text-cream transition-colors group-hover:text-ember">
                     {item.label}
                   </span>
                 </a>
@@ -485,7 +485,7 @@ function MobileDrawer({
               ? { target: '_blank', rel: 'noopener noreferrer' }
               : {})}
             onClick={onClose}
-            className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-serif text-2xl text-cream transition-colors hover:text-ember"
+            className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember"
           >
             <span>{dict.nav.book}</span>
             <ArrowRight className="h-4 w-4 self-center transition-transform group-hover:translate-x-1" />

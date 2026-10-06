@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
-import { Instrument_Serif } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 import { i18n, hreflang } from '@/lib/i18n/config';
 import { getDictionary } from '@/lib/i18n/get-dictionary';
 import { siteUrl } from '@/lib/site';
@@ -12,11 +12,13 @@ import { CookieBanner } from '@/components/analytics/CookieBanner';
 import { MotionProvider } from '@/components/ui/MotionProvider';
 import '../globals.css';
 
-const instrumentSerif = Instrument_Serif({
+// The wordmark's typeface ("dapto" in the logo is Outfit SemiBold): every
+// display heading and title (`font-brand`). Body copy stays in Geist.
+// Loaded as the variable font (one file, every weight): the hero's "adapts"
+// animates along its weight axis.
+const outfit = Outfit({
   subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
+  variable: '--font-outfit',
   display: 'swap',
 });
 
@@ -108,7 +110,7 @@ export default async function LangLayout({
   return (
     <html
       lang={locale === 'fr' ? 'fr-CA' : 'en-CA'}
-      className={`${GeistSans.variable} ${GeistMono.variable} ${instrumentSerif.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${outfit.variable}`}
       suppressHydrationWarning
     >
       <head>
