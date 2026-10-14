@@ -90,12 +90,10 @@ function HeroPoster({
 }
 
 /**
- * The accent line, its first word ("adapts" / "s'adapte") breathing along
- * Outfit's weight axis: it thins, swells to bold and settles back, as if
- * reshaping itself (.adapt-word in globals.css, large screens only).
- * Letter-spacing moves the other way to hold the word's width, so the rest of
- * the line stays put. The word starts at rest (the headline paints at once)
- * and is a single text node (it reads and indexes as a normal word).
+ * The accent line split after its first word ("adapts" / "s'adapte"). On
+ * desktop the word closes the first line ("Software that adapts") and the
+ * rest of the accent is the second; elsewhere both parts run on as one line.
+ * A glint sweeps across the word now and then (.adapts-shine, globals.css).
  */
 function AdaptWord({ text }: { text: string }) {
   const space = text.indexOf(' ');
@@ -103,8 +101,8 @@ function AdaptWord({ text }: { text: string }) {
   const rest = space === -1 ? '' : text.slice(space);
   return (
     <>
-      <span className="adapt-word">{word}</span>
-      {rest}
+      <span className="hero-lit-ember adapts-shine">{word}</span>
+      {rest && <span className="hero-lit-ember hero-lit-near desk:mt-[0.06em] desk:block">{rest}</span>}
     </>
   );
 }
@@ -116,16 +114,26 @@ function AdaptWord({ text }: { text: string }) {
  * of the slot's width: about 1.6x the object's, which the phone slot frames
  * larger (MOBILE_ZOOM). Breathes slowly; still under reduced motion.
  */
-function HeroGlow({ size }: { size: string }) {
+/**
+ * Wide variant (desktop): the light spreads well past the object, up to the
+ * headline. Blur alone left the edge of so large a disc visible as a ring,
+ * so the falloff is a Gaussian curve sampled into the gradient, reaching zero
+ * at the element's edge; a light blur smooths the remaining banding.
+ */
+const GLOW_COMPACT =
+  'radial-gradient(circle, rgba(195,86,34,0.8) 0%, rgba(195,86,34,0.36) 42%, rgba(195,86,34,0) 70%)';
+const GLOW_WIDE =
+  'radial-gradient(circle closest-side, rgba(195,86,34,0.300) 0%, rgba(195,86,34,0.293) 6%, rgba(195,86,34,0.274) 12%, rgba(195,86,34,0.245) 19%, rgba(195,86,34,0.209) 25%, rgba(195,86,34,0.171) 31%, rgba(195,86,34,0.134) 38%, rgba(195,86,34,0.100) 44%, rgba(195,86,34,0.071) 50%, rgba(195,86,34,0.049) 56%, rgba(195,86,34,0.031) 62%, rgba(195,86,34,0.019) 69%, rgba(195,86,34,0.011) 75%, rgba(195,86,34,0.006) 81%, rgba(195,86,34,0.003) 88%, rgba(195,86,34,0.001) 94%, rgba(195,86,34,0.000) 100%)';
+
+function HeroGlow({ size, wide = false }: { size: string; wide?: boolean }) {
   return (
     <div
       aria-hidden
-      style={{
-        width: size,
-        background:
-          'radial-gradient(circle, rgba(195,86,34,0.8) 0%, rgba(195,86,34,0.36) 42%, rgba(195,86,34,0) 70%)',
-      }}
-      className="pointer-events-none absolute left-1/2 top-1/2 aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl animate-[hero-glow_6s_ease-in-out_infinite] motion-reduce:animate-none"
+      style={{ width: size, background: wide ? GLOW_WIDE : GLOW_COMPACT }}
+      className={cn(
+        'pointer-events-none absolute left-1/2 top-1/2 aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full animate-[hero-glow_6s_ease-in-out_infinite] motion-reduce:animate-none',
+        wide ? 'blur-xl' : 'blur-2xl',
+      )}
     />
   );
 }
@@ -185,6 +193,9 @@ type SceneSlot = 'desktop' | 'mobile' | null;
 
 /** How much tighter the phone/tablet slot frames the object than desktop. */
 const MOBILE_ZOOM = 1.3;
+
+/** Desktop frames it tighter too: its band is wide and short, the box fits the height. */
+const DESK_ZOOM = 1.15;
 
 /** With no input, how long after `load` the scene still boots on its own. */
 const LATE_START_MS = 3500;
@@ -284,26 +295,15 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
   // Stacked tablets (sm+, not desk) get a larger headline — it has the full width.
   const titleClamp =
     lang === 'fr'
-      ? 'text-[clamp(2rem,3.8vw,3.8rem)] phone:text-[clamp(1.7rem,calc(var(--svh,1svh)*4.25),2rem)] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2rem,3.8vw,3.8rem)]'
-      : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:text-[clamp(2rem,calc(var(--svh,1svh)*5.2),2.6rem)] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.6rem,5vw,4.4rem)]';
+      ? 'text-[clamp(2rem,3.8vw,3.8rem)] phone:text-[clamp(1.7rem,calc(var(--svh,1svh)*4.25),2rem)] sm:text-[clamp(2.6rem,6vw,4.2rem)] desk:text-[clamp(2.25rem,min(4.6vw,7.6svh),5.75rem)]'
+      : 'text-[clamp(2.6rem,5vw,4.4rem)] phone:text-[clamp(2rem,calc(var(--svh,1svh)*5.2),2.6rem)] sm:text-[clamp(3.2rem,7.2vw,5rem)] desk:text-[clamp(2.5rem,min(5.4vw,8.6svh),6.5rem)]';
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[calc(var(--svh,1svh)*100)] phone:min-h-fit phone:pb-[3.75rem] sm:pt-24 md:pt-28 desk:[@media(max-height:760px)]:pt-24 snap-start [scroll-snap-stop:always]">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink pt-20 phone:h-[calc(var(--svh,1svh)*100)] phone:min-h-fit phone:pb-[3.75rem] sm:pt-24 md:pt-28 desk:h-[100svh] desk:min-h-[560px] desk:pt-[clamp(5.5rem,10svh,7.5rem)] snap-start [scroll-snap-stop:always]">
       {/* subtle grid background */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 grid-bg mask-radial opacity-50"
-      />
-      {/* Ember light coming in from outside: its source sits past the right
-          edge, just below the top corner. Large screens only; phones and
-          tablets keep just the object's own glow (HeroGlow) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 hidden desk:block"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 65% at 112% 15%, rgba(195,86,34,0.2) 0%, rgba(195,86,34,0.08) 38%, rgba(195,86,34,0) 72%)',
-        }}
       />
       {/* Large brand mark watermark — slightly lighter than bg, bleeds off the right edge */}
       <div aria-hidden className="pointer-events-none absolute right-[-18%] top-1/2 hidden -translate-y-1/2 select-none desk:block">
@@ -325,11 +325,12 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
             Phones get a one-line subtitle (subtitleShort) instead of the full
             one, so the first screen still says what we build without taking
             the room the 3D visual needs. The full one stays in the HTML. */}
-        <div className="flex flex-1 items-start pb-6 phone:flex-col phone:items-stretch phone:pb-4 sm:items-center desk:py-6">
-          {/* Title + Visual two-column grid */}
-          <div className="grid w-full grid-cols-12 items-center gap-x-4 gap-y-8 phone:flex phone:flex-1 phone:flex-col phone:items-stretch desk:gap-12">
+        <div className="flex flex-1 items-start pb-6 phone:flex-col phone:items-stretch phone:pb-4 sm:items-center desk:min-h-0 desk:items-stretch desk:pb-[clamp(1rem,3svh,2rem)] desk:pt-[clamp(0.5rem,2svh,1.5rem)]">
+          {/* Phones/tablets: one column, visual above the headline. Desktop:
+              three stacked bands — headline, visual, then subtitle and CTA */}
+          <div className="grid w-full grid-cols-12 items-center gap-x-4 gap-y-8 phone:flex phone:flex-1 phone:flex-col phone:items-stretch desk:flex desk:min-h-0 desk:flex-col desk:items-stretch">
             {/* Headline column */}
-            <div className="col-span-12 phone:flex phone:flex-1 phone:flex-col desk:col-span-5">
+            <div className="col-span-12 phone:flex phone:flex-1 phone:flex-col desk:flex desk:min-h-0 desk:flex-1 desk:flex-col">
               {/* Mobile/tablet visual — bleeds to the screen edges and is framed
                   tighter (MOBILE_ZOOM) so the object reads large. Tablets: sized
                   from the viewport height. Phones: it fills the space the text
@@ -353,8 +354,9 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                 </div>
               </div>
 
-              {/* Location chip — sits right above the headline */}
-              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:mb-[clamp(0.75rem,calc(var(--svh,1svh)*5.3-25px),1.25rem)] md:mb-6 desk:mb-11 desk:[@media(max-height:820px)]:mb-6">
+              {/* Location chip — sits right above the headline. Desktop moves
+                  it to the bottom strip, beside the availability line */}
+              <div className="mb-5 flex animate-hero-in motion-reduce:animate-none phone:mb-[clamp(0.75rem,calc(var(--svh,1svh)*5.3-25px),1.25rem)] md:mb-6 desk:hidden">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-cream/10 bg-cream/[0.04] px-2.5 py-1 text-[10px] font-medium text-cream/50 backdrop-blur-sm md:gap-2 md:px-3.5 md:py-1.5 md:text-xs md:text-cream/80">
                   <MapPin className="h-3 w-3 text-ember/70 md:h-3.5 md:w-3.5 md:text-ember" />
                   <span>Vancouver · BC · Canada</span>
@@ -364,17 +366,33 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
               </div>
               <h1
                 style={{ animationDelay: '60ms' }}
-                className={`${titleClamp} animate-hero-in motion-reduce:animate-none font-brand font-semibold leading-[0.98] tracking-[-0.02em] text-cream`}
+                className={`${titleClamp} animate-hero-in motion-reduce:animate-none font-brand font-semibold leading-[0.98] tracking-[-0.02em] text-cream desk:text-center`}
               >
-                <span className="block">{dict.hero.title}</span>{' '}
-                <span className="mt-2 block text-ember desk:mt-1">
+                <span className="hero-lit block desk:inline">{dict.hero.title}</span>{' '}
+                <span className="mt-2 block text-ember desk:mt-0 desk:inline">
                   <AdaptWord text={dict.hero.titleAccent} />
                 </span>
               </h1>
 
+              {/* Desktop visual — the middle band: takes the height the
+                  headline and the bottom band leave, the 5:4 box centred in it */}
+              <div
+                aria-hidden
+                style={{ animationDelay: '150ms' }}
+                className="relative hidden min-h-0 flex-1 animate-hero-in motion-reduce:animate-none desk:my-[clamp(0.25rem,1.5svh,1.25rem)] desk:block"
+              >
+                <div className="absolute inset-y-0 left-1/2 aspect-[5/4] h-full max-w-full -translate-x-1/2">
+                  <HeroGlow size="230%" wide />
+                  <HeroPoster hidden={sceneSlot === 'desktop' && sceneReady} scale={DESK_ZOOM} />
+                  {sceneSlot === 'desktop' && renderScene(HeroScene, DESK_ZOOM)}
+                </div>
+              </div>
+
+              {/* Desktop: subtitle left, CTA right */}
+              <div className="desk:flex desk:items-end desk:justify-between desk:gap-16">
               <p
                 style={{ animationDelay: '200ms' }}
-                className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 phone:hidden sm:mt-6 sm:text-lg md:mt-7 md:text-xl desk:mt-12 desk:[@media(max-height:820px)]:mt-6"
+                className="mt-4 animate-hero-in motion-reduce:animate-none text-balance text-base leading-[1.55] text-cream/75 phone:hidden sm:mt-6 sm:text-lg md:mt-7 md:text-xl desk:mt-0 desk:max-w-[34rem] desk:text-lg"
               >
                 {dict.hero.subtitle}
               </p>
@@ -384,7 +402,7 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
 
               <div
                 style={{ animationDelay: '300ms' }}
-                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:mt-[clamp(1rem,calc(var(--svh,1svh)*8-40px),1.75rem)] sm:mt-8 md:mt-10 desk:mt-14 desk:[@media(max-height:820px)]:mt-8"
+                className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:mt-[clamp(1rem,calc(var(--svh,1svh)*8-40px),1.75rem)] sm:mt-8 md:mt-10 desk:mt-0 desk:shrink-0"
               >
                 <a
                   href={bookingHref()}
@@ -397,27 +415,15 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
-
-            </div>
-
-            {/* Visual column */}
-            <div
-              style={{ animationDelay: '150ms' }}
-              className="col-span-12 hidden animate-hero-in motion-reduce:animate-none desk:col-span-7 desk:block"
-            >
-              {/* On short desktop screens the 5:4 box, not the text, set the
-                  hero's height and pushed the bottom strip off-screen — cap it */}
-              <div className="relative mx-auto aspect-[5/4] w-full desk:[@media(max-height:820px)]:max-w-[600px] desk:[@media(max-height:760px)]:max-w-[540px]">
-                <HeroGlow size="72%" />
-                <HeroPoster hidden={sceneSlot === 'desktop' && sceneReady} />
-                {sceneSlot === 'desktop' && renderScene(HeroScene, 1)}
               </div>
+
             </div>
+
           </div>
         </div>
 
         {/* Bottom strip — always visible, sits below the flex-1 wrapper */}
-        <div className="flex items-center justify-between gap-4 border-t border-cream/10 pt-4 sm:pt-5">
+        <div className="flex items-center justify-between gap-4 border-t border-cream/10 pt-4 sm:pt-5 desk:gap-10">
           {/* Phones/tablets: availability lives here, not as an extra line under the CTA */}
           <p className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-cream/50 md:hidden">
             <span className="relative flex h-1.5 w-1.5" aria-hidden>
@@ -428,6 +434,13 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
           </p>
           <p className="hidden font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50 md:block">
             <span className="text-ember">↳</span> {dict.hero.availableStrip}
+          </p>
+          {/* Desktop: the location chip's copy, on the right of the strip */}
+          <p className="ml-auto hidden items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/50 desk:flex">
+            <MapPin className="h-3 w-3 text-ember" aria-hidden />
+            <span>Vancouver · BC · Canada</span>
+            <span aria-hidden>—</span>
+            <span>{dict.hero.remote}</span>
           </p>
           <a
             href="#services"

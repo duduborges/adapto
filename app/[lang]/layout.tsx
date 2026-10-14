@@ -13,8 +13,7 @@ import '../globals.css';
 
 // The wordmark's typeface ("dapto" in the logo is Outfit SemiBold): every
 // display heading and title (`font-brand`). Body copy stays in Geist.
-// Loaded as the variable font (one file, every weight): the hero's "adapts"
-// animates along its weight axis.
+// Loaded as the variable font: one file for every weight in use.
 const outfit = Outfit({
   subsets: ['latin'],
   variable: '--font-outfit',
