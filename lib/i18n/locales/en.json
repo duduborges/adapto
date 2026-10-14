@@ -62,9 +62,9 @@
         ]
       },
       "websites": {
-        "title": "Websites & landing pages",
+        "title": "Websites",
         "description": "Institutional websites, landing pages, online stores and client portals — fast, bilingual-ready, easy for your team to update and built to turn visitors into conversations.",
-        "link": "Explore websites & landing pages",
+        "link": "Explore websites",
         "tags": [
           "Websites",
           "Landing pages",
@@ -94,7 +94,7 @@
         ]
       },
       "dashboards": {
-        "title": "Dashboards & visibility",
+        "title": "Dashboards",
         "description": "Real-time views of what matters to your business: sales, stock, operations, people. Your decisions stop relying on gut feeling.",
         "link": "Explore dashboards",
         "tags": [
@@ -114,7 +114,8 @@
         ]
       }
     },
-    "stackLabel": "What's included"
+    "stackLabel": "What's included",
+    "close": "Close"
   },
   "differentials": {
     "eyebrow": "Why Adapto",

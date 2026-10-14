@@ -62,7 +62,7 @@
         ]
       },
       "websites": {
-        "title": "Sites web et landing pages",
+        "title": "Sites web",
         "description": "Sites institutionnels, landing pages, boutiques en ligne et portails clients — rapides, prêts pour le bilinguisme, faciles à mettre à jour par votre équipe et pensés pour transformer les visiteurs en conversations.",
         "link": "Découvrir les sites web",
         "tags": [
@@ -94,7 +94,7 @@
         ]
       },
       "dashboards": {
-        "title": "Tableaux de bord et visibilité",
+        "title": "Tableaux de bord",
         "description": "Vues en temps réel de ce qui compte pour votre entreprise : ventes, stocks, opérations, équipes. Vos décisions ne reposent plus sur l'intuition.",
         "link": "Découvrir les tableaux de bord",
         "tags": [
@@ -114,7 +114,8 @@
         ]
       }
     },
-    "stackLabel": "Ce qui est inclus"
+    "stackLabel": "Ce qui est inclus",
+    "close": "Fermer"
   },
   "differentials": {
     "eyebrow": "Pourquoi Adapto",
