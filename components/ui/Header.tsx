@@ -16,6 +16,14 @@ import { Menu, X, ArrowRight, ArrowUpRight, MapPin, Mail } from 'lucide-react';
 /** The mobile drawer's slide, in and out. */
 const DRAWER_MS = 320;
 
+/** How the bar's items slide out when the header tucks away (and back). */
+const TUCK_MOTION =
+  'transition-[transform,opacity,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none';
+const TUCK_AWAY = '-translate-y-24 opacity-0';
+/** The logo and the booking button stay and glide out to the edges: slower and gentler. */
+const TUCK_GLIDE =
+  'transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(0.45,0,0.15,1)] motion-reduce:transition-none';
+
 /** Page sections the desktop nav links to, in page order. */
 const SECTION_IDS = ['services', 'process', 'why', 'manifesto', 'contact'] as const;
 
@@ -214,6 +222,55 @@ export function Header({ lang, dict }: HeaderProps) {
 
   useEffect(() => setMounted(true), []);
 
+  // Scrolling down tucks the bar away, leaving a translucent strip; scrolling
+  // up, a mouse in the bar's area (peek) or keyboard focus inside it brings it
+  // back. The logo is not part of the bar, so it never leaves.
+  const [scrolledAway, setScrolledAway] = useState(false);
+  const [peek, setPeek] = useState(false);
+  const [focusWithin, setFocusWithin] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const tucked = scrolledAway && !peek && !focusWithin && !open;
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const dy = y - lastY;
+      // Ignore jitter (and iOS bounce); near the top the bar always shows
+      if (y < 120) setScrolledAway(false);
+      else if (dy > 6) setScrolledAway(true);
+      else if (dy < -6) setScrolledAway(false);
+      if (Math.abs(dy) > 6 || y < 120) lastY = y;
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  // Mouse only (touch has no hover): the pointer entering the bar's band at
+  // the top of the screen shows it, leaving the band hides it again. While
+  // tucked the header lets clicks through, so this can't be a mouseenter.
+  useEffect(() => {
+    if (!scrolledAway) {
+      setPeek(false);
+      return;
+    }
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      const band = headerRef.current?.offsetHeight ?? 96;
+      setPeek(e.clientY <= band);
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    return () => window.removeEventListener('pointermove', onMove);
+  }, [scrolledAway]);
+
   // The header's backdrop fades in with the scroll, over its first 80px,
   // instead of switching on at once: on phones the old switch landed while the
   // browser's address bar was collapsing, and the pair read as the page jumping.
@@ -268,33 +325,72 @@ export function Header({ lang, dict }: HeaderProps) {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      {/* Backdrop: opacity driven by the scroll (above); fully on while the
-          menu is open */}
+    <header
+      ref={headerRef}
+      data-tucked={tucked || undefined}
+      onFocus={() => setFocusWithin(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocusWithin(false);
+      }}
+      // Tucked: clicks go through to the page, except on the logo
+      className={cn('fixed inset-x-0 top-0 z-50', tucked && 'pointer-events-none')}
+    >
+      {/* The bar's background. Tucked, it slides up until only a strip with a
+          small handle is left, and turns more transparent. */}
       <div
-        ref={backdropRef}
         aria-hidden
         className={cn(
-          // Phones: a plain solid backdrop. A blurred fixed layer has to be
-          // re-rendered whenever the browser's toolbars move, which showed as
-          // a jolt on the first scroll; the blur stays from md up.
-          'pointer-events-none absolute inset-0 -z-10 bg-ink/95 md:bg-ink/85 md:backdrop-blur-xl',
-          open && '!opacity-100',
+          'pointer-events-none absolute inset-0 -z-10 transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
+          tucked ? 'translate-y-[calc(-100%+10px)] opacity-60' : 'translate-y-0 opacity-100',
         )}
-        style={{ opacity: 0 }}
-      />
+      >
+        {/* Backdrop: opacity driven by the scroll (above); fully on while the
+            menu is open, and while tucked so the strip shows */}
+        <div
+          ref={backdropRef}
+          className={cn(
+            // Phones: a plain solid backdrop. A blurred fixed layer has to be
+            // re-rendered whenever the browser's toolbars move, which showed as
+            // a jolt on the first scroll; the blur stays from md up.
+            'absolute inset-0 bg-ink/95 md:bg-ink/85 md:backdrop-blur-xl',
+            (open || tucked) && '!opacity-100',
+          )}
+          style={{ opacity: 0 }}
+        />
+        <span
+          className={cn(
+            'absolute bottom-0 left-0 right-0 h-px bg-cream/15 transition-opacity duration-500',
+            tucked ? 'opacity-100' : 'opacity-0',
+          )}
+        />
+        <span
+          className={cn(
+            'absolute bottom-[3px] left-1/2 h-1 w-10 -translate-x-1/2 rounded-full bg-cream/40 transition-opacity duration-500',
+            tucked ? 'opacity-100' : 'opacity-0',
+          )}
+        />
+      </div>
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-24 md:px-8 lg:px-10">
         <Link
           href={`/${lang}`}
           aria-label="Adapto — home"
-          className="group inline-flex items-center transition-opacity hover:opacity-80"
+          className={cn(
+            'group pointer-events-auto inline-flex items-center hover:opacity-80',
+            TUCK_GLIDE,
+            // Tucked: out to the screen's left edge (the gutter past the
+            // 80rem column), clear of the content
+            tucked && 'translate-x-[calc(max(0px,(100vw-80rem)/2)*-1)]',
+          )}
         >
           <Logo variant="mark" sizeClass="h-14 md:h-16" priority />
         </Link>
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-5 lg:flex xl:gap-8">
-          <ul ref={navListRef} className="relative flex items-center gap-1">
+          <ul
+            ref={navListRef}
+            className={cn('relative flex items-center gap-1', TUCK_MOTION, tucked && TUCK_AWAY)}
+          >
             {/* Section indicator — positioned by useSectionPill */}
             {/* Section indicator — positioned by useSectionPill. It sits above
                 the links and carries a dark copy of the labels, counter-shifted
@@ -332,7 +428,13 @@ export function Header({ lang, dict }: HeaderProps) {
             ))}
           </ul>
 
-          <div className="flex items-center gap-1 rounded-full border border-cream/10 bg-cream/5 p-0.5">
+          <div
+            className={cn(
+              'flex items-center gap-1 rounded-full border border-cream/10 bg-cream/5 p-0.5',
+              TUCK_MOTION,
+              tucked && TUCK_AWAY,
+            )}
+          >
             {i18n.locales.map((locale) => (
               <Link
                 key={locale}
@@ -356,21 +458,38 @@ export function Header({ lang, dict }: HeaderProps) {
             // Hidden on small laptops: with the FAQ link and the longer
             // French CTA the row no longer fits at 1024px. The Tracker stays
             // in the mobile drawer and the Process section.
-            className="group hidden items-center gap-1.5 whitespace-nowrap text-sm font-medium text-cream/70 transition-colors hover:text-cream xl:inline-flex"
+            className={cn(
+              'group hidden items-center gap-1.5 whitespace-nowrap text-sm font-medium text-cream/70 hover:text-cream xl:inline-flex',
+              TUCK_MOTION,
+              tucked && TUCK_AWAY,
+            )}
           >
             {dict.process.tracker.cta.button}
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
 
-          <Button href={bookingHref()} external={bookingIsExternal()} size="sm">
-            {dict.nav.book}
-          </Button>
+          {/* Stays when tucked, out to the screen's right edge */}
+          <div
+            className={cn(
+              'pointer-events-auto',
+              TUCK_GLIDE,
+              tucked && 'translate-x-[max(0px,(100vw-80rem)/2)]',
+            )}
+          >
+            <Button href={bookingHref()} external={bookingIsExternal()} size="sm">
+              {dict.nav.book}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile toggle — generous hit area, no default highlight */}
         <button
           type="button"
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream lg:hidden"
+          className={cn(
+            '-mr-2 inline-flex h-11 w-11 items-center justify-center text-cream lg:hidden',
+            TUCK_MOTION,
+            tucked && TUCK_AWAY,
+          )}
           onClick={() => setOpen((s) => !s)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}

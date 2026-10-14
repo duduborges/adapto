@@ -475,3 +475,24 @@ body {
   32%, 100% { background-position: 0 0, 0 0; }
 }
 
+
+/*
+ * "What we build" on large screens (components/sections/Services.tsx).
+ * Tiles step in one by one as the row scrolls in, their glyphs drawing
+ * themselves, and again when a card closes. The card grows out of the box
+ * that opened it (in Services.tsx) while the topic buttons slide in from
+ * the right.
+ */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html.reveal-on .svc-desk .svc-dtile {
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  }
+  html.reveal-on .svc-desk:not([data-revealed]) .svc-dtile { opacity: 0; transform: translateY(28px); }
+  html.reveal-on .svc-desk:not([data-revealed]) .svc-glyph [data-draw] { stroke-dashoffset: 1; }
+  html.reveal-on .svc-desk:not([data-revealed]) :is(.svc-fade, .svc-block-core) { opacity: 0; }
+
+  .svc-desk [data-enter] .svc-dtile { animation: svc-tile-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i) * 0.06s) both; }
+  .svc-desk .svc-dbtn { animation: svc-btn-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) calc(0.1s + var(--i) * 0.05s) both; }
+}
+@keyframes svc-tile-in { from { opacity: 0; transform: translateY(24px) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes svc-btn-in { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
