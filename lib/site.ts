@@ -47,7 +47,7 @@ export const site = {
   shortName: 'Adapto · Software House',
   domain: 'adapto-sh.com',
   email: 'contact@adapto-sh.com',
-  bookingUrl: 'https://calendar.app.google/kzHtcffwJgX8JQVG7',
+  bookingUrl: 'https://calendar.app.google/qfW6fExP1wZ3zem3A',
   /** Adapto Tracker — clients enter their access code here. */
   trackerUrl: 'https://tracker.adapto-sh.com',
   location: {
