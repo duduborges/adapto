@@ -459,27 +459,63 @@
     "sections": [
       {
         "heading": "Qui nous sommes",
-        "body": "Adapto Software House est un studio de software établi à Vancouver, en Colombie-Britannique, au Canada. Écrivez-nous à contact@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
+        "body": "Adapto Software House (« Adapto », « nous ») est un studio de logiciels établi à Vancouver, en Colombie-Britannique, au Canada. Nous développons des logiciels pour nos clients et exploitons Adapto Tracker, où nos clients suivent leurs projets.\n\nLes personnes responsables de la protection des renseignements personnels chez Adapto sont Arthur D'Eça Morgenstern Vinhas Marchetti et Eduardo Cambraia Borges, cofondateurs. Vous pouvez les joindre à contact@adapto-sh.com pour toute question sur cette politique ou sur les données que nous détenons."
+      },
+      {
+        "heading": "Ce que couvre cette politique",
+        "body": "Cette politique couvre ce site (adapto-sh.com), Adapto Tracker (tracker.adapto-sh.com) et la façon dont nous traitons les renseignements personnels lorsque nous travaillons avec vous.\n\nLes données qui appartiennent au produit ou aux utilisateurs d'un client, que nous pouvons traiter en le développant ou en l'entretenant, sont aussi régies par l'entente signée avec ce client."
       },
       {
         "heading": "Ce que nous recueillons",
-        "body": "Lorsque vous remplissez le formulaire de contact, nous recevons votre nom, votre adresse courriel, le nom de votre entreprise et votre message. Ce sont les seules données personnelles que nous demandons. Elles servent uniquement à vous répondre et, le cas échéant, à mener le projet dont nous discutons."
+        "body": "Sur ce site :\n• le formulaire de contact : votre nom, votre adresse courriel, le nom de votre entreprise et votre message;\n• la prise de rendez-vous : votre nom, votre adresse courriel et l'heure choisie, par Google Agenda;\n• des statistiques d'utilisation, seulement si vous acceptez les témoins (voir plus bas).\n\nDans Adapto Tracker :\n• les adresses courriel que vous ajoutez pour recevoir les mises à jour du projet et les invitations;\n• les rencontres proposées par vous ou par nous : titre, note, date et heure, fuseau horaire et courriel de la personne qui l'a proposée;\n• les messages que vous nous envoyez depuis la page de votre projet, avec le courriel de réponse;\n• pour les membres de notre équipe, leur courriel et leur mot de passe de connexion, gérés par notre fournisseur d'authentification.\n\nPendant un projet : les renseignements que vous choisissez de nous transmettre, comme les coordonnées de votre équipe, des documents d'affaires, des fichiers, du contenu et des accès aux comptes nécessaires pour construire ou exploiter votre produit.\n\nAutomatiquement : comme la plupart des sites, nos serveurs enregistrent des données techniques comme votre adresse IP, votre navigateur et l'heure de chaque requête. Nous les utilisons pour protéger nos services (par exemple, bloquer les tentatives répétées de codes d'accès erronés) et corriger les problèmes."
       },
       {
-        "heading": "Analyse et témoins",
-        "body": "Nous utilisons Google Analytics 4 pour comprendre comment les visiteurs trouvent et utilisent ce site, ainsi que Vercel Speed Insights pour mesurer la performance des pages. Google Analytics dépose des témoins et ne se charge qu'après votre acceptation dans la bannière. Speed Insights recueille des mesures de performance anonymes et ne dépose aucun témoin. Vous pouvez modifier votre choix à tout moment depuis le lien dans le pied de page."
+        "heading": "Comment nous les utilisons, et pourquoi",
+        "body": "Nous utilisons les renseignements personnels seulement pour :\n• vous répondre et discuter d'un projet possible;\n• réaliser le projet convenu, y compris Adapto Tracker, ses notifications et ses rencontres;\n• assurer la sécurité et le bon fonctionnement de nos services;\n• comprendre, de façon globale, l'utilisation de ce site, si vous acceptez les statistiques;\n• respecter nos obligations légales et comptables.\n\nNous le faisons avec votre consentement (témoins d'analyse, courriels de notification que vous confirmez), parce que c'est nécessaire pour fournir les services que vous demandez (vous répondre, réaliser votre projet et Tracker), ou en raison de notre intérêt légitime à protéger nos services. Nous n'utilisons jamais vos données à des fins publicitaires et nous ne les vendons jamais."
+      },
+      {
+        "heading": "Adapto Tracker",
+        "body": "Tracker montre à un client la ligne du temps de son projet grâce à un code d'accès privé qui n'est communiqué qu'à lui. Une adresse courriel ajoutée à un projet ne reçoit rien tant qu'elle n'est pas confirmée depuis sa propre boîte de réception, et elle peut être retirée en tout temps depuis la page du projet.\n\nLorsqu'une rencontre est acceptée, un événement Google Agenda avec un lien Google Meet est créé et l'invitation est envoyée aux participants. Si vous choisissez de nous écrire par WhatsApp ou Messages d'Apple, la conversation a lieu dans ces services, selon leurs propres politiques de confidentialité.\n\nLa page de projet du client n'utilise aucun témoin d'analyse ou publicitaire. La connexion de notre équipe utilise un témoin de session strictement nécessaire."
+      },
+      {
+        "heading": "Statistiques et témoins",
+        "body": "Nous utilisons Google Analytics 4 pour comprendre comment les gens trouvent et utilisent ce site, et Vercel Speed Insights pour mesurer la performance des pages. Google Analytics dépose des témoins et ne s'active qu'après votre acceptation dans la bannière. Speed Insights recueille des mesures de performance anonymes et ne dépose aucun témoin. Vous pouvez modifier votre choix en tout temps à partir du lien dans le pied de page."
       },
       {
         "heading": "Avec qui nous les partageons",
-        "body": "Les messages du formulaire de contact sont acheminés par Resend, notre fournisseur de courriel. Les données d'analyse sont traitées par Google. Ce site est hébergé par Vercel. Nous ne vendons pas vos données et ne les partageons avec personne d'autre."
+        "body": "Nous partageons des renseignements personnels seulement avec les fournisseurs qui nous aident à exploiter nos services, et seulement ce dont chacun a besoin :\n• Vercel : hébergement de ce site et de Tracker;\n• Supabase : base de données de Tracker et connexion de l'équipe;\n• Resend : envoi de nos courriels (formulaire de contact, notifications et invitations de Tracker);\n• Google : Analytics (si vous l'acceptez), Agenda et Meet (rencontres et prise de rendez-vous);\n• WhatsApp (Meta) et Apple : seulement si vous choisissez de nous écrire par ces services.\n\nChaque fournisseur traite les données pour notre compte selon ses propres engagements de sécurité et de confidentialité. Nous pouvons aussi communiquer des renseignements lorsque la loi l'exige. Nous ne vendons pas vos données et ne les partageons avec personne d'autre."
       },
       {
-        "heading": "Combien de temps nous les conservons",
-        "body": "Les messages du formulaire de contact sont conservés tant que l'échange demeure pertinent pour un projet possible ou en cours, et au plus 24 mois après notre dernier échange. Les données d'analyse suivent la conservation standard de 14 mois de Google."
+        "heading": "Où vos données sont conservées",
+        "body": "La base de données de Tracker est hébergée par Supabase aux États-Unis (Virginie du Nord, us-east-1). Vercel, Resend et Google traitent aussi des données aux États-Unis et dans d'autres pays. Vos renseignements peuvent donc être conservés à l'extérieur du Canada, du Québec et de l'Union européenne, où ils peuvent être accessibles aux autorités locales selon les lois de ces pays.\n\nNous choisissons des fournisseurs qui offrent une sécurité solide et des protections contractuelles pour ces transferts, comme des clauses contractuelles types ou des garanties équivalentes, et nous les évaluons avant de les utiliser."
+      },
+      {
+        "heading": "Durée de conservation",
+        "body": "• Messages du formulaire et prises de rendez-vous : tant que la conversation reste pertinente pour un projet possible ou en cours, et au plus 24 mois après notre dernier échange.\n• Données de Tracker (courriels, rencontres, messages) : pendant la durée du projet, puis jusqu'à 24 mois après sa fin, sauf si vous demandez leur suppression plus tôt. Une adresse retirée d'un projet est supprimée immédiatement.\n• Renseignements de projet que vous nous transmettez : selon notre entente, et sinon pas plus longtemps que nécessaire pour réaliser et soutenir le projet.\n• Journaux de sécurité : quelques semaines, sauf s'ils sont nécessaires pour enquêter sur un incident.\n• Statistiques : la durée standard de 14 mois de Google.\n\nNous conservons les registres comptables aussi longtemps que la loi l'exige."
+      },
+      {
+        "heading": "Comment nous les protégeons",
+        "body": "Nous protégeons les renseignements personnels par des mesures adaptées à leur sensibilité : connexions chiffrées (HTTPS), accès limité aux personnes qui en ont besoin, règles de base de données qui séparent les données de chaque client, clés secrètes conservées uniquement sur nos serveurs, liens de nos courriels protégés par des jetons aléatoires à usage unique et limites qui bloquent les tentatives répétées de deviner les codes d'accès. Aucun système n'est parfaitement sûr, mais nous révisons et améliorons ces mesures régulièrement."
+      },
+      {
+        "heading": "En cas d'incident",
+        "body": "Si un incident touchant vos renseignements personnels présente un risque de préjudice sérieux, nous vous en aviserons, ainsi que les autorités compétentes, comme la loi l'exige, et nous vous dirons ce qui s'est passé et ce que nous faisons pour y remédier."
       },
       {
         "heading": "Vos droits",
-        "body": "Vous pouvez nous demander de consulter, corriger ou supprimer les données personnelles que nous détenons à votre sujet, ou retirer votre consentement à l'analyse. Écrivez à contact@adapto-sh.com et nous répondrons dans les 30 jours. Si vous résidez au Québec, la Loi 25 vous accorde ces droits."
+        "body": "Vous pouvez nous demander d'accéder aux renseignements personnels que nous détenons sur vous, de les rectifier ou de les supprimer, de cesser de les utiliser, ou retirer un consentement donné (par exemple, pour les statistiques ou les courriels de notification). Vous pouvez aussi demander une copie des renseignements que vous nous avez fournis dans un format couramment utilisé.\n\nCes droits sont protégés au Canada par la LPRPDE et la PIPA de la Colombie-Britannique, au Québec par la Loi 25, et dans l'Union européenne et au Royaume-Uni par le RGPD. Si vous êtes dans l'UE ou au Royaume-Uni, vous pouvez aussi vous opposer aux traitements fondés sur notre intérêt légitime.\n\nÉcrivez à contact@adapto-sh.com. Nous répondrons dans un délai de 30 jours et pourrions d'abord vous demander de confirmer votre identité."
+      },
+      {
+        "heading": "Plaintes",
+        "body": "Si notre réponse ne vous satisfait pas, vous pouvez vous adresser au Commissariat à la protection de la vie privée du Canada, au Commissariat à l'information et à la protection de la vie privée de la Colombie-Britannique ou, au Québec, à la Commission d'accès à l'information. Si vous êtes dans l'Union européenne ou au Royaume-Uni, vous pouvez vous adresser à votre autorité locale de protection des données."
+      },
+      {
+        "heading": "Enfants",
+        "body": "Notre site et nos services s'adressent aux entreprises et ne visent pas les enfants. Nous ne recueillons pas sciemment de renseignements personnels auprès de personnes de moins de 14 ans."
+      },
+      {
+        "heading": "Modifications de cette politique",
+        "body": "Nous pouvons mettre à jour cette politique lorsque nos services ou la loi changent. La date en haut indique la version la plus récente. Si un changement est important, nous en informerons nos clients par courriel ou dans Tracker avant son entrée en vigueur."
       }
     ]
   }

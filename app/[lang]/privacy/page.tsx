@@ -9,11 +9,11 @@ import { Container } from '@/components/ui/Container';
 import { Footer } from '@/components/ui/Footer';
 import { Logo } from '@/components/ui/Logo';
 
-const LAST_UPDATED = '2026-08-27';
+const LAST_UPDATED = '2026-10-30';
 
 const descriptions: Record<Locale, string> = {
-  en: 'How Adapto collects, uses and protects the data you share through this site: contact form, analytics cookies, retention and your rights.',
-  fr: "Comment Adapto recueille, utilise et protège les données partagées via ce site : formulaire de contact, témoins d'analyse, conservation et vos droits.",
+  en: 'How Adapto collects, uses and protects personal data across this site, the Adapto Tracker and our projects: what we collect, where it is stored, retention and your rights.',
+  fr: "Comment Adapto recueille, utilise et protège les renseignements personnels sur ce site, dans Adapto Tracker et dans nos projets : collecte, hébergement, conservation et vos droits.",
 };
 
 export async function generateStaticParams() {
@@ -88,9 +88,15 @@ export default async function PrivacyPage({
                   <h2 className="text-lg font-medium text-cream">
                     {s.heading}
                   </h2>
-                  <p className="mt-3 text-base leading-relaxed text-cream/60">
-                    {s.body}
-                  </p>
+                  {/* A blank line in the text starts a new paragraph. */}
+                  {s.body.split('\n\n').map((paragraph, i) => (
+                    <p
+                      key={i}
+                      className="mt-3 whitespace-pre-line text-base leading-relaxed text-cream/60"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
                 </section>
               ),
             )}
