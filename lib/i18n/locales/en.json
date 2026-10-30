@@ -459,27 +459,63 @@
     "sections": [
       {
         "heading": "Who we are",
-        "body": "Adapto Software House is a software studio based in Vancouver, British Columbia, Canada. You can reach us at contact@adapto-sh.com for any question about this policy or the data we hold."
+        "body": "Adapto Software House (\"Adapto\", \"we\") is a software studio based in Vancouver, British Columbia, Canada. We build software for our clients and run the Adapto Tracker, where clients follow their projects.\n\nThe people in charge of protecting personal information at Adapto are Arthur D'Eça Morgenstern Vinhas Marchetti and Eduardo Cambraia Borges, co-founders. You can reach them at contact@adapto-sh.com for any question about this policy or the data we hold."
+      },
+      {
+        "heading": "What this policy covers",
+        "body": "This policy covers this website (adapto-sh.com), the Adapto Tracker (tracker.adapto-sh.com) and the way we handle personal information while working with you.\n\nData that belongs to a client's own product or users, which we may handle while building or maintaining it, is also governed by the agreement we sign with that client."
       },
       {
         "heading": "What we collect",
-        "body": "When you submit the contact form we receive your name, email address, company name and the message you write. That is the only personal data we ask for. We use it solely to reply to you and, if it goes further, to run the project we discuss."
+        "body": "On this website:\n• the contact form: your name, email address, company name and the message you write;\n• booking a call: your name, email address and the time you pick, through Google Calendar;\n• analytics, only if you accept cookies (see below).\n\nIn the Adapto Tracker:\n• the email addresses you add to receive project updates and meeting invites;\n• meetings you or we propose: title, note, date and time, time zone and the email of who proposed it;\n• messages you send us from your project page, with the email you reply from;\n• for our team members, their login email and password, managed by our authentication provider.\n\nWhile working on a project: the information you choose to share with us, such as contact details of your team, business documents, files, content and access to accounts we need to build or run your product.\n\nAutomatically: like most websites, our servers record technical data such as your IP address, browser and the time of each request. We use it to keep the services secure (for example, to block repeated wrong access codes) and to fix problems."
+      },
+      {
+        "heading": "How we use it, and why",
+        "body": "We use personal information only to:\n• reply to you and discuss a possible project;\n• deliver the project we agreed on, including the Adapto Tracker, its notifications and its meetings;\n• keep our services secure and working;\n• understand, in aggregate, how this website is used, if you allow analytics;\n• meet our legal and accounting obligations.\n\nWe do this with your consent (analytics cookies, notification emails you confirm), because it is needed to provide the services you ask for (replying, running your project and the Tracker), or because of our legitimate interest in keeping our services secure. We never use your data for advertising and we never sell it."
+      },
+      {
+        "heading": "The Adapto Tracker",
+        "body": "The Tracker shows a client their project timeline through a private access code shared only with them. An email address added to a project receives nothing until it is confirmed from its own inbox, and it can be removed at any time from the project page.\n\nWhen a meeting is accepted, a Google Calendar event with a Google Meet link is created and the invitation is sent to the meeting's participants. If you choose to message us by WhatsApp or Apple Messages, that conversation happens in those services, under their own privacy policies.\n\nThe client's project page uses no analytics or advertising cookies. Our team's sign-in uses a strictly necessary session cookie."
       },
       {
         "heading": "Analytics and cookies",
-        "body": "We use Google Analytics 4 to understand how people find and use this site, and Vercel Speed Insights to measure page performance. Google Analytics sets cookies and only runs after you accept them in the banner. Speed Insights collects anonymous performance timings and sets no cookies. You can change your choice at any time from the link in the footer."
+        "body": "We use Google Analytics 4 to understand how people find and use this website, and Vercel Speed Insights to measure page performance. Google Analytics sets cookies and only runs after you accept them in the banner. Speed Insights collects anonymous performance timings and sets no cookies. You can change your choice at any time from the link in the footer."
       },
       {
         "heading": "Who we share it with",
-        "body": "Contact-form messages are delivered through Resend, our email provider. Analytics data is processed by Google. This site is hosted by Vercel. We do not sell your data and we do not share it with anyone else."
+        "body": "We share personal information only with the service providers that help us run our services, and only what each one needs:\n• Vercel: hosting of this website and the Tracker;\n• Supabase: the Tracker's database and team sign-in;\n• Resend: delivery of our emails (contact form, Tracker notifications and invitations);\n• Google: Analytics (if you allow it), Calendar and Meet (meetings and call bookings);\n• WhatsApp (Meta) and Apple: only if you choose to message us through them.\n\nEach provider processes the data on our behalf under its own security and privacy commitments. We may also disclose information when the law requires it. We do not sell your data and we do not share it with anyone else."
+      },
+      {
+        "heading": "Where your data is stored",
+        "body": "The Tracker's database is hosted by Supabase in the United States (North Virginia, us-east-1). Vercel, Resend and Google also process data in the United States and other countries. This means your information may be stored outside Canada, outside Quebec and outside the European Union, where it may be accessible to local authorities under the laws of those countries.\n\nWe choose providers that offer strong security and contractual protections for these transfers, such as standard contractual clauses or equivalent safeguards, and we assess them before we use them."
       },
       {
         "heading": "How long we keep it",
-        "body": "Contact-form messages are kept for as long as the conversation stays relevant to a possible or ongoing project, and no more than 24 months after our last exchange. Analytics data follows Google's standard 14-month retention."
+        "body": "• Contact-form messages and call bookings: as long as the conversation stays relevant to a possible or ongoing project, and no more than 24 months after our last exchange.\n• Tracker data (emails, meetings, messages): for the life of the project, then up to 24 months after it ends, unless you ask us to delete it sooner. An email removed from a project is deleted right away.\n• Project information you share with us: as set out in our agreement, and otherwise no longer than needed to deliver and support the project.\n• Security logs: a few weeks, unless needed to investigate an incident.\n• Analytics data: Google's standard 14-month retention.\n\nWe keep accounting records as long as the law requires."
+      },
+      {
+        "heading": "How we protect it",
+        "body": "We protect personal information with measures that match its sensitivity: encrypted connections (HTTPS), access limited to the people who need it, database rules that keep each client's data apart, secret keys kept on our servers only, links in our emails protected by single-purpose random tokens, and limits that block repeated attempts to guess access codes. No system is perfectly secure, but we review and improve these measures regularly."
+      },
+      {
+        "heading": "If something goes wrong",
+        "body": "If an incident involving your personal information creates a risk of serious harm, we will notify you and the competent authorities as the law requires, and tell you what happened and what we are doing about it."
       },
       {
         "heading": "Your rights",
-        "body": "You can ask us to show you, correct or delete any personal data we hold about you, or withdraw your consent to analytics. Write to contact@adapto-sh.com and we will respond within 30 days. If you are in Quebec, Law 25 gives you these rights."
+        "body": "You can ask us to access, correct or delete the personal information we hold about you, to stop using it, or to withdraw a consent you gave (for example, analytics or notification emails). You can also ask for a copy of the information you gave us in a commonly used format.\n\nThese rights are protected in Canada by PIPEDA and British Columbia's PIPA, in Quebec by Law 25, and in the European Union and the United Kingdom by the GDPR. If you are in the EU or the UK, you may also object to processing based on our legitimate interests.\n\nWrite to contact@adapto-sh.com. We will answer within 30 days and may ask you to confirm your identity first."
+      },
+      {
+        "heading": "Complaints",
+        "body": "If you are not satisfied with our answer, you can contact the Office of the Privacy Commissioner of Canada, the Office of the Information and Privacy Commissioner for British Columbia, or, in Quebec, the Commission d'accès à l'information. If you are in the European Union or the United Kingdom, you can contact your local data protection authority."
+      },
+      {
+        "heading": "Children",
+        "body": "Our website and services are meant for businesses and are not directed at children. We do not knowingly collect personal information from anyone under 14."
+      },
+      {
+        "heading": "Changes to this policy",
+        "body": "We may update this policy when our services or the law change. The date at the top shows the latest version. If a change is significant, we will tell our clients by email or in the Tracker before it applies."
       }
     ]
   }
