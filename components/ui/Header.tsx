@@ -10,7 +10,7 @@ import type { Locale } from '@/types';
 import { i18n, languageShort } from '@/lib/i18n/config';
 import { Logo } from './Logo';
 import { Button } from './Button';
-import { site, bookingHref, bookingIsExternal } from '@/lib/site';
+import { site, bookingHref } from '@/lib/site';
 import { Menu, X, ArrowRight, ArrowUpRight, MapPin, Mail } from 'lucide-react';
 
 /** The mobile drawer's slide, in and out. */
@@ -476,7 +476,7 @@ export function Header({ lang, dict }: HeaderProps) {
               tucked && 'translate-x-[max(0px,(100vw-80rem)/2)]',
             )}
           >
-            <Button href={bookingHref()} external={bookingIsExternal()} size="sm">
+            <Button href={bookingHref(lang)} size="sm">
               {dict.nav.book}
             </Button>
           </div>
@@ -617,17 +617,14 @@ function MobileDrawer({
             shown ? 'translate-y-0 opacity-100 delay-[400ms]' : 'translate-y-2 opacity-0',
           )}
         >
-          <a
-            href={bookingHref()}
-            {...(bookingIsExternal()
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
+          <Link
+            href={bookingHref(lang)}
             onClick={onClose}
             className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember"
           >
             <span>{dict.nav.book}</span>
             <ArrowRight className="h-4 w-4 self-center transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
 
           <a
             href={site.trackerUrl}

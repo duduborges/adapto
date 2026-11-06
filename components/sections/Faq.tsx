@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { ArrowRight, Plus } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
@@ -11,6 +12,7 @@ interface FaqProps {
   title: string;
   subtitle?: string;
   bookLabel: string;
+  lang: string;
   items: { q: string; a: string }[];
   className?: string;
 }
@@ -26,6 +28,7 @@ export function Faq({
   title,
   subtitle,
   bookLabel,
+  lang,
   items,
   className,
 }: FaqProps) {
@@ -68,15 +71,13 @@ export function Faq({
                 {subtitle}
               </p>
             )}
-            <a
-              href={bookingHref()}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={bookingHref(lang)}
               className="group mt-8 inline-flex items-baseline gap-3 border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember"
             >
               <span>{bookLabel}</span>
               <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
           </div>
         </div>
 

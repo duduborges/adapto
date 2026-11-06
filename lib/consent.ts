@@ -2,7 +2,8 @@
  * Cookie consent, stored client-side only. Analytics scripts are not injected
  * at all until the visitor accepts — no "load first, ask later".
  */
-export const CONSENT_KEY = 'adapto.consent.v1';
+// v2: the choice now also covers the Meta Pixel, so v1's "accept" doesn't count.
+export const CONSENT_KEY = 'adapto.consent.v2';
 export const CONSENT_EVENT = 'adapto:consent-change';
 
 export type ConsentValue = 'granted' | 'denied';

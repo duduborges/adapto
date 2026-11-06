@@ -39,7 +39,7 @@ export async function GET() {
     '',
     '## Contact',
     '',
-    `- [${dict.hero.cta}](${site.bookingUrl})`,
+    `- [${dict.hero.cta}](${en}/book)`,
     `- [Email](mailto:${site.email})`,
     '',
     '## Optional',

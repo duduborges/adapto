@@ -447,7 +447,7 @@
   },
   "cookies": {
     "title": "Nous utilisons des témoins",
-    "body": "Nous utilisons des témoins d'analyse pour comprendre comment le site est utilisé. Rien n'est chargé avant votre choix.",
+    "body": "Nous utilisons des témoins d'analyse et de publicité pour comprendre comment le site est utilisé et mesurer nos annonces. Rien n'est chargé avant votre choix.",
     "accept": "Accepter",
     "reject": "Refuser",
     "policy": "Politique de confidentialité"
@@ -467,11 +467,11 @@
       },
       {
         "heading": "Ce que nous recueillons",
-        "body": "Sur ce site :\n• le formulaire de contact : votre nom, votre adresse courriel, le nom de votre entreprise et votre message;\n• la prise de rendez-vous : votre nom, votre adresse courriel et l'heure choisie, par Google Agenda;\n• des statistiques d'utilisation, seulement si vous acceptez les témoins (voir plus bas).\n\nDans Adapto Tracker :\n• les adresses courriel que vous ajoutez pour recevoir les mises à jour du projet et les invitations;\n• les rencontres proposées par vous ou par nous : titre, note, date et heure, fuseau horaire et courriel de la personne qui l'a proposée;\n• les messages que vous nous envoyez depuis la page de votre projet, avec le courriel de réponse;\n• pour les membres de notre équipe, leur courriel et leur mot de passe de connexion, gérés par notre fournisseur d'authentification.\n\nPendant un projet : les renseignements que vous choisissez de nous transmettre, comme les coordonnées de votre équipe, des documents d'affaires, des fichiers, du contenu et des accès aux comptes nécessaires pour construire ou exploiter votre produit.\n\nAutomatiquement : comme la plupart des sites, nos serveurs enregistrent des données techniques comme votre adresse IP, votre navigateur et l'heure de chaque requête. Nous les utilisons pour protéger nos services (par exemple, bloquer les tentatives répétées de codes d'accès erronés) et corriger les problèmes."
+        "body": "Sur ce site :\n• le formulaire de contact : votre nom, votre adresse courriel, le nom de votre entreprise et votre message;\n• la prise de rendez-vous : votre nom, votre adresse courriel, le nom de votre entreprise, ce que vous voulez résoudre, l'heure choisie et votre fuseau horaire, ainsi que la façon dont vous êtes arrivé sur le site (par exemple la publication, l'annonce ou le site d'origine);\n• des statistiques d'utilisation, seulement si vous acceptez les témoins (voir plus bas).\n\nDans Adapto Tracker :\n• les adresses courriel que vous ajoutez pour recevoir les mises à jour du projet et les invitations;\n• les rencontres proposées par vous ou par nous : titre, note, date et heure, fuseau horaire et courriel de la personne qui l'a proposée;\n• les messages que vous nous envoyez depuis la page de votre projet, avec le courriel de réponse;\n• pour les membres de notre équipe, leur courriel et leur mot de passe de connexion, gérés par notre fournisseur d'authentification.\n\nPendant un projet : les renseignements que vous choisissez de nous transmettre, comme les coordonnées de votre équipe, des documents d'affaires, des fichiers, du contenu et des accès aux comptes nécessaires pour construire ou exploiter votre produit.\n\nAutomatiquement : comme la plupart des sites, nos serveurs enregistrent des données techniques comme votre adresse IP, votre navigateur et l'heure de chaque requête. Nous les utilisons pour protéger nos services (par exemple, bloquer les tentatives répétées de codes d'accès erronés) et corriger les problèmes."
       },
       {
         "heading": "Comment nous les utilisons, et pourquoi",
-        "body": "Nous utilisons les renseignements personnels seulement pour :\n• vous répondre et discuter d'un projet possible;\n• réaliser le projet convenu, y compris Adapto Tracker, ses notifications et ses rencontres;\n• assurer la sécurité et le bon fonctionnement de nos services;\n• comprendre, de façon globale, l'utilisation de ce site, si vous acceptez les statistiques;\n• respecter nos obligations légales et comptables.\n\nNous le faisons avec votre consentement (témoins d'analyse, courriels de notification que vous confirmez), parce que c'est nécessaire pour fournir les services que vous demandez (vous répondre, réaliser votre projet et Tracker), ou en raison de notre intérêt légitime à protéger nos services. Nous n'utilisons jamais vos données à des fins publicitaires et nous ne les vendons jamais."
+        "body": "Nous utilisons les renseignements personnels seulement pour :\n• vous répondre et discuter d'un projet possible;\n• réaliser le projet convenu, y compris Adapto Tracker, ses notifications et ses rencontres;\n• assurer la sécurité et le bon fonctionnement de nos services;\n• comprendre, de façon globale, l'utilisation de ce site, si vous acceptez les statistiques;\n• savoir quelles publications et annonces mènent à des appels, et mesurer notre publicité sur Meta, si vous l'acceptez;\n• respecter nos obligations légales et comptables.\n\nNous le faisons avec votre consentement (témoins d'analyse et de publicité, courriels de notification que vous confirmez), parce que c'est nécessaire pour fournir les services que vous demandez (vous répondre, réaliser votre projet et Tracker), ou en raison de notre intérêt légitime à protéger nos services. Nous ne vendons jamais vos données, et ce que vous écrivez dans nos formulaires n'est jamais transmis à des plateformes publicitaires."
       },
       {
         "heading": "Adapto Tracker",
@@ -479,11 +479,11 @@
       },
       {
         "heading": "Statistiques et témoins",
-        "body": "Nous utilisons Google Analytics 4 pour comprendre comment les gens trouvent et utilisent ce site, et Vercel Speed Insights pour mesurer la performance des pages. Google Analytics dépose des témoins et ne s'active qu'après votre acceptation dans la bannière. Speed Insights recueille des mesures de performance anonymes et ne dépose aucun témoin. Vous pouvez modifier votre choix en tout temps à partir du lien dans le pied de page."
+        "body": "Nous utilisons Google Analytics 4 pour comprendre comment les gens trouvent et utilisent ce site, et Vercel Speed Insights pour mesurer la performance des pages. Google Analytics dépose des témoins et ne s'active qu'après votre acceptation dans la bannière. Il en va de même pour le pixel Meta, que nous pouvons utiliser pour mesurer nos annonces sur Instagram et Facebook : il indique à Meta qu'une visite ou une réservation a eu lieu, et Meta traite cette information selon sa propre politique, mais il ne reçoit jamais votre nom, votre courriel ni votre message. Si vous arrivez par un lien de campagne, votre navigateur conserve aussi les étiquettes de campagne du lien et le site d'origine jusqu'à la fermeture de l'onglet. Aucun témoin n'est utilisé, et ces détails ne nous parviennent que si vous réservez un appel. Speed Insights recueille des mesures de performance anonymes et ne dépose aucun témoin. Vous pouvez modifier votre choix en tout temps à partir du lien dans le pied de page."
       },
       {
         "heading": "Avec qui nous les partageons",
-        "body": "Nous partageons des renseignements personnels seulement avec les fournisseurs qui nous aident à exploiter nos services, et seulement ce dont chacun a besoin :\n• Vercel : hébergement de ce site et de Tracker;\n• Supabase : base de données de Tracker et connexion de l'équipe;\n• Resend : envoi de nos courriels (formulaire de contact, notifications et invitations de Tracker);\n• Google : Analytics (si vous l'acceptez), Agenda et Meet (rencontres et prise de rendez-vous);\n• WhatsApp (Meta) et Apple : seulement si vous choisissez de nous écrire par ces services.\n\nChaque fournisseur traite les données pour notre compte selon ses propres engagements de sécurité et de confidentialité. Nous pouvons aussi communiquer des renseignements lorsque la loi l'exige. Nous ne vendons pas vos données et ne les partageons avec personne d'autre."
+        "body": "Nous partageons des renseignements personnels seulement avec les fournisseurs qui nous aident à exploiter nos services, et seulement ce dont chacun a besoin :\n• Vercel : hébergement de ce site et de Tracker;\n• Supabase : base de données de Tracker et connexion de l'équipe;\n• Resend : envoi de nos courriels (formulaire de contact, notifications et invitations de Tracker);\n• Google : Analytics (si vous l'acceptez), Agenda et Meet (rencontres et prise de rendez-vous);\n• Meta : le pixel, seulement si vous l'acceptez (voir Statistiques et témoins);\n• WhatsApp (Meta) et Apple : seulement si vous choisissez de nous écrire par ces services.\n\nChaque fournisseur traite les données pour notre compte selon ses propres engagements de sécurité et de confidentialité. Nous pouvons aussi communiquer des renseignements lorsque la loi l'exige. Nous ne vendons pas vos données et ne les partageons avec personne d'autre."
       },
       {
         "heading": "Où vos données sont conservées",
@@ -518,5 +518,63 @@
         "body": "Nous pouvons mettre à jour cette politique lorsque nos services ou la loi changent. La date en haut indique la version la plus récente. Si un changement est important, nous en informerons nos clients par courriel ou dans Tracker avant son entrée en vigueur."
       }
     ]
+  },
+  "booking": {
+    "metaTitle": "Réserver un appel gratuit | Adapto",
+    "metaDescription": "Choisissez une heure pour un appel gratuit de 30 minutes avec Adapto, un studio de software à Vancouver. Parlez-nous du problème, nous vous dirons honnêtement si nous pouvons aider.",
+    "eyebrow": "Appel gratuit",
+    "title": "Réserver un appel gratuit",
+    "lead": "Nous écoutons comment fonctionne votre entreprise et vous disons honnêtement si nous sommes la bonne équipe pour vous.",
+    "duration": "30 minutes",
+    "meet": "Google Meet",
+    "founder": "Avec un cofondateur",
+    "free": "Gratuit, sans engagement",
+    "step1": "Choisissez une heure",
+    "step2": "Vos coordonnées",
+    "timeZone": "Fuseau horaire",
+    "changeTime": "Changer l'heure",
+    "previousMonth": "Mois précédent",
+    "nextMonth": "Mois suivant",
+    "timesCount": "{count} heures disponibles",
+    "loading": "Chargement des heures disponibles",
+    "retry": "Réessayer",
+    "loadError": "Nous ne pouvons pas afficher notre agenda pour le moment. Réessayez dans un instant ou écrivez-nous à",
+    "noSlots": "Aucune heure n'est ouverte pour le moment. Écrivez-nous et nous en trouverons une :",
+    "form": {
+      "name": "Nom complet",
+      "email": "E-mail professionnel",
+      "company": "Entreprise",
+      "problem": "Que cherchez-vous à résoudre ?",
+      "problemHint": "Une phrase ou deux suffisent.",
+      "submit": "Confirmer mon appel",
+      "submitting": "Réservation…",
+      "privacy": "Nous utilisons ces renseignements seulement pour préparer l'appel.",
+      "privacyLink": "Politique de confidentialité"
+    },
+    "errors": {
+      "required": "Ce champ est requis.",
+      "email": "Entrez une adresse courriel valide.",
+      "noLinks": "Les liens et le signe @ ne sont pas permis ici.",
+      "slot_taken": "Quelqu'un vient de prendre cette heure. Veuillez en choisir une autre.",
+      "already_booked": "Cette adresse a déjà un appel réservé. Cherchez l'invitation dans votre boîte de réception ou écrivez-nous pour le changer :",
+      "invalid": "Vérifiez vos renseignements et réessayez. Si le problème persiste, écrivez-nous :",
+      "rate_limited": "Trop de tentatives. Attendez quelques minutes et réessayez, ou écrivez-nous :",
+      "unavailable": "Nous n'avons pas pu réserver votre appel. Réessayez ou écrivez-nous :"
+    },
+    "confirmed": {
+      "metaTitle": "Votre appel est réservé | Adapto",
+      "title": "Votre appel est réservé",
+      "lead": "L'invitation est en route vers votre boîte de réception.",
+      "leadEmail": "L'invitation est en route vers {email}. Elle contient le lien Google Meet et ajoute l'appel à votre agenda.",
+      "joinMeet": "Ouvrir le lien Google Meet",
+      "nextTitle": "La suite",
+      "steps": [
+        "Acceptez l'invitation. Si vous ne la voyez pas d'ici quelques minutes, vérifiez vos courriels indésirables.",
+        "Nous lisons ce que vous avez écrit, pour que l'appel commence par votre problème et non par un formulaire.",
+        "Pendant l'appel, nous écoutons et vous disons honnêtement si nous sommes la bonne équipe pour vous."
+      ],
+      "reschedule": "Besoin d'une autre heure ?",
+      "back": "Retour à l'accueil"
+    }
   }
 }

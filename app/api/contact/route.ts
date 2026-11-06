@@ -1,7 +1,15 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import type { ContactFormData } from '@/types';
-import { site } from '@/lib/site';
+import { site, siteUrl, bookingHref } from '@/lib/site';
+import {
+  clientIp,
+  EMAIL_RE,
+  esc,
+  LINK_RE,
+  rateLimited,
+  sameOrigin,
+} from '@/lib/request-guards';
 
 // Force the route to be dynamic so Next.js does not try to pre-collect it
 // at build time (which would touch RESEND_API_KEY before envs are available).
@@ -10,75 +18,15 @@ export const dynamic = 'force-dynamic';
 const FROM_EMAIL =
   process.env.RESEND_FROM || 'Adapto <contact@adapto-sh.com>';
 const TO_EMAIL = process.env.CONTACT_TO || site.email;
-
-const esc = (s: string) =>
-  s.replace(/[&<>"']/g, (c) =>
-    ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;',
-    }[c] as string),
-  );
+// RESEND_FROM may include a display name; each email below sets its own.
+const FROM_ADDRESS = FROM_EMAIL.match(/<(.+)>/)?.[1] ?? FROM_EMAIL;
 
 /** Per-field caps — generous for real people, useless for payload stuffing. */
 const LIMITS = { name: 100, email: 254, company: 150, message: 5000 } as const;
 const MAX_BODY_BYTES = 16 * 1024;
 
-// No commas, semicolons, spaces or angle brackets: one plain address, so the
-// field can't smuggle extra recipients or a display name into Resend's `to`.
-const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
-// Name and company are echoed in the subject and the visitor's confirmation;
-// links there would turn the form into a spam relay.
-const LINK_RE = /(https?:\/\/|www\.|<|>|@)/i;
-
-/**
- * Best-effort, per-instance rate limit. Serverless instances don't share
- * memory, so this blunts bursts rather than guaranteeing a global cap —
- * pair it with a Vercel WAF rate-limit rule on /api/contact.
- */
-const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_IP = 5;
 const MAX_PER_RECIPIENT = 2;
-const hits = new Map<string, number[]>();
-
-function rateLimited(key: string, max: number): boolean {
-  const now = Date.now();
-  const recent = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
-  if (recent.length >= max) {
-    hits.set(key, recent);
-    return true;
-  }
-  recent.push(now);
-  hits.set(key, recent);
-  if (hits.size > 5000) {
-    // Drop the oldest keys so the map can't grow without bound
-    for (const k of Array.from(hits.keys()).slice(0, 1000)) hits.delete(k);
-  }
-  return false;
-}
-
-function clientIp(request: Request): string {
-  return (
-    request.headers.get('x-real-ip') ||
-    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-    'unknown'
-  );
-}
-
-/** Only accept posts from this site's own pages. */
-function sameOrigin(request: Request): boolean {
-  const origin = request.headers.get('origin');
-  const host =
-    request.headers.get('x-forwarded-host') || request.headers.get('host');
-  if (!origin || !host) return false;
-  try {
-    return new URL(origin).host === host;
-  } catch {
-    return false;
-  }
-}
 
 const bad = (error: string, status = 400) =>
   NextResponse.json({ error }, { status });
@@ -154,7 +102,7 @@ export async function POST(request: Request) {
 
     /* ---- Notify Adapto ---- */
     const adminResult = await resend.emails.send({
-      from: `Adapto Website <${FROM_EMAIL}>`,
+      from: `Adapto Website <${FROM_ADDRESS}>`,
       to: TO_EMAIL,
       replyTo: data.email,
       subject: `New conversation request — ${data.name}${data.company ? ` (${data.company})` : ''}`,
@@ -208,7 +156,7 @@ export async function POST(request: Request) {
     /* ---- Send confirmation to the visitor ---- */
     try {
       await resend.emails.send({
-        from: `Adapto <${FROM_EMAIL}>`,
+        from: `Adapto <${FROM_ADDRESS}>`,
         to: data.email,
         // Resend can't send from a Gmail address, so replies are routed there.
         replyTo: site.email,
@@ -226,7 +174,7 @@ export async function POST(request: Request) {
             <div style="border: 1px solid #e6e1e1; border-top: none; padding: 28px; border-radius: 0 0 12px 12px; background: #fefefe; font-size: 15px; line-height: 1.65; color: #2a2021;">
               <p style="margin: 0 0 14px;">
                 One of the founders will reply within one business day. In the meantime, if it's easier, you can
-                <a href="${site.bookingUrl}" style="color: #c35622; font-weight: 500;">book a 30-minute call</a> directly on our calendar.
+                <a href="${siteUrl}${bookingHref('en')}" style="color: #c35622; font-weight: 500;">book a 30-minute call</a> directly on our site.
               </p>
               <!-- The visitor's message is deliberately NOT echoed here: the
                    address is unverified, so echoing it would let anyone send

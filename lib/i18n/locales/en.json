@@ -447,7 +447,7 @@
   },
   "cookies": {
     "title": "We use cookies",
-    "body": "We use analytics cookies to understand how the site is used. Nothing is loaded until you choose.",
+    "body": "We use analytics and advertising cookies to understand how the site is used and measure our ads. Nothing is loaded until you choose.",
     "accept": "Accept",
     "reject": "Reject",
     "policy": "Privacy policy"
@@ -467,11 +467,11 @@
       },
       {
         "heading": "What we collect",
-        "body": "On this website:\n• the contact form: your name, email address, company name and the message you write;\n• booking a call: your name, email address and the time you pick, through Google Calendar;\n• analytics, only if you accept cookies (see below).\n\nIn the Adapto Tracker:\n• the email addresses you add to receive project updates and meeting invites;\n• meetings you or we propose: title, note, date and time, time zone and the email of who proposed it;\n• messages you send us from your project page, with the email you reply from;\n• for our team members, their login email and password, managed by our authentication provider.\n\nWhile working on a project: the information you choose to share with us, such as contact details of your team, business documents, files, content and access to accounts we need to build or run your product.\n\nAutomatically: like most websites, our servers record technical data such as your IP address, browser and the time of each request. We use it to keep the services secure (for example, to block repeated wrong access codes) and to fix problems."
+        "body": "On this website:\n• the contact form: your name, email address, company name and the message you write;\n• booking a call: your name, email address, company name, what you want to solve, the time you pick and your time zone, plus how you reached the site (for example the post, ad or website you came from);\n• analytics, only if you accept cookies (see below).\n\nIn the Adapto Tracker:\n• the email addresses you add to receive project updates and meeting invites;\n• meetings you or we propose: title, note, date and time, time zone and the email of who proposed it;\n• messages you send us from your project page, with the email you reply from;\n• for our team members, their login email and password, managed by our authentication provider.\n\nWhile working on a project: the information you choose to share with us, such as contact details of your team, business documents, files, content and access to accounts we need to build or run your product.\n\nAutomatically: like most websites, our servers record technical data such as your IP address, browser and the time of each request. We use it to keep the services secure (for example, to block repeated wrong access codes) and to fix problems."
       },
       {
         "heading": "How we use it, and why",
-        "body": "We use personal information only to:\n• reply to you and discuss a possible project;\n• deliver the project we agreed on, including the Adapto Tracker, its notifications and its meetings;\n• keep our services secure and working;\n• understand, in aggregate, how this website is used, if you allow analytics;\n• meet our legal and accounting obligations.\n\nWe do this with your consent (analytics cookies, notification emails you confirm), because it is needed to provide the services you ask for (replying, running your project and the Tracker), or because of our legitimate interest in keeping our services secure. We never use your data for advertising and we never sell it."
+        "body": "We use personal information only to:\n• reply to you and discuss a possible project;\n• deliver the project we agreed on, including the Adapto Tracker, its notifications and its meetings;\n• keep our services secure and working;\n• understand, in aggregate, how this website is used, if you allow analytics;\n• know which posts and ads bring calls, and measure our advertising on Meta, if you allow it;\n• meet our legal and accounting obligations.\n\nWe do this with your consent (analytics and advertising cookies, notification emails you confirm), because it is needed to provide the services you ask for (replying, running your project and the Tracker), or because of our legitimate interest in keeping our services secure. We never sell your data, and what you type in our forms is never shared with advertising platforms."
       },
       {
         "heading": "The Adapto Tracker",
@@ -479,11 +479,11 @@
       },
       {
         "heading": "Analytics and cookies",
-        "body": "We use Google Analytics 4 to understand how people find and use this website, and Vercel Speed Insights to measure page performance. Google Analytics sets cookies and only runs after you accept them in the banner. Speed Insights collects anonymous performance timings and sets no cookies. You can change your choice at any time from the link in the footer."
+        "body": "We use Google Analytics 4 to understand how people find and use this website, and Vercel Speed Insights to measure page performance. Google Analytics sets cookies and only runs after you accept them in the banner. The same applies to the Meta Pixel, which we may use to measure our ads on Instagram and Facebook: it tells Meta that a visit or a booking happened, and Meta processes that under its own policy, but it never receives your name, email or message. If you arrive through a campaign link, your browser also keeps the link's campaign tags and the referring site until you close the tab. No cookie is involved, and these details only reach us if you book a call. Speed Insights collects anonymous performance timings and sets no cookies. You can change your choice at any time from the link in the footer."
       },
       {
         "heading": "Who we share it with",
-        "body": "We share personal information only with the service providers that help us run our services, and only what each one needs:\n• Vercel: hosting of this website and the Tracker;\n• Supabase: the Tracker's database and team sign-in;\n• Resend: delivery of our emails (contact form, Tracker notifications and invitations);\n• Google: Analytics (if you allow it), Calendar and Meet (meetings and call bookings);\n• WhatsApp (Meta) and Apple: only if you choose to message us through them.\n\nEach provider processes the data on our behalf under its own security and privacy commitments. We may also disclose information when the law requires it. We do not sell your data and we do not share it with anyone else."
+        "body": "We share personal information only with the service providers that help us run our services, and only what each one needs:\n• Vercel: hosting of this website and the Tracker;\n• Supabase: the Tracker's database and team sign-in;\n• Resend: delivery of our emails (contact form, Tracker notifications and invitations);\n• Google: Analytics (if you allow it), Calendar and Meet (meetings and call bookings);\n• Meta: the Pixel, only if you allow it (see Analytics and cookies);\n• WhatsApp (Meta) and Apple: only if you choose to message us through them.\n\nEach provider processes the data on our behalf under its own security and privacy commitments. We may also disclose information when the law requires it. We do not sell your data and we do not share it with anyone else."
       },
       {
         "heading": "Where your data is stored",
@@ -518,5 +518,63 @@
         "body": "We may update this policy when our services or the law change. The date at the top shows the latest version. If a change is significant, we will tell our clients by email or in the Tracker before it applies."
       }
     ]
+  },
+  "booking": {
+    "metaTitle": "Book a free call | Adapto",
+    "metaDescription": "Pick a time for a free 30-minute call with Adapto, a software studio in Vancouver. Tell us the problem and we'll tell you honestly if we can help.",
+    "eyebrow": "Free call",
+    "title": "Book a free call",
+    "lead": "We'll listen to how your company works and tell you honestly whether we're the right team for you.",
+    "duration": "30 minutes",
+    "meet": "Google Meet",
+    "founder": "With a founder",
+    "free": "Free, no commitment",
+    "step1": "Pick a time",
+    "step2": "Your details",
+    "timeZone": "Time zone",
+    "changeTime": "Change the time",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "timesCount": "{count} times available",
+    "loading": "Loading available times",
+    "retry": "Try again",
+    "loadError": "We can't show our calendar right now. Try again in a moment, or write to us at",
+    "noSlots": "There are no open times right now. Write to us and we'll find one:",
+    "form": {
+      "name": "Full name",
+      "email": "Work email",
+      "company": "Company",
+      "problem": "What are you trying to solve?",
+      "problemHint": "A sentence or two is enough.",
+      "submit": "Confirm my call",
+      "submitting": "Booking…",
+      "privacy": "We only use this to prepare for the call.",
+      "privacyLink": "Privacy policy"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "email": "Enter a valid email address.",
+      "noLinks": "Links and the @ sign aren't allowed here.",
+      "slot_taken": "Someone just took that time. Please pick another one.",
+      "already_booked": "This email already has a call booked. Look for the invitation in your inbox, or write to us to change it:",
+      "invalid": "Please check your details and try again. If it keeps happening, write to us:",
+      "rate_limited": "Too many attempts. Wait a few minutes and try again, or write to us:",
+      "unavailable": "We couldn't book your call. Please try again, or write to us:"
+    },
+    "confirmed": {
+      "metaTitle": "Your call is booked | Adapto",
+      "title": "Your call is booked",
+      "lead": "The invitation is on its way to your inbox.",
+      "leadEmail": "The invitation is on its way to {email}. It has the Google Meet link and adds the call to your calendar.",
+      "joinMeet": "Open the Google Meet link",
+      "nextTitle": "What happens next",
+      "steps": [
+        "Accept the invitation. If you don't see it within a few minutes, check your spam folder.",
+        "We read what you wrote, so the call starts with your problem and not a form.",
+        "On the call, we listen and tell you honestly whether we're the right team for you."
+      ],
+      "reschedule": "Need another time?",
+      "back": "Back to home"
+    }
   }
 }

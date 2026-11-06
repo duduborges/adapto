@@ -4,7 +4,7 @@ import type { Locale } from '@/types';
 import { Container } from './Container';
 import { Logo } from './Logo';
 import { Button } from './Button';
-import { site, bookingHref, bookingIsExternal } from '@/lib/site';
+import { site, bookingHref } from '@/lib/site';
 import { CookiePrefsLink } from '@/components/analytics/CookiePrefsLink';
 import { SERVICES } from '@/lib/services';
 import { MapPin, Calendar, ArrowRight } from 'lucide-react';
@@ -103,8 +103,7 @@ export function Footer({ lang, dict }: FooterProps) {
               {dict.footer.cta}
             </p>
             <Button
-              href={bookingHref()}
-              external={bookingIsExternal()}
+              href={bookingHref(lang)}
               variant="primary"
               size="lg"
               className="group"

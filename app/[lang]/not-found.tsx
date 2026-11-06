@@ -1,6 +1,5 @@
 import { getDictionary } from '@/lib/i18n/get-dictionary';
 import { i18n } from '@/lib/i18n/config';
-import { bookingHref } from '@/lib/site';
 import type { Locale } from '@/types';
 import { NotFoundView } from '@/components/sections/NotFoundView';
 import type { Metadata } from 'next';
@@ -27,5 +26,5 @@ export default async function NotFound() {
     (typeof entries)[number][1]
   >;
 
-  return <NotFoundView copy={copy} bookingHref={bookingHref()} />;
+  return <NotFoundView copy={copy} />;
 }

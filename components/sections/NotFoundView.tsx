@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { i18n } from '@/lib/i18n/config';
+import { bookingHref } from '@/lib/site';
 import type { Locale } from '@/types';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
@@ -30,7 +31,6 @@ interface NavCopy {
 
 interface NotFoundViewProps {
   copy: Record<Locale, { notFound: NotFoundCopy; nav: NavCopy }>;
-  bookingHref: string;
 }
 
 const ROUTES = ['services', 'process', 'why', 'manifesto', 'contact'] as const;
@@ -45,7 +45,7 @@ function splitPath(pathname: string) {
   return { lang, known, missing };
 }
 
-export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
+export function NotFoundView({ copy }: NotFoundViewProps) {
   const { lang, known, missing } = splitPath(usePathname() ?? '/');
   const { notFound: t, nav } = copy[lang];
   const home = `/${lang}`;
@@ -98,7 +98,7 @@ export function NotFoundView({ copy, bookingHref }: NotFoundViewProps) {
               <ArrowLeft className="h-4 w-4" />
               {t.cta}
             </Button>
-            <Button href={bookingHref} variant="secondary" size="lg">
+            <Button href={bookingHref(lang)} variant="secondary" size="lg">
               {t.secondary}
               <ArrowUpRight className="h-4 w-4" />
             </Button>
