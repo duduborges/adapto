@@ -1,6 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
+
+// Effects don't run on the server; this only avoids React's warning there.
+const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 /**
  * Scopes the section-snap scroll behavior (see globals.css) to whatever page
@@ -13,9 +16,13 @@ import { useEffect } from 'react';
  * the page scrolls freely to the bottom; scrolling back up past it turns
  * snapping on again right where Contact sits, so nothing jumps. (Snapping
  * itself only applies on large screens, see globals.css.)
+ *
+ * A layout effect, so the cleanup runs in the same commit that swaps the page.
+ * Run any later, the snapping is still on when the next page appears, and with
+ * the footer as its only snap point, the browser lands that page at its bottom.
  */
 export function ScrollSnap() {
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const root = document.documentElement;
     root.classList.add('snap-scroll');
 

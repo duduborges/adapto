@@ -94,6 +94,14 @@ Translations are stored in JSON files under `lib/i18n/locales/`.
 
 The contact form posts to `/api/contact`, which sends the message through [Resend](https://resend.com) to `site.email` (or `CONTACT_TO`) and a confirmation to the visitor. See `.env.example` for the required variables.
 
+## Booking page
+
+`/[lang]/book` is where every "Book a free call" button leads. It reads the free times from Google Calendar, creates the event with a Meet link, and Google emails the invitation. `/api/booking` then sends Adapto the visitor's problem and where they came from (UTM tags, ad click IDs, referrer). `/book` redirects to `/en/book`, so `adapto-sh.com/book?utm_source=instagram&utm_campaign=comment-adapt` works as a campaign link.
+
+- **Availability:** hours, duration, buffer and notice are in `lib/booking/config.ts`. Anything busy on the Adapto calendar blocks its time.
+- **Credentials:** the same `GOOGLE_*` variables as the Adapto Tracker (see `.env.example`).
+- **Conversion:** the confirmation page fires `generate_lead` (GA4) and `Schedule` (Meta Pixel, once `NEXT_PUBLIC_META_PIXEL_ID` is set), both only after cookie consent.
+
 ## Deployment
 
 This project is optimized for deployment on Vercel:

@@ -124,15 +124,13 @@ export default async function FaqPage({ params }: { params: Params }) {
               </h1>
               <div className="col-span-12 lg:col-span-5">
                 <p className="text-lg leading-[1.6] text-cream/70 md:text-xl">{t.lead}</p>
-                <a
-                  href={bookingHref()}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={bookingHref(locale)}
                   className="group mt-8 inline-flex items-baseline gap-3 border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
                 >
                   <span>{dict.nav.book}</span>
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -209,7 +207,7 @@ export default async function FaqPage({ params }: { params: Params }) {
           </section>
         ))}
 
-        <Contact dict={{ contact: dict.contact }} />
+        <Contact lang={locale} dict={{ contact: dict.contact }} />
       </main>
       <Footer lang={locale} dict={dict} />
     </>

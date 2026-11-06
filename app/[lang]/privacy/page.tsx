@@ -9,7 +9,7 @@ import { Container } from '@/components/ui/Container';
 import { Footer } from '@/components/ui/Footer';
 import { Logo } from '@/components/ui/Logo';
 
-const LAST_UPDATED = '2026-10-30';
+const LAST_UPDATED = '2026-11-06';
 
 const descriptions: Record<Locale, string> = {
   en: 'How Adapto collects, uses and protects personal data across this site, the Adapto Tracker and our projects: what we collect, where it is stored, retention and your rights.',

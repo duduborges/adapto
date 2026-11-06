@@ -7,6 +7,7 @@ import { siteUrl } from '@/lib/site';
 import type { Locale } from '@/types';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Analytics } from '@/components/analytics/Analytics';
+import { AttributionCapture } from '@/components/analytics/AttributionCapture';
 import { CookieBanner } from '@/components/analytics/CookieBanner';
 import { geistSans, geistMono } from '@/lib/fonts';
 import '../globals.css';
@@ -132,6 +133,7 @@ export default async function LangLayout({
         {children}
         <CookieBanner lang={locale} dict={{ cookies: dict.cookies }} />
         <Analytics />
+        <AttributionCapture />
       </body>
     </html>
   );

@@ -1,18 +1,20 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { ArrowRight, Calendar, Mail, MapPin, Globe2 } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionLabel } from '@/components/ui/SectionLabel';
-import { site, bookingHref, bookingIsExternal } from '@/lib/site';
+import { site, bookingHref } from '@/lib/site';
 
 interface ContactProps {
+  lang: string;
   dict: any;
 }
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
-export function Contact({ dict }: ContactProps) {
+export function Contact({ lang, dict }: ContactProps) {
   const [status, setStatus] = useState<Status>('idle');
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -103,17 +105,14 @@ export function Contact({ dict }: ContactProps) {
             {dict.contact.subtitle}
           </p>
 
-          <a
-            href={bookingHref()}
-            {...(bookingIsExternal()
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
+          <Link
+            href={bookingHref(lang)}
             className="group mt-10 inline-flex max-w-full items-baseline gap-3 border-b border-ember pb-1 font-brand text-3xl leading-tight text-cream transition-colors hover:text-ember md:text-4xl desk:mt-[3.5svh]"
           >
             <Calendar className="h-6 w-6 self-center" />
             <span>{dict.contact.ctaPrimary}</span>
             <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
 
           <ul className="mt-12 space-y-5 text-sm text-cream/70 desk:mt-[3.5svh] desk:space-y-[1.8svh]">
             <li className="flex items-start gap-3">

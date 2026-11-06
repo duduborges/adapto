@@ -6,7 +6,8 @@ import { getImageProps } from 'next/image';
 import dynamic from 'next/dynamic';
 import { Container } from '@/components/ui/Container';
 import { cn } from '@/lib/utils';
-import { bookingHref, bookingIsExternal } from '@/lib/site';
+import Link from 'next/link';
+import { bookingHref } from '@/lib/site';
 
 // Client-only scenes, no server render: WebGL (Three.js) on desktop, its
 // Canvas 2D twin on phones and tablets. The static HeroPoster below holds
@@ -404,16 +405,13 @@ export function Hero({ dict, lang = 'en' }: HeroProps) {
                 style={{ animationDelay: '300ms' }}
                 className="mt-7 flex animate-hero-in motion-reduce:animate-none flex-wrap items-center gap-x-8 gap-y-4 phone:mt-[clamp(1rem,calc(var(--svh,1svh)*8-40px),1.75rem)] sm:mt-8 md:mt-10 desk:mt-0 desk:shrink-0"
               >
-                <a
-                  href={bookingHref()}
-                  {...(bookingIsExternal()
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
+                <Link
+                  href={bookingHref(lang)}
                   className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
                 >
                   <span>{dict.hero.cta}</span>
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
               </div>
               </div>
 

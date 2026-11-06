@@ -47,7 +47,6 @@ export const site = {
   shortName: 'Adapto · Software House',
   domain: 'adapto-sh.com',
   email: 'contact@adapto-sh.com',
-  bookingUrl: 'https://calendar.app.google/qfW6fExP1wZ3zem3A',
   /** Adapto Tracker — clients enter their access code here. */
   trackerUrl: 'https://tracker.adapto-sh.com',
   location: {
@@ -70,12 +69,7 @@ export const site = {
   },
 } as const;
 
-/** Returns the booking CTA href. */
-export function bookingHref(): string {
-  return site.bookingUrl;
-}
-
-/** Whether the booking CTA opens in a new tab. Always true for the calendar URL. */
-export function bookingIsExternal(): boolean {
-  return true;
+/** The booking page, for every "Book a free call" CTA. */
+export function bookingHref(lang: string): string {
+  return `/${lang}/book`;
 }

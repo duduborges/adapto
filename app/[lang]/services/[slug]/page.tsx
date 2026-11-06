@@ -109,7 +109,7 @@ export default async function ServiceRoute({ params }: { params: Params }) {
       <Header lang={locale} dict={{ nav: dict.nav, contact: dict.contact, process: dict.process }} />
       <main className="relative">
         <ServicePage lang={locale} slug={slug} content={content} ui={ui} all={services} dict={dict} />
-        <Contact dict={{ contact: dict.contact }} />
+        <Contact lang={locale} dict={{ contact: dict.contact }} />
       </main>
       <Footer lang={locale} dict={dict} />
     </>

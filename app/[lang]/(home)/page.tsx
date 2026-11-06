@@ -37,7 +37,7 @@ export default async function Home({
         <Process dict={{ process: dict.process }} />
         <Differentials dict={{ differentials: dict.differentials }} />
         <About dict={{ manifesto: dict.manifesto }} />
-        <Contact dict={{ contact: dict.contact }} />
+        <Contact lang={lang} dict={{ contact: dict.contact }} />
       </main>
       <Footer lang={lang as Locale} dict={dict} />
     </>

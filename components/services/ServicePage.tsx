@@ -94,15 +94,13 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
               </p>
 
               <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-                <a
-                  href={bookingHref()}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={bookingHref(lang)}
                   className="group inline-flex items-baseline gap-3 whitespace-nowrap border-b border-ember pb-1 font-brand text-2xl text-cream transition-colors hover:text-ember md:text-3xl"
                 >
                   <span>{dict.nav.book}</span>
                   <ArrowRight className="h-5 w-5 self-center transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
                 <Link
                   href={`/${lang}#process`}
                   className="text-sm font-medium text-cream/60 underline-offset-4 transition-colors hover:text-cream hover:underline"
@@ -283,7 +281,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
               </div>
             </div>
             <div className="md:col-span-4 md:justify-self-end">
-              <Button href={bookingHref()} external size="lg" className="group">
+              <Button href={bookingHref(lang)} size="lg" className="group">
                 {dict.nav.book}
                 <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
@@ -331,6 +329,7 @@ export function ServicePage({ lang, slug, content, ui, all, dict }: ServicePageP
         title={ui.faqTitle}
         subtitle={dict.faq.subtitle}
         bookLabel={dict.nav.book}
+        lang={lang}
         items={content.faq}
       />
 
